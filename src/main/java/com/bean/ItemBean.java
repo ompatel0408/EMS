@@ -1,0 +1,110 @@
+package com.bean;
+
+public class ItemBean {
+	
+	
+	// Real Fields	
+	private String ItemName;
+    private int Quantity;
+    private String tagNo;
+    private String remarks;
+    private String totalPrice;
+    private String date;
+    private String projectId;
+    private String ItemCode;
+    private int quotationId;
+    private String drawingId;
+    
+    public ItemBean() {
+		// TODO Auto-generated constructor stub
+	}
+    
+    public ItemBean(String projectId,String ItemCode,int quotationId,String drawingId,String ItemName,int Quantity,String tagNo,String remarks,String totalPrice,String date) {
+    	this.ItemName = ItemName;
+    	this.Quantity = Quantity;
+    	this.tagNo = tagNo;
+    	this.remarks = remarks;
+    	this.totalPrice = totalPrice;
+    	this.date = date;
+    	this.projectId = projectId;
+    	this.ItemCode = ItemCode;
+    	this.quotationId = quotationId;
+    	this.drawingId = drawingId;	
+    }
+    
+
+    
+	public String getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
+
+	public String getItemCode() {
+		return ItemCode;
+	}
+
+	public void setItemCode(String itemCode) {
+		ItemCode = itemCode;
+	}
+
+	public int getQuotationId() {
+		return quotationId;
+	}
+
+	public void setQuotationId(int quotationId) {
+		this.quotationId = quotationId;
+	}
+
+	public String getDrawingId() {
+		return drawingId;
+		
+	}
+
+	public void setDrawingId(String drawingId) {
+		this.drawingId = drawingId;
+	}
+
+	public String getItemName() {
+		return ItemName;
+	}
+	public void setItemName(String itemName) {
+		ItemName = itemName;
+	}
+	public int getQuantity() {
+		return Quantity;
+	}
+	public void setQuantity(int quantity) {
+		Quantity = quantity;
+	}
+	
+	public String getTagNo() {
+		return tagNo;
+	}
+	public void setTagNo(String tagNo) {
+		this.tagNo = tagNo;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+	public String getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(String totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	} 
+	
+    
+    
+}

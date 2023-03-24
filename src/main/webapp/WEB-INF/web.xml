@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+	<display-name>EMS</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>EMSLogin.jsp</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+	</welcome-file-list>
+	<session-config>
+		<session-timeout>90</session-timeout> <!-- Set session timeout to 60 minutes -->
+	</session-config>
+	<servlet>
+		<servlet-name>EMSLoginServlet</servlet-name>
+		<servlet-class>com.controller.EMSLoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EMSLoginServlet</servlet-name>
+		<url-pattern>/EMSLoginServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ClientServlet</servlet-name>
+		<servlet-class>com.controller.ClientServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ClientServlet</servlet-name>
+		<url-pattern>/ClientServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EMSItemServlet</servlet-name>
+		<servlet-class>com.controller.EMSItemServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>EMSItemServlet</servlet-name>
+		<url-pattern>/EMSItemServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>ProjectServlet</servlet-name>
+		<servlet-class>com.controller.ProjectServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ProjectServlet</servlet-name>
+		<url-pattern>/ProjectServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EMSQuotationPerItemServlet</servlet-name>
+		<servlet-class>com.controller.EMSQuotationPerItemServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSQuotationPerItemServlet</servlet-name>
+		<url-pattern>/EMSQuotationPerItemServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EMSDirectorsDashboardServlet</servlet-name>
+		<servlet-class>com.controller.EMSDirectorsDashboardServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSDirectorsDashboardServlet</servlet-name>
+		<url-pattern>/EMSDirectorsDashboardServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EMSFinalQuotationServlet</servlet-name>
+		<servlet-class>com.controller.EMSFinalQuotationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EMSFinalQuotationServlet</servlet-name>
+		<url-pattern>/EMSFinalQuotationServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EMSPurchaseServlet</servlet-name>
+		<servlet-class>com.controller.EMSPurchaseServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EMSPurchaseServlet</servlet-name>
+		<url-pattern>/EMSPurchaseServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EMSStoreServlet</servlet-name>
+		<servlet-class>com.controller.EMSStoreServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EMSStoreServlet</servlet-name>
+		<url-pattern>/EMSStoreServlet</url-pattern>
+	</servlet-mapping>
+</web-app>

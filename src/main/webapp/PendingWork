@@ -1,0 +1,7 @@
+For purchase Module 
+
+In purchase,when they click perform purchase button we have to check that the amount of purchase have not to ecside the quotationPerProject.
+we need to notiy the use that the amount of purchase is excceding it's limit and show it by using three diffrenet colors such as red if the purchase amount  
+is greater than quotationPerProject amount
+green until it's less than their profit margin and we need to convert that color to orange when it reached towards the profit amount.
+----------------------------
