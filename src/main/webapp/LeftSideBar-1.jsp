@@ -38,160 +38,136 @@
 				<li class="nav-item"><a href="EMSDirectorsDashboard.jsp" class="nav-link active">
 						<p>Dashboard</p>
 				</a></li>
-				<li class="nav-item"><a href="ClientServlet?clientId=0&update=notupdate" class="nav-link"> <i
+				<li class="nav-item" id="client-target-id" style="display:none;"><a href="ClientServlet?clientId=0&update=notupdate" class="nav-link"> <i
 						class="nav-icon fas ion-person"></i>
 						<p>Client</p>
-				</a></li>
-				<li class="nav-item"><a href="#" class="nav-link"> <i
+				</a><ul class="nav nav-treeview">
+						<li class="nav-item" id="addclient-target-id" style="display:none;"><a href="#" class="nav-link"> <i
+								class="far fa-circle nav-icon"></i>
+								<p>Add Client</p>
+						</a></li>
+						<li class="nav-item" id="showclient-target-id" style="display:none;"><a href="#" class="nav-link"> <i
+								class="far fa-circle nav-icon"></i>
+								<p>Client list</p>
+						</a></li>
+					</ul></li>
+				<li class="nav-item" id="accessmanagement-target-id" style="display:none;"><a href="AccessManagementServlet" class="nav-link"> <i
 						class="nav-icon fas fa-chart-pie"></i>
 						<p>
 							Access Management <i class="right fas fa-angle-left"></i>
 						</p>
 				</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="#" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>Super Admin</p>
-						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>Admin</p>
-						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>Store</p>
-						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>Employee</p>
-						</a></li>
-					</ul></li>
-				<li class="nav-item"><a href="#" class="nav-link"> <i
+					</li>
+				<li class="nav-item" id="project-target-id" style="display:none;"><a href="#" class="nav-link"> <i
 						class="nav-icon fas fa-columns   "></i>
 						<p>
 							Projects <i class="fas fa-angle-left right"></i>
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="ProjectServlet?projectId=0&update=notupdate" class="nav-link"> <i
+						<li class="nav-item" id="addproject-target-id" style="display:none;"><a href="ProjectServlet?projectId=0&update=notupdate" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Add Project</p>
 						</a></li>
-						<li class="nav-item"><a href="EMSItem.jsp" class="nav-link" onclick="AddHeaders()"> <i
+						<li class="nav-item" id="showproject-target-id" style="display:none;"><a href="ProjectServlet?projectId=0&update=notupdate" class="nav-link"> <i
+								class="far fa-circle nav-icon"></i>
+								<p>List Project</p>
+						</a></li>
+						<li class="nav-item" id="showproject-target-id" style="display:none;"><a href="EMSItem.jsp" class="nav-link" onclick="AddHeaders()"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Add Offers</p>
 						</a></li>
-						<li class="nav-item"><a href="EMSQuotationPerItem.jsp" class="nav-link"> <i
+						<li class="nav-item" id="quotationperoffers-target-id" style="display:none;"><a href="EMSQuotationPerItem.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>QuotationPerOffers</p>
+								<p>Quotation Per Offers</p>
 						</a></li>
-						<li class="nav-item"><a href="EMSFinalQuotation.jsp" class="nav-link" > <i
+						<li class="nav-item" id="showquotationperoffer-target-id" style="display:none;"><a href="EMSFinalQuotation.jsp" class="nav-link" > <i
 								class="far fa-circle nav-icon"></i>
-								<p>FinalQuotation</p>
+								<p>Final Quotation</p>
 						</a></li>
 					</ul></li>
-				<li class="nav-item"><a href="#" class="nav-link"> <i
+				<li class="nav-item" id="indent-target-id" style="display:none;"><a href="#" class="nav-link"> <i
 						class="nav-icon fas fa-edit"></i>
 						<p>
 							Indent <i class="fas fa-angle-left right"></i>
 						</p>
 				</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="#" class="nav-link"> <i
+					<ul class="nav nav-treeview" id="indent-target-id" style="display:none;">
+						<li class="nav-item" id="generateindent-target-id" style="display:none;"><a href="#" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Generate Indent</p>
 						</a></li>
-						<li class="nav-item"><a href="EMSIndentList.jsp" class="nav-link"> <i
+						<li class="nav-item" id="showindent-target-id" style="display:none;"><a href="#" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Indent list</p>
 						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
+						<li class="nav-item" id="approvalpending-target-id" style="display:none;"><a href="#" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Approval Pending</p>
+								<p>Approval Pending Indent</p>
 						</a></li>
 					</ul></li>
-				<li class="nav-item"><a href="#" class="nav-link"> <i
+				<li class="nav-item" id="purchase-target-id" style="display:none;"><a href="#" class="nav-link"> <i
 						class="nav-icon fas fa-table"></i>
 						<p>
 							Purchase Orders <i class="fas fa-angle-left right"></i>
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="EMSPurchase.jsp" class="nav-link"> <i
+						<li class="nav-item" id="generatepo-target-id" style="display:none;"><a href="EMSPurchase.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Generate P.O</p>
 						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
+						<li class="nav-item" id="polist-target-id" style="display:none;"><a href="#" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>P.O List</p>
 						</a></li>
 					</ul></li>
-				<li class="nav-item"><a href="#" class="nav-link"> <i
+				<li class="nav-item" id="grn-target-id" style="display:none;"><a href="#" class="nav-link"> <i
 						class="nav-icon fas fa-copy"></i>
 						<p>
 							GRN <i class="fas fa-angle-left right"></i>
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="EMSGRN.jsp" class="nav-link"> <i
+						<li class="nav-item" id="generategrn-target-id" style="display:none;"><a href="#" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Generate GRN</p>
 						</a></li>
-						<li class="nav-item"><a href="EMSGRNList.jsp" class="nav-link"> <i
+						<li class="nav-item" id="grnlist-target-id" style="display:none;"><a href="#" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>GRN List</p>
 						</a></li>
 					</ul></li>
-				<li class="nav-item"><a href="#" class="nav-link"> <i
-						class="nav-icon fas fa-tree"></i>
-						<p>
-							Issue Note <i class="fas fa-angle-left right"></i>
-						</p>
-				</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="#" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>Generate Issue Note</p>
-						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>Issue Note List</p>
-						</a></li>
-					</ul></li>
-				<li class="nav-item"><a href="#" class="nav-link"> <i
+				<li class="nav-item" id="stock-target-id" style="display:none;"><a href="#" class="nav-link"> <i
 						class="nav-icon fas fa-book"></i>
 						<p>
 							Stock Management <i class="fas fa-angle-left right"></i>
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="EMSStore.jsp" class="nav-link"> <i
+						<li class="nav-item" id="addstock-target-id" style="display:none;"><a href="EMSStore.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Add stock</p>
 						</a></li>
-						<li class="nav-item"><a href="StoreList.jsp" class="nav-link"> <i
+						<li class="nav-item" id="stocklist-target-id" style="display:none;"><a href="#" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Stock List</p>
 						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>Issue Note List</p>
-						</a></li>
 					</ul></li>
-				<li class="nav-item"><a href="#" class="nav-link"> <i
+				<li class="nav-item" id="sellmanagement-target-id" style="display:none;"><a href="#" class="nav-link"> <i
 						class="nav-icon fas fa-file"></i>
 						<p>
-							Production<i class="fas fa-angle-left right"></i>
+							Sell Management <i class="fas fa-angle-left right"></i>
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="#" class="nav-link"> <i
+						<li class="nav-item" id="sellitemlist-target-id" style="display:none;"><a href="#" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Project Status</p>
+								<p>Sell item List</p>
 						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
+						<li class="nav-item" id="sellissuedlist-target-id" style="display:none;"><a href="#" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Quality check</p>
+								<p>Sell issued List</p>
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <!-- <i class="nav-icon fas fa-edit"></i> -->
@@ -225,42 +201,6 @@
     <script>	
         $.widget.bridge('uibutton', $.ui.button)
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-	<script src="assets/dist/js/custom.js"></script>
-	<script src="assets/dist/js/models.js"></script>
-	<!-- jQuery -->
-	<script src="assets/plugins/jquery/jquery.min.js"></script>
-	<!-- Bootstrap 4 -->
-	<script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<!-- Select2 -->
-	<script src="assets/plugins/select2/js/select2.full.min.js"></script>
-	<!-- Bootstrap4 Duallistbox -->
-	<script
-		src="assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
-	<!-- InputMask -->
-	<script src="assets/plugins/moment/moment.min.js"></script>
-	<script src="assets/plugins/inputmask/jquery.inputmask.min.js"></script>
-	<!-- date-range-picker -->
-	<script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
-	<!-- bootstrap color picker -->
-	<script
-		src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-	<!-- Tempusdominus Bootstrap 4 -->
-	<script
-		src="assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-	<!-- Bootstrap Switch -->
-	<script
-		src="assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-	<!-- BS-Stepper -->
-	<script src="assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
-	<!-- dropzonejs -->
-	<script src="assets/plugins/dropzone/min/dropzone.min.js"></script>
-	<!-- AdminLTE App -->
-	<script src="assets/dist/js/adminlte.min.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="assets/dist/js/demo.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Sparkline -->

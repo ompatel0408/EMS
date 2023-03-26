@@ -26,7 +26,7 @@ public class EMSQuotationPerItemServlet extends HttpServlet {
 	private static String category = "";
 	private static HashMap<String,String> map = new HashMap<String,String>();
 	private static ArrayList<String> arr = new ArrayList<String>();
-	
+	private static boolean isFound = false;
 	
 	
 	public static EMSQuotationPerItemServlet getInstance() {
@@ -80,11 +80,14 @@ public class EMSQuotationPerItemServlet extends HttpServlet {
 		
 		for(QuotationPerItemBean QPIB:QPd.performSum()){
 			if(!arr.contains(QPIB.getItemId())) {
-				String profitAmount  = String.valueOf((Double.parseDouble(QPIB.getTotalAmountWithoutProfit()) * (Double.parseDouble(map.get(QPIB.getItemId()))/100.0)) + (Double.parseDouble(QPIB.getTotalAmountWithoutProfit())));
-				QuotationPerItemBean QPIB1 = new QuotationPerItemBean(QPIB.getItemId(),QPIB.getTotalAmountWithoutProfit() , profitAmount);
-				ar.add(QPIB1);
+				if(map.get(QPIB.getItemId()) != null) {
+					String profitAmount  = String.valueOf((Double.parseDouble(QPIB.getTotalAmountWithoutProfit()) * (Double.parseDouble(map.get(QPIB.getItemId()))/100.0)) + (Double.parseDouble(QPIB.getTotalAmountWithoutProfit())));
+					QuotationPerItemBean QPIB1 = new QuotationPerItemBean(QPIB.getItemId(),QPIB.getTotalAmountWithoutProfit() , profitAmount);
+					ar.add(QPIB1);
+				}
 			}
 		}
+		
 		for(QuotationPerItemBean QPIB:AQPIB) {
 			if(!arr.contains(QPIB.getItemId())) {
 				arr.add(QPIB.getItemId());

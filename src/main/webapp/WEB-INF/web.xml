@@ -12,9 +12,14 @@
 		<welcome-file>default.jsp</welcome-file>
 		<welcome-file>default.htm</welcome-file>
 	</welcome-file-list>
+
+	<listener>
+		<listener-class>com.service.ServerListener</listener-class>
+	</listener>
 	<session-config>
-		<session-timeout>90</session-timeout> <!-- Set session timeout to 60 minutes -->
+		<session-timeout>90</session-timeout> <!-- Set session timeout to 90 minutes -->
 	</session-config>
+
 	<servlet>
 		<servlet-name>EMSLoginServlet</servlet-name>
 		<servlet-class>com.controller.EMSLoginServlet</servlet-class>
@@ -23,6 +28,16 @@
 		<servlet-name>EMSLoginServlet</servlet-name>
 		<url-pattern>/EMSLoginServlet</url-pattern>
 	</servlet-mapping>
+
+	<filter>
+		<filter-name>EMSLoginFilter</filter-name>
+		<filter-class>com.Filter.EMSLoginFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>EMSLoginFilter</filter-name>
+		<url-pattern>/EMSLoginServlet</url-pattern>
+	</filter-mapping>
 
 	<servlet>
 		<servlet-name>ClientServlet</servlet-name>
@@ -54,27 +69,27 @@
 		<servlet-name>ProjectServlet</servlet-name>
 		<url-pattern>/ProjectServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>EMSQuotationPerItemServlet</servlet-name>
 		<servlet-class>com.controller.EMSQuotationPerItemServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>EMSQuotationPerItemServlet</servlet-name>
 		<url-pattern>/EMSQuotationPerItemServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>EMSDirectorsDashboardServlet</servlet-name>
 		<servlet-class>com.controller.EMSDirectorsDashboardServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>EMSDirectorsDashboardServlet</servlet-name>
 		<url-pattern>/EMSDirectorsDashboardServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>EMSFinalQuotationServlet</servlet-name>
 		<servlet-class>com.controller.EMSFinalQuotationServlet</servlet-class>
@@ -83,7 +98,7 @@
 		<servlet-name>EMSFinalQuotationServlet</servlet-name>
 		<url-pattern>/EMSFinalQuotationServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>EMSPurchaseServlet</servlet-name>
 		<servlet-class>com.controller.EMSPurchaseServlet</servlet-class>
@@ -92,7 +107,7 @@
 		<servlet-name>EMSPurchaseServlet</servlet-name>
 		<url-pattern>/EMSPurchaseServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>EMSStoreServlet</servlet-name>
 		<servlet-class>com.controller.EMSStoreServlet</servlet-class>
@@ -101,4 +116,24 @@
 		<servlet-name>EMSStoreServlet</servlet-name>
 		<url-pattern>/EMSStoreServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ShowManagementAccess</servlet-name>
+		<servlet-class>com.controller.ShowManagementAccess</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowManagementAccess</servlet-name>
+		<url-pattern>/ShowManagementAccess</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AccessManagementServlet</servlet-name>
+		<servlet-class>com.controller.AccessManagementServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AccessManagementServlet</servlet-name>
+		<url-pattern>/AccessManagementServlet</url-pattern>
+	</servlet-mapping>
+
+
 </web-app>

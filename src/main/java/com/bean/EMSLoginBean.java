@@ -3,21 +3,73 @@ package com.bean;
 
 public class EMSLoginBean {
 	
-	private static String name;
-	private static String email;
-	private static String password;
-	private static long phoneNumber;
-	private static String departmentName;
-	private static int role;
+	private String name;
+	private String email;
+	private String password;
+	private long phoneNumber;
+	private String departmentName;
+	private int role;
+	private String token;
+	private String secretKey;
+	private int userId;
 	
+	public EMSLoginBean() {}
 	
+	public EMSLoginBean(String token, String secretKey) {	
+		this.token = token;
+		this.secretKey = secretKey;
+	}
+	public EMSLoginBean(String email,int role) {
+		this.email = email;
+		this.role = role;
+	}
 	
+	public EMSLoginBean(int userId,String secretKey) {
+		this.userId = userId;
+		this.secretKey = secretKey;
+	}
+	
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public EMSLoginBean(String name,String email,int role) {
+		this.name = name;
+		this.email = email;
+		this.role = role;
+	}
+	
+	public EMSLoginBean(String email,String password,String secretKey) {
+		this.email = email;
+		this.password = password;
+		this.secretKey = secretKey;
+	}
+	
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public String getSecretKey() {
+		return secretKey;
+	}
+
+	public void setSecretKey(String secretKey) {
+		this.secretKey = secretKey;
+	}
 	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
-		EMSLoginBean.name = name;
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -25,7 +77,7 @@ public class EMSLoginBean {
 	}
 
 	public void setEmail(String email) {
-		EMSLoginBean.email = email;
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -33,7 +85,7 @@ public class EMSLoginBean {
 	}
 
 	public void setPassword(String password) {
-		EMSLoginBean.password = password;
+		this.password = password;
 	}
 
 	public long getPhoneNumber() {
@@ -41,7 +93,7 @@ public class EMSLoginBean {
 	}
 
 	public void setPhoneNumber(long phoneNumber) {
-		EMSLoginBean.phoneNumber = phoneNumber;
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getDepartmentName() {
@@ -49,7 +101,7 @@ public class EMSLoginBean {
 	}
 
 	public void setDepartmentName(String departmentName) {
-		EMSLoginBean.departmentName = departmentName;
+		this.departmentName = departmentName;
 	}
 
 	public int getRole() {
@@ -57,6 +109,6 @@ public class EMSLoginBean {
 	}
 
 	public void setRole(int role) {
-		EMSLoginBean.role = role;
+		this.role = role;
 	}
 }

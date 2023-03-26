@@ -229,6 +229,13 @@ function appendSize(sizeData){
 	}
 }
 
+
+window.addEventListener("beforeunload", function (event) {
+  event.preventDefault();
+  document.cookie = "myCookie=".concat(JSON.stringify(data));
+});
+
+
 function XHRRequestForQuotationPerItem(){
 	
 	document.getElementById('itemId').disabled = false;
@@ -263,4 +270,7 @@ function XHRRequestForQuotationPerItem(){
 	document.getElementById("MyTable").innerHTML = "";
 	data=[]
 }
+
+
+
 

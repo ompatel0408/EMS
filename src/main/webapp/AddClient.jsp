@@ -248,7 +248,7 @@
 													</button>
 												</div>
 												<div class="modal-body">
-													<p>Are you sure you want to delete this project?</p>
+													<p>Are you sure you want to delete this Client?</p>
 												</div>
 												<div class="modal-footer justify-content-between">
 													<button type="button" class="btn btn-outline-light"
@@ -258,7 +258,7 @@
 															value=<%=c.getClientId()%>> <input type="hidden"
 															name="update" value="not">
 														<button type="submit" class="btn btn-outline-light">Delete
-															Project</button>
+															Client</button>
 													</form>
 												</div>
 											</div>

@@ -6,7 +6,9 @@ public class Authentication {
 
 	public static boolean isValidCredentials(String email,String password) {
 		
-		if(EMSLoginDao.getPasswordFromDb(email).getPassword().equals(password)) {
+		EMSLoginDao ELD = EMSLoginDao.getInstance();
+		
+		if(ELD.getPasswordFromDb(email).getPassword().equals(password)) {
 			return true;
 		}
 		return false;

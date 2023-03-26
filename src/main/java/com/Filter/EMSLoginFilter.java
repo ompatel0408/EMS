@@ -1,8 +1,13 @@
 package com.Filter;
 
 import java.io.IOException;
+import java.net.http.HttpRequest;
+import java.util.HashMap;
 
+import com.bean.EMSLoginBean;
+import com.dao.EMSLoginDao;
 import com.service.Authentication;
+import com.service.EMSLoginServices;
 import com.util.EMSLoginValidators;
 
 import jakarta.servlet.Filter;
@@ -12,6 +17,8 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 public class EMSLoginFilter implements Filter {
 
@@ -26,54 +33,20 @@ public class EMSLoginFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-
-		String email1 =request.getParameter("email");
-		String password1 = request.getParameter("password");
 		
-		
-		System.out.println(email1);
-
-		System.out.println(password1);
-		
-		boolean isError = false;
-		if(email1==null || email1.trim().length()==0) {
-			isError=true;
-			request.setAttribute("EmailError","email is required!");
-		}else if(EMSLoginValidators.isValidEmail(email1)==false) {
-			isError=true;
-			request.setAttribute("EmailError", "Please,Enter valid email!");
-			request.setAttribute("EmailValue", email1);
-			
-		}else {
-			request.setAttribute("EmailValue", email1);
-		}
-		
-		if(password1==null || password1.trim().length()==0) {
-			isError=true;
-			request.setAttribute("PasswordError","Password is required!");
-		}else if(EMSLoginValidators.isValidPassword(password1)==false) {
-			isError=true;
-			request.setAttribute("PasswordError", "Please,Enter valid Password!");
-			request.setAttribute("PasswordValue", password1);
-			
-		}else {
-			request.setAttribute("PasswordValue", password1);
-		}
-		
+		EMSLoginDao ELD = EMSLoginDao.getInstance();
+		String password = request.getParameter("password");
+		EMSLoginBean ELB =   ELD.getAllDetails(password);
 		RequestDispatcher rd = null;
-		if(isError) {
+		if(ELB != null) {
+				EMSLoginBean ELB1 = EMSLoginServices.geDataFromJWTToken(password,ELB.getSecretKey());
+				HttpServletRequest req = (HttpServletRequest)request;
+				HttpSession session = req.getSession();
+				session.setAttribute("userId", ELB.getUserId());
+				chain.doFilter(request, response);
+		}else {
 			rd = request.getRequestDispatcher("EMSLogin.jsp");
 			rd.forward(request, response);
-			
-		}else {
-			// pass the request along the filter chain
-			if(Authentication.isValidCredentials(email1, password1)) {
-				chain.doFilter(request, response);
-			}else {
-				request.setAttribute("InvalidCredentials", "Invalid username or paassword !");
-				rd = request.getRequestDispatcher("EMSLogin.jsp");
-				rd.forward(request, response);
-			}
 		}
 	}
 	public void init(FilterConfig fConfig) throws ServletException {
