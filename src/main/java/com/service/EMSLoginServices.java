@@ -31,28 +31,34 @@ public class EMSLoginServices {
 		    .sign(algorithm);
 		
 		return  new EMSLoginBean(token, secretKey);
+		
 	}
 	
 	public static EMSLoginBean geDataFromJWTToken(String token,String secretKey){
 		
 
 		// Set the algorithm
-		Algorithm algorithm = Algorithm.HMAC256(secretKey);
-		// Create a verifier
-		JWTVerifier verifier = JWT.require(algorithm)
-		    .withIssuer("EMSTeam")
-		    .withSubject("yourPassword")
-		    .withAudience("users")
-		    .build();
+		try{
+			Algorithm algorithm = Algorithm.HMAC256(secretKey);
+			// Create a verifier
+			JWTVerifier verifier = JWT.require(algorithm)
+			    .withIssuer("EMSTeam")
+			    .withSubject("yourPassword")
+			    .withAudience("users")
+			    .build();
 
-		// Verify the token
-		DecodedJWT jwt = verifier.verify(token);
-		
-		Map<String, Claim> claims = jwt.getClaims();
-		
-		Map<String, Object> data = (Map<String, Object>) claims.get("data").asMap();
-		
-		return new EMSLoginBean((String) data.get("email"), (String) data.get("role"));
+			// Verify the token
+			DecodedJWT jwt = verifier.verify(token);
+			
+			Map<String, Claim> claims = jwt.getClaims();
+			
+			Map<String, Object> data = (Map<String, Object>) claims.get("data").asMap();
+			
+			return new EMSLoginBean((String) data.get("email"), (String) data.get("role"));
+		}catch(Exception E) {
+			E.printStackTrace();
+		}
+			return null;
 		
 	}
 	

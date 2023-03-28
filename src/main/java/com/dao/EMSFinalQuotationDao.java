@@ -23,6 +23,7 @@ public class EMSFinalQuotationDao {
 	
 	public ArrayList<EMSFinalQuotationBean> getSumOfAllItemCodeOfAProject(String projectId){
 		
+		
 		//SELECT SUM(subquery.TotalAmountWithProfit) AS Total FROM (SELECT I.ItemCode, SUM(PQI.TotalAmountWithProfit) AS TotalAmountWithProfit   FROM items I   JOIN ProfitInQuotationPerItem PQI ON I.ItemCode = PQI.ItemCode   WHERE I.projectId = ?  GROUP BY I.ItemCode) subquery
 		String selectQuery = "SELECT count(*),sum(TotalAmountWithProfit) FROM Items I JOIN ProfitInQuotationPerItem PQI ON I.ItemCode = PQI.ItemCode WHERE ProjectId= ? ";
 		Connection conn = MySqlConnection.getInstance();

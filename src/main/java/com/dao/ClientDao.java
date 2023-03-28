@@ -20,6 +20,7 @@ public class ClientDao {
 		return instance;
 	}
 
+	
 	public void addClient(ClientBean clientBean) {
 		try {
 			Connection con = MySqlConnection.getInstance();

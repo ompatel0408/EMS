@@ -18,6 +18,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class EMSLoginFilter implements Filter {
@@ -34,18 +35,25 @@ public class EMSLoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		
+		 
 		EMSLoginDao ELD = EMSLoginDao.getInstance();
 		String password = request.getParameter("password");
+		System.out.println(password);
+		password = password.trim();
 		EMSLoginBean ELB =   ELD.getAllDetails(password);
-		RequestDispatcher rd = null;
+		
 		if(ELB != null) {
 				EMSLoginBean ELB1 = EMSLoginServices.geDataFromJWTToken(password,ELB.getSecretKey());
+				HttpServletResponse res = (HttpServletResponse)response;
+				if(ELB1 == null) {
+					res.sendRedirect("InvalidToken.jsp");
+				}
 				HttpServletRequest req = (HttpServletRequest)request;
 				HttpSession session = req.getSession();
 				session.setAttribute("userId", ELB.getUserId());
 				chain.doFilter(request, response);
 		}else {
-			rd = request.getRequestDispatcher("EMSLogin.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("EMSLogin.jsp");
 			rd.forward(request, response);
 		}
 	}

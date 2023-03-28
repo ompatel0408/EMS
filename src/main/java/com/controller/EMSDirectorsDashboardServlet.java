@@ -42,7 +42,6 @@ public class EMSDirectorsDashboardServlet extends HttpServlet {
 	    response.getWriter().write(json);
 	}
 	
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
@@ -52,5 +51,6 @@ public class EMSDirectorsDashboardServlet extends HttpServlet {
 	    response.setCharacterEncoding("UTF-8");
 	    response.getWriter().write(json);
 	}
+	
 
 }

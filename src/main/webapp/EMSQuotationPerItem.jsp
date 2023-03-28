@@ -146,6 +146,83 @@
                 </div>
                 <!-- /.card-body -->
             </div>
+            <div class="modal fade" id="modal-editItem">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Project Details</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="enableItemName">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="col-m-5">
+                        <div class="form-group p-3">
+                            <label>Select </label>
+                            <p id="select-error"></p>
+                            <form onsubmit="event.preventDefault();updateField()">
+                                <select class="form-control select2 select2-hidden-accessible my-3" style="width: 100%;"
+                                    data-select2-id="1" tabindex="-1" aria-hidden="true" id="input-form">
+                                    <br>
+                                    <option selected="selected" data-select2-id="3">Select
+                                        option you want to update..</option>
+                                    <option value="category">Category</option>
+                                    <option value="grade">Grade</option>
+                                    <option value="size">Size</option>
+                                    <option value="ItemName">Item Name</option>
+                                    <option value="quantity">Quantaty</option>
+                                    <option value="unit">Units</option>
+                                    <option value="waight">Waight</option>
+                                    <option value="delivaryDate">Delivery Date</option>
+                                </select>
+
+                                <div class="form-group" id="hide-text" style="display: none;">
+                                    <label for="placeholderChange" id="lableName" class="mt-2"></label>
+                                    <input type="text" class="form-control" id="placeholderChange" placeholder="Enter">
+                                </div>
+                                <div class="form-group" id="hide-date" style="display: none;">
+                                    <label for="" id="lableName1">Delivery Date</label> <input type="date"
+                                        class="form-control" id="placeholderChange1" placeholder="Enter Delivery Date">
+                                </div>
+                                <!-- text input -->
+                                <div class="form-group" id="category-id-model" style="display: none;">
+                                    <label>Category</label>
+                                    <select type="text" id="category-id" class="form-control"
+                                        placeholder="select category" required>
+                                        <option value="select" selected>Select category</option>
+                                        <option value="ms">MS</option>
+                                        <option value="ss">SS</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="grade-id-model" style="display: none;">
+                                    <label>Grade</label>
+                                    <select type="text" id="grade-id" class="form-control" placeholder="select Grade"
+                                        required>
+                                        <option value="">Select Grade</option>
+                                        <option value="">aaa</option>
+                                        <option value="">bbb</option>
+                                        <option value="">ccc</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="size-id-model" style="display: none;">
+                                    <label>Size</label>
+                                    <select type="text" id="size-id" class="form-control" placeholder="select size"
+                                        required>
+                                        <option value="">Select size</option>
+                                        <option value="">AAA</option>
+                                        <option value="">BBB</option>
+                                        <option value="">CCC</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-2 disabled" id="input-update">Save
+                                    changes</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.modal-project show -->
+                </div>
+            </div>
+            <!-- /.modal-edit items -->
+        </div>
         </div>
         </div>
 </body>

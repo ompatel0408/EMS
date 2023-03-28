@@ -26,10 +26,10 @@ function appendLiveProjects(data){
                              <td><a id="projectId${i + 1}"></a><br></td>         
                              <td class="project_progress">               
                                     <div class="progress progress-sm">
-                                         <div class="progress-bar bg-green" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%"></div>
+                                         <div class="progress-bar bg-green" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: ${data[0].workDonePercentage}%"></div>
                                     </div>    
                                     <small>
-                                         77% Complete
+                                         ${data[0].workDonePercentage}% Complete
                                     </small>        
                              </td>               
                              <td class="project-state">
@@ -64,8 +64,13 @@ function getUserId(){
 	}
 	
 	xhr.send(JSON.stringify({Abcd:"ABCD"}));
+	getProjectStatus();
 	//getListSideBar()
 }
+
+
+
+
 function getListSideBar(){
 	var gradeData;
 	var xhr = new XMLHttpRequest();

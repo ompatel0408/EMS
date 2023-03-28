@@ -45,6 +45,7 @@ public class EMSItemServlet extends HttpServlet {
 		if(itemCode != null) {
 			session.setAttribute("ItemCode", itemCode.getItemCode());
 		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

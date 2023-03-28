@@ -97,17 +97,22 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="#" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
+						<li class="nav-item"><a href="IndentServlet" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
 								<p>Generate Indent</p>
 						</a></li>
-						<li class="nav-item"><a href="EMSIndentList.jsp" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
+						<li class="nav-item"><a
+							href="ListIndentServlet?token=1&projectid=0&itemcode=0"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Indent list</p>
 						</a></li>
 						<li class="nav-item"><a href="#" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Approval Pending</p>
+								<p>Approval Pending Indent</p>
+						</a></li>
+						<li class="nav-item"><a href="#" class="nav-link"> <i
+								class="far fa-circle nav-icon"></i>
+								<p>My Indent</p>
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
@@ -165,11 +170,15 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="EMSStore.jsp" class="nav-link"> <i
+						<li class="nav-item"><a href="CatagoryGradeSizeServlet" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Add stock</p>
 						</a></li>
-						<li class="nav-item"><a href="StoreList.jsp" class="nav-link"> <i
+						<li class="nav-item"><a href="EMSStore.jsp" class="nav-link"> <i
+								class="far fa-circle nav-icon"></i>
+								<p>Add stock Per Project</p>
+						</a></li>
+						<li class="nav-item"><a href="EMSStoreListServlet" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Stock List</p>
 						</a></li>
@@ -185,14 +194,11 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="#" class="nav-link"> <i
+						<li class="nav-item"><a href="EMSProduction.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Project Status</p>
 						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>Quality check</p>
-						</a></li>
+						
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <!-- <i class="nav-icon fas fa-edit"></i> -->
 						<i class="nav-icon far fa-plus-square"></i>
@@ -205,7 +211,7 @@
 								class="far fa-circle nav-icon"></i>
 								<p>Account setting</p>
 						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
+						<li class="nav-item"><a href="EMSLogin.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Logout</p>
 						</a></li>
@@ -217,16 +223,8 @@
 	<!-- /.sidebar -->
 	<script type="text/javascript" src="UtilScript.js"></script>
 </aside>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <script src="assets/plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>	
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-	<script src="assets/dist/js/custom.js"></script>
+<script type="text/javascript" src="EMSDirectorsDashboard.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 	<script src="assets/dist/js/models.js"></script>
 	<!-- jQuery -->
 	<script src="assets/plugins/jquery/jquery.min.js"></script>
@@ -258,30 +256,5 @@
 	<!-- AdminLTE App -->
 	<script src="assets/dist/js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
-	<script src="assets/dist/js/demo.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Sparkline -->
-    <script src="assets/plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <script src="assets/plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="assets/plugins/jquery-knob/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Summernote -->
-    <script src="assets/plugins/summernote/summernote-bs4.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="assets/dist/js/adminlte.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="assets/dist/js/demo.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="assets/dist/js/pages/dashboard.js"></script>
-    <script src="assets/plugins/moment/moment.min.js"></script>

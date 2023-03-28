@@ -19,6 +19,7 @@ public class ItemBean {
 		// TODO Auto-generated constructor stub
 	}
     
+    
     public ItemBean(String projectId,String ItemCode,int quotationId,String drawingId,String ItemName,int Quantity,String tagNo,String remarks,String totalPrice,String date) {
     	this.ItemName = ItemName;
     	this.Quantity = Quantity;
@@ -105,6 +106,5 @@ public class ItemBean {
 		this.date = date;
 	} 
 	
-    
     
 }

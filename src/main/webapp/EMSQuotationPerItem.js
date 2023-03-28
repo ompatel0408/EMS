@@ -2,6 +2,89 @@
 var data = [];
 var search = [];
 var percent;
+
+document.getElementById("input-form").addEventListener("change", () => {
+
+            let value = document.getElementById("input-form").value;
+            console.log(value);
+            if (value == "Select option you want to update..") {
+                document.getElementById("input-form").style.borderColor = "red";
+                document.getElementById("select-error").innerText = "Please, Select any one optoins.";
+                document.getElementById("select-error").style.color = "red";
+                document.getElementById("hide-text").style.display = "none";
+                document.querySelector("#input-update").classList.add("disabled");
+                document.getElementById("category-id-model").style.display = "none";
+                document.getElementById("grade-id-model").style.display = "none";
+                document.getElementById("size-id-model").style.display = "none";
+                document.getElementById("hide-date").style.display = "none";
+            }
+            else if (value == "category") {
+                document.querySelector("#input-update").classList.remove("disabled");
+                document.getElementById("category-id-model").style.display = "block";
+                document.getElementById("grade-id-model").style.display = "block";
+                document.getElementById("size-id-model").style.display = "block";
+                document.getElementById("hide-text").style.display = "none";
+                document.getElementById("lableName1").innerHTML = document.getElementById("input-form").value;
+                document.getElementById("placeholderChange1").setAttribute("placeholder", "Enter New value to that element");
+                document.getElementById("input-form").style.borderColor = "blue";
+                document.getElementById("select-error").innerText = "";
+                document.getElementById("select-error").style.color = "red";
+                document.getElementById("hide-date").style.display = "none";
+            }
+            else if (value == "grade") {
+                document.querySelector("#input-update").classList.remove("disabled");
+                document.getElementById("category-id-model").style.display = "none";
+                document.getElementById("grade-id-model").style.display = "block";
+                document.getElementById("size-id-model").style.display = "block";
+                document.getElementById("hide-text").style.display = "none";
+                document.getElementById("lableName1").innerHTML = document.getElementById("input-form").value;
+                document.getElementById("placeholderChange1").setAttribute("placeholder", "Enter New value to that element");
+                document.getElementById("input-form").style.borderColor = "blue";
+                document.getElementById("select-error").innerText = "";
+                document.getElementById("select-error").style.color = "red";
+                document.getElementById("hide-date").style.display = "none";
+            }
+            else if (value == "size") {
+                document.querySelector("#input-update").classList.remove("disabled");
+                document.getElementById("category-id-model").style.display = "none";
+                document.getElementById("grade-id-model").style.display = "none";
+                document.getElementById("size-id-model").style.display = "block";
+                document.getElementById("hide-text").style.display = "none";
+                document.getElementById("lableName1").innerHTML = document.getElementById("input-form").value;
+                document.getElementById("placeholderChange1").setAttribute("placeholder", "Enter New value to that element");
+                document.getElementById("input-form").style.borderColor = "blue";
+                document.getElementById("select-error").innerText = "";
+                document.getElementById("select-error").style.color = "red";
+                document.getElementById("hide-date").style.display = "none";
+            }
+            else if (value == "delivaryDate") {
+                document.querySelector("#input-update").classList.remove("disabled");
+                document.getElementById("hide-date").style.display = "block";
+                document.getElementById("hide-text").style.display = "none";
+                document.getElementById("lableName1").innerHTML = document.getElementById("input-form").value;
+                document.getElementById("placeholderChange1").setAttribute("placeholder", "Enter New value to that element");
+                document.getElementById("input-form").style.borderColor = "blue";
+                document.getElementById("select-error").innerText = "";
+                document.getElementById("select-error").style.color = "red";
+                document.getElementById("category-id-model").style.display = "none";
+                document.getElementById("grade-id-model").style.display = "none";
+                document.getElementById("size-id-model").style.display = "none";
+            }
+            else {
+                document.querySelector("#input-update").classList.remove("disabled");
+                document.getElementById("hide-text").style.display = "block";
+                document.getElementById("hide-date").style.display = "none";
+                document.getElementById("lableName").innerHTML = document.getElementById("input-form").value;
+                document.getElementById("placeholderChange").setAttribute("placeholder", "Enter New value to that element");
+                document.getElementById("input-form").style.borderColor = "blue";
+                document.getElementById("select-error").innerText = "";
+                document.getElementById("select-error").style.color = "red";
+                document.getElementById("category-id-model").style.display = "none";
+                document.getElementById("grade-id-model").style.display = "none";
+                document.getElementById("size-id-model").style.display = "none";
+            }
+        })
+
 function submitForm(){
 	if (document.getElementById('MyTable').hasChildNodes) {
 		document.querySelector('#processTo').classList.remove('disabled')

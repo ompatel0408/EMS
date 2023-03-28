@@ -19,7 +19,6 @@ public class EMSPurchaseBean {
 	public EMSPurchaseBean() {}
 	
 	
-	
 	public EMSPurchaseBean(String productDescription, String size, int quantity, String uom, String ratePerKg,String discount, String netAmount, double sGST, double cGST, String indentId, String currentDate, String pONumber,String vendorName) {
 		this.ProductDescription = productDescription;
 		this.Size = size;

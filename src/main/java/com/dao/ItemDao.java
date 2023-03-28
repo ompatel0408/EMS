@@ -28,6 +28,7 @@ public class ItemDao {
 		
 		Connection conn = MySqlConnection.getInstance();
 		
+		
 		try {
 			PreparedStatement stmt = conn.prepareStatement(insertQuery);
 			
@@ -96,4 +97,64 @@ public class ItemDao {
 		}
 		return null;
 	}
+	
+	
+public ArrayList<ItemBean> getItemListForIndent(String projectId){
+		
+		String selectQuery = "SELECT Itemname,itemcode,quantity FROM items where projectid ="+"'"+projectId+"'";
+		Connection conn = MySqlConnection.getInstance();
+		ArrayList<ItemBean> a = new ArrayList<ItemBean>();	
+		
+		if(conn != null) {
+			
+			try {
+				Statement pstmt = conn.createStatement();
+				ResultSet rs=pstmt.executeQuery(selectQuery);
+				
+				while(rs.next()) {
+					ItemBean ib = new ItemBean();
+					ib.setItemName(rs.getString("itemname"));
+					ib.setItemCode(rs.getString("itemcode"));
+					ib.setQuantity(rs.getInt("Quantity"));
+					
+					a.add(ib);
+				}
+				return a;
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		return null;
+	}
+
+	public ArrayList<String> getItemNames(String projectId) {
+		
+		String selectQuery = "select itemname from items where projectId = "+"'"+projectId+"'";
+		Connection conn = MySqlConnection.getInstance();
+		ArrayList<String> a = new ArrayList<String>();	
+		
+		if(conn != null) {
+			
+			try {
+				Statement pstmt = conn.createStatement();
+				ResultSet rs=pstmt.executeQuery(selectQuery);
+				
+				while(rs.next()) {
+					String name = rs.getString("itemname");
+					
+					a.add(name);
+				}
+				return a;
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		return null;
+	}
 }
+
+

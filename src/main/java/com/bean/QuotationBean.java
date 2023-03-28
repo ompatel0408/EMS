@@ -26,6 +26,7 @@ public class QuotationBean {
 		return quotationId;
 	}
 
+	
 	public void setQuotationId(int quotationId) {
 		this.quotationId = quotationId;
 	}

@@ -46,12 +46,14 @@ document.getElementById('ProjectId1').addEventListener('change', () => {
 	document.querySelector('#AddItemBtn').classList.remove('disabled');
 });
 var EditId;
+var deleteId;
 var data = []
 function submitForm() {
-	if (document.getElementById('MyTable').hasChildNodes) {
-		document.querySelector('#ProcessId').classList.remove('disabled')
+	console.log(document.getElementById('MyTable').hasChildNodes);
+	if (document.getElementById('MyTable').hasChildNodes != null) {
+		document.querySelector('#ProcessId').classList.remove('disabled');
 	}
-	
+
 	var json =
 	{
 		ProjectId: document.getElementById('ProjectId1').value,
@@ -62,40 +64,12 @@ function submitForm() {
 		delivaryDate: document.getElementById('DelivaryDate').value,
 		TotalPrice: JSON.stringify(parseInt(document.getElementById('Quantity').value) * 0)
 	}
-	data.push(json)
-	console.log(json.tagNo)
-
-	document.getElementById("MyTable").innerHTML = "";
-	var table = document.getElementById("MyTable");
-	for (var i = 0; i < data.length; i++) {
-		var newRow = document.createElement("tr");
-
-		newRow.innerHTML = `
-    		<td id="${i + 1}">${i + 1}</td>
-    		<td><a id="ItemName${i + 1}"></a> <br></td>
-    		<td><a id="Quantity${i + 1}"></a> <br></td>
-    		<td><a id="TagNo${i + 1}"></a> <br></td>
-    		<td><a id="DelivaryDate${i + 1}"></a> <br></td>
-    		 <td class="project-actions text-right">
-                  <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-editItem" onclick="Demo(this.id)" id="Edit${i+1}">
-                        <i class="fas fa-pencil-alt"></i>
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-itemDelete" id="Delete${i+1}">
-                        <i class="fas fa-trash"></i>
-                  </button>
-              </td>
-    		`;
-		table.appendChild(newRow);
-
-		document.getElementById(`ItemName${i + 1}`).innerHTML = data[i].ItemName;
-
-		document.getElementById(`TagNo${i + 1}`).innerHTML = data[i].tagNo;
-
-		document.getElementById(`Quantity${i + 1}`).innerHTML = data[i].quantity;
-
-		document.getElementById(`DelivaryDate${i + 1}`).innerHTML = data[i].delivaryDate;
-
-	}
+	data.push(json);
+	console.log(json);
+	console.log(data);
+	appendFunc();
+	
+	
 }
 
 window.onload = function getProjects(){
@@ -127,28 +101,15 @@ function appendProjects(projects){
 		projectsSelect.appendChild(createdAt);
 	}
 }
-
+/*
 function Demo(tt){
 	EditId=parseInt(tt.slice(4));
-	console.log(EditId)
+	console.log("Edit Id :"+EditId)
 }
 
-function deleteItem(){
-	data.splice((EditId-1),1);
-	var parent = document.getElementById('MyTable')
-	var child = parent.querySelector('tr')
-	parent.removeChild(child);
-	for (var i = 0; i < data.length; i++) {	
-		document.getElementById(`ItemName${i + 1}`).innerHTML = data[i].ItemName;
-
-		document.getElementById(`TagNo${i + 1}`).innerHTML = data[i].tagNo;
-
-		document.getElementById(`Quantity${i + 1}`).innerHTML = data[i].quantity;
-
-		document.getElementById(`DelivaryDate${i + 1}`).innerHTML = data[i].delivaryDate;
-
-	}
-	console.log(data)
+function Demo1(tt){
+	deleteId=parseInt(tt.slice(6));
+	console.log("Delete Id :"+deleteId)
 }
 
 function updateField(){
@@ -184,7 +145,28 @@ function updateField(){
 }
 
 
+function deleteItem(){
+	console.log("delete Id -------->"+deleteId)
+	data.splice((deleteId-1),1);
+	var parent = document.getElementById('MyTable')
+	//var child = parent.querySelector('tr')
+	//parent.removeChild(child);
+	document.getElementById(`Edit${deleteId}`).removeChild('tr')
+	parent.innerHTML = "";
+	for (var i = 0; i < data.length; i++) {	
+		document.getElementById(`ItemName${i + 1}`).innerHTML = data[i].ItemName;
 
+		document.getElementById(`TagNo${i + 1}`).innerHTML = data[i].tagNo;
+
+		document.getElementById(`Quantity${i + 1}`).innerHTML = data[i].quantity;
+
+		document.getElementById(`DelivaryDate${i + 1}`).innerHTML = data[i].delivaryDate;
+
+	}
+	console.log(data)
+}
+
+*/
 
 
 
@@ -221,6 +203,110 @@ function XHRRequestForItem() {
 
 
 
+
+
+
+
+var deleteValue = "";
+function deleteItem(deleteId) {
+	deleteValue = deleteId;
+}
+document.getElementById("deleteClicked").addEventListener("click", () => {
+	data.splice(((deleteValue.substring(6)) - 1), 1);
+	appendFunc();
+});
+
+let editValue = "";
+function editFinction(editId) {
+	console.log(editId);
+	editValue = editId;
+}
+
+function updateField() {
+	EditId = parseInt(editValue.substring(4));
+	var fieldToChange = document.getElementById('input-form').value;
+	var newValue = document.getElementById('placeholderChange').value;
+	console.log("fieldToChange "+fieldToChange)
+	console.log("newValue  "+newValue)
+	console.log("hiiiii"+editValue)
+	if(fieldToChange == "ItemName"){
+		data[EditId-1].ItemName =newValue;
+	}else if(fieldToChange == "tagNo"){
+		data[EditId-1].tagNo = newValue;
+	}else if(fieldToChange == "quantity"){	
+		data[EditId-1].quantity = newValue;
+	}else{
+		var Value = document.getElementById('placeholderChange1').value;
+		data[EditId-1].delivaryDate = Value;
+	}
+	console.log(data)
+	appendFunc();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	event.preventDefault();
+	alert(editValue)
+	editValue = editValue.substring(4)
+	console.log("edited id : " + editValue);
+	var fieldToChange = document.getElementById('input-form').value;
+	var newValue = document.getElementById('placeholderChange').value;
+
+	console.log("fieldToChange ", fieldToChange);
+	console.log("newValue  ", newValue);
+
+	if (fieldToChange == "category") {
+		data[editValue - 1].category = document.getElementById("category-id-select").value;
+		data[editValue - 1].grade = document.getElementById("grade-id-select").value;
+		data[editValue - 1].size = document.getElementById("size-id-select").value;
+	} else if (fieldToChange == "grade") {
+		data[editValue - 1].grade = document.getElementById("grade-id-select").value;
+		data[editValue - 1].size = document.getElementById("size-id-select").value;
+	} else if (fieldToChange == "size") {
+		data[editValue - 1].size = document.getElementById("size-id-select").value;
+	} else if (fieldToChange == "quantity") {
+		var Value = document.getElementById('placeholderChange').value;
+		data[editValue - 1].quantity = Value;
+	}
+	console.log(data)
+	appendFunc();*/
+}
+
+function appendFunc() {
+	
+	document.getElementById("MyTable").innerHTML = "";
+	var table = document.getElementById("MyTable");
+	for (var i = 0; i < data.length; i++) {
+		var newRow = document.createElement("tr");
+
+		newRow.innerHTML = `
+    		<td id="${i + 1}">${i + 1}</td>
+    		<td><a id="ItemName${i + 1}">${data[i].ItemName}</a> <br></td>
+    		<td><a id="Quantity${i + 1}">${data[i].quantity}</a> <br></td>
+    		<td><a id="TagNo${i + 1}">${data[i].tagNo}</a> <br></td>
+    		<td><a id="DelivaryDate${i + 1}">${data[i].delivaryDate}</a> <br></td>
+    		 <td class="project-actions text-right">
+                  <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-editItem" onclick="editFinction(this.id)" id="Edit${i+1}">
+                        <i class="fas fa-pencil-alt"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-itemDelete" onclick="deleteItem(this.id)" id="Delete${i+1}">
+                        <i class="fas fa-trash"></i>
+                  </button>
+              </td>
+    		`;
+		table.appendChild(newRow);
+	}
+}
 
 
 

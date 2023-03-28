@@ -5,6 +5,7 @@ public class UserBean {
 		int userId,role;
 		long phNum;
 		String userName,email,password,departmentName;
+		
 		public int getUserId() {
 			return userId;
 		}

@@ -31,6 +31,7 @@ public class QuotationPerItemDao {
 		int rowCount = 0;
 		if(conn!= null) {
 			
+			
 			try {
 				Statement stmt = conn.createStatement();
 				ResultSet rs =stmt.executeQuery(selectQuery);
@@ -211,29 +212,77 @@ public class QuotationPerItemDao {
 		return false;
 	}
 	
-	
-	public boolean addProfitForQuotationPerItem(ArrayList<QuotationPerItemBean> ar) {
+	public ArrayList<String> getAllItemCode(){
 		
-		String insertQuery = "Insert into ProfitInQuotationPerItem Values(?,?,?)";
+		String selectQuery = "SELECT ItemCode FROM  ProfitInQuotationPerItem";
 		Connection conn = MySqlConnection.getInstance();
-		
+		ArrayList<String> ar = new ArrayList<String>();
 		if(conn != null) {
+			
 			try {
-				PreparedStatement stmt = conn.prepareStatement(insertQuery);
-				for(QuotationPerItemBean qpib :ar) {
-					stmt.setString(1, qpib.getItemId());
-					stmt.setString(2, qpib.getTotalAmountWithoutProfit());
-					stmt.setString(3, qpib.getTotalAmountWithProfit());
-					stmt.addBatch();
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(selectQuery);
+				
+				while(rs.next()) {
+					ar.add(rs.getString(1));
 				}
-				stmt.executeBatch();
-				return true;
+				return ar;
 			}catch(SQLException E) {
 				E.printStackTrace();
 			}
 		}else {
 			System.out.println("Connection is not establised!");
 		}
+		return null;
+	}
+	
+	public boolean addProfitForQuotationPerItem(ArrayList<QuotationPerItemBean> ar) {
+		Connection conn = MySqlConnection.getInstance();
+		if (QuotationPerItemDao.getInstance().getAllItemCode().contains(ar.get(0).getItemId())) {
+			String updateQuery = "UPDATE ProfitInQuotationPerItem SET TotalAmountWithoutProfit = ?,TotalAmountWithProfit = ? WHERE ItemCode = ?";
+
+			if(conn != null) {
+				try {
+					PreparedStatement stmt = conn.prepareStatement(updateQuery);
+					for(QuotationPerItemBean qpib :ar) {
+						stmt.setString(1, qpib.getTotalAmountWithoutProfit());
+						stmt.setString(2, qpib.getTotalAmountWithProfit());
+						stmt.setString(3, qpib.getItemId());
+						stmt.addBatch();
+					}
+					stmt.executeBatch();
+					return true;
+				}catch(SQLException E) {
+					E.printStackTrace();
+				}
+			}else {
+				System.out.println("Connection is not establised!");
+			}
+		}else {
+			
+			String insertQuery = "Insert into ProfitInQuotationPerItem Values(?,?,?)";
+			
+			if(conn != null) {
+				try {
+					PreparedStatement stmt = conn.prepareStatement(insertQuery);
+					for(QuotationPerItemBean qpib :ar) {
+						stmt.setString(1, qpib.getItemId());
+						stmt.setString(2, qpib.getTotalAmountWithoutProfit());
+						stmt.setString(3, qpib.getTotalAmountWithProfit());
+						stmt.addBatch();
+					}
+					stmt.executeBatch();
+					return true;
+				}catch(SQLException E) {
+					E.printStackTrace();
+				}
+			}else {
+				System.out.println("Connection is not establised!");
+			}
+		}
+		
+		
+		
 		return false;
 	}
 	

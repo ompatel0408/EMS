@@ -80,6 +80,7 @@ public class EMSPurchaseDao {
 		
 		if(conn != null) {
 			
+			
 			try {
 				
 				PreparedStatement stmt = conn.prepareStatement(insertQuery);

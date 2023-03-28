@@ -16,6 +16,7 @@ public class AccessDao
 	public AccessBean getAllAccess(int userId) {
 		try {
 			Connection con = MySqlConnection.getInstance();
+			
 			PreparedStatement pstmt = con.prepareStatement("select * from access where userId=?");
 			pstmt.setInt(1, userId);
 			ResultSet rs = pstmt.executeQuery();

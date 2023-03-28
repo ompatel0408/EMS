@@ -24,6 +24,7 @@ public class EMSLoginBean {
 		this.role = role;
 	}
 	
+	
 	public EMSLoginBean(int userId,String secretKey) {
 		this.userId = userId;
 		this.secretKey = secretKey;

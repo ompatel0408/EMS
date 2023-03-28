@@ -8,17 +8,45 @@ import com.bean.ProjectBean;
 import com.dbConnection.MySqlConnection;
 
 public class ProjectDao {
+	
+public static ProjectDao instance = null;
+	
+	public static ProjectDao getInstance() {
+		
+		if(instance == null) {
+			instance = new ProjectDao();
+		}
+		return instance;
+	}
+	
+	public ArrayList<String> getOnlyProjectId() {
+		try {
+			ArrayList<String> projectIds = new ArrayList<String>();
+			Connection con = MySqlConnection.getInstance();
+			PreparedStatement pstmt = con.prepareStatement("select projectid from projects");
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				
+				projectIds.add(rs.getString("projectid"));
+			}
+			return projectIds;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public void addProject(ProjectBean projectBean) {
 		try {
 			Connection con = MySqlConnection.getInstance();
-			PreparedStatement pstmt = con.prepareStatement("insert into project values (?,?,?,?,?,?,?)");
+			PreparedStatement pstmt = con.prepareStatement("insert into projects values (?,?,?,?,?,?)");
 			pstmt.setString(1,projectBean.getProjectId());
 			pstmt.setString(2, projectBean.getClientPoId());
 			pstmt.setString(3, projectBean.getPoDate());
 			pstmt.setInt(4,projectBean.getAdvancePayPercent());
 			pstmt.setInt(5,projectBean.getAfterPayPercent());
-			pstmt.setString(6,projectBean.getFinalDeliveryDate());
-			pstmt.setInt(7,projectBean.getClientId());
+			pstmt.setInt(6,projectBean.getClientId());
 			pstmt.executeUpdate();
 		}
 		catch (Exception e) {
@@ -30,19 +58,18 @@ public class ProjectDao {
 		ArrayList<ProjectBean> projects = new ArrayList<ProjectBean>();
 		try {
 			Connection con =MySqlConnection.getInstance();
-			PreparedStatement pstmt = con.prepareStatement("select projectid,clientpoid,podate,finaldeliverydate,clientid,advancepaypercent,afterpaypercent,clientname from project p join clients c on p.clientid = c.client_id");
+			PreparedStatement pstmt = con.prepareStatement("select projectid,clientpoid,podate,p.clientid,advancepaypercent,afterpaypercent,clientname from projects p join clients c on p.clientid = c.clientid");
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				ProjectBean project = new ProjectBean();
-				project.setProjectId(rs.getString("PROJECTID"));
-				project.setClientPoId(rs.getString("CLIENTPOID"));
-				project.setPoDate(rs.getString("PODATE"));
-				project.setFinalDeliveryDate("FINALDELIVERYDATE");
-				project.setClientId(rs.getInt("CLIENTID"));
-				project.setAdvancePayPercent(rs.getInt("ADVANCEPAYPERCENT"));
-				project.setAfterPayPercent(rs.getInt("AFTERPAYPERCENT"));
-				project.setClientName(rs.getString("CLIENTNAME"));
+				project.setProjectId(rs.getString(1));
+				project.setClientPoId(rs.getString(2));
+				project.setPoDate(rs.getString(3));
+				project.setClientId(rs.getInt(4));
+				project.setAdvancePayPercent(rs.getInt(5));
+				project.setAfterPayPercent(rs.getInt(6));
+				project.setClientName(rs.getString(7));
 				projects.add(project);
 			}
 			return projects;
@@ -57,7 +84,7 @@ public class ProjectDao {
 	public void deleteProject(String projectId) {
 		try {
 			Connection con = MySqlConnection.getInstance();
-			PreparedStatement pstmt = con.prepareStatement("delete from project where projectid = ?");
+			PreparedStatement pstmt = con.prepareStatement("delete from projects where projectid = ?");
 			pstmt.setString(1, projectId);
 			pstmt.executeUpdate();
 			
@@ -72,7 +99,7 @@ public class ProjectDao {
 	public void updateProject(String newData, String changeField, String projectId) {
 		try {
 			Connection con = MySqlConnection.getInstance();
-			PreparedStatement pstmt = con.prepareStatement("update project set " + changeField + "= ? where projectid = ? ");
+			PreparedStatement pstmt = con.prepareStatement("update projects set " + changeField + "= ? where projectid = ? ");
 			pstmt.setString(1, newData);
 			pstmt.setString(2, projectId);
 			pstmt.executeUpdate();
@@ -106,7 +133,7 @@ public class ProjectDao {
 		String projectId = null;
 		try {
 			Connection con = MySqlConnection.getInstance();
-			PreparedStatement pstmt = con.prepareStatement("select projectid from project where projectid = (select max(projectid) from project)");
+			PreparedStatement pstmt = con.prepareStatement("select projectid from projects where projectid = (select max(projectid) from projects)");
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				projectId = rs.getString("projectid");

@@ -29,6 +29,7 @@ public class QuotationPerItemBean {
 		this.pricePerItem = pricePerItem;
 	}
 	
+	
 	public QuotationPerItemBean(String itemCode,String TotalAmountWithoutProfit) {
 		this.itemId = itemCode;
 		this.TotalAmountWithoutProfit = TotalAmountWithoutProfit;

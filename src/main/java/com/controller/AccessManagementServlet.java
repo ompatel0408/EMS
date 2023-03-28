@@ -14,9 +14,7 @@ import com.bean.UserBean;
 import com.dao.UserDao;
 
 
-/**
- * Servlet implementation class AccessManagementServlet
- */
+
 public class AccessManagementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

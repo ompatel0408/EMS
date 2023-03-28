@@ -32,6 +32,7 @@ public class ClientServlet extends HttpServlet {
 		if(update.equals("update")) {
 			doPut(request, response);
 		}
+		
 		else if(clientId != 0){
 			doDelete(request, response);
 		}

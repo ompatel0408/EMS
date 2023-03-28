@@ -26,6 +26,7 @@ public class EMSStoreDao {
 		String insertQuery = "INSERT INTO STORE (projectId, categoryId, gradeId, sizeId, quantity) VALUES(?,?,?,?,?)";
 
 		Connection conn = MySqlConnection.getInstance();
+		
 		if (conn == null) {
 			System.out.println("connection is not connected..");
 		} else {
@@ -33,9 +34,9 @@ public class EMSStoreDao {
 				PreparedStatement stmt = conn.prepareStatement(insertQuery);
 				for (EMSStoreBean s : sb) {
 					stmt.setString(1, s.getProjectId());
-					stmt.setInt(2, s.getCategory());
-					stmt.setInt(3, s.getGrade());
-					stmt.setInt(4, s.getSize());
+					stmt.setInt(2, s.getCategoryId());
+					stmt.setInt(3, s.getGradeId());
+					stmt.setInt(4, s.getSizeId());
 					stmt.setInt(5, s.getQuantity());
 					stmt.addBatch();
 				}
@@ -178,6 +179,34 @@ public class EMSStoreDao {
 		return 0;
 	}
 	
+	
+	public ArrayList<EMSStoreBean> getAllData() {
+
+		ArrayList<EMSStoreBean> store =  new ArrayList<EMSStoreBean>();
+		String selectQuery = "select projectId,catagory,grade,size,quantity from store s join emscatagory ec on s.categoryid=ec.catagoryid  join catagorygrade cg on s.gradeid=cg.gradeid join catagorygradesize using (sizeid)";
+		Connection conn = MySqlConnection.getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement(selectQuery);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					EMSStoreBean esb = new EMSStoreBean(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5));
+					store.add(esb);
+				}
+				return store;
+
+			} catch (SQLException E) {
+				E.printStackTrace();
+			}
+		} else {
+			System.out.println("Connection is not establised!");
+		}
+		return null;
+	}
+	
 	public int getSizeIdFromDatabase(int category,int grade, String size) {
 
 		System.out.println("in getSizeId = category : " + category + ", grade : " + grade + ", size : " + size);
@@ -207,6 +236,33 @@ public class EMSStoreDao {
 			System.out.println("Connection is not establised!");
 		}
 		return 0;
+	}
+	
+	public ArrayList<EMSStoreBean> getAllStoreList() {
+
+		ArrayList<EMSStoreBean> store =  new ArrayList<EMSStoreBean>();
+		String selectQuery = "select catagory,grade,size,quantity from store s join emscatagory ec on s.categoryid = ec.catagoryid join catagorygrade using (gradeid) join catagorygradesize using (sizeid)";
+		Connection conn = MySqlConnection.getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement(selectQuery);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					EMSStoreBean esb = new EMSStoreBean(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4));
+					store.add(esb);
+				}
+				return store;
+
+			} catch (SQLException E) {
+				E.printStackTrace();
+			}
+		} else {
+			System.out.println("Connection is not establised!");
+		}
+		return null;
 	}
 
 }

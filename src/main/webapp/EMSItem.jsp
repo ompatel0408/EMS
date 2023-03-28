@@ -149,7 +149,7 @@
 									option you want to update..</option>
 								<option value="ItemName">Item Name</option>
 								<option value="tagNo">Tag No</option>
-								<option value="quantity">Quantaty</option>
+								<option value="quantity">Quantity</option>
 								<option value="delivaryDate">Delivery Date</option>
 							</select>
 
@@ -190,7 +190,7 @@
 					<button type="button" class="btn btn-outline-light"
 						data-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-outline-light"
-						onclick="deleteItem()" data-dismiss="modal">Delete Item</button>
+						 data-dismiss="modal" id="deleteClicked">Delete Item</button>
 				</div>
 			</div>
 		</div>

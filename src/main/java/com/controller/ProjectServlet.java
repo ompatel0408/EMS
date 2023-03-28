@@ -7,6 +7,7 @@ import java.util.Date;
 
 import com.bean.ProjectBean;
 import com.dao.ProjectDao;
+import com.service.*;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -38,6 +39,7 @@ public class ProjectServlet extends HttpServlet {
 		
 		
 		
+		
 		ArrayList<ProjectBean> projects = projectDao.getAllProject();
 //		System.out.println("ProjectListSize:"+projects.size());
 		
@@ -46,18 +48,26 @@ public class ProjectServlet extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String projectId = request.getParameter("projectId");
+		//String projectId = request.getParameter("projectId");
+		String projectId="";
+		String clientName="";
 		String clientPoId = request.getParameter("clientPoId");
 		Integer advancePayPercent = Integer.parseInt(request.getParameter("advancePayPercent"));
 		Integer afterPayPercent = Integer.parseInt(request.getParameter("afterPayPercent"));
+		String finalDeliveryDate = request.getParameter("finalDeliveryDate");
 		Integer clientId = Integer.parseInt(request.getParameter("clientId"));
 		ProjectBean projectbean= new ProjectBean();
-		projectbean.setProjectId(projectId);
+		
 		projectbean.setClientPoId(clientPoId);
 		projectbean.setPoDate(today);
 		projectbean.setAdvancePayPercent(advancePayPercent);
 		projectbean.setAfterPayPercent(afterPayPercent);
+		projectbean.setFinalDeliveryDate(finalDeliveryDate);
 		projectbean.setClientId(clientId);
+		clientName = new ProjectDao().getClientName(clientId);
+		ProjectServices ps = new ProjectServices();
+		projectId = ps.projectGenerate(clientName);
+		projectbean.setProjectId(projectId);
 		new ProjectDao().addProject(projectbean);
 		response.sendRedirect("ProjectServlet?projectId=0&update=notupdate");
 	}

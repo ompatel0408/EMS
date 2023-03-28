@@ -8,6 +8,7 @@ public class AccessBean
 		return accessManagement;
 	}
 
+	
 	public void setAccessManagement(int accessManagement) {
 		this.accessManagement = accessManagement;
 	}

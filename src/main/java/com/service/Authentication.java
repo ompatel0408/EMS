@@ -11,6 +11,7 @@ public class Authentication {
 		if(ELD.getPasswordFromDb(email).getPassword().equals(password)) {
 			return true;
 		}
+		
 		return false;
 		
 	}

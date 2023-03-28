@@ -23,6 +23,7 @@ public class MySqlConnection {
 		}
 		
 		
+		
 		public static Connection getInstance()
 		{
 			if(con==null)

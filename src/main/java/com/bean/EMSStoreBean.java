@@ -4,20 +4,71 @@ package com.bean;
 public class EMSStoreBean 
 {
 	private String projectId;
-	private int category;
-	private int grade;
-	private int size;
+	private String category;
+	private String grade;
+	private String size;
 	private int quantity;
+	private int categoryId;
+	private int gradeId;
+	private int sizeId;
 	
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public int getGradeId() {
+		return gradeId;
+	}
+
+	public void setGradeId(int gradeId) {
+		this.gradeId = gradeId;
+	}
+
+	public int getSizeId() {
+		return sizeId;
+	}
+
+	public void setSizeId(int sizeId) {
+		this.sizeId = sizeId;
+	}
+
 	public EMSStoreBean() {}
 
-	public EMSStoreBean(String projectId, int category, int grade, int size, int quantity) {
-		
+	public EMSStoreBean(String projectId, String category, String grade, String size, int quantity) {
 		this.projectId = projectId;
 		this.category = category;
 		this.grade = grade;
 		this.size = size;
 		this.quantity = quantity;
+	}
+
+	public EMSStoreBean(String projectId, int categoryId, int gradeId, int sizeId, int quantity) {
+		
+		this.projectId = projectId;
+		this.categoryId = categoryId;
+		this.gradeId = gradeId;
+		this.sizeId = sizeId;
+		this.quantity = quantity;
+	}
+	
+	
+	public EMSStoreBean(String category, String grade, String size, int quantity) {
+		this.category = category;
+		this.grade = grade;
+		this.size = size;
+		this.quantity = quantity;
+	}
+
+	public EMSStoreBean(int quantity, int categoryId, int gradeId, int sizeId) {
+		super();
+		this.quantity = quantity;
+		this.categoryId = categoryId;
+		this.gradeId = gradeId;
+		this.sizeId = sizeId;
 	}
 
 	public String getProjectId() {
@@ -28,27 +79,28 @@ public class EMSStoreBean
 		this.projectId = projectId;
 	}
 
-	public int getCategory() {
+	public String getCategory() {
 		return category;
 	}
 
-	public void setCategory(int category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 
-	public int getGrade() {
+	public String getGrade() {
 		return grade;
 	}
 
-	public void setGrade(int grade) {
+	public void setGrade(String grade) {
 		this.grade = grade;
 	}
 
-	public int getSize() {
+	
+	public String getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 

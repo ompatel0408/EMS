@@ -77,6 +77,7 @@ public class ProjectBean {
 	public void setProjectId(String projectId) {
 		this.projectId = projectId;
 	}
+	
 
 	public String getClientPoId() {
 		return clientPoId;

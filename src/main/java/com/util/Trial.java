@@ -38,6 +38,7 @@ public class Trial implements Job{
 
 			// Schedule the job with the trigger
 	
+			
 			try {
 				scheduler = new StdSchedulerFactory().getScheduler();
 				scheduler.start();
@@ -56,6 +57,7 @@ public class Trial implements Job{
 			e.printStackTrace();
 		}
 	}
+	
 	
 	
 }

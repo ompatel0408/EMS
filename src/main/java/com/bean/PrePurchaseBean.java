@@ -19,6 +19,7 @@ public class PrePurchaseBean {
 		this.projectId = projectId;
 	}
 	
+	
 	public String getDrawingId() {
 		return drawingId;
 	}

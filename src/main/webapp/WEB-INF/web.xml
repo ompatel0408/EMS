@@ -133,7 +133,66 @@
 	<servlet-mapping>
 		<servlet-name>AccessManagementServlet</servlet-name>
 		<url-pattern>/AccessManagementServlet</url-pattern>
+	</servlet-mapping>	
+	
+	<servlet>
+		<servlet-name>EMSProductionServlet</servlet-name>
+		<servlet-class>com.controller.EMSProductionServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSProductionServlet</servlet-name>
+		<url-pattern>/EMSProductionServlet</url-pattern>
 	</servlet-mapping>
-
+	
+	<servlet>
+		<servlet-name>GetGradeListServlet</servlet-name>
+		<servlet-class>com.controller.GetGradeListServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GetGradeListServlet</servlet-name>
+		<url-pattern>/GetGradeListServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EMSStoreListServlet</servlet-name>
+		<servlet-class>com.controller.EMSStoreListServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSStoreListServlet</servlet-name>
+		<url-pattern>/EMSStoreListServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>IndentServlet</servlet-name>
+		<servlet-class>com.controller.IndentServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>IndentServlet</servlet-name>
+		<url-pattern>/IndentServlet</url-pattern>
+	</servlet-mapping>
+		
+	
+	<servlet>
+		<servlet-name>ListIndentServlet</servlet-name>
+		<servlet-class>com.controller.ListIndentServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ListIndentServlet</servlet-name>
+		<url-pattern>/ListIndentServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EMSGRNServlet</servlet-name>
+		<servlet-class>com.controller.EMSGRNServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EMSGRNServlet</servlet-name>
+		<url-pattern>/EMSGRNServlet</url-pattern>
+	</servlet-mapping>
 
 </web-app>

@@ -31,7 +31,6 @@ public class QuotationPerItemServices {
 		}
 		
 		String jsonData = sb.toString();
-	
 
 		// Create a Gson object
 		Gson gson = new Gson();

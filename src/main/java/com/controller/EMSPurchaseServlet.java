@@ -39,6 +39,7 @@ public class EMSPurchaseServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		
 
 		ArrayList<ArrayList<String>> ar = new ArrayList<ArrayList<String>>();
 		EMSPurchaseDao EPD = EMSPurchaseDao.getInstance();

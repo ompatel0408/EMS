@@ -6,7 +6,7 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 
-@WebListener
+
 public class ServerListener implements ServletContextListener {
 
 
@@ -15,15 +15,18 @@ public class ServerListener implements ServletContextListener {
     }
     
 	
-	public void contextInitialized(ServletContextEvent arg0) {
+	public void contextInitialized(ServletContextEvent event) {
 		System.out.println("Listener Started");
-		Trial.DailyMailService();
+//		Trial.DailyMailService();
 	}
 	
 	
-	public void contextDestroyed(ServletContextEvent arg0) {
+	public void contextDestroyed(ServletContextEvent event) {
 		System.out.println("Listener Destroyed");
-		Trial.stopDailyMailService();
+//		Trial.stopDailyMailService();
 	}
+	
+	
+
 	
 }

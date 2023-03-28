@@ -242,13 +242,6 @@ int srNo=1;
 						<form action="ProjectServlet" method="POST">
 							
 							<div class="modal-body">
-
-								<div class="form-group">
-									<label for="exampleInputEmail1">Project Id</label> <input
-										type="text" class="form-control" name="projectId"
-										id="exampleInputEmail1" required
-										placeholder="Enter Project Id">
-								</div>
 								<div class="form-group">
 									<label for="exampleInputPassword1">Client PO ID</label> <input
 										type="text" class="form-control" name="clientPoId"

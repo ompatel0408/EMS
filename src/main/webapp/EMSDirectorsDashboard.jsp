@@ -200,7 +200,6 @@ button {
 	</div>
 	<script type="text/javascript" src="EMSDirectorsDashboard.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-	<script src="assets/dist/js/custom.js"></script>
 	<script src="assets/dist/js/models.js"></script>
 	<!-- jQuery -->
 	<script src="assets/plugins/jquery/jquery.min.js"></script>
@@ -233,6 +232,7 @@ button {
 	<script src="assets/dist/js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="assets/dist/js/demo.js"></script>
+	<script src="assets/dist/js/custom.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Page specific script -->
