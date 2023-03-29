@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.bean.ClientBean;
 import com.bean.ItemBean;
 import com.dbConnection.MySqlConnection;
 
@@ -24,7 +25,7 @@ public class ItemDao {
 	
 	public static boolean addItems(ArrayList<ItemBean> Aqb) {
 		
-		String insertQuery = "INSERT INTO ITEMS VALUES(?,?,?,?,?,?,?,?,?,?)";
+		String insertQuery = "INSERT INTO ITEMS(CLIENTID,ITEMCODE,ITEMNAME,Quantity,QuotationId,TagNo,DeliveryDate,Remarks) VALUES(?,?,?,?,?,?,?,?)";
 		
 		Connection conn = MySqlConnection.getInstance();
 		
@@ -33,16 +34,14 @@ public class ItemDao {
 			PreparedStatement stmt = conn.prepareStatement(insertQuery);
 			
 			for(ItemBean qb:Aqb) {
-				stmt.setString(1, qb.getProjectId());
+				stmt.setInt(1, qb.getClientId());
 				stmt.setString(2, qb.getItemCode());
 				stmt.setString(3, qb.getItemName());
-				stmt.setString(4, qb.getTotalPrice());
-				stmt.setInt(5, qb.getQuantity());
-				stmt.setInt(6, qb.getQuotationId());
-				stmt.setString(7, qb.getTagNo());			
-				stmt.setString(8, qb.getDate());
-				stmt.setString(9, qb.getDrawingId());
-				stmt.setString(10, qb.getRemarks());
+				stmt.setInt(4, qb.getQuantity());
+				stmt.setInt(5, qb.getQuotationId());
+				stmt.setString(6, qb.getTagNo());			
+				stmt.setString(7, qb.getDate());
+				stmt.setString(8, qb.getRemarks());
 				stmt.addBatch();
 			}
 			int[] result = stmt.executeBatch();
@@ -72,12 +71,12 @@ public class ItemDao {
 		return null;
 	}
 	
-	public ArrayList<String> getProjects(){
+	public ArrayList<ClientBean> getClients(){
 		
-		String selectQuery = "SELECT ProjectId FROM Projects";
+		String selectQuery = "SELECT clientid,ClientName FROM Clients";
 		Connection conn = MySqlConnection.getInstance();
-		ArrayList<String> a = new ArrayList<String>();	
-		
+		ArrayList<ClientBean> a = new ArrayList<ClientBean>();	
+		ClientBean Cb = null;
 		if(conn != null) {
 			
 			try {
@@ -85,9 +84,9 @@ public class ItemDao {
 				ResultSet rs=stmt.executeQuery(selectQuery);
 				
 				while(rs.next()) {
-					a.add(rs.getString(1));
+					Cb = new ClientBean(rs.getInt(1), rs.getString(2));
+					a.add(Cb);
 				}
-				
 				return a;
 			}catch(SQLException e) {
 				e.printStackTrace();

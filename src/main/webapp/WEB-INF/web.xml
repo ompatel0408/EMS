@@ -194,5 +194,24 @@
 		<servlet-name>EMSGRNServlet</servlet-name>
 		<url-pattern>/EMSGRNServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EMSClientListServlet</servlet-name>
+		<servlet-class>com.controller.EMSClientListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EMSClientListServlet</servlet-name>
+		<url-pattern>/EMSClientListServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EMSOffersServlet</servlet-name>
+		<servlet-class>com.controller.EMSOffersServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSOffersServlet</servlet-name>
+		<url-pattern>/EMSOffersServlet</url-pattern>
+	</servlet-mapping>
 
 </web-app>

@@ -10,6 +10,7 @@ public class ItemBean {
     private String remarks;
     private String totalPrice;
     private String date;
+    private int clientId;
     private String projectId;
     private String ItemCode;
     private int quotationId;
@@ -19,28 +20,35 @@ public class ItemBean {
 		// TODO Auto-generated constructor stub
 	}
     
-    
-    public ItemBean(String projectId,String ItemCode,int quotationId,String drawingId,String ItemName,int Quantity,String tagNo,String remarks,String totalPrice,String date) {
+    public ItemBean(int clientId,String ItemCode,int quotationId,String drawingId,String ItemName,int Quantity,String tagNo,String remarks,String totalPrice,String date) {
     	this.ItemName = ItemName;
     	this.Quantity = Quantity;
     	this.tagNo = tagNo;
     	this.remarks = remarks;
     	this.totalPrice = totalPrice;
     	this.date = date;
-    	this.projectId = projectId;
+    	this.clientId = clientId;
     	this.ItemCode = ItemCode;
     	this.quotationId = quotationId;
     	this.drawingId = drawingId;	
     }
     
 
-    
-	public String getProjectId() {
+    public String getProjectId() {
 		return projectId;
 	}
 
-	public void setProjectId(String projectId) {
+	public void setprojectId(String projectId) {
 		this.projectId = projectId;
+	}
+    
+    
+	public int getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 
 	public String getItemCode() {
@@ -48,7 +56,7 @@ public class ItemBean {
 	}
 
 	public void setItemCode(String itemCode) {
-		ItemCode = itemCode;
+		this.ItemCode = itemCode;
 	}
 
 	public int getQuotationId() {
@@ -72,13 +80,13 @@ public class ItemBean {
 		return ItemName;
 	}
 	public void setItemName(String itemName) {
-		ItemName = itemName;
+		this.ItemName = itemName;
 	}
 	public int getQuantity() {
 		return Quantity;
 	}
 	public void setQuantity(int quantity) {
-		Quantity = quantity;
+		this.Quantity = quantity;
 	}
 	
 	public String getTagNo() {
@@ -105,6 +113,5 @@ public class ItemBean {
 	public void setDate(String date) {
 		this.date = date;
 	} 
-	
     
 }

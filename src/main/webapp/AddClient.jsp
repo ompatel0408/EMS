@@ -23,12 +23,8 @@
 	<jsp:include page="Header.jsp"></jsp:include>
 	<jsp:include page="LeftSideBar.jsp"></jsp:include>
 	<div class="wrapper">
-
 		<div class="content-wrapper">
 			<section class="content" style="margin-left: 90%;">
-				<button type="button" class="btn btn-primary planButton"
-					data-bs-toggle="modal" data-bs-target="#myModal">Add
-					Client</button>
 				<div class="modal fade" id="myModal">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -44,17 +40,17 @@
 									<div class="form-group">
 										<label for="exampleInputPassword1">Client Name</label> <input
 											type="text" class="form-control" id="exampleInputPassword1"
-											placeholder="Password" name="clientName">
+											placeholder="Enter Client Name" name="clientName">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">GST</label> <input
 											type="text" class="form-control" id="exampleInputPassword1"
-											placeholder="Password" name="gst">
+											placeholder="Enter GST" name="gst">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Phone</label> <input
 											type="number" class="form-control" id="exampleInputPassword1"
-											placeholder="Password" name="phone">
+											placeholder="Enter Phone Number" name="phone">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Email</label> <input
@@ -64,12 +60,12 @@
 									<div class="form-group">
 										<label for="exampleInputPassword1">PAN No</label> <input
 											type="text" class="form-control" id="exampleInputPassword1"
-											placeholder="Password" name="pan">
+											placeholder="Enter PAN No" name="pan">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Address</label> <input
 											type="text" class="form-control" id="exampleInputPassword1"
-											placeholder="Password" name="address">
+											placeholder="Enter Address" name="address">
 									</div>
 									<div class="modal-footer justify-content-between">
 										<button type="button" class="btn btn-default"
@@ -88,7 +84,10 @@
 			<!-- Content Header (Page header) -->
 			<div class="card m-2">
 				<div class="card-header">
-					<h3 class="card-title">Clients</h3>
+					<h3 class="card-title mt-2"> <b>Clients </b></h3>
+					<button type="button" class="btn btn-primary planButton float-right"
+						data-bs-toggle="modal" data-bs-target="#myModal">Add
+						Client</button>
 				</div>
 				<div class="card-body p-0">
 					<table class="table table-striped projects">
@@ -120,7 +119,7 @@
 										data-target="#modal-projectDetails<%=c.getClientId()%>">View
 									</button>
 									<button type="button" class="btn btn-success btn-sm"
-										data-toggle="modal"
+										data-toggle="modal" onclick="dropDown(<%=c.getClientId()%>)"
 										data-target="#updateClientModal<%=c.getClientId()%>">
 										<i class="fas fa-pencil-alt"></i> Edit
 									</button> <!-- updateModalCode -->
@@ -144,10 +143,7 @@
 																value=<%=c.getClientId()%>> <select
 																name="editedColumn"
 																class="form-control select2 select2-hidden-accessible"
-																style="width: 100%;" data-select2-id="1" tabindex="-1"
-																aria-hidden="true" id="input-form<%=c.getClientId()%>"
-																onchange="dropDown(<%=c.getClientId()%>)">
-																<br>
+																style="width: 100%;" id="input-form<%=c.getClientId()%>">
 																<option selected="selected" data-select2-id="3">Please,
 																	Select any one optoins.</option>
 																<option value="CLIENTNAME">CLIENTNAME</option>
@@ -190,11 +186,13 @@
 													</button>
 												</div>
 												<div class="modal-body">
-													<%for(int j=0;j<clients.size();j++){ 
-														if(clients.get(j).getClientId() == c.getClientId()){%>
+													<%
+													for (int j = 0; j < clients.size(); j++) {
+														if (clients.get(j).getClientId() == c.getClientId()) {
+													%>
 													<div class="form-group">
-														<label for="exampleInputEmail1">Client Id</label>
-														<p><%=clients.get(j).getClientId()%></p>
+														<label for="exampleInputEmail1 d-flex flex-direction-column align-items-flex-start">Client Id</label>
+														<p class=""><%=clients.get(j).getClientId()%></p>
 													</div>
 													<div class="form-group">
 														<label for="exampleInputEmail1">Client Name</label>
@@ -220,7 +218,10 @@
 														<label for="exampleInputEmail1">ADDRESS</label>
 														<p><%=clients.get(j).getAddress()%></p>
 													</div>
-													<%} } %>
+													<%
+													}
+													}
+													%>
 													</form>
 												</div>
 											</div>
@@ -244,7 +245,7 @@
 													</button>
 												</div>
 												<div class="modal-body">
-													<p>Are you sure you want to delete this project?</p>
+													<p>Are you sure you want to delete this Client?</p>
 												</div>
 												<div class="modal-footer justify-content-between">
 													<button type="button" class="btn btn-outline-light"
@@ -268,20 +269,16 @@
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header ">
-													<center>
-														<h1 class="modal-title fs-5" id="staticBackdropLabel">Delete
-															Client</h1>
-													</center>
+													<h1 class="modal-title fs-5" id="staticBackdropLabel">Delete
+														Client</h1>
 													<button type="button" class="btn-close"
 														data-bs-dismiss="modal" aria-label="Close"></button>
 												</div>
 												<div class="modal-body">
 
 													<form>
-														<center>
-															<input type="button" class="btn btn-warning"
-																value="Are You Sure">
-														</center>
+														<input type="button" class="btn btn-warning"
+															value="Are You Sure">
 													</form>
 												</div>
 
@@ -303,28 +300,31 @@
 	</div>
 
 	<script>
+		var newId;
 		function dropDown(clientId){
-			alert(clientId)
-	        document.getElementById("input-form"+clientId).addEventListener("change", () => {
-	            let value = document.getElementById("input-form"+clientId).value;
-	            //alert(value);
-	            if (value == "Select option you want to update..") {
-	                document.getElementById("input-form"+clientId).style.borderColor = "red";
-	                document.getElementById("select-error"+clientId).innerText = "Please, Select any one optoins.";
-	                document.getElementById("select-error"+clientId).style.color = "red";
-	                document.getElementById("hide-text"+clientId).style.display = "none";
-	                document.querySelector("#input-update"+clientId).classList.add("disabled");
-	            }
-	            else {
-	                document.querySelector("#input-update"+clientId).classList.remove("disabled");
-	                document.getElementById("hide-text"+clientId).style.display = "block";
-	                document.getElementById("lableName"+clientId).innerHTML = document.getElementById("input-form"+clientId).value;
-	                document.getElementById("placeholderChange"+clientId).setAttribute("placeholder", "Enter " + value );
-	                document.getElementById("input-form"+clientId).style.borderColor = "blue";
-	                document.getElementById("select-error"+clientId).innerText = "";
-	                document.getElementById("select-error"+clientId).style.color = "red";
-	            }
-	        })
+			console.log(clientId.toString());
+			newId = clientId.toString();
+			console.log(newId);
+		
+		document.getElementById("input-form"+newId).addEventListener("change", () => {
+            let value = document.getElementById("input-form"+newId).value;
+            if (value == "Select option you want to update..") {
+                document.getElementById("input-form"+newId).style.borderColor = "red";
+                document.getElementById("select-error"+newId).innerText = "Please, Select any one optoins.";
+                document.getElementById("select-error"+newId).style.color = "red";
+                document.getElementById("hide-text"+newId).style.display = "none";
+                document.querySelector("#input-update"+newId).classList.add("disabled");
+            }
+            else {
+                document.querySelector("#input-update"+newId).classList.remove("disabled");
+                document.getElementById("hide-text"+newId).style.display = "block";
+                document.getElementById("lableName"+newId).innerHTML = document.getElementById("input-form"+newId).value;
+                document.getElementById("placeholderChange"+newId).setAttribute("placeholder", "Enter " + value );
+                document.getElementById("input-form"+newId).style.borderColor = "blue";
+                document.getElementById("select-error"+newId).innerText = "";
+                document.getElementById("select-error"+newId).style.color = "red";
+            }
+        })
 		}
     </script>
 

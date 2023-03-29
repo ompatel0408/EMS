@@ -37,14 +37,12 @@
                 <p>
                Your Key is expired so please Enter a new Key on login Page
                 </p>
-                <form class="search-form">
                        <div class="col-md-6">
                         <a class="btn btn-danger" href="EMSLogin.jsp" role="button">Back to LoginPage</a>
                     </div>
                   </div>
-                </form>
               </div>
-            </div>
+
           </section>
 </body>
 </html>

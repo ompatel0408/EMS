@@ -13,6 +13,8 @@ import com.google.gson.reflect.TypeToken;
 
 import com.bean.QuotationBean;
 import com.bean.ItemBean;
+import com.dao.ClientDao;
+import com.dao.EMSOffersDao;
 import com.dao.QuotationDao;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -52,12 +54,14 @@ public class ItemServices {
 
 		// Loop through each object in the list and extract the fields
 		for (Map<String, Object> item : data) {
-			String projectId = item.get("ProjectId").toString();
-			if(QuotationDao.getQuotationIdFromDataBase(projectId) == null) {
-				QuotationDao.addQuotation(new QuotationBean(projectId,LocalDate.now().toString()));
+			String ClientName = item.get("ClientId").toString();
+			int clientId = ClientDao.getInstance().getClientIdFormDatabase(ClientName);
+			if(QuotationDao.getQuotationIdFromDataBase(clientId) == null) {
+				QuotationDao.addQuotation(new QuotationBean(clientId,LocalDate.now().toString()));
 			}
 			String it = ItemServices.generateItemCode(request);
-			ItemBean Qb = new ItemBean(item.get("ProjectId").toString(),it,QuotationDao.getQuotationIdFromDataBase(projectId).getQuotationId(),ItemServices.generateDrawingId(projectId),item.get("ItemName").toString(), Integer.parseInt((String) item.get("quantity")), item.get("tagNo").toString(),item.get("remarks").toString(), item.get("TotalPrice").toString(),item.get("delivaryDate").toString());
+			
+			ItemBean Qb = new ItemBean(clientId,it,QuotationDao.getQuotationIdFromDataBase(clientId).getQuotationId(),ItemServices.generateDrawingId(clientId),item.get("ItemName").toString(), Integer.parseInt((String) item.get("quantity")), item.get("tagNo").toString(),item.get("remarks").toString(), item.get("TotalPrice").toString(),item.get("delivaryDate").toString());
 		   
 		    AQb.add(Qb);
 		}
@@ -87,10 +91,10 @@ public class ItemServices {
 		return ItemCode;
 	}
 	
-	public static String generateDrawingId(String projectId) {
+	public static String generateDrawingId(int clientId) {
 		
 		String drawingId = "";
-		drawingId = projectId.concat("_").concat(String.valueOf(ItemCode));
+		drawingId = String.valueOf(clientId).concat("_").concat(String.valueOf(ItemCode));
 		return drawingId;
 	}
 	

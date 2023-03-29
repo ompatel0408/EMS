@@ -2,7 +2,10 @@ package com.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import com.bean.ClientBean;
 import com.bean.EMSFinalQuotationBean;
 import com.dao.EMSFinalQuotationDao;
 import com.dao.ItemDao;
@@ -18,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class EMSFinalQuotationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static EMSFinalQuotationServlet instance = null;
-	
+	private static HashMap<String, Integer> map = new HashMap<>();
 	
 	public static EMSFinalQuotationServlet getInstacne() {
 		
@@ -34,11 +37,19 @@ public class EMSFinalQuotationServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+	    
+		Gson gson = new Gson();
+	    
 	    ItemDao Id = ItemDao.getInstance();
-	    Gson gson = new Gson();
-		
-	    String json = gson.toJson(Id.getProjects());
+	    
+	    ArrayList<String> arr = new ArrayList<String>();
+	    for(ClientBean c:Id.getClients()) {
+	    	arr.add(c.getClientName());
+	    	if(!map.containsKey(c.getClientName())) {
+	    		map.put(c.getClientName(), c.getClientId());
+	    	}
+	    }
+	    String json = gson.toJson(arr);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(json);
@@ -59,11 +70,15 @@ public class EMSFinalQuotationServlet extends HttpServlet {
 	    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
 		
 		EMSFinalQuotationDao EQD = EMSFinalQuotationDao.getInstance();
-		if(EQD.insertFinalQuotation(new EMSFinalQuotationBean(jsonObject.get("TotalAmount").getAsString(), jsonObject.get("finalDelivaryDate").getAsString(), Integer.parseInt(jsonObject.get("Quantity").getAsString()), jsonObject.get("discountPercentage").getAsString(), jsonObject.get("discountAmount").getAsString(),jsonObject.get("projectId").getAsString(),jsonObject.get("remark").getAsString()))) {
-			System.out.println("Inserted successfully!");
-		}else {
-			System.out.println("Not inserted!");
+		String clientName = jsonObject.get("clientId").getAsString();
+		if(clientName != null) {
+			if(EQD.insertFinalQuotation(new EMSFinalQuotationBean(jsonObject.get("TotalAmount").getAsString(), jsonObject.get("finalDelivaryDate").getAsString(), Integer.parseInt(jsonObject.get("Quantity").getAsString()), jsonObject.get("discountPercentage").getAsString(), jsonObject.get("discountAmount").getAsString(),map.get(clientName),jsonObject.get("remark").getAsString()))) {
+				System.out.println("Inserted successfully!");
+			}else {
+				System.out.println("Not inserted!");
+			}
 		}
+		
 	}
 	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -80,7 +95,11 @@ public class EMSFinalQuotationServlet extends HttpServlet {
 		
 		
 		EMSFinalQuotationDao EFQD = EMSFinalQuotationDao.getInstance();
-		String json = gson.toJson(EFQD.getSumOfAllItemCodeOfAProject(jsonObject.get("projectId").getAsString()));
+		String clientName = jsonObject.get("ClientId").getAsString();
+		String json = "";
+		if(clientName != null) {
+			json = gson.toJson(EFQD.getSumOfAllItemCodeOfAProject(map.get(clientName)));
+		}
 	    response.setContentType("application/json");
 	    response.setCharacterEncoding("UTF-8");
 	    response.getWriter().write(json);

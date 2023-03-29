@@ -152,7 +152,6 @@ public class EMSQuotationPerItemServlet extends HttpServlet {
 	    	for(int i=0;i<a.size();i++) {
 	    		offers[i] = a.get(i);
 	    	}
-	    	
 	    	String json = gson.toJson(offers);
 		    response.setContentType("application/json");
 		    response.setCharacterEncoding("UTF-8");

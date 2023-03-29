@@ -10,8 +10,13 @@ public class ClientBean {
 	private String panNo;
 	private String address;
 	
+	public ClientBean() {}
 	
-	
+	public ClientBean(int clientId, String clientName) {
+		this.clientId = clientId;
+		this.clientName = clientName;
+	}
+
 	public int getClientId() {
 		return clientId;
 	}

@@ -6,6 +6,7 @@ import com.dao.EMSLoginDao;
 import com.google.gson.Gson;
 import com.service.Authentication;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -37,8 +38,12 @@ public class EMSLoginServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		response.sendRedirect("EMSDirectorsDashboard.jsp");
+	
+		if("get".equals((String)request.getAttribute("InvalidAuth"))) {
+			response.sendRedirect("InvalidToken.jsp");
+		}else {
+			response.sendRedirect("EMSDirectorsDashboard.jsp");
+		}
 	}
 
 }

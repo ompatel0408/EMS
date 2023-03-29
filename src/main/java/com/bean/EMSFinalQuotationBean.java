@@ -3,6 +3,16 @@ package com.bean;
 public class EMSFinalQuotationBean {
 	
 	private int quotationId;
+	private int clientId;
+	public int getClientId() {
+		return clientId;
+	}
+
+
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
+	}
+
 	private String projectId;
 	private String quotationDate;
 	private String quotationAmount;
@@ -25,13 +35,13 @@ public class EMSFinalQuotationBean {
 	}
 	
 	
-	public EMSFinalQuotationBean(String quotationAmount,String finalDelivaryDate,int Quantity,String discountPercentage,String discountAmount,String projectId,String remarks) {
+	public EMSFinalQuotationBean(String quotationAmount,String finalDelivaryDate,int Quantity,String discountPercentage,String discountAmount,int clientId,String remarks) {
 		this.quotationAmount = quotationAmount;
 		this.finalDelivaryDate = finalDelivaryDate;
 		this.quantity = Quantity;
 		this.discountPercentage = discountPercentage;
 		this.discountAmount = discountAmount;
-		this.projectId = projectId;
+		this.clientId = clientId;
 		this.remarks = remarks;
 	}
 	

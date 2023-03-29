@@ -77,9 +77,13 @@
 								class="far fa-circle nav-icon"></i>
 								<p>Add Project</p>
 						</a></li>
-						<li class="nav-item"><a href="EMSItem.jsp" class="nav-link" onclick="AddHeaders()"> <i
+						<li class="nav-item"><a href="EMSClientListServlet" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Add Offers</p>
+						</a></li>
+						<li class="nav-item"><a href="EMSItem.jsp" class="nav-link" onclick="AddHeaders()"> <i
+								class="far fa-circle nav-icon"></i>
+								<p>Add orders</p>
 						</a></li>
 						<li class="nav-item"><a href="EMSQuotationPerItem.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>

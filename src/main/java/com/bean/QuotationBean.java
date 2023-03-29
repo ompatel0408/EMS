@@ -4,6 +4,7 @@ public class QuotationBean {
 	
 	private int quotationId;
 	private String projectId;
+	private int clientId;
 	private String QuotationDate;
 	private long QuotationAmount;
 	private String finalDeliveryDate;
@@ -17,10 +18,19 @@ public class QuotationBean {
 		this.finalDeliveryDate = finalDeliveryDate;
 	}
 	
-	public QuotationBean(String projectId,String QuotationDate) {
-		this.projectId = projectId;
+	public QuotationBean(int clientId,String QuotationDate) {
+		this.clientId = clientId;
 		this.QuotationDate = QuotationDate;
 	}
+	
+	public int getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
+	}
+
 	
 	public int getQuotationId() {
 		return quotationId;

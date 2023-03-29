@@ -12,11 +12,11 @@ public class QuotationDao {
 	
 	public static boolean addQuotation(QuotationBean Qb) {
 		
-		String insertQuery = "INSERT INTO Quotations(ProjectId,QuotationDate,QuotationAmount,FinalDelivaryDate) VALUES(?,?,?,?)";
+		String insertQuery = "INSERT INTO Quotations(ClientId,QuotationDate,QuotationAmount,FinalDelivaryDate) VALUES(?,?,?,?)";
 		Connection conn = MySqlConnection.getInstance();
 		try {
 			PreparedStatement stmt = conn.prepareStatement(insertQuery);
-			stmt.setString(1, Qb.getProjectId());
+			stmt.setInt(1, Qb.getClientId());
 			stmt.setString(2, Qb.getQuotationDate());
 			stmt.setLong(3, Qb.getQuotationAmount());
 			stmt.setString(4, Qb.getFinalDeliveryDate());
@@ -29,15 +29,15 @@ public class QuotationDao {
 		return false;
 		
 	}
-	public static QuotationBean getQuotationIdFromDataBase(String ProjectId) {
+	public static QuotationBean getQuotationIdFromDataBase(int clientId) {
 		
-		String SelectQuery = "SELECT QuotationId FROM quotations WHERE ProjectId = ?";
+		String SelectQuery = "SELECT QuotationId FROM quotations WHERE clientId = ?";
 		Connection conn = MySqlConnection.getInstance();
 		QuotationBean Qb = new QuotationBean();
 		ResultSet rs = null;
 		try {
 			PreparedStatement stmt = conn.prepareStatement(SelectQuery);
-			stmt.setString(1, ProjectId);
+			stmt.setInt(1, clientId);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				Qb.setQuotationId(rs.getInt(1));

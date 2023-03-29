@@ -17,6 +17,7 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -35,7 +36,7 @@ public class EMSLoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		
-		 
+		System.out.println("Filter");
 		EMSLoginDao ELD = EMSLoginDao.getInstance();
 		String password = request.getParameter("password");
 		System.out.println(password);
@@ -43,15 +44,15 @@ public class EMSLoginFilter implements Filter {
 		EMSLoginBean ELB =   ELD.getAllDetails(password);
 		
 		if(ELB != null) {
-				EMSLoginBean ELB1 = EMSLoginServices.geDataFromJWTToken(password,ELB.getSecretKey());
-				HttpServletResponse res = (HttpServletResponse)response;
-				if(ELB1 == null) {
-					res.sendRedirect("InvalidToken.jsp");
-				}
 				HttpServletRequest req = (HttpServletRequest)request;
+				EMSLoginBean ELB1 = EMSLoginServices.geDataFromJWTToken(password,ELB.getSecretKey());
+				if(ELB1 == null) {
+					String name = "get";
+					req.setAttribute("InvalidAuth", name);
+				}
 				HttpSession session = req.getSession();
 				session.setAttribute("userId", ELB.getUserId());
-				chain.doFilter(request, response);
+				chain.doFilter(req, response);
 		}else {
 			RequestDispatcher rd = request.getRequestDispatcher("EMSLogin.jsp");
 			rd.forward(request, response);

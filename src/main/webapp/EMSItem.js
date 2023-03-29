@@ -1,5 +1,5 @@
 
-
+/*
 document.getElementById("input-form").addEventListener("change", () => {
 
                let value = document.getElementById("input-form").value;
@@ -34,10 +34,10 @@ document.getElementById("input-form").addEventListener("change", () => {
                    document.getElementById("select-error").style.color = "red";
                }
  })
+*/
+document.getElementById('ClientId1').addEventListener('change', () => {
 
-document.getElementById('ProjectId1').addEventListener('change', () => {
-
-	document.getElementById('ProjectId1').disabled = true;
+	document.getElementById('ClientId1').disabled = true;
 	document.getElementById('ItemName').disabled = false;
 	document.getElementById('TagNo').disabled = false;
 	document.getElementById('Remarks').disabled = false;
@@ -48,15 +48,17 @@ document.getElementById('ProjectId1').addEventListener('change', () => {
 var EditId;
 var deleteId;
 var data = []
+var servletData = []
+var response;
 function submitForm() {
-	console.log(document.getElementById('MyTable').hasChildNodes);
-	if (document.getElementById('MyTable').hasChildNodes != null) {
-		document.querySelector('#ProcessId').classList.remove('disabled');
-	}
-
+	data[EditId-1].tagNo = document.getElementById('TagNo').value;
+	data[EditId-1].quantity = document.getElementById('Quantity').value;
+	data[EditId-1].ItemName = document.getElementById('ItemName').value
+	data[EditId-1].delivaryDate = document.getElementById('DelivaryDate').value
+	
 	var json =
 	{
-		ProjectId: document.getElementById('ProjectId1').value,
+		ClientId: document.getElementById('ClientId1').value,
 		ItemName: document.getElementById('ItemName').value,
 		tagNo: document.getElementById('TagNo').value,
 		remarks: document.getElementById('Remarks').value,
@@ -64,15 +66,16 @@ function submitForm() {
 		delivaryDate: document.getElementById('DelivaryDate').value,
 		TotalPrice: JSON.stringify(parseInt(document.getElementById('Quantity').value) * 0)
 	}
-	data.push(json);
+	servletData.push(json);
+	console.log("--------------")
 	console.log(json);
-	console.log(data);
+	console.log(servletData);
 	appendFunc();
 	
 	
 }
 
-window.onload = function getProjects(){
+window.onload = function getClients1(){
 	let Data;
 	var xhr = new XMLHttpRequest();
 	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSItemServlet',true);
@@ -80,7 +83,8 @@ window.onload = function getProjects(){
 	xhr.onload = function() {
   		if (xhr.status === 200) {
     		Data = JSON.parse(xhr.responseText);
-    		appendProjects(Data)
+    		console.log(Data)
+    		appendClients(Data)
   		}
 	}
   	var data = { token:"Projects" }
@@ -88,17 +92,17 @@ window.onload = function getProjects(){
 }
 
 
-function appendProjects(projects){
+function appendClients(Clients){
 
-	var projectsSelect = document.getElementById("ProjectId1");
-	console.log(projectsSelect)
-	projectsSelect.innerHTML = `<option value="select category"selected>Select Project</option>`;
-	for(let i=0; i<projects.length; i++)
+	var ClientsSelect = document.getElementById("ClientId1");
+	console.log(ClientsSelect)
+	ClientsSelect.innerHTML = `<option value="select Clients"selected>Select Clients</option>`;
+	for(let i=0; i<Clients.length; i++)
 	{
 		let createdAt = document.createElement("option");
-		createdAt.value = projects[i];
-		createdAt.innerHTML = projects[i];
-		projectsSelect.appendChild(createdAt);
+		createdAt.value = Clients[i];
+		createdAt.innerHTML = Clients[i];
+		ClientsSelect.appendChild(createdAt);
 	}
 }
 /*
@@ -173,7 +177,7 @@ function deleteItem(){
 
 function XHRRequestForItem() {
 
-	document.getElementById('ProjectId1').disabled = false;
+	document.getElementById('ClientId1').disabled = false;
 	document.getElementById('ItemName').disabled = true;
 	document.getElementById('TagNo').disabled = true;
 	document.getElementById('Remarks').disabled = true;
@@ -193,18 +197,56 @@ function XHRRequestForItem() {
 
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
-			var response = xhr.responseText;
+			response = xhr.responseText;
 			console.log(response);
 		}
 	}
 	// send the request
-	xhr.send(JSON.stringify(data));
+	xhr.send(JSON.stringify(servletData));
+}
+
+function GetOfferData(){
+	
+	var xhr = new XMLHttpRequest();
+
+	// specify the servlet URL and HTTP method
+	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSOffersServlet', true);
+
+	// set headers
+	xhr.setRequestHeader('Content-type', 'application/json');
+
+	// handle the response
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			response = JSON.parse(xhr.responseText);
+			appendJsonData(response)			
+			
+		}
+	}
+	// send the request
+	xhr.send(JSON.stringify({ClientName:document.getElementById('ClientId1').value,Token:"Offers"}));
 }
 
 
-
-
-
+function appendJsonData(response){
+	
+	console.log(response)
+	
+	for(let i=0;i<response.length;i++){
+		var json = {
+			ItemName: response[i].offerName,
+			quantity:response[i].quantity,
+			tagNo:0,
+			delivaryDate:0,
+			remarks: response[i].remarks,			
+		}
+		data.push(json)
+		console.log(data)
+	}
+	
+	appendFunc()
+}
 
 
 var deleteValue = "";
@@ -217,18 +259,21 @@ document.getElementById("deleteClicked").addEventListener("click", () => {
 });
 
 let editValue = "";
+/*
 function editFinction(editId) {
 	console.log(editId);
 	editValue = editId;
 }
-
-function updateField() {
+*/
+function updateField(editId) {
+	console.log(editId);
+	editValue = editId;
+	
 	EditId = parseInt(editValue.substring(4));
-	var fieldToChange = document.getElementById('input-form').value;
-	var newValue = document.getElementById('placeholderChange').value;
-	console.log("fieldToChange "+fieldToChange)
-	console.log("newValue  "+newValue)
-	console.log("hiiiii"+editValue)
+	//var fieldToChange = document.getElementById('input-form').value;
+	//var newValue = document.getElementById('placeholderChange').value;
+	
+	/*
 	if(fieldToChange == "ItemName"){
 		data[EditId-1].ItemName =newValue;
 	}else if(fieldToChange == "tagNo"){
@@ -238,54 +283,20 @@ function updateField() {
 	}else{
 		var Value = document.getElementById('placeholderChange1').value;
 		data[EditId-1].delivaryDate = Value;
-	}
+	}*/
+	document.getElementById('Quantity').value =response[EditId - 1].quantity;
+	document.getElementById('ItemName').value = response[EditId - 1].offerName;
+	document.getElementById('DelivaryDate').value = response[EditId - 1].deliveryDate,
+	document.getElementById('Remarks').value = response[EditId - 1].remarks;
 	console.log(data)
 	appendFunc();
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-	event.preventDefault();
-	alert(editValue)
-	editValue = editValue.substring(4)
-	console.log("edited id : " + editValue);
-	var fieldToChange = document.getElementById('input-form').value;
-	var newValue = document.getElementById('placeholderChange').value;
 
-	console.log("fieldToChange ", fieldToChange);
-	console.log("newValue  ", newValue);
-
-	if (fieldToChange == "category") {
-		data[editValue - 1].category = document.getElementById("category-id-select").value;
-		data[editValue - 1].grade = document.getElementById("grade-id-select").value;
-		data[editValue - 1].size = document.getElementById("size-id-select").value;
-	} else if (fieldToChange == "grade") {
-		data[editValue - 1].grade = document.getElementById("grade-id-select").value;
-		data[editValue - 1].size = document.getElementById("size-id-select").value;
-	} else if (fieldToChange == "size") {
-		data[editValue - 1].size = document.getElementById("size-id-select").value;
-	} else if (fieldToChange == "quantity") {
-		var Value = document.getElementById('placeholderChange').value;
-		data[editValue - 1].quantity = Value;
-	}
-	console.log(data)
-	appendFunc();*/
 }
 
 function appendFunc() {
 	
-	document.getElementById("MyTable").innerHTML = "";
-	var table = document.getElementById("MyTable");
+	document.getElementById("MyTable3").innerHTML = "";
+	var table = document.getElementById("MyTable3");
 	for (var i = 0; i < data.length; i++) {
 		var newRow = document.createElement("tr");
 
@@ -296,7 +307,7 @@ function appendFunc() {
     		<td><a id="TagNo${i + 1}">${data[i].tagNo}</a> <br></td>
     		<td><a id="DelivaryDate${i + 1}">${data[i].delivaryDate}</a> <br></td>
     		 <td class="project-actions text-right">
-                  <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-editItem" onclick="editFinction(this.id)" id="Edit${i+1}">
+                  <button type="button" class="btn btn-success btn-sm" onclick = "updateField(this.id)" id="Edit${i+1}">
                         <i class="fas fa-pencil-alt"></i>
                   </button>
                   <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-itemDelete" onclick="deleteItem(this.id)" id="Delete${i+1}">
@@ -305,6 +316,9 @@ function appendFunc() {
               </td>
     		`;
 		table.appendChild(newRow);
+	}
+	if (document.getElementById('MyTable3').hasChildNodes != null) {
+		document.querySelector('#ProcessId').classList.remove('disabled');
 	}
 }
 

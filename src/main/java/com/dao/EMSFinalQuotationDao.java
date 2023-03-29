@@ -21,11 +21,11 @@ public class EMSFinalQuotationDao {
 		return instance;
 	}
 	
-	public ArrayList<EMSFinalQuotationBean> getSumOfAllItemCodeOfAProject(String projectId){
+	public ArrayList<EMSFinalQuotationBean> getSumOfAllItemCodeOfAProject(int clientId){
 		
 		
 		//SELECT SUM(subquery.TotalAmountWithProfit) AS Total FROM (SELECT I.ItemCode, SUM(PQI.TotalAmountWithProfit) AS TotalAmountWithProfit   FROM items I   JOIN ProfitInQuotationPerItem PQI ON I.ItemCode = PQI.ItemCode   WHERE I.projectId = ?  GROUP BY I.ItemCode) subquery
-		String selectQuery = "SELECT count(*),sum(TotalAmountWithProfit) FROM Items I JOIN ProfitInQuotationPerItem PQI ON I.ItemCode = PQI.ItemCode WHERE ProjectId= ? ";
+		String selectQuery = "SELECT count(*),sum(TotalAmountWithProfit) FROM offer I JOIN ProfitInQuotationPerItem PQI ON I.offerCode = PQI.offerCode WHERE clientId= ? ";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<EMSFinalQuotationBean> a = new ArrayList<EMSFinalQuotationBean>();
 		
@@ -34,7 +34,7 @@ public class EMSFinalQuotationDao {
 			try {
 				
 				PreparedStatement stmt = conn.prepareStatement(selectQuery);
-				stmt.setString(1, projectId);
+				stmt.setInt(1, clientId);
 				ResultSet rs = stmt.executeQuery();
 				if(rs.next()) {
 					a.add(new EMSFinalQuotationBean(rs.getInt(1), rs.getString(2)));
@@ -52,7 +52,7 @@ public class EMSFinalQuotationDao {
 	
 	public boolean insertFinalQuotation(EMSFinalQuotationBean EFQB) {
 		
-		String updateQuery = "Update Quotations SET QuotationAmount = ? , FinalDelivaryDate = ? , Quantity = ? , DiscountPercentage = ? , DiscountAmount = ?, Remarks = ? WHERE ProjectId = ?";
+		String updateQuery = "Update Quotations SET QuotationAmount = ? , FinalDelivaryDate = ? , Quantity = ? , DiscountPercentage = ? , DiscountAmount = ?, Remarks = ? WHERE clientId = ?";
 		Connection conn = MySqlConnection.getInstance();
 		
 		if(conn != null) {
@@ -64,7 +64,7 @@ public class EMSFinalQuotationDao {
 				stmt.setString(4,EFQB.getDiscountPercentage());
 				stmt.setString(5,EFQB.getDiscountAmount());
 				stmt.setString(6, EFQB.getRemarks());
-				stmt.setString(7,EFQB.getProjectId());
+				stmt.setInt(7,EFQB.getClientId());
 				stmt.executeUpdate();
 				return true;
 			}catch(SQLException E) {

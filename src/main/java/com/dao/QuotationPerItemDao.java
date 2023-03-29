@@ -132,9 +132,10 @@ public class QuotationPerItemDao {
 	}
 	
 	public ArrayList<String> getItemCodeFromDatabase() {
-		String selectQuery = "SELECT ItemCode FROM ITEMS";
+		String selectQuery = "SELECT OfferCode FROM offer";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<String> a = new  ArrayList<String>();
+		
 		if(conn != null) {
 			
 			try {
@@ -214,7 +215,7 @@ public class QuotationPerItemDao {
 	
 	public ArrayList<String> getAllItemCode(){
 		
-		String selectQuery = "SELECT ItemCode FROM  ProfitInQuotationPerItem";
+		String selectQuery = "SELECT offerCode FROM  ProfitInQuotationPerItem";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<String> ar = new ArrayList<String>();
 		if(conn != null) {
@@ -239,7 +240,7 @@ public class QuotationPerItemDao {
 	public boolean addProfitForQuotationPerItem(ArrayList<QuotationPerItemBean> ar) {
 		Connection conn = MySqlConnection.getInstance();
 		if (QuotationPerItemDao.getInstance().getAllItemCode().contains(ar.get(0).getItemId())) {
-			String updateQuery = "UPDATE ProfitInQuotationPerItem SET TotalAmountWithoutProfit = ?,TotalAmountWithProfit = ? WHERE ItemCode = ?";
+			String updateQuery = "UPDATE ProfitInQuotationPerItem SET TotalAmountWithoutProfit = ?,TotalAmountWithProfit = ? WHERE offerCode = ?";
 
 			if(conn != null) {
 				try {
@@ -288,7 +289,7 @@ public class QuotationPerItemDao {
 	
 	public boolean updateTotalPrice(ArrayList<QuotationPerItemBean> QAIB) {
 		
-		String updateQuery = "UPDATE ITEMS SET TotalPrice = ? WHERE ITEMCODE =?";
+		String updateQuery = "UPDATE OFFER SET TotalPrice = ? WHERE offerCode =?";
 		Connection  conn = MySqlConnection.getInstance();
 		
 		if(conn != null) {
@@ -316,7 +317,7 @@ public class QuotationPerItemDao {
 	
 	public ArrayList<QuotationPerItemBean> performSum() {
 		
-		String sumQuery = "select ItemCode,sum(TotalPricePerItem) from QuotationPerItem group by ItemCode";
+		String sumQuery = "select offerCode,sum(TotalPricePerItem) from QuotationPerItem group by offerCode";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<QuotationPerItemBean> ar  = new ArrayList<QuotationPerItemBean>();
 		if(conn != null) {

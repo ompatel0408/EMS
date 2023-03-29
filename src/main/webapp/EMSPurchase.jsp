@@ -11,6 +11,43 @@
 		<jsp:include page="Header.jsp"></jsp:include>
 		<jsp:include page="LeftSideBar.jsp"></jsp:include>
 	<div class="content-wrapper p-3">
+	<div class="card card-default">
+				<div class="card-header">
+					<h3 class="card-title">
+						<b>Purchase and Quotation Calculation Graph</b>
+					</h3>
+					<div class="card-tools">
+						<button type="button" class="btn btn-tool"
+							data-card-widget="collapse">
+							<i class="fas fa-minus"></i>
+						</button>
+						<button type="button" class="btn btn-tool"
+							data-card-widget="remove">
+							<i class="fas fa-times"></i>
+						</button>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class=" col-12">
+							<div class="info-box bg-gradient-success">
+								<span class="info-box-icon"><i class=" ion-stats-bars"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text py-3">Percentage of profit</span> <span class="info-box-number">40%</span>
+
+									<div class="progress h-25">
+										<div class="progress-bar" style="width: 100%;"></div>
+									</div>
+									<span class="progress-description m-2 h-75"> Your total quotation without profit is <b> 1000000</b>, With profit <b>1500000</b>.
+									<br> You are purchased items total amount's of <b>600000</b>, and your profit is 400000.
+									 </span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
             <div class="card card-default">
                 <div class="card-header">
                     <h3 class="card-title"><b>Purchase Order</b></h3>

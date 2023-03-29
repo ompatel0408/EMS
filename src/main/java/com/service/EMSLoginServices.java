@@ -1,10 +1,15 @@
 package com.service;
+import java.io.IOException;
 import java.util.*;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import com.bean.EMSLoginBean;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
@@ -56,9 +61,9 @@ public class EMSLoginServices {
 			
 			return new EMSLoginBean((String) data.get("email"), (String) data.get("role"));
 		}catch(Exception E) {
-			E.printStackTrace();
-		}
+
 			return null;
+		}
 		
 	}
 	

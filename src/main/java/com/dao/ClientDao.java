@@ -3,6 +3,7 @@ package com.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.bean.ClientBean;
@@ -59,7 +60,6 @@ public class ClientDao {
 				user.setGstNo(rs.getString("GSTNO"));
 				user.setPhoneNumber(rs.getLong("PHONENUMBER"));
 				user.setPanNo(rs.getString("PANNO"));
-				System.out.println(rs.getString("CLIENTNAME"));
 				users.add(user);
 			}
 		}
@@ -95,6 +95,33 @@ public class ClientDao {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int getClientIdFormDatabase(String clientName) {
 		
+		String selectQuery = "SELECT ClientId From Clients WHERE ClientName = ?";
+		Connection conn = MySqlConnection.getInstance();
+		
+		if(conn != null) {
+			
+			try {
+				
+				PreparedStatement stmt = conn.prepareStatement(selectQuery);
+				stmt.setString(1, clientName);
+				ResultSet rs = stmt.executeQuery();
+				
+				int clientId = 0;
+				while(rs.next()) {
+					clientId = rs.getInt(1);
+				}
+				return clientId;
+			}catch(SQLException E) {
+				E.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		
+		return 0;
 	}
 }

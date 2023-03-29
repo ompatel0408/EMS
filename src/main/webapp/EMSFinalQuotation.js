@@ -1,4 +1,4 @@
-window.onload = function getProjects(){
+window.onload = function getClients1(){
 	let Data;
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', 'http://localhost:8080/EMS2/EMSFinalQuotationServlet',true);
@@ -6,23 +6,23 @@ window.onload = function getProjects(){
 	xhr.onreadystatechange = function() {
   		if (xhr.status === 200) {
     		Data = JSON.parse(xhr.responseText);
-    		appendProjects(Data)
+    		appendClient(Data)
   		}
 	}
 	xhr.send();	
 }
 
-function appendProjects(projects){
+function appendClient(clients){
 
-	var projectsSelect = document.getElementById("ProjectId1");
-	console.log(projectsSelect)
-	projectsSelect.innerHTML = `<option value="select category"selected>Select Project</option>`;
-	for(let i=0; i<projects.length; i++)
+	var clientsSelect = document.getElementById("ClientId1");
+	console.log(clientsSelect)
+	clientsSelect.innerHTML = `<option value="select Clients"selected>Select Clients</option>`;
+	for(let i=0; i<clients.length; i++)
 	{
 		let createdAt = document.createElement("option");
-		createdAt.value = projects[i];
-		createdAt.innerHTML = projects[i];
-		projectsSelect.appendChild(createdAt);
+		createdAt.value = clients[i];
+		createdAt.innerHTML = clients[i];
+		clientsSelect.appendChild(createdAt);
 	}
 }
 
@@ -38,7 +38,7 @@ function getQuotation(){
     		appendQuotation(Data)
   		}
 	}
-  	var data = {projectId:document.getElementById('ProjectId1').value,token:"Project"}
+  	var data = {ClientId:document.getElementById('ClientId1').value,token:"Clients"}
 	xhr.send(JSON.stringify(data));	
 }
 
@@ -86,7 +86,7 @@ function clickOfRadioButton(){
 function submitForm(){
 	
 	var json = {
-		projectId:document.getElementById('ProjectId1').value,
+		clientId:document.getElementById('ClientId1').value,
 		finalDelivaryDate:document.getElementById('finalDeliveryDate').value,
 		Quantity:document.getElementById('QuotationQuantity').value,
 		remark:document.getElementById('FinalQuotationRemarks').value,
@@ -94,7 +94,6 @@ function submitForm(){
 		discountAmount:document.getElementById('discountAmount').value,
 		TotalAmount:document.getElementById('TotalAmount').value
 	}
-	
 	
 	var xhr = new XMLHttpRequest();
 

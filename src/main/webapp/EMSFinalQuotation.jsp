@@ -33,7 +33,7 @@
 								<!-- text input -->
 								<div class="form-group">
 									<label>Project</label> <select class="form-control"
-										onload="getProjects()" id="ProjectId1"
+										onload="getClients1()" id="ClientId1"
 										onchange="getQuotation()">
 									</select>
 								</div>

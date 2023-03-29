@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
+import com.bean.ClientBean;
 import com.bean.ItemBean;
 import com.bean.PrePurchaseBean;
 import com.dao.ItemDao;
@@ -19,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class EMSItemServlet extends HttpServlet {
@@ -52,12 +55,7 @@ public class EMSItemServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		EMSItemServlet ESI = new EMSItemServlet();
 		ESI.doGet(request,response);
-		System.out.println("Reached AT Do post");
 		ArrayList<ItemBean> AQb = ItemServices.fetchDataFromXHRRequest(request.getReader(),request);
-		
-		for(ItemBean ib:AQb) {
-			PrePurchaseDao.addPrePurchase(new PrePurchaseBean(ib.getProjectId(),ib.getDrawingId()));
-		}
 		if(ItemDao.addItems(AQb)) {
 			
 			System.out.println("Item Added SuccessFully");
@@ -82,8 +80,12 @@ public class EMSItemServlet extends HttpServlet {
 	    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
 	    
 	    if(jsonObject.get("token").getAsString().equals("Projects")) {
-	    	System.out.println("Hello");
-	    	String json = gson.toJson(Id.getProjects());
+	    	
+	    	ArrayList<String> arr = new ArrayList<String>();
+	    	for(ClientBean c:Id.getClients()) {
+	    		arr.add(c.getClientName());
+	    	}
+	    	String json = gson.toJson(arr);
 		    response.setContentType("application/json");
 		    response.setCharacterEncoding("UTF-8");
 		    response.getWriter().write(json);
