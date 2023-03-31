@@ -4,8 +4,35 @@ public class QuotationPerItemBean {
 	
 	private String itemId;
 	private int catagoryId;
-	private String gradeName;
-	private String size;
+	private int gradeId;
+	private int size;
+	private String catagory,grade,sizeName;
+	
+	
+	public String getCatagory() {
+		return catagory;
+	}
+
+	public void setCatagory(String catagory) {
+		this.catagory = catagory;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	public String getSizeName() {
+		return sizeName;
+	}
+
+	public void setSizeName(String sizeName) {
+		this.sizeName = sizeName;
+	}
+
 	private double quantity;
 	private String units;
 	private String weight;
@@ -18,11 +45,9 @@ public class QuotationPerItemBean {
 	
 	public QuotationPerItemBean() {}
 	
-	public QuotationPerItemBean(String itemId, int catagoryId, String gradeName, String size, int quantity,String units, String weight, String pricePerItem) {
+	public QuotationPerItemBean(String itemId, int catagoryId, int quantity,String units, String weight, String pricePerItem) {
 		this.itemId = itemId;
 		this.catagoryId = catagoryId;
-		this.gradeName = gradeName;
-		this.size = size;
 		this.quantity = quantity;
 		this.units = units;
 		this.weight = weight;
@@ -41,7 +66,7 @@ public class QuotationPerItemBean {
 		this.TotalAmountWithProfit = TotalAmountWithProfit;
 	}
 
-	public QuotationPerItemBean(String itemId,  int catagoryId,double quantity,String weight, String units,String pricePerItem,String profitPercentage,String totalPricePerItem) {
+	public QuotationPerItemBean(String itemId,  int catagoryId,int gradeId, int size,double quantity,String weight, String units,String pricePerItem,String profitPercentage,String totalPricePerItem) {
 		this.itemId = itemId;
 		this.catagoryId = catagoryId;
 		this.quantity = quantity;
@@ -50,6 +75,8 @@ public class QuotationPerItemBean {
 		this.pricePerItem = pricePerItem;
 		this.totalPricePerItem = totalPricePerItem;
 		this.profitPercentage = profitPercentage;
+		this.gradeId = gradeId;
+		this.size = size;
 	}
 
 	
@@ -101,19 +128,19 @@ public class QuotationPerItemBean {
 		this.catagoryId = catagoryId;
 	}
 	
-	public String getGradeName() {
-		return gradeName;
+	public int getGradeId() {
+		return gradeId;
 	}
 	
-	public void setGradeName(String gradeName) {
-		this.gradeName = gradeName;
+	public void setGradeId(int gradeId) {
+		this.gradeId = gradeId;
 	}
 	
-	public String getSize() {
+	public int getSize() {
 		return size;
 	}
 	
-	public void setSize(String size) {
+	public void setSize(int size) {
 		this.size = size;
 	}
 	

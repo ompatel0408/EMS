@@ -73,25 +73,45 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="ProjectServlet?projectId=0&update=notupdate" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>Add Project</p>
-						</a></li>
 						<li class="nav-item"><a href="EMSClientListServlet" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Add Offers</p>
 						</a></li>
-						<li class="nav-item"><a href="EMSItem.jsp" class="nav-link" onclick="AddHeaders()"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>Add orders</p>
-						</a></li>
+						
+						
+						
 						<li class="nav-item"><a href="EMSQuotationPerItem.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>QuotationPerOffers</p>
 						</a></li>
+						
+						<li class="nav-item"><a href="QuotationPerItemListServlet?offer=1" class="nav-link" > <i
+								class="far fa-circle nav-icon"></i>
+								<p>Quotation Per Offer List</p>
+						</a></li>
+						
 						<li class="nav-item"><a href="EMSFinalQuotation.jsp" class="nav-link" > <i
 								class="far fa-circle nav-icon"></i>
 								<p>FinalQuotation</p>
+						</a></li>
+						
+						
+						<li class="nav-item"><a href="EMSFinalQuotationListServlet?quotationId=0&update=notupdate" class="nav-link" > <i
+								class="far fa-circle nav-icon"></i>
+								<p>FinalQuotation List</p>
+						</a></li>
+						
+						<li class="nav-item"><a href="EMSItem.jsp" class="nav-link" onclick="AddHeaders()"> <i
+								class="far fa-circle nav-icon"></i>
+								<p>Add orders</p>
+						</a></li>
+						<li class="nav-item"><a href="EMSItemListServlet?itemCode=0&update=notupdate" class="nav-link" onclick="AddHeaders()"> <i
+								class="far fa-circle nav-icon"></i>
+								<p>orders List</p>
+						</a></li>
+						<li class="nav-item"><a href="ProjectServlet?projectId=0&update=notupdate" class="nav-link"> <i
+								class="far fa-circle nav-icon"></i>
+								<p>Add Project</p>
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
@@ -110,14 +130,6 @@
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Indent list</p>
 						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>Approval Pending Indent</p>
-						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>My Indent</p>
-						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
 						class="nav-icon fas fa-table"></i>
@@ -130,7 +142,7 @@
 								class="far fa-circle nav-icon"></i>
 								<p>Generate P.O</p>
 						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
+						<li class="nav-item"><a href="EMSPurchaseListServlet?delete=no" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>P.O List</p>
 						</a></li>
@@ -185,10 +197,6 @@
 						<li class="nav-item"><a href="EMSStoreListServlet" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Stock List</p>
-						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>Issue Note List</p>
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i

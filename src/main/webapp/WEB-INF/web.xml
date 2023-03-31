@@ -213,5 +213,42 @@
 		<servlet-name>EMSOffersServlet</servlet-name>
 		<url-pattern>/EMSOffersServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>QuotationPerItemListServlet</servlet-name>
+		<servlet-class>com.controller.QuotationPerItemListServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>QuotationPerItemListServlet</servlet-name>
+		<url-pattern>/QuotationPerItemListServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSPurchaseListServlet</servlet-name>
+		<servlet-class>com.controller.EMSPurchaseListServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSPurchaseListServlet</servlet-name>
+		<url-pattern>/EMSPurchaseListServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSFinalQuotationListServlet</servlet-name>
+		<servlet-class>com.controller.EMSFinalQuotationListServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSFinalQuotationListServlet</servlet-name>
+		<url-pattern>/EMSFinalQuotationListServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSItemListServlet</servlet-name>
+		<servlet-class>com.controller.EMSItemListServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSItemListServlet</servlet-name>
+		<url-pattern>/EMSItemListServlet</url-pattern>
+	</servlet-mapping>
 
 </web-app>

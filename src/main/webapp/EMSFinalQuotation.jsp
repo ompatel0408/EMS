@@ -66,7 +66,7 @@
 									<label class="float-left">Remark</label>
 									<textarea class="form-control" rows="3"
 										placeholder="Enter Remark..." name="FinalQuotationRemarks"
-										id="FinalQuotationRemarks" style="height: 40px;"></textarea>
+										id="FinalQuotationRemarks" style="height: 40px;" maxlength="150"></textarea>
 								</div>
 							</div>
 							<div class="col-md-2">
@@ -74,14 +74,14 @@
 									<label>Discount(%)</label> <input type="text"
 										class="form-control" id="discountPercentage"
 										name="discountPercentage" placeholder="0"
-										onblur="calculateDiscountAmount()" pattern="^\d+(\.\d+)?$">
+										onkeyup="calculateDiscountAmount()" pattern="^\d+(\.\d+)?$">
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-group">
 									<label>Discount Amount</label> <input type="text"
 										class="form-control" id="discountAmount" name="discountAmount"
-										onblur="calculateDiscountPercentage()" placeholder="0"
+										onkeyup="calculateDiscountPercentage()" placeholder="0"
 										pattern="^\d+(\.\d+)?$">
 								</div>
 							</div>

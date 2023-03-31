@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.bean.EMSOffersBean;
 import com.bean.QuotationPerItemBean;
 import com.dbConnection.MySqlConnection;
 
@@ -185,9 +186,65 @@ public class QuotationPerItemDao {
 		return 0;
 	}
 	
+	public int getgradeIdFromDatabase(String gardeName) {
+		
+		String selectQuery = "SELECT gradeId FROM CatagoryGrade WHERE grade = ?";
+		Connection conn = MySqlConnection.getInstance();
+		
+		if(conn!= null) {
+			
+			try {
+				
+				PreparedStatement stmt = conn.prepareStatement(selectQuery);
+				stmt.setString(1,gardeName);
+				ResultSet rs=stmt.executeQuery();
+				int rows = 0;
+				if(rs.next()) {
+					rows = rs.getInt(1);
+				}
+				return  rows;
+				
+			}catch(SQLException E) {
+				E.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		
+		return 0;
+	}
+	public int getsizeIdFromDatabase(String sizeName) {
+	
+	String selectQuery = "SELECT sizeId FROM CatagoryGradeSize WHERE size = ?";
+	Connection conn = MySqlConnection.getInstance();
+	
+	if(conn!= null) {
+		
+		try {
+			
+			PreparedStatement stmt = conn.prepareStatement(selectQuery);
+			stmt.setString(1,sizeName);
+			ResultSet rs=stmt.executeQuery();
+			int rows = 0;
+			if(rs.next()) {
+				rows = rs.getInt(1);
+			}
+			return  rows;
+			
+		}catch(SQLException E) {
+			E.printStackTrace();
+		}
+	}else {
+		System.out.println("Connection is not establised!");
+	}
+	
+	return 0;
+}
+	
+	
 	public boolean addQuotationPerItem(ArrayList<QuotationPerItemBean> AQPIB) {
 		
-		String insertQuery = "INSERT INTO quotationPerItem VALUES(?,?,?,?,?,?,?,?)";
+		String insertQuery = "INSERT INTO quotationPerItem VALUES(?,?,?,?,?,?,?,?,?,?)";
 		
 		Connection conn = MySqlConnection.getInstance();
 		
@@ -203,6 +260,8 @@ public class QuotationPerItemDao {
 				stmt.setString(6, qpib.getpricePerItem());
 				stmt.setString(7, qpib.getProfitPercentage());
 				stmt.setString(8, qpib.getTotalPricePerItem());
+				stmt.setInt(9, qpib.getGradeId());
+				stmt.setInt(10, qpib.getSize());
 				stmt.addBatch();
 			}
 			int[] result = stmt.executeBatch();
@@ -317,7 +376,7 @@ public class QuotationPerItemDao {
 	
 	public ArrayList<QuotationPerItemBean> performSum() {
 		
-		String sumQuery = "select offerCode,sum(TotalPricePerItem) from QuotationPerItem group by offerCode";
+		String sumQuery = "select offerCode,sum(QuotationPerItemQuantity*TotalPricePerItem) from QuotationPerItem group by offerCode";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<QuotationPerItemBean> ar  = new ArrayList<QuotationPerItemBean>();
 		if(conn != null) {
@@ -338,7 +397,121 @@ public class QuotationPerItemDao {
 		}
 		return null;
 	}
+
+	
+	public ArrayList<QuotationPerItemBean> getList(String offerCode) {
+		
+		String Query = "select * from Quotationperitem where offerCode = " + "'" + offerCode+ "'";
+		Connection conn = MySqlConnection.getInstance();
+		QuotationPerItemDao qdao = QuotationPerItemDao.getInstance();
+		ArrayList<QuotationPerItemBean> ar  = new ArrayList<QuotationPerItemBean>();
+		if(conn != null) {
+			
+			try {
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(Query);
+				
+				while(rs.next()) {
+					QuotationPerItemBean ibean = new QuotationPerItemBean();
+					System.out.println(rs.getInt("catagoryid"));
+					ibean.setCatagory(qdao.getCatagoryName(rs.getInt("catagoryid")));
+					ibean.setGrade(qdao.getGradeName(rs.getInt("gradeid")));
+					ibean.setSizeName(qdao.getSizeName(rs.getInt("sizeid")));
+					ibean.setCatagoryId(rs.getInt("catagoryid"));
+					ibean.setGradeId(rs.getInt("gradeid"));
+					ibean.setSize(rs.getInt("sizeid"));
+					ibean.setQuantity(rs.getInt("quotationperitemQuantity"));
+					ibean.setWeight(rs.getString("Weights"));
+					ibean.setUnits(rs.getString("units"));
+					ibean.setTotalPricePerItem(rs.getString("totalpriceperitem"));
+					ibean.setprofitPercentage(rs.getString("profitpercentage"));
+					ibean.setpricePerItem(rs.getString("price"));
+					ar.add(ibean);
+				}
+				return ar;
+			}catch(SQLException E) {
+				E.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		return null;
+	}
+	
+	public String getCatagoryName(int catagoryId) { 
+		try {
+			String catagory="";
+			Connection con = MySqlConnection.getInstance();
+			PreparedStatement pstmt = con.prepareStatement("select * from emscatagory where catagoryId = ?");
+			pstmt.setInt(1, catagoryId);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				catagory = rs.getString(2);
+			}
+			return catagory;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public String getGradeName(int gradeId) {
+		try {
+			String grade="";
+			Connection con = MySqlConnection.getInstance();
+			PreparedStatement pstmt = con.prepareStatement("select * from catagorygrade where gradeId = ?");
+			pstmt.setInt(1, gradeId);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				grade = rs.getString("grade");
+			}
+			return grade;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public String getSizeName(int sizeId) {
+		try {
+			String size="";
+			Connection con = MySqlConnection.getInstance();
+			PreparedStatement pstmt = con.prepareStatement("select * from catagorygradesize where sizeId = ?");
+			pstmt.setInt(1, sizeId);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				size = rs.getString("size");
+			}
+			return size;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public void deleteFromQuotationPerItem(int catagoryId,int gradeId,int sizeId) {
+		try {
+			Connection con = MySqlConnection.getInstance();
+			PreparedStatement pstmt = con.prepareStatement("delete from quotationperitem where catagoryId = ? and gradeId =? and sizeid = ?");
+			pstmt.setInt(1, catagoryId);
+			pstmt.setInt(2, gradeId);
+			pstmt.setInt(3, sizeId);
+			int result = pstmt.executeUpdate();
+			if(result == 1)
+				System.out.println("deleted");
+			else {
+				System.out.println("not deleted");
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
+
 }
 

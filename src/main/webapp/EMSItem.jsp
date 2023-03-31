@@ -13,7 +13,7 @@
 	<div class="content-wrapper p-3">
 		<div class="card card-default">
 			<div class="card-header">
-				<h3 class="card-title">Add Items</h3>
+				<h3 class="card-title">Add Orders</h3>
 
 				<div class="card-tools">
 					<button type="button" class="btn btn-tool"
@@ -44,7 +44,7 @@
 							</div>
 							 <div class="form-group">
 								<label>Quantity</label> <input type="number"
-									class="form-control" id="Quantity" placeholder="Enter Quantaty"
+									class="form-control" id="Quantity" placeholder="Enter Quantity"
 									disabled>
 							</div> 
 							<div class="form-group">
@@ -58,9 +58,9 @@
 						<!-- /.col -->
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>Offer name</label> <input type="text"
+								<label>Order name</label> <input type="text"
 									class="form-control" id="ItemName"
-									placeholder="Enter Offer name" disabled>
+									placeholder="Enter Order name" disabled>
 							</div> 
 							<!-- /.form-group -->
 							<div class="form-group">
@@ -113,7 +113,7 @@
 						<tr>
 							<th style="width: 2%">Sr.No</th>
 							<th style="width: 20%">Item Name</th>
-							<th style="width: 20%">Quantaty</th>
+							<th style="width: 20%">Quantity</th>
 							<th style="width: 20%">Tag No</th>
 							<th style="width: 15%">Delevery Date</th>
 							<th style="width: 20%"></th>

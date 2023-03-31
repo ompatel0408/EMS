@@ -11,15 +11,16 @@ public class EMSPurchaseBean {
 	private String netAmount;
 	private double SGST;
 	private double CGST;
-	private String IndentId;
+	private int IndentId;
 	private String CurrentDate;
 	private String PONumber;
 	private String VendorName;
+	private int poId;
 	
 	public EMSPurchaseBean() {}
 	
 	
-	public EMSPurchaseBean(String productDescription, String size, int quantity, String uom, String ratePerKg,String discount, String netAmount, double sGST, double cGST, String indentId, String currentDate, String pONumber,String vendorName) {
+	public EMSPurchaseBean(String productDescription, String size, int quantity, String uom, String ratePerKg,String discount, String netAmount, double sGST, double cGST, int indentId, String currentDate, String pONumber,String vendorName) {
 		this.ProductDescription = productDescription;
 		this.Size = size;
 		this.quantity = quantity;
@@ -34,9 +35,14 @@ public class EMSPurchaseBean {
 		this.PONumber = pONumber;
 		this.VendorName = vendorName;
 	}
-
-
-
+	
+	
+	public int getPoId() {
+		return poId;
+	}
+	public void setPoId(int poId) {
+		this.poId = poId;
+	}
 	public String getProductDescription() {
 		return ProductDescription;
 	}
@@ -109,11 +115,11 @@ public class EMSPurchaseBean {
 		this.CGST = cGST;
 	}
 	
-	public String getIndentId() {
+	public int getIndentId() {
 		return IndentId;
 	}
 	
-	public void setIndentId(String indentId) {
+	public void setIndentId(int indentId) {
 		this.IndentId = indentId;
 	}
 	

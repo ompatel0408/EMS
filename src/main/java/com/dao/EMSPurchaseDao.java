@@ -47,7 +47,7 @@ public class EMSPurchaseDao {
 		return null;
 	}
 	
-	public String getIndentId(String projectId) {
+	public int getIndentId(String projectId) {
 		
 		String selectQuery = "SELECT IndentID FROM Indent WHERE ProjectId = ?";
 		Connection conn = MySqlConnection.getInstance();
@@ -59,9 +59,9 @@ public class EMSPurchaseDao {
 				PreparedStatement stmt = conn.prepareStatement(selectQuery);
 				stmt.setString(1, projectId);
 				ResultSet rs = stmt.executeQuery();
-				String indentId = "";
+				int indentId = 0;
 				if(rs.next()) {
-					indentId = rs.getString(1);
+					indentId = rs.getInt(1);
 				}
 				return indentId;
 			}catch(SQLException E) {
@@ -70,12 +70,12 @@ public class EMSPurchaseDao {
 		}else {
 			System.out.println("Connection is not establised!");
 		}
-		return null;
+		return 0;
 	}
 	
 	public boolean addPurchase(ArrayList<EMSPurchaseBean> AEPB) {
 		
-		String insertQuery = "INSERT INTO POSTPURCHASE VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String insertQuery = "INSERT INTO POSTPURCHASE(INDENTID,ProductDescription,Size,Quantity,UNITS,RatePerKg,discount,TotalAmount,SGST,CGST,CurrentDate,PONumber,VendorName) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		Connection conn = MySqlConnection.getInstance();
 		
 		if(conn != null) {
@@ -86,7 +86,7 @@ public class EMSPurchaseDao {
 				PreparedStatement stmt = conn.prepareStatement(insertQuery);
 				
 				for(EMSPurchaseBean EPB:AEPB) {
-					stmt.setString(1,EPB.getIndentId());
+					stmt.setInt(1,EPB.getIndentId());
 					stmt.setString(2, EPB.getProductDescription());
 					stmt.setString(3, EPB.getSize());
 					stmt.setInt(4, EPB.getQuantity());
@@ -114,5 +114,84 @@ public class EMSPurchaseDao {
 		return false;
 	}
 	
+	public ArrayList<String> getVendorNameFromDatabase(){
+		
+		String selectQuery = "SELECT VENDORNAME FROM vendors";
+		Connection conn = MySqlConnection.getInstance();
+		ArrayList<String> a = new ArrayList<String>();
+		if(conn != null) {
+			
+			try {
+				Statement stmt = conn.createStatement();
+				ResultSet rs  = stmt.executeQuery(selectQuery);
+				
+				while(rs.next()) {
+					a.add(rs.getString(1));
+				}
+				return a;
+			}catch(SQLException E) {
+				E.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establisd!");
+		}
+		
+		
+		return null;
+	}
+	
+	public ArrayList<EMSPurchaseBean> getAllPurchaseOrder() {
+		
+		String selectQuery = "SELECT * from postpurchase";
+		Connection conn = MySqlConnection.getInstance();
+		ArrayList<EMSPurchaseBean> pos = new ArrayList<EMSPurchaseBean>();
+		if(conn != null) {
+			
+			try {
+				Statement stmt = conn.createStatement();
+				ResultSet rs =stmt.executeQuery(selectQuery);
+
+				while(rs.next()) {
+					EMSPurchaseBean ebean = new EMSPurchaseBean();
+					ebean.setPoId(rs.getInt("poid"));
+					ebean.setCGST(rs.getDouble("CGST"));
+					ebean.setSGST(rs.getDouble("SGST"));
+					ebean.setIndentId(rs.getInt("Indentid"));
+					ebean.setProductDescription(rs.getString("productdescription"));
+					ebean.setSize(rs.getString("SIZE"));
+					ebean.setQuantity(rs.getInt("Quantity"));
+					ebean.setUom(rs.getString("UNITS"));
+					ebean.setRatePerKg(rs.getString("rateperkg"));
+					ebean.setDiscount(rs.getString("discount"));
+					ebean.setCurrentDate(rs.getString("currentDate"));
+					ebean.setPONumber(rs.getString("PONumber"));
+					ebean.setVendorName(rs.getString("vendorName"));
+					ebean.setNetAmount(rs.getString("TotalAmount"));
+					
+					pos.add(ebean);
+				}
+				return pos;
+			}catch(SQLException E) {
+				E.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection Not Esablised!");
+		}
+		
+		return null;
+	}
+	public void deleteParticularPO(int poid) {
+		try {
+			Connection con = MySqlConnection.getInstance();
+			PreparedStatement pstmt = con.prepareStatement("delete from postpurchase where poid = ?");
+			pstmt.setInt(1, poid);
+			int result=pstmt.executeUpdate();
+			if(result == 1) System.out.println("Delete Purchase order Particular");
+			else System.out.println("Not deleted Error Che!");
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

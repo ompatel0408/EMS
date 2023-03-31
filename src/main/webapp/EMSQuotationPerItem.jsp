@@ -13,7 +13,7 @@
 	<div class="content-wrapper p-3">
             <div class="card card-default">
                 <div class="card-header">
-                    <h3 class="card-title">Add Quotation per item </h3>
+                    <h3 class="card-title">Add Quotation per offer </h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -68,7 +68,7 @@
                                 <div class="form-group">
                                     <label>Quantity</label>
                                     <input type="text" class="form-control" id="Quantity"
-                                        placeholder="Enter Quantaty" disabled>
+                                        placeholder="Enter Quantity" disabled>
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
@@ -96,7 +96,7 @@
                                     <div class="form-group mt-3 d-flex justify-content-around">
                                         <button type="submit" id="add_Quatation" class="btn btn-primary w-25 disabled">
                                             <strong>+</strong> Add
-                                            Quatation</button>
+                                            Quatation per offer</button>
                                         
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@
                     <form onsubmit="event.preventDefault();XHRRequestForQuotationPerItem()">
                     <div class="form-group mt-3 d-flex justify-content-around">
                     	<button type="submit" id="processTo" class="btn btn-danger w-25 disabled">
-                              <strong> Process to items </strong> 
+                              <strong> Process to quotation per offer </strong> 
                         </button>
                     </div>
                     </form>
@@ -134,7 +134,7 @@
                                 <th style="width: 10%">Category</th>
                                 <th style="width: 10%">Grade</th>
                                 <th style="width: 12%">Size</th>
-                                <th style="width: 7%">Quantaty</th>
+                                <th style="width: 7%">Quantity</th>
                                 <th style="width: 9%">Units</th>
                                 <th style="width: 15%">Waight(kg)</th>
                                 <th style="width: 10%">Price</th>

@@ -35,6 +35,7 @@ function getQuotation(){
 	xhr.onload = function() {
   		if (xhr.status === 200) {
     		Data = JSON.parse(xhr.responseText);
+    		console.log(Data)
     		appendQuotation(Data)
   		}
 	}
@@ -107,7 +108,7 @@ function submitForm(){
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var response = xhr.responseText;
-			console.log(response);
+			window.location.href = "EMSItem.jsp"
 		}
 	}
 	// send the request
@@ -116,4 +117,10 @@ function submitForm(){
 	console.log("count :"+count)
 	
 }
+window.addEventListener("beforeunload", function (event) {
+  event.preventDefault();
+  document.cookie = "myCookie1=".concat(JSON.stringify(data));
+  event.returnValue = "Are you sure you want to leave this page?"
+});
+
 

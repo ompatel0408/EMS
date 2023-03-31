@@ -199,11 +199,40 @@ function XHRRequestForItem() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			response = xhr.responseText;
 			console.log(response);
+			XHRRequestForQuotationId()
 		}
 	}
 	// send the request
 	xhr.send(JSON.stringify(servletData));
 }
+
+function XHRRequestForQuotationId()
+{
+	var xhr = new XMLHttpRequest();
+
+	// specify the servlet URL and HTTP method
+	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSItemServlet', true);
+
+	// set headers
+	xhr.setRequestHeader('Content-type', 'application/json');
+
+	// handle the response
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var res = JSON.parse(xhr.responseText);
+			localStorage.setItem('QuotationId',res.quotationId)
+			localStorage.setItem('clientId',res.clientId)
+			localStorage.setItem('Token','true')
+			window.location.href = "ProjectServlet?projectId=0&update=notupdate"
+		}
+	}
+	// send the request
+	xhr.send(JSON.stringify({ClientName:document.getElementById('ClientId1').value,token:"QuotationId"}));	
+}
+
+
+
 
 function GetOfferData(){
 	
@@ -322,6 +351,11 @@ function appendFunc() {
 	}
 }
 
+window.addEventListener("beforeunload", function (event) {
+  event.preventDefault();
+  document.cookie = "myCookie2=".concat(JSON.stringify(data));
+  event.returnValue = "Are you sure you want to leave this page?"
+});
 
 
 

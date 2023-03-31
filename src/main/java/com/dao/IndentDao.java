@@ -139,7 +139,7 @@ public class IndentDao {
 			Connection con = MySqlConnection.getInstance();
 
 			PreparedStatement pstmt = con.prepareStatement(
-					"select catagory,grade,size,uom,itemname,projectid from indent i join EMScatagory ec on i.itemcatagory = ec.catagoryid join catagorygrade ecg on i.gradeid=ecg.gradeid join catagorygradesize ecgs on i.sizeId = ecgs.sizeId where projectId = ? and itemname = ?");
+					"select catagory,grade,size,uom,itemname,projectid,QUANTITY from indent i join EMScatagory ec on i.itemcatagory = ec.catagoryid join catagorygrade ecg on i.gradeid=ecg.gradeid join catagorygradesize ecgs on i.sizeId = ecgs.sizeId where projectId = ? and itemname = ?");
 //			PreparedStatement pstmt=con.prepareStatement("select ")
 			pstmt.setString(1, projectId);
 			pstmt.setString(2, itemname);
@@ -157,6 +157,7 @@ public class IndentDao {
 				indent.setItemName(rs.getString("itemname"));
 				indent.setProjectId(rs.getString("projectId"));
 				indent.setUOM(rs.getString("uom"));
+				indent.setQuantity(rs.getInt("quantity"));
 				indents.add(indent);
 			}
 		} catch (Exception e) {

@@ -24,7 +24,7 @@
 		<div class="content-wrapper p-3">
 			<div class="card card-default">
 				<div class="card-header">
-					<h3 class="card-title">Indent item</h3>
+					<h3 class="card-title">Indent Request</h3>
 					<div class="card-tools">
 						<button type="button" class="btn btn-tool"
 							data-card-widget="collapse">
@@ -44,7 +44,7 @@
 								<div class="form-group">
 									<label for="item-id">Project</label> <select type="text"
 										id="ProjectId1" onchange="getItemNames()" class="form-control" required>
-										<option value="select" selected>Select Item</option>
+										<option value="select" selected>Select Projects</option>
 										<%
 										for (int i = 0; i < projectIds.size(); i++) {
 										%>
@@ -92,6 +92,7 @@
 									<label>Item Name</label>
 									<select id="itemName"
 										class="form-control" required>
+										<option value="Select Orders">Select Orders</option>
 									</select>
 								</div>
 								<div class="form-group" id="quantity-id">

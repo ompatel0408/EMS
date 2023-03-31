@@ -12,6 +12,7 @@ import com.dao.ItemDao;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -74,12 +75,12 @@ public class EMSFinalQuotationServlet extends HttpServlet {
 		if(clientName != null) {
 			if(EQD.insertFinalQuotation(new EMSFinalQuotationBean(jsonObject.get("TotalAmount").getAsString(), jsonObject.get("finalDelivaryDate").getAsString(), Integer.parseInt(jsonObject.get("Quantity").getAsString()), jsonObject.get("discountPercentage").getAsString(), jsonObject.get("discountAmount").getAsString(),map.get(clientName),jsonObject.get("remark").getAsString()))) {
 				System.out.println("Inserted successfully!");
-			}else {
+				
+			}else 
 				System.out.println("Not inserted!");
 			}
 		}
-		
-	}
+	
 	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BufferedReader reader = request.getReader();
@@ -98,6 +99,7 @@ public class EMSFinalQuotationServlet extends HttpServlet {
 		String clientName = jsonObject.get("ClientId").getAsString();
 		String json = "";
 		if(clientName != null) {
+			System.out.println("---------------------------------"+map.get(clientName));
 			json = gson.toJson(EFQD.getSumOfAllItemCodeOfAProject(map.get(clientName)));
 		}
 	    response.setContentType("application/json");

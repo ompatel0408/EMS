@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,6 +53,7 @@ public class ProjectServlet extends HttpServlet {
 		String projectId="";
 		String clientName="";
 		String clientPoId = request.getParameter("clientPoId");
+		System.out.println("clIENT po id"+clientPoId);
 		Integer advancePayPercent = Integer.parseInt(request.getParameter("advancePayPercent"));
 		Integer afterPayPercent = Integer.parseInt(request.getParameter("afterPayPercent"));
 		String finalDeliveryDate = request.getParameter("finalDeliveryDate");

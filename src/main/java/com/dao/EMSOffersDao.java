@@ -26,30 +26,30 @@ public class EMSOffersDao {
 	
 	
 	
-	public ArrayList<EMSOffersBean> getAllOffer() {
-		ArrayList<EMSOffersBean> offers = new ArrayList<EMSOffersBean>();
-		try {
-			Connection con = MySqlConnection.getInstance();
-			PreparedStatement pstmt = con.prepareStatement("select * from offer");
-			ResultSet rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				EMSOffersBean offer = new EMSOffersBean();
-//				offer.setDeliveryDate(rs.getString("deliverydate"));
-//				offer.setItemName(rs.getString("itemname"));
-				offer.setQuantity(rs.getInt("quantity"));
-				offer.setRemarks(rs.getString("remakrs"));
-				offer.setClientId(rs.getInt("CLIENTID"));
-				offers.add(offer);
-			}
-			return offers;
-			
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+//	public ArrayList<EMSOffersBean> getAllOffer() {
+//		ArrayList<EMSOffersBean> offers = new ArrayList<EMSOffersBean>();
+//		try {
+//			Connection con = MySqlConnection.getInstance();
+//			PreparedStatement pstmt = con.prepareStatement("select * from offer");
+//			ResultSet rs = pstmt.executeQuery();
+//			
+//			while(rs.next()) {
+//				EMSOffersBean offer = new EMSOffersBean();
+////				offer.setDeliveryDate(rs.getString("deliverydate"));
+////				offer.setItemName(rs.getString("itemname"));
+//				offer.setQuantity(rs.getInt("quantity"));
+//				offer.setRemarks(rs.getString("remarks"));
+//				offer.setClientId(rs.getInt("CLIENTID"));
+//				offers.add(offer);
+//			}
+//			return offers;
+//			
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
 	
 	public boolean addOffer(ArrayList<EMSOffersBean> indent) {
 		
@@ -119,6 +119,32 @@ public class EMSOffersDao {
 			}
 			return Qb;
 		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<EMSOffersBean> getAllOffer() {
+		ArrayList<EMSOffersBean> offers = new ArrayList<EMSOffersBean>();
+		try {
+			Connection con = MySqlConnection.getInstance();
+			PreparedStatement pstmt = con.prepareStatement("select * from offer");
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				EMSOffersBean offer = new EMSOffersBean();
+				offer.setOfferCode(rs.getString("offercode"));
+				offer.setOfferName(rs.getString("offername"));
+				offer.setQuantity(rs.getInt("quantity"));
+				offer.setRemarks(rs.getString("remarks"));
+				offer.setDrawingId(rs.getString("drawingid"));
+				offer.setClientId(rs.getInt("CLIENTID"));
+				offers.add(offer);
+			}
+			return offers;
+			
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

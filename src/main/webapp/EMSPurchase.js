@@ -28,6 +28,39 @@ function appendProjects(projects){
 	}
 }
 
+
+function ProjectChange(){
+	let Data;
+	var xhr = new XMLHttpRequest();
+	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSPurchaseServlet',true);
+	xhr.setRequestHeader('Content-type', 'application/json');
+	xhr.onload = function() {
+  		if (xhr.status === 200) {
+    		Data = JSON.parse(xhr.responseText);
+    		appendVendors(Data)
+  		}
+	}
+	xhr.send(JSON.stringify({token:"Vendors"}));	
+}
+
+function appendVendors(projects){
+
+	var projectsSelect = document.getElementById("vendor-id");
+	console.log(projectsSelect)
+	projectsSelect.innerHTML = `<option value="select Vendor"selected>Select vendor</option>`;
+	for(let i=0; i<projects.length; i++)
+	{
+		let createdAt = document.createElement("option");
+		createdAt.value = projects[i];
+		createdAt.innerHTML = projects[i];
+		projectsSelect.appendChild(createdAt);
+	}
+}
+
+
+
+
+
 function appendCategory(categoryData){
 	
 	console.log(categoryData);
@@ -335,54 +368,16 @@ function submitForm(){
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var response = xhr.responseText;
 			console.log(response);
+			window.location.href = "EMSPurchaseListServlet?delete=no";
 		}
 	}
 	// send the request
 	xhr.send(JSON.stringify(data));
 }
+window.addEventListener("beforeunload", function (event) {
+  event.preventDefault();
+  document.cookie = "myCookie1=".concat(JSON.stringify(data));
+  event.returnValue = "Are you sure you want to leave this page?"
+});
 
-
-
-
-/*
-    var deleteValue = "";
-    function deleteItem(deleteId) {
-        deleteValue = deleteId;
-    }
-    document.getElementById("deleteClicked").addEventListener("click", () => {
-        data.splice(((deleteValue.substring(6)) - 1), 1);
-        appendFunc();
-    });
-
-    let editValue = "";
-    function editFinction(editId) {
-        console.log(editId);
-        editValue = editId;
-    }
-
-    function updateField(event) {
-        event.preventDefault();
-        alert(editValue)
-        editValue = editValue.substring(4)
-        console.log("edited id : " + editValue);
-        var fieldToChange = document.getElementById('input-form').value;
-        var newValue = document.getElementById('placeholderChange').value;
-
-        console.log("fieldToChange ", fieldToChange);
-        console.log("newValue  ", newValue);
-
-        if (fieldToChange == "category") {
-            data[editValue - 1].category = document.getElementById("category-id-select").value;
-            data[editValue - 1].grade = document.getElementById("grade-id-select").value;
-            data[editValue - 1].size = document.getElementById("size-id-select").value;
-        } else if (fieldToChange == "grade") {
-            data[editValue - 1].grade = document.getElementById("grade-id-select").value;
-            data[editValue - 1].size = document.getElementById("size-id-select").value;
-        } else if (fieldToChange == "size") {
-            data[editValue - 1].size = document.getElementById("size-id-select").value;
-        }
-        console.log(data)
-        appendFunc();
-    }
-*/
 

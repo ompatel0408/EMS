@@ -45,8 +45,10 @@ public class QuotationPerItemServices {
 		for (Map<String, Object> item : data) {
 			String category = item.get("catagory").toString();
 			int categoryId = QPI.getCategoryIdFromDatabase(category);
+			int gradeId = QPI.getgradeIdFromDatabase(item.get("grade").toString());
+			int sizeId = QPI.getsizeIdFromDatabase(item.get("size").toString());
 			String TotalpricePerItem = String.valueOf(Double.parseDouble(item.get("price").toString()) * Double.parseDouble(item.get("quantity").toString()));
-			QuotationPerItemBean QPIB = new QuotationPerItemBean(item.get("OfferName").toString(),categoryId,Double.parseDouble(item.get("quantity").toString()), item.get("waight").toString(), item.get("unit").toString(), item.get("price").toString(),item.get("percentage").toString(),TotalpricePerItem);
+			QuotationPerItemBean QPIB = new QuotationPerItemBean(item.get("OfferName").toString(),categoryId,gradeId,sizeId,Double.parseDouble(item.get("quantity").toString()), item.get("waight").toString(), item.get("unit").toString(), item.get("price").toString(),item.get("percentage").toString(),TotalpricePerItem);
 			
 			AQPIB.add(QPIB);
 		}

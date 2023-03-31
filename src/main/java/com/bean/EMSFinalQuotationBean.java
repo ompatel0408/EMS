@@ -8,10 +8,17 @@ public class EMSFinalQuotationBean {
 		return clientId;
 	}
 
-
 	public void setClientId(int clientId) {
 		this.clientId = clientId;
 	}
+	private String clientName;
+	public String getClientName() {
+		return clientName;
+	}
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+	public EMSFinalQuotationBean() {}
 
 	private String projectId;
 	private String quotationDate;

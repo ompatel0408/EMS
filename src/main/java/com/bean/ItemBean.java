@@ -15,8 +15,12 @@ public class ItemBean {
     private String ItemCode;
     private int quotationId;
     private String drawingId;
-    
-    public ItemBean() {
+	private String clientName;
+    private String DeliveryDate;
+	
+
+
+	public ItemBean() {
 		// TODO Auto-generated constructor stub
 	}
     
@@ -33,7 +37,32 @@ public class ItemBean {
     	this.drawingId = drawingId;	
     }
     
+    
+    
+    public ItemBean(int clientId,int quotationId) {
+    	this.quotationId = quotationId;
+    	this.clientId = clientId;
+    }
+    
+    
+    public String getDeliveryDate() {
+		return DeliveryDate;
+	}
 
+	public void setDeliveryDate(String deliveryDate) {
+		DeliveryDate = deliveryDate;
+	}
+
+    
+    public String getClientName() {
+		return clientName;
+	}
+
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+    
+    
     public String getProjectId() {
 		return projectId;
 	}

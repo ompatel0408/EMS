@@ -59,8 +59,8 @@ int srno=1;
 								<td><a><%=lists.get(i).getCatagory() %></a> <br></td>
 								<td><a><%=lists.get(i).getGrade() %></a> <br></td>
 								<td><a><%=lists.get(i).getSize() %></a> <br></td>
-								<td><a><%=lists.get(i).getQuantity() %></a> <br></td>
 								<td><a><%=lists.get(i).getUOM() %></a> <br></td>
+								<td><a><%=lists.get(i).getQuantity() %></a> <br></td>
 							</tr>
 						</tbody>
 						<%} %>

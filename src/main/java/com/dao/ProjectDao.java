@@ -58,7 +58,7 @@ public static ProjectDao instance = null;
 		ArrayList<ProjectBean> projects = new ArrayList<ProjectBean>();
 		try {
 			Connection con =MySqlConnection.getInstance();
-			PreparedStatement pstmt = con.prepareStatement("select projectid,clientpoid,podate,p.clientid,advancepaypercent,afterpaypercent,clientname from projects p join clients c on p.clientid = c.clientid");
+			PreparedStatement pstmt = con.prepareStatement("select projectid,QUOTATIONid,podate,p.clientid,advancepaypercent,afterpaypercent,clientname from projects p join clients c on p.clientid = c.clientid");
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next()) {

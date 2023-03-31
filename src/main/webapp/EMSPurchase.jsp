@@ -68,7 +68,7 @@
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label for="item-id">Project</label>
-                                    <select id="ProjectId1" class="form-control" onload="getProjects1()" required>
+                                    <select id="ProjectId1" class="form-control" onload="getProjects1()" onblur="ProjectChange()" required>
                                     </select>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@
                                 <div class="form-group">
                                     <label>Order Quantity</label>
                                     <div>
-                                        <input class="form-control" id="orderQuan-id" maxlength="20" name="HSNcode" onchange="calculateAmount()"
+                                        <input class="form-control" id="orderQuan-id" maxlength="20" name="HSNcode" onkeyup="calculateAmount()"
                                             placeholder="Enter Order quantity" type="text" value="" disabled>
                                     </div>
                                 </div>
@@ -140,10 +140,10 @@
                                 </div>
                                 </div>
                                  </div>
-                                <div class="form-group">
-                                    <label>Vendor Name</label>
-                                    <input type="text" class="form-control" id="vendor-id" placeholder="Enter vendor name"
-                                        disabled>
+                                 <div class="form-group">
+                                    <label for="vendor-id">Vendor Name</label>
+                                    <select id="vendor-id" class="form-control" required>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -156,13 +156,13 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Discount(%)</label>
-                                    <input type="text" class="form-control" id="DiscountPercentage" onblur="calculateDiscountAmount()" placeholder="0" disabled>
+                                    <input type="text" class="form-control" id="DiscountPercentage" onkeyup="calculateDiscountAmount()" placeholder="0" disabled>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Discount Amount</label>
-                                    <input type="text" class="form-control" id="DiscountAmount" onblur="calculateDiscountPercentage()" placeholder="0" disabled>
+                                    <input type="text" class="form-control" id="DiscountAmount" onkeyup="calculateDiscountPercentage()" placeholder="0" disabled>
                                 </div>
                             </div>
                             <div class="col-md-2">

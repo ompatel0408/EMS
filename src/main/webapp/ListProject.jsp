@@ -37,7 +37,7 @@ int srNo=1;
 				<div class="card-header">
 					<h3 class="card-title">Projects</h3>
 					<div class="card-tools">
-						<button type="button" class="btn btn-primary" data-toggle="modal"
+						<button type="button" class="btn btn-primary" id="AddProjectBTN" data-toggle="modal"
 							data-target="#modal-addProject">Add Project</button>
 					</div>
 				</div>
@@ -66,8 +66,8 @@ int srNo=1;
 									<div class="progress progress-sm">
 										<div class="progress-bar bg-green" role="progressbar"
 											aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"
-											style="width: 77%"></div>
-									</div> <small> 77% Complete </small>
+											style="width: 0%"></div>
+									</div> <small> 0% Complete </small>
 								</td>
 								<td class="project-actions text-right">
 									<button type="button" class="btn btn-info btn-sm"
@@ -243,9 +243,9 @@ int srNo=1;
 							
 							<div class="modal-body">
 								<div class="form-group">
-									<label for="exampleInputPassword1">Client PO ID</label> <input
+									<label for="exampleInputPassword1">Quotation Id</label> <input
 										type="text" class="form-control" name="clientPoId"
-										id="exampleInputPassword1" required placeholder="Client PO ID" />
+										id="exampleInputPassword1" required placeholder="Enter Quotation Id" value="" readonly/>
 								</div>
 
 								<div class="form-group">
@@ -261,9 +261,14 @@ int srNo=1;
 										placeholder="After Pay Percent" />
 								</div>
 								
-								<label for="exampleInputPassword1">Client Id</label> <input
-									type="number" class="form-control" required name="clientId"
-									id="exampleInputPassword1" placeholder="Client ID">
+								<div class="form-group">
+ 								<label for="exampleInputPassword3">Client Id</label> 
+								<input
+										type="number" class="form-control" required
+										name="clientId" id="exampleInputPassword3"
+										placeholder="Enter Client Id" value="" readonly/>
+								</div>
+									
 							</div>
 							<div class="modal-footer justify-content-between">
 								<button type="button" class="btn btn-default"
@@ -276,7 +281,6 @@ int srNo=1;
 				</div>
 				<!-- /.modal-add project -->
 			</div>
-
 		</section>
 		<footer class="main-footer">
 			<strong>Copyright &copy; 2023 <a href="#">EMS Project
@@ -326,7 +330,19 @@ int srNo=1;
 	<script src="assets/dist/js/adminlte.js"></script>
 	<script src="assets/plugins/moment/moment.min.js"></script>
 	<script src="./custom/custom.js"></script>
-
+	<script type="text/javascript">
+		window.onload = function(){
+			if(localStorage.getItem("Token") == "true"){
+				$('#modal-addProject').modal('show');
+				localStorage.setItem("Token",'false')
+				
+				document.getElementsByName('clientPoId')[0].value = localStorage.getItem("QuotationId")
+				document.getElementsByName('clientId')[0].value = localStorage.getItem("clientId");
+			}else{
+				document.getElementById('AddProjectBTN').disabled = true;
+			}
+		}
+	</script>
 </body>
 
 </html>

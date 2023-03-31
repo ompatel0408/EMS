@@ -89,6 +89,12 @@ public class EMSItemServlet extends HttpServlet {
 		    response.setContentType("application/json");
 		    response.setCharacterEncoding("UTF-8");
 		    response.getWriter().write(json);
+	    }else if(jsonObject.get("token").getAsString().equals("QuotationId")) {
+	    	System.out.println("Reached at quotationId");
+	    	String json = gson.toJson(ItemDao.getInstance().getQuotationIdFromdatabase(jsonObject.get("ClientName").getAsString()));
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("UTF-8");
+		    response.getWriter().write(json);
 	    }
 	    
 	}

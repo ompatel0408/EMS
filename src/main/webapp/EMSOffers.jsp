@@ -18,7 +18,7 @@
 	<div class="content-wrapper p-3">
 		<div class="card card-default">
 			<div class="card-header">
-				<h3 class="card-title">Add Items</h3>
+				<h3 class="card-title">Add offers</h3>
 
 				<div class="card-tools">
 					<button type="button" class="btn btn-tool"
@@ -38,7 +38,7 @@
 
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>ClientID</label>
+								<label>Client Name</label>
 								<select id="ProjectId1" onload="getProjects()"  class="form-control" required>
 								<option value="client">Select Client Name</option>
 								<%for(ClientBean c : clients) {%>
@@ -48,7 +48,7 @@
 							</div>
 							<div class="form-group">
 								<label>Quantity</label> <input type="number"
-									class="form-control" id="Quantity" placeholder="Enter Quantaty"
+									class="form-control" id="Quantity" placeholder="Enter Quantity"
 									>
 							</div>
 							<!-- <div class="form-group">
@@ -75,7 +75,7 @@
 							<div class="form-group mt-5 d-flex justify-content-around">
 								<button type="submit" id="AddItemBtn"
 									class="btn btn-primary w-25">
-									<strong>+</strong> Add Item
+									<strong>+</strong> Add offers
 								</button>
 							</div>
 						</div>
@@ -88,7 +88,7 @@
 					<div class="form-group mt-5 d-flex justify-content-around">
 						<button type="submit" id="ProcessId"
 							class="btn btn-danger w-25">
-							<strong> Process to items </strong>
+							<strong> Process to offers </strong>
 						</button>
 					</div>
 				</form>

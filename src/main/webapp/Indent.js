@@ -87,7 +87,7 @@ function appendItemName(nameData){
 	console.log(nameData);
 	var itemSelect = document.getElementById("itemName");
 	
-	itemSelect.innerHTML = `<option value="Select Item">Select Item</option>`;
+	itemSelect.innerHTML = `<option value="Select Orders">Select Orders</option>`;
 	for(let i=0; i<nameData.length; i++)
 	{
 		let createdAt = document.createElement("option");
@@ -142,13 +142,13 @@ function appendSize(sizeData){
 	
 }
 function submitForm1(){
-	alert('called!');
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'http://localhost:8080/EMS2/IndentServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onreadystatechange = function() {
 		if (xhr.status == 200) {
 			 console.log(xhr.responseText);
+			 window.location.href = "ListIndentServlet?token=1&projectid=0&itemcode=0";
 		}
 	}
 	xhr.send(JSON.stringify(data));
@@ -246,5 +246,13 @@ function submitForm(event) {
 		document.getElementById(`remarkApp${i + 1}`).innerHTML = data[i].remark;
 	}
 }
+window.addEventListener("beforeunload", function (event) {
+  event.preventDefault();
+  document.cookie = "myCookie1=".concat(JSON.stringify(data));
+  event.returnValue = "Are you sure you want to leave this page?"
+});
+
+
+
 
 
