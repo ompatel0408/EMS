@@ -250,5 +250,23 @@
 		<servlet-name>EMSItemListServlet</servlet-name>
 		<url-pattern>/EMSItemListServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSIssueNoteServlet</servlet-name>
+		<servlet-class>com.controller.EMSIssueNoteServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSIssueNoteServlet</servlet-name>
+		<url-pattern>/EMSIssueNoteServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSIssueNoteListServlet</servlet-name>
+		<servlet-class>com.controller.EMSIssueNoteListServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSIssueNoteListServlet</servlet-name>
+		<url-pattern>/EMSIssueNoteListServlet</url-pattern>
+	</servlet-mapping>
 
 </web-app>

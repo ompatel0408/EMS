@@ -94,5 +94,4 @@ public class SendMail {
 			System.out.println("Updated not successfully!");
 		}
 	}
-	
 }

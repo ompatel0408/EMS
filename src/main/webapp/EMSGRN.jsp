@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -81,8 +82,8 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label>Receved Date</label> <input type="date"
-										class="form-control" id="waight-id" placeholder="Enter Waight">
+									<label>Received Date</label> <input type="date" name="ReceivedDate"
+										class="form-control" id="waight-id" placeholder="Enter Waight" onchange="getVendorName()">
 								</div>
 								<div class="card-header">
 									<h3 class="card-title">Upload The Bill</h3>
@@ -100,12 +101,18 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 								</div>
 							</div>
 							<div class="col-md-6">
-								<div class="form-group">
+<!-- 								<div class="form-group">
 
-									<label>Vendor name</label> <input type="text"
+									<label>Vendor name</label> <input type="text" name="VendorName"
 										class="form-control" id="quantaty-id"
 										placeholder="Enter Vendor name">
+								</div> -->
+								<div class="form-group">
+									<label>Vendor Name</label> <select class="form-control"
+										 id="quantaty-id" name="VendorName" >
+									</select>
 								</div>
+								
 								<!-- /.form-group -->
 								<div class="card-header">
 									<h3 class="card-title">Upload The Truck Pic</h3>
@@ -209,5 +216,34 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 		myDropzone.removeAllFiles(true)
 	}
 	// DropzoneJS Demo Code End
+</script>
+<script type="text/javascript">
+	function getVendorName() {
+			let Data;
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'http://localhost:8080/EMS2/EMSGRNServlet',true);
+			xhr.onreadystatechange = function() {
+		  		if (xhr.status === 200) {
+		    		Data = JSON.parse(xhr.responseText);
+		    		console.log(Data)
+		    		appendVendors(Data)
+		  		}
+			}
+			xhr.send();	
+		}
+
+		function appendVendors(Clients){
+			var ClientsSelect = document.getElementById("quantaty-id");
+			console.log(ClientsSelect)
+			ClientsSelect.innerHTML = `<option value="select Vendors"selected>Select Vendors</option>`;
+			for(let i=0; i<Clients.length; i++)
+			{
+				let createdAt = document.createElement("option");
+				createdAt.value = Clients[i];
+				createdAt.innerHTML = Clients[i];
+				ClientsSelect.appendChild(createdAt);
+			}
+		}
+
 </script>
 </html>

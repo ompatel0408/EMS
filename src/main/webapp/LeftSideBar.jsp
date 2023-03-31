@@ -170,11 +170,11 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="#" class="nav-link"> <i
+						<li class="nav-item"><a href="EMSIssueNote.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Generate Issue Note</p>
 						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link"> <i
+						<li class="nav-item"><a href="EMSIssueNoteListServlet?issueId=0&update=notupdate" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Issue Note List</p>
 						</a></li>
