@@ -22,25 +22,63 @@ public class EMSStoreDao {
 		return instance;
 	}
 
+	
+	public void updateQ(int catid,int gig,int sig,int q)
+	{
+		System.out.println("qu"+q);
+		System.out.println("qu"+catid);
+		System.out.println("qu"+gig);
+		System.out.println("qu"+sig);
+		String uq="update store set quantity=quantity+? where categoryId=? and gradeId=? and sizeId=?";
+Connection conn = MySqlConnection.getInstance();
+		
+		if (conn == null) {
+			System.out.println("connection is not connected..");
+		} else {
+			try {
+				PreparedStatement stmt1 = conn.prepareStatement(uq);
+				stmt1.setInt(1, q);
+				stmt1.setInt(2, catid);
+				stmt1.setInt(3, gig);
+				stmt1.setInt(4, sig);
+				stmt1.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public boolean addItems(ArrayList<EMSStoreBean> sb) {
-		String insertQuery = "INSERT INTO STORE (projectId, categoryId, gradeId, sizeId, quantity) VALUES(?,?,?,?,?)";
-
+		String insertQuery = "INSERT INTO STORE (categoryId, gradeId, sizeId, quantity) VALUES(?,?,?,?)";
+		String checkQuery="select storeid from store where categoryId=? and gradeId=? and sizeId=?";
 		Connection conn = MySqlConnection.getInstance();
 		
 		if (conn == null) {
 			System.out.println("connection is not connected..");
 		} else {
 			try {
-				PreparedStatement stmt = conn.prepareStatement(insertQuery);
 				for (EMSStoreBean s : sb) {
-					stmt.setString(1, s.getProjectId());
-					stmt.setInt(2, s.getCategoryId());
-					stmt.setInt(3, s.getGradeId());
-					stmt.setInt(4, s.getSizeId());
-					stmt.setInt(5, s.getQuantity());
-					stmt.addBatch();
+					PreparedStatement stmt1 = conn.prepareStatement(checkQuery);
+					stmt1.setInt(1, s.getCategoryId());
+					stmt1.setInt(2, s.getGradeId());
+					stmt1.setInt(3, s.getSizeId());
+					ResultSet rs = stmt1.executeQuery();
+					if(rs.next())
+					{
+						System.out.println("update");
+						updateQ(s.getCategoryId(),s.getGradeId(),s.getSizeId(),s.getQuantity());
+					}
+					else {
+						System.out.println("insert");
+						PreparedStatement stmt = conn.prepareStatement(insertQuery);
+						stmt.setInt(1, s.getCategoryId());
+						stmt.setInt(2, s.getGradeId());
+						stmt.setInt(3, s.getSizeId());
+						stmt.setInt(4, s.getQuantity());
+						stmt.executeUpdate();
+					}
 				}
-				int[] result = stmt.executeBatch();
 				return true;
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -183,7 +221,7 @@ public class EMSStoreDao {
 	public ArrayList<EMSStoreBean> getAllData() {
 
 		ArrayList<EMSStoreBean> store =  new ArrayList<EMSStoreBean>();
-		String selectQuery = "select projectId,catagory,grade,size,quantity from store s join emscatagory ec on s.categoryid=ec.catagoryid  join catagorygrade cg on s.gradeid=cg.gradeid join catagorygradesize using (sizeid)";
+		String selectQuery = "select catagory,grade,size,quantity from store s join emscatagory ec on s.categoryid=ec.catagoryid  join catagorygrade cg on s.gradeid=cg.gradeid join catagorygradesize using (sizeid) order by StoreId DESC";
 		Connection conn = MySqlConnection.getInstance();
 
 		if (conn != null) {
@@ -193,7 +231,7 @@ public class EMSStoreDao {
 				PreparedStatement stmt = conn.prepareStatement(selectQuery);
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
-					EMSStoreBean esb = new EMSStoreBean(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5));
+					EMSStoreBean esb = new EMSStoreBean(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4));
 					store.add(esb);
 				}
 				return store;
@@ -241,7 +279,7 @@ public class EMSStoreDao {
 	public ArrayList<EMSStoreBean> getAllStoreList() {
 
 		ArrayList<EMSStoreBean> store =  new ArrayList<EMSStoreBean>();
-		String selectQuery = "select catagory,grade,size,quantity from store s join emscatagory ec on s.categoryid = ec.catagoryid join catagorygrade using (gradeid) join catagorygradesize using (sizeid)";
+		String selectQuery = "select catagory,grade,size,quantity from store s join emscatagory ec on s.categoryid = ec.catagoryid join catagorygrade using (gradeid) join catagorygradesize using (sizeid) order by storeId DESC";
 		Connection conn = MySqlConnection.getInstance();
 
 		if (conn != null) {

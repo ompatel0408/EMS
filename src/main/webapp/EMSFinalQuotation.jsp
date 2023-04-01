@@ -73,14 +73,14 @@
 								<div class="form-group">
 									<label>Discount(%)</label> <input type="text"
 										class="form-control" id="discountPercentage"
-										name="discountPercentage" placeholder="0"
+										name="discountPercentage" placeholder="0" 
 										onkeyup="calculateDiscountAmount()" pattern="^\d+(\.\d+)?$">
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-group">
 									<label>Discount Amount</label> <input type="text"
-										class="form-control" id="discountAmount" name="discountAmount"
+										class="form-control" id="discountAmount" name="discountAmount" 
 										onkeyup="calculateDiscountPercentage()" placeholder="0"
 										pattern="^\d+(\.\d+)?$">
 								</div>

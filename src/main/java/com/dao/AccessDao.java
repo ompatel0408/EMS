@@ -36,8 +36,7 @@ public class AccessDao
 				access.setPoList(rs.getInt("polist"));
 				access.setGenerateGrn(rs.getInt("generategrn"));
 				access.setGrnList(rs.getInt("grnlist"));
-				access.setSellItemList(rs.getInt("sellitemlist"));
-				access.setSellIssuedList(rs.getInt("sellissuedlist"));
+				
 				access.setShowProject(rs.getInt("showProject"));
 				access.setShowClient(rs.getInt("showclient"));
 				access.setAddClient(rs.getInt("addclient"));
@@ -45,7 +44,7 @@ public class AccessDao
 				access.setShowQuotationPerOffer(rs.getInt("showquotationperoffer"));
 				access.setShowFinalQuotation(rs.getInt("showfinalquotation"));
 				access.setAddStock(rs.getInt("stocklist"));
-				access.setShowStockList(rs.getInt("showstocklist"));
+				
 				return access;
 			}
 		

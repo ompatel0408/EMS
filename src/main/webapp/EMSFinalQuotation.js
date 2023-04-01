@@ -47,9 +47,9 @@ function appendQuotation(Data){
 	
 	console.log(Data);
 	document.getElementById('QuotationAmount').value = Data[0].quotationAmount;
+	document.getElementById('TotalAmount').value = document.getElementById('QuotationAmount').value
 	document.getElementById('QuotationQuantity').value = Data[0].quantity;
 }
-
 function calculateDiscountAmount(){
 	console.log(parseFloat(document.getElementById('QuotationAmount').value) * (parseFloat(document.getElementById('discountPercentage').value) / 100));
 	document.getElementById('discountAmount').disabled = true;
@@ -59,9 +59,11 @@ function calculateDiscountAmount(){
 
 function calculateDiscountPercentage(){
  	document.getElementById('discountPercentage').disabled = true;
+ 	
 	document.getElementById('discountPercentage').value = (parseFloat(document.getElementById('discountAmount').value) / parseFloat(document.getElementById('QuotationAmount').value)) * 100;
 	document.getElementById('TotalAmount').value = parseFloat(document.getElementById('QuotationAmount').value)  - parseFloat(document.getElementById('discountAmount').value)
 }
+
 var gstAmount;
 var count = 0;
 var originalAmount;

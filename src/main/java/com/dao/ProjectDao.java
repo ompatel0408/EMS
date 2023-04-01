@@ -3,6 +3,7 @@ package com.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import com.bean.ProjectBean;
 import com.dbConnection.MySqlConnection;
@@ -151,4 +152,30 @@ public static ProjectDao instance = null;
 		}
 		return 0;
 	}
+	
+	public boolean updatePrPurchase(int clientId,String projectId) {
+		System.out.println(clientId);
+		System.out.println(projectId);
+		String updateQuery = "UPDATE PrePurchase SET PROJECTID = ? WHERE ClientId = ?";
+		Connection conn = MySqlConnection.getInstance();
+		
+		if(conn != null) {
+			
+			try {
+				
+				PreparedStatement stmt = conn.prepareStatement(updateQuery);
+				stmt.setString(1, projectId);
+				stmt.setInt(2, clientId);
+				stmt.executeUpdate();
+				return true;
+			}catch(SQLException E) {
+				E.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		return false;
+		
+	}
+	
 }

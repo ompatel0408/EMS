@@ -29,36 +29,27 @@
 				<div class="card-body">
 					<form onsubmit="submitForm(event)">
 						<div class="row">
-							<div class="col-sm-3">
-								<!-- text input -->
-								<div class="form-group">
-									<label for="item-id">Project</label> <select name="projectId"
-										id="ProjectId1" class="form-control" required>
-										<option value="select" selected>Select Item</option>
-									</select>
-								</div>
-							</div>  
-							<div class="col-sm-3">
+							
+							<div class="col-sm-4">
 								<!-- text input -->
 								<div class="form-group">
 									<label>Category</label> <select id="category-id"
-										class="form-control" required disabled="">
+										class="form-control">
 										<option value="select" selected>Select category</option>
 									</select>
 								</div>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-4">
 								<div class="form-group">
-									<label>Grade</label> <select id="grade-id" class="form-control"
-										required disabled="">
+									<label>Grade</label> <select id="grade-id" class="form-control">
 										<option value="select grade">Select Grade</option>
 									</select>
 								</div>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-4">
 								<div class="form-group">
 									<label>Size</label> <select type="text" id="size-id"
-										class="form-control" required disabled="">
+										class="form-control">
 										<option >Select size</option>
 									</select>
 								</div>
@@ -66,13 +57,13 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Quantity</label> <input type="text" class="form-control"
-										id="quantaty-id" placeholder="Quantity" disabled="">
+										id="quantaty-id" placeholder="Quantity">
 								</div>
 							</div>
 							<div
 								class="col-sm-6 d-flex justify-content-center align-items-center mt-auto">
 								<div class="form-group">
-									<button type="submit" class="btn btn-primary disabled"
+									<button type="submit" class="btn btn-primary"
 										id="add-store">
 										<strong>+</strong> add Item
 									</button>

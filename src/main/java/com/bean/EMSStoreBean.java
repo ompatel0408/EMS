@@ -3,7 +3,6 @@ package com.bean;
 
 public class EMSStoreBean 
 {
-	private String projectId;
 	private String category;
 	private String grade;
 	private String size;
@@ -38,46 +37,20 @@ public class EMSStoreBean
 
 	public EMSStoreBean() {}
 
-	public EMSStoreBean(String projectId, String category, String grade, String size, int quantity) {
-		this.projectId = projectId;
-		this.category = category;
-		this.grade = grade;
-		this.size = size;
-		this.quantity = quantity;
-	}
-
-	public EMSStoreBean(String projectId, int categoryId, int gradeId, int sizeId, int quantity) {
-		
-		this.projectId = projectId;
-		this.categoryId = categoryId;
-		this.gradeId = gradeId;
-		this.sizeId = sizeId;
-		this.quantity = quantity;
-	}
-	
-	
 	public EMSStoreBean(String category, String grade, String size, int quantity) {
 		this.category = category;
 		this.grade = grade;
 		this.size = size;
 		this.quantity = quantity;
 	}
-
-	public EMSStoreBean(int quantity, int categoryId, int gradeId, int sizeId) {
-		super();
-		this.quantity = quantity;
+	public EMSStoreBean( int categoryId, int gradeId, int sizeId, int quantity) {
+		
 		this.categoryId = categoryId;
 		this.gradeId = gradeId;
 		this.sizeId = sizeId;
+		this.quantity = quantity;
 	}
-
-	public String getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(String projectId) {
-		this.projectId = projectId;
-	}
+	
 
 	public String getCategory() {
 		return category;

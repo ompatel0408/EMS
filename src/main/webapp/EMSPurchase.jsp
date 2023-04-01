@@ -30,18 +30,21 @@
 				<div class="card-body">
 					<div class="row">
 						<div class=" col-12">
-							<div class="info-box bg-gradient-success">
+							<div class="info-box bg-gradient-success" id="success">
 								<span class="info-box-icon"><i class=" ion-stats-bars"></i></span>
 
 								<div class="info-box-content">
-									<span class="info-box-text py-3">Percentage of profit</span> <span class="info-box-number">40%</span>
+									<span class="info-box-text py-3">Percentage of profit</span> <span class="info-box-number" id="totalNumber">0%</span>
 
 									<div class="progress h-25">
-										<div class="progress-bar" style="width: 100%;"></div>
+										<div class="progress-bar" style="width: 0%;"></div>
 									</div>
-									<span class="progress-description m-2 h-75"> Your total quotation without profit is <b> 1000000</b>, With profit <b>1500000</b>.
-									<br> You are purchased items total amount's of <b>600000</b>, and your profit is 400000.
-									 </span>
+									<span class="progress-description m-2 h-75" id="progressDesc"></span>
+									<span class="progress-description m-2 h-75" id="progressDescOfAvailable"></span>
+									<span id="profitAlert"></span>
+									<!-- <span class="progress-description m-2 h-75"> Your total quotation without profit is <b> 1000000</b>, With profit <b>1500000</b>.
+									<br> You are purchased items total amount's of <span id="totalPurchase">600000</span>, and your profit is 400000.
+									 </span> -->
 								</div>
 							</div>
 						</div>
@@ -356,120 +359,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card card-default">
-                <div class="card-header">
-                    <h3 class="card-title"> Progress of Purchase and Quotation </h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="timeline">
-                            <!-- The timeline -->
-                            <div class="timeline timeline-inverse">
-                                <!-- timeline time label -->
-                                <div class="time-label">
-                                    <span class="bg-gradient-info">
-                                        10 Feb. 2014
-                                    </span>
-                                </div>
-                                <!-- END timeline item -->
-                                <!-- timeline item -->
-                                <div>
-                                    <i class="fas fa-user bg-info"></i>
-
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-
-                                        <h3 class="timeline-header border-0">
-                                       	 Updated by
-                                       <b>
-                                       	 	<i> 
-                                       			 Paresh patel 
-                                       		</i>
-                                       	</b>
-                                             
-                                        </h3>
-                                    </div>
-                                </div>
-                                <!-- END timeline item -->
-                                <!-- timeline item -->
-                                <div>
-                                    <i class="fas fa-comments bg-gradient-success"></i>
-
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-
-                                        <h3 class="timeline-header">
-                                        <!--<a href="#">Jay White</a> -->
-                                         <font color="lightgreen">
-                                         <b>No worries!</b>
-                                         </font>
-                                         </h3>
-											
-                                        <div class="timeline-body">
-                                            No worries! Your purchase amount is currently below the quotation amount. You have room to make additional purchases without incurring any additional fees or charges. Please let us know if you have any questions or concerns.
-                                        </div>    
-                                    </div>
-                                </div>
-                                <div>
-                                    <i class="fas fa-user bg-info"></i>
-
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-                                        
-                                        <h3 class="timeline-header border-0">
-                                       	 Updated by
-                                       	<b>
-                                       	 	<i> 
-                                       			 Paresh patel 
-                                       		</i>
-                                       	</b>
-                                           
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div>
-									<i class="fas fa-comments bg-danger"></i>
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-
-                                        <h3 class="timeline-header">
-                                        <!--<a href="#">Jay White</a> -->
-                                        <font color="red">
-                                        	<b> Warning:</b>
-                                        </font> 
-                                        
-                                            </h3>
-                                        <div class="timeline-body">
-                                            Your purchase amount has exceeded the quotation amount. Please be aware that any additional purchases will be applied towards the quotation amount and may result in additional fees or charges. We strongly advise that you review your purchase history and adjust your spending accordingly to avoid any further overage charges.
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <!-- END timeline item -->
-                                <!-- timeline time label -->
-                                <div class="time-label">
-                                    <span class="bg-gradient-info">
-                                        3 Jan. 2014
-                                    </span>
-                                </div>
-                                <div>
-                                    <i class="far fa-clock bg-gray"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!-- /.tab-content -->
-                </div><!-- /.card-body -->
             </div>
         </div>
         </div>

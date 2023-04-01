@@ -2,7 +2,116 @@ package com.bean;
 
 public class AccessBean 
 {
-	int userId,accessManagement,addProject,addOffer,quotationPerOffers,finalQuotation,generateIndent,indentList,approvalPending,generatePo,poList,generateGrn,grnList,stockList,addStock,sellItemList,sellIssuedList,showProject,showClient,addClient,showOffer,showQuotationPerOffer,showFinalQuotation,showStockList;
+	int userId,accessManagement,addProject,addOffer,quotationPerOffers,finalQuotation,generateIndent,indentList,approvalPending,generatePo,poList,generateGrn,grnList,addStock,addDrawing,drawingList,showProject,showClient,addClient,showOffer,issueNoteList,addGeneralStore,addVendor,projectStatus,vendorList,generateIssueNote,showQuotationPerOffer,addOrder,showFinalQuotation,orderList,addNewStock,stockList;
+	public int getAddDrawing() {
+		return addDrawing;
+	}
+
+
+	public void setAddDrawing(int addDrawing) {
+		this.addDrawing = addDrawing;
+	}
+
+
+	public int getDrawingList() {
+		return drawingList;
+	}
+
+
+	public void setDrawingList(int drawingList) {
+		this.drawingList = drawingList;
+	}
+
+
+	public int getIssueNoteList() {
+		return issueNoteList;
+	}
+
+
+	public void setIssueNoteList(int issueNoteList) {
+		this.issueNoteList = issueNoteList;
+	}
+
+
+	public int getAddGeneralStore() {
+		return addGeneralStore;
+	}
+
+
+	public void setAddGeneralStore(int addGeneralStore) {
+		this.addGeneralStore = addGeneralStore;
+	}
+
+
+	public int getAddVendor() {
+		return addVendor;
+	}
+
+
+	public void setAddVendor(int addVendor) {
+		this.addVendor = addVendor;
+	}
+
+
+	public int getProjectStatus() {
+		return projectStatus;
+	}
+
+
+	public void setProjectStatus(int projectStatus) {
+		this.projectStatus = projectStatus;
+	}
+
+
+	public int getVendorList() {
+		return vendorList;
+	}
+
+
+	public void setVendorList(int vendorList) {
+		this.vendorList = vendorList;
+	}
+
+
+	public int getGenerateIssueNote() {
+		return generateIssueNote;
+	}
+
+
+	public void setGenerateIssueNote(int generateIssueNote) {
+		this.generateIssueNote = generateIssueNote;
+	}
+
+
+	public int getAddOrder() {
+		return addOrder;
+	}
+
+
+	public void setAddOrder(int addOrder) {
+		this.addOrder = addOrder;
+	}
+
+
+	public int getOrderList() {
+		return orderList;
+	}
+
+
+	public void setOrderList(int orderList) {
+		this.orderList = orderList;
+	}
+
+
+	public int getAddNewStock() {
+		return addNewStock;
+	}
+
+
+	public void setAddNewStock(int addNewStock) {
+		this.addNewStock = addNewStock;
+	}
+
 
 	public int getAccessManagement() {
 		return accessManagement;
@@ -21,14 +130,7 @@ public class AccessBean
 		this.userId = userId;
 	}
 
-	public int getShowStockList() {
-		return showStockList;
-	}
-
-	public void setShowStockList(int showStockList) {
-		this.showStockList = showStockList;
-	}
-
+	
 	public int getAddProject() {
 		return addProject;
 	}
@@ -127,23 +229,7 @@ public class AccessBean
 		this.stockList = stockList;
 	}
 
-	
 
-	public int getSellItemList() {
-		return sellItemList;
-	}
-
-	public void setSellItemList(int sellItemList) {
-		this.sellItemList = sellItemList;
-	}
-
-	public int getSellIssuedList() {
-		return sellIssuedList;
-	}
-
-	public void setSellIssuedList(int sellIssuedList) {
-		this.sellIssuedList = sellIssuedList;
-	}
 
 	public int getAddStock() {
 		return addStock;

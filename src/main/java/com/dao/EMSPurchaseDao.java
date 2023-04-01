@@ -193,4 +193,22 @@ public class EMSPurchaseDao {
 		}
 	}
 	
+	public double getTotalQuotation(String projct)
+	{
+		try {
+			Connection con = MySqlConnection.getInstance();
+			PreparedStatement pstmt = con.prepareStatement("select QuotationAmount from quotations join projects using (QuotationId) where projectid=?");
+			pstmt.setString(1, projct);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next())
+			{
+				return (rs.getDouble("QuotationAmount"));
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 }

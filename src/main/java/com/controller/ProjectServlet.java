@@ -18,6 +18,15 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class ProjectServlet extends HttpServlet {
 	private static  long serialVersionUID = 1L;
+	private static ProjectServlet instance = null;
+	
+	public static ProjectServlet getInstance() {
+		if(instance == null) {
+			instance = new ProjectServlet();
+		}
+		return instance;
+	}
+	
 	Date d = new Date();
 	DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
 	String today = df.format(d);
@@ -29,7 +38,7 @@ public class ProjectServlet extends HttpServlet {
 		String view = request.getParameter("view");
 		System.out.println("ProjectId:"+projectId);
 		System.out.println("Update:"+update);
-		ProjectDao projectDao = new ProjectDao();
+		ProjectDao projectDao = ProjectDao.getInstance();
 		if(update.equals("update")) {
 			doPut(request, response);
 		}
@@ -42,8 +51,6 @@ public class ProjectServlet extends HttpServlet {
 		
 		
 		ArrayList<ProjectBean> projects = projectDao.getAllProject();
-//		System.out.println("ProjectListSize:"+projects.size());
-		
 		request.setAttribute("projects", projects);
 		request.getRequestDispatcher("ListProject.jsp").forward(request, response);
 	}
@@ -66,11 +73,12 @@ public class ProjectServlet extends HttpServlet {
 		projectbean.setAfterPayPercent(afterPayPercent);
 		projectbean.setFinalDeliveryDate(finalDeliveryDate);
 		projectbean.setClientId(clientId);
-		clientName = new ProjectDao().getClientName(clientId);
+		clientName = ProjectDao.getInstance().getClientName(clientId);
 		ProjectServices ps = new ProjectServices();
 		projectId = ps.projectGenerate(clientName);
 		projectbean.setProjectId(projectId);
-		new ProjectDao().addProject(projectbean);
+		ProjectDao.getInstance().addProject(projectbean);
+		ProjectDao.getInstance().updatePrPurchase(clientId,projectId);
 		response.sendRedirect("ProjectServlet?projectId=0&update=notupdate");
 	}
 	
@@ -81,7 +89,7 @@ public class ProjectServlet extends HttpServlet {
 		System.out.println("update:"+projectId);
 		String changeField = request.getParameter("changeField");
 		String newData = request.getParameter("newData");
-		ProjectDao projectDao = new ProjectDao();
+		ProjectDao projectDao = ProjectDao.getInstance();
 		projectDao.updateProject(newData, changeField, projectId);
 	}
 	
@@ -89,7 +97,7 @@ public class ProjectServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String projectId = req.getParameter("projectId");
 		System.out.println("DeleteProjectId:"+projectId);
-		ProjectDao projectDao = new ProjectDao();
+		ProjectDao projectDao = ProjectDao.getInstance();
 		projectDao.deleteProject(projectId);
 	}
 

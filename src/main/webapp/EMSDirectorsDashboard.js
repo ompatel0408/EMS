@@ -1,7 +1,7 @@
 window.onload = function(){
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://localhost:8080/EMS2/EMSDirectorsDashboardServlet',true);
+	xhr.open('GET', 'http://192.168.1.127:8080/EMS2/EMSDirectorsDashboardServlet',true);
 	xhr.onload = function() {
   		if (xhr.status === 200) {
     		Data = JSON.parse(xhr.responseText);
@@ -55,26 +55,27 @@ function appendLiveProjects(data){
 var userId;
 function getUserId(){
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'http://localhost:8080/EMS2/EMSDirectorsDashboardServlet',true);
+	xhr.open('POST', 'http://192.168.1.127:8080/EMS2/EMSDirectorsDashboardServlet',true);
 	xhr.onload = function() {
   		if (xhr.status == 200) {
     		userId = JSON.parse(xhr.responseText);
     		console.log(userId)
+    		getListSideBar(userId);
   		}
 	}
 	
 	xhr.send(JSON.stringify({Abcd:"ABCD"}));
-	getProjectStatus();
-	//getListSideBar()
+	//getProjectStatus();
+	
 }
 
 
 
 
-function getListSideBar(){
+function getListSideBar(userId){
 	var gradeData;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://localhost:8080/EMS2/ShowManagementAccess?change=2&userId=11',true);
+	xhr.open('GET', `http://192.168.1.127:8080/EMS2/ShowManagementAccess?change=2&userId=${userId}`,true);
     		xhr.setRequestHeader('Content-type', 'application/json');
     		xhr.onload = function() {
     	  		if (xhr.status == 200) {
@@ -83,25 +84,22 @@ function getListSideBar(){
     	    		if(gradeData.accessManagement==1){
     	  				document.getElementById('accessmanagement-target-id').style.display='block';
     	  			}
-    	    		if(gradeData.addClient==1 || gradeData.showClient==1){
-    	    			document.getElementById('client-target-id').style.display='block';
-    	    		}if(gradeData.addProject==1 || gradeData.showProject==1 || gradeData.addOffer==1 || gradeData.quotationPerOffers==1 || gradeData.finalQuotation==1){
-    	    			document.getElementById('project-target-id').style.display='block';
-    	    		}
-    	    		if(gradeData.generateIndent==1 || gradeData.indentList==1 || gradeData.approvalePending==1){
-    	    			document.getElementById('indent-target-id').style.display='block';
-    	    		}if(gradeData.generatePo==1 || gradeData.poList==1){
-    	    			document.getElementById('purchase-target-id').style.display='block';
-    	    		}
-    	    		if(gradeData.generateGrn==1 || gradeData.grnList==1){
-    	    			document.getElementById('grn-target-id').style.display='block';
-    	    		}
-    	    		if(gradeData.addStock==1 || gradeData.stockList==1){
-    	    			document.getElementById('stock-target-id').style.display='block';
-    	    		}
-    	    		if(gradeData.sellIssuedList==1 || gradeData.sellItemList==1){
-    	    			document.getElementById('sellmanagement-target-id').style.display='block';
-    	    		}
+    	    		//if(gradeData.addClient==1 || gradeData.showClient==1){
+    	    		//	document.getElementById('client-target-id').style.display='block';
+    	    		//}if(gradeData.addProject==1 || gradeData.showProject==1 || gradeData.addOffer==1 || gradeData.quotationPerOffers==1 || gradeData.finalQuotation==1){
+    	    		//	document.getElementById('project-target-id').style.display='block';
+    	    		//}
+    	    		//if(gradeData.generateIndent==1 || gradeData.indentList==1 || gradeData.approvalePending==1){
+    	    		//	document.getElementById('indent-target-id').style.display='block';
+    	    		//}if(gradeData.generatePo==1 || gradeData.poList==1){
+    	    		//	document.getElementById('purchase-target-id').style.display='block';
+    	    		//}
+    	    		//if(gradeData.generateGrn==1 || gradeData.grnList==1){
+    	    		//	document.getElementById('grn-target-id').style.display='block';
+    	    		//}
+    	    		//if(gradeData.addStock==1 || gradeData.stockList==1){
+    	    		//	document.getElementById('stock-target-id').style.display='block';
+    	    		//}
     	    		if(gradeData.addClient==1){
     	  				document.getElementById('addclient-target-id').style.display='block';
     	  			}if(gradeData.showClient==1){
@@ -110,8 +108,8 @@ function getListSideBar(){
     	  				document.getElementById('addproject-target-id').style.display='block';
     	  			}if(gradeData.showProject==1){
     	  				document.getElementById('showproject-target-id').style.display='block';
-    	  			}if(gradeData.approvalPending==1){
-    	  				document.getElementById('approvalpending-target-id').style.display='block';
+    	  			}if(gradeData.addDrawing==1){
+    	  				document.getElementById('adddrawing-target-id').style.display='block';
     	  			}if(gradeData.generatePo==1){
     	  				document.getElementById('generatepo-target-id').style.display='block';
     	  			}if(gradeData.finalQuotation==1){
@@ -127,25 +125,39 @@ function getListSideBar(){
     	  			}if(gradeData.poList==1){
     	  				document.getElementById('polist-target-id').style.display='block';
     	  			}if(gradeData.quotationPerOffers==1){
-    	  				document.getElementById('quotationperoffers-target-id').style.display='block';
-    	  			}if(gradeData.sellIssuedList==1){
-    	  				document.getElementById('sellissuedlist-target-id').style.display='block';
-    	  			}if(gradeData.sellItemList==1){
-    	  				document.getElementById('sellitemlist-target-id').style.display='block';
+    	  				document.getElementById('quotationperoffer-target-id').style.display='block';
+    	  			}if(gradeData.drawingList==1){
+    	  				document.getElementById('drawinglist-target-id').style.display='block';
+    	  			}if(gradeData.orderList==1){
+    	  				document.getElementById('orderlist-target-id').style.display='block';
     	  			}if(gradeData.showFinalQuotation==1){
-    	  				document.getElementById('showfinalquotation-target-id').style.display='block';
+    	  				document.getElementById('finalquotationlist-target-id').style.display='block';
     	  			}if(gradeData.showOffer==1){
     	  				document.getElementById('showoffer-target-id').style.display='block';
     	  			}if(gradeData.showQuotationPerOffer==1){
-    	  				document.getElementById('showquotationperoffer-target-id').style.display='block';
-    	  			}if(gradeData.showStockList==1){
-    	  				document.getElementById('showstocklist-target-id').style.display='block';
+    	  				document.getElementById('quotationperofferlist-target-id').style.display='block';
+    	  			}if(gradeData.addNewStock==1){
+    	  				document.getElementById('addnewstock-target-id').style.display='block';
     	  			}if(gradeData.stockList==1){
     	  				document.getElementById('stocklist-target-id').style.display='block';
     	  			}if(gradeData.addOffer==1){
     	  				document.getElementById('addoffer-target-id').style.display='block';
     	  			}if(gradeData.addStock==1){
     	  				document.getElementById('addstock-target-id').style.display='block';
+    	  			}if(gradeData.addOrder==1){
+    	  				document.getElementById('addorder-target-id').style.display='block';
+    	  			if(gradeData.issueNoteList==1){
+    	  				document.getElementById('issuenotelist-target-id').style.display='block';
+    	  			}if(gradeData.generateIssueNote==1){
+    	  				document.getElementById('generateissuenote-target-id').style.display='block';
+    	  			}if(gradeData.addGeneralStore==1){
+    	  				document.getElementById('addgeneralstore-target-id').style.display='block';
+    	  			}if(gradeData.projectStatus==1){
+    	  				document.getElementById('projectstatus-target-id').style.display='block';
+    	  			}if(gradeData.addVendor==1){
+    	  				document.getElementById('addvendor-target-id').style.display='block';
+    	  			}if(gradeData.vendorList==1){
+    	  				document.getElementById('vendorList-target-id').style.display='block';
     	  			}
     	  		}
     		}

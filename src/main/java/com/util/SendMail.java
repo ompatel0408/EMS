@@ -94,4 +94,8 @@ public class SendMail {
 			System.out.println("Updated not successfully!");
 		}
 	}
+	
+	public static void main(String[] args) {
+		SendMail.mailTokenEveryDay();
+	}
 }

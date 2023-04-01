@@ -1,61 +1,46 @@
 package com.controller;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
-import com.bean.EMSIssueNoteBean;
-import com.dao.EMSIssueNoteDao;
-
-
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
 
+import com.bean.ClientBean;
+import com.bean.EMSIssueNoteBean;
+import com.dao.ClientDao;
+import com.dao.EMSIssueNoteDao;
 
+/**
+ * Servlet implementation class EMSIssueNoteList
+ */
 public class EMSIssueNoteListServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-    
+private static EMSIssueNoteListServlet instance = null;
+	
+	public static EMSIssueNoteListServlet getInstance()
+	{
+		if(instance == null) {
+			instance = new EMSIssueNoteListServlet();
+		}
+		return instance;
+	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String issueId = request.getParameter("issueId");
-		String update = request.getParameter("update");
-		EMSIssueNoteDao EMSIssueNoteDao = new EMSIssueNoteDao();
-		if(update.equals("update")) {
-			System.out.println("do put");
-			doPut(request, response);
+		ArrayList<EMSIssueNoteBean> clients = new ArrayList<EMSIssueNoteBean>();
+		EMSIssueNoteDao  clientDao = EMSIssueNoteDao.getInstance();
+		clients = clientDao.getAllList();
+		for (EMSIssueNoteBean clientBean : clients) {
+			System.out.println(clientBean.getIssueId());
 		}
-		else if(!(issueId.equals("0"))){
-			System.out.println("do delete");
-			doDelete(request, response);
-		}
-		System.out.println("List");
+		request.setAttribute("issue", clients);
 		
-		
-		
-		ArrayList<EMSIssueNoteBean> issue = EMSIssueNoteDao.getAllIssues();
-		System.out.println(issue.size());
-		request.setAttribute("issue", issue);
-		request.getRequestDispatcher("EMSIssueList.jsp").forward(request, response);
-		
+		RequestDispatcher rd = request.getRequestDispatcher("EMSIssueList.jsp");
+		rd.forward(request, response);
 	}
-
-	
-	
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int issueId = Integer.parseInt(request.getParameter("issueId"));
-		String changeField = request.getParameter("changeField");
-		String newData = request.getParameter("newData");
-		EMSIssueNoteDao EMSIssueNoteDao = new EMSIssueNoteDao();
-		EMSIssueNoteDao.updateIssue(newData, changeField, issueId);
-	}
-	
-	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		int issueId = Integer.parseInt(req.getParameter("issueId"));
-		EMSIssueNoteDao EMSIssueNoteDao = new EMSIssueNoteDao();
-		EMSIssueNoteDao.deleteIssue(issueId);
+		doGet(request, response);
 	}
 
 }

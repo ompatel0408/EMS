@@ -151,7 +151,7 @@
 								<option selected="selected" data-select2-id="3">Select
 									option you want to update..</option>
 								<option value="ItemName">Item Name</option>
-								<option value="quantity">Quantaty</option>
+								<option value="quantity">Quantity</option>
 								<option value="delivaryDate">Delivery Date</option>
 							</select>
 
@@ -160,10 +160,10 @@
 								<input type="text" class="form-control" id="placeholderChange"
 									placeholder="Enter">
 							</div>
-							<div class="form-group" id="hide-date" style="display: none;">
-								<label for="" id="lableName1">Delivery Date</label> <input type="date"
-									class="form-control" id="placeholderChange1"
-									placeholder="Enter Delivery Date">
+							<div class="form-group" id="hide-are" style="display: none;">
+								<label for="placeholderChange" id="lableName" class="mt-2"></label>
+								<input type="text" class="form-control" id="placeholderChange"
+									placeholder="Enter">
 							</div>
 							<button type="submit" class="btn btn-primary mt-2 disabled"
 								id="input-update">Save changes</button>
@@ -192,7 +192,7 @@
 					<button type="button" class="btn btn-outline-light"
 						data-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-outline-light"
-						onclick="deleteItem()" data-dismiss="modal">Delete Item</button>
+						id="deleteClicked" data-dismiss="modal">Delete Item</button>
 				</div>
 			</div>
 		</div>

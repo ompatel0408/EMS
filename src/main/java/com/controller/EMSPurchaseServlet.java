@@ -99,6 +99,13 @@ public class EMSPurchaseServlet extends HttpServlet {
 		    response.setContentType("application/json");
 		    response.setCharacterEncoding("UTF-8");
 		    response.getWriter().write(json);   
+	    }else if(jsonObject.get("token").getAsString().equals("quotations")){
+	    	System.out.println("quoat");
+	    	String json = gson.toJson(EMSPurchaseDao.getInstance().getTotalQuotation(jsonObject.get("project").getAsString()));
+	    	System.out.println(json);
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("UTF-8");
+		    response.getWriter().write(json);   
 	    }else {
 	    	String json = gson.toJson(EMSPurchaseDao.getInstance().getVendorNameFromDatabase());
 		    response.setContentType("application/json");
@@ -108,4 +115,4 @@ public class EMSPurchaseServlet extends HttpServlet {
 	    }
 	}
 		
-	}
+}

@@ -51,21 +51,14 @@ public class EMSIssueNoteServlet extends HttpServlet {
 		}
 		String requestBody = sb.toString();
 
-		EMSStoreDao sd = EMSStoreDao.getInstance();
+		EMSIssueNoteDao sd = EMSIssueNoteDao.getInstance();
 
 		Gson gson = new Gson();
 		JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
 
 		String jsonType = jsonObject.getAsJsonObject().get("token").toString().replace("\"", "");
 		
-		if (jsonType.equals("Projects")) {
-			String json = gson.toJson(sd.getProjects());
-			System.out.println(json);
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(json);
-		}
-		else if(jsonType.equals("grade"))
+		if(jsonType.equals("grade"))
 		{
 			String ctgry = jsonObject.getAsJsonObject().get("category").toString().replace("\"", "");
 			System.out.println("In grade : "+ ctgry);
@@ -81,6 +74,35 @@ public class EMSIssueNoteServlet extends HttpServlet {
 			String grd = jsonObject.getAsJsonObject().get("grade").toString().replace("\"", "");
 			
 			String json = gson.toJson(sd.getSizeFromDatabase(ctgry, grd));
+			System.out.println(json);
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(json);		
+		}else if(jsonType.equals("catagory"))
+		{
+			System.out.println("innnnn...");
+			String json = gson.toJson(sd.getCatagorytFromDatabase());
+			System.out.println(json);
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+//			response.getWriter().write(json);		
+		}
+		else if(jsonType.equals("Projects"))
+		{
+//			System.out.println(jsonObject.get("Projects").getAsString());
+	    	String json = gson.toJson(sd.getProjectId());
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("UTF-8");
+		    response.getWriter().write(json);
+		}
+		else if(jsonType.equals("quantity"))
+		{
+			System.out.println("in,,,,,,,");
+			String ctgry = jsonObject.getAsJsonObject().get("catagory").toString().replace("\"", "");
+			String grd = jsonObject.getAsJsonObject().get("grade").toString().replace("\"", "");
+			String size = jsonObject.getAsJsonObject().get("size").toString().replace("\"", "");
+			
+			String json = gson.toJson(sd.getQuantityFromDatabase(ctgry, grd,size));
 			System.out.println(json);
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");

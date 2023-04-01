@@ -10,7 +10,7 @@ public class ProjectServices {
 		pId = new ProjectDao().getProjectId();
 		pId++;
 		System.out.println(pId);
-		projectId = clientName.concat("_Pro_").concat(Integer.toString(pId)); 
+		projectId = clientName.trim().concat("_Pro_").concat(Integer.toString(pId)); 
 		return projectId;
 		
 	}

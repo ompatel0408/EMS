@@ -1,237 +1,372 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@page import="com.bean.EMSIssueNoteBean"%>
-<%@page import="java.util.ArrayList"%>
-
+<%@page import="java.util.ArrayList,com.bean.ClientBean"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EMS</title>
-<link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
-
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 </head>
-<%
-ArrayList<EMSIssueNoteBean> issues = (ArrayList<EMSIssueNoteBean>) request.getAttribute("issue");
+<style>
+#myModal {
+	padding-top: 0px;
+	margin-top: 0;
+	overflow: hidden;
+	height: 1100px;
+}
+</style>
 
-int srNo=1;
-%>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini">
+	<%
+	ArrayList<EMSIssueNoteBean> issue = (ArrayList<EMSIssueNoteBean>) request.getAttribute("issue");
+	%>
+	<jsp:include page="Header.jsp"></jsp:include>
+	<jsp:include page="LeftSideBar.jsp"></jsp:include>
 	<div class="wrapper">
+		<div class="content-wrapper">
+			<section class="content" style="margin-left: 90%;">
+				<div class="modal fade" id="myModal">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header ">
+								<h4 class="modal-title">Add Client Details</h4>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form action="ClientServlet?clientId=0" method="post">
+									<div class="form-group">
+										<label for="exampleInputPassword1">Client Name</label> <input
+											type="text" class="form-control" id="exampleInputPassword1"
+											placeholder="Enter Client Name" name="clientName">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">GST</label> <input
+											type="text" class="form-control" id="exampleInputPassword1"
+											placeholder="Enter GST" name="gst">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Phone</label> <input
+											type="number" class="form-control" id="exampleInputPassword1"
+											placeholder="Enter Phone Number" name="phone">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Email</label> <input
+											type="text" class="form-control" id="exampleInputPassword1"
+											placeholder="Password" name="email">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">PAN No</label> <input
+											type="text" class="form-control" id="exampleInputPassword1"
+											placeholder="Enter PAN No" name="pan">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Address</label> <input
+											type="text" class="form-control" id="exampleInputPassword1"
+											placeholder="Enter Address" name="address">
+									</div>
+									<div class="modal-footer justify-content-between">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary">Save
+											changes</button>
+									</div>
+								</form>
 
-		<!-- Preloader -->
+							</div>
 
-		<jsp:include page="Header.jsp"></jsp:include>
-		<jsp:include page="LeftSideBar.jsp"></jsp:include>
-
-
-		<!-- Content Wrapper. Contains page content -->
-		<section class="content-wrapper">
-			<!-- Default box -->
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- Content Header (Page header) -->
 			<div class="card m-2">
 				<div class="card-header">
-					<h3 class="card-title">Issue</h3>
-					
+					<h3 class="card-title mt-2"> <b>Clients </b></h3>
+					<button type="button" class="btn btn-primary planButton float-right"
+						data-bs-toggle="modal" data-bs-target="#myModal">Add
+						Client</button>
 				</div>
 				<div class="card-body p-0">
 					<table class="table table-striped projects">
 						<thead>
 							<tr>
 								<th style="width: 2%">Sr.No</th>
-								<th style="width: 10%">Project Id</th>
-								<th style="width: 10%">Person Name</th>
-								<th style="width: 10%">Contractor Name</th>
-								<th style="width: 10%">Category</th>
-								<th style="width: 10%">Grade</th>
-								<th style="width: 10%">Size</th>
-								<th style="width: 8%">Quantity</th>
-								<th style="width: 7%">UOM</th>
-								<th style="width: 13%">Issue Date</th>
+								<th style="width: 10%">ProjectId</th>
+								<th style="width: 13%">Catagory</th>
+								<th style="width: 13%">Grade</th>
+								<th style="width: 13%">size</th>
+								<th style="width: 10%">Quantity</th>
+								<th style="width: 10%">UOM</th>
+								<th style="width: 13%">Person Name</th>
+								<th style="width: 13%">Contractor Name</th>
 							</tr>
 						</thead>
 						<tbody>
 
 							<%
-							for (EMSIssueNoteBean ib : issues) {
+							int temp = 0;
+							for (EMSIssueNoteBean c : issue) {
 							%>
 							<tr>
-
-								<td style="width: 2%"><%=srNo++%></td>
-								<td style="width: 10%"><%=ib.getPid()%></td>
-								<td style="width: 1%"><%=ib.getIssuePerson()%></td>
-								<td><%=ib.getContractor()%></td>
-								<td><%=ib.getCatagory()%></td>
-								<td><%=ib.getGrade()%></td>
-								<td><%=ib.getSize()%></td>
-								<td><%=ib.getQuantity()%></td>
-								<td><%=ib.getUom()%></td>
-								<td><%=ib.getIssueDate()%></td>
+								<td><%=++temp%></td>
+								<td><a><%=c.getPid()%></a> <br></td>
+								<td><a><%=c.getCatagory()%> </a> <br></td>
+								<td><a><%=c.getGrade()%></a> <br></td>
+								<td><a><%=c.getSize()%></a> <br></td>
+								<td><a><%=c.getQuantity()%></a> <br></td>
+								<td><a><%=c.getUom()%></a> <br></td>
+								<td><a><%=c.getIssuePerson()%></a> <br></td>
+								<td><a><%=c.getContractor()%></a> <br></td>
 								<td class="project-actions text-right">
-									<button type="button" class="btn btn-success btn-sm"
+									<button type="button" class="btn btn-info btn-sm"
 										data-toggle="modal"
-										data-target="#modal-projectEdit<%=ib.getIssueId()%>">
-										<i class="fas fa-pencil-alt"></i> 
+										data-target="#modal-projectDetails<%=c.getIssueId()%>">View
 									</button>
+									<button type="button" class="btn btn-success btn-sm"
+										data-toggle="modal" onclick="dropDown(<%=c.getIssueId()%>)"
+										data-target="#updateClientModal<%=c.getIssueId()%>">
+										<i class="fas fa-pencil-alt"></i> Edit
+									</button> <!-- updateModalCode -->
 									<div class="modal fade"
-										id="modal-projectEdit<%=ib.getIssueId()%>">
+										id="updateClientModal<%=c.getIssueId()%>">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h4 class="modal-title">Issues</h4>
+													<h4 class="modal-title">Client Details</h4>
 													<button type="button" class="close" data-dismiss="modal"
 														aria-label="Close">
 														<span aria-hidden="true">&times;</span>
 													</button>
 												</div>
-
 												<div class="col-m-5">
 													<div class="form-group p-3">
-													
 														<label>Select </label>
-														<p id="select-error<%=ib.getIssueId()%>"></p>
-														<form
-															action="EMSIssueNoteListServlet">
-															
-															<select
+														<p id="select-error"></p>
+														<form action="ClientServlet" method="GET">
+															<input type="hidden" name="clientId"
+																value=<%=c.getIssueId()%>> <select
+																name="editedColumn"
 																class="form-control select2 select2-hidden-accessible"
-																name="changeField" style="width: 100%;"
-																data-select2-id="1" tabindex="-1" aria-hidden="true"
-																id="input-form<%=ib.getIssueId()%>" onchange="dropDown('<%=ib.getIssueId()%>')">
-																<option selected="selected" data-select2-id="3">Select
-																	option you want to update..</option>
-																	
-																<option>ContractorName</option>
-																 <option>Quantity</option> 
-																 <option>PersonName</option>
+																style="width: 100%;" id="input-form<%=c.getIssueId()%>">
+																<option selected="selected" data-select2-id="3">Please,
+																	Select any one optoins.</option>
+																<option value="CLIENTNAME">CLIENTNAME</option>
+																<option value="GSTNO">GSTNO</option>
+																<option value="PHONENUMBER">PHONENUMBER</option>
+																<option value="EMAIL">EMAIL</option>
+																<option value="PANNO">PANNO</option>
+																<option value="ADDRESS">ADDRESS</option>
 															</select>
-															<div class="form-group" id="hide-text<%=ib.getIssueId()%>"
+															<div class="form-group"
+																id="hide-text<%=c.getIssueId()%>"
 																style="display: none;">
-																<label for="placeholderChange" id="lableName<%=ib.getIssueId()%>"
-																	class="mt-2"></label> <input type="text"
-																	class="form-control" name="newData"
-																	id="placeholderChange<%=ib.getIssueId()%>">
+																<label for="placeholderChange"
+																	id="lableName<%=c.getIssueId()%>" class="mt-2"></label>
+																<input type="text" class="form-control"
+																	id="placeholderChange<%=c.getIssueId()%>"
+																	name="changes">
 															</div>
-															<input type="hidden" name="issueId" value="<%=ib.getIssueId()%>">
-															<input type="hidden" name="update" value="update">
+															<input type="hidden" value="update" name="update">
 															<button type="submit"
-																class="btn btn-primary mt-2 disabled" id="input-update<%=ib.getIssueId()%>">Save
+																class="btn btn-primary mt-2 disabled"
+																id="input-update<%=c.getIssueId()%>">Save
 																changes</button>
 														</form>
 													</div>
 												</div>
-
 												<!-- /.modal-project show -->
 											</div>
 										</div>
-									</div>
-
+									</div> <!-- Modal View Code -->
+									<div class="modal fade"
+										id="modal-projectDetails<%=c.getIssueId()%>">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h4 class="modal-title">Project Details</h4>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">×</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<%
+													for (int j = 0; j < issue.size(); j++) {
+														if (issue.get(j).getIssueId() == c.getIssueId()) {
+													%>
+													<div class="form-group">
+														<label for="exampleInputEmail1 d-flex flex-direction-column align-items-flex-start">Client Id</label>
+														<p class=""><%=issue.get(j).getIssueId()%></p>
+													</div>
+													<div class="form-group">
+														<label for="exampleInputEmail1">Client Name</label>
+														<p><%=issue.get(j).getContractor()%></p>
+													</div>
+													<div class="form-group">
+														<label for="exampleInputEmail1">Address</label>
+														<p><%=issue.get(j).getIssuePerson()%></p>
+													</div>
+													<div class="form-group">
+														<label for="exampleInputEmail1">Email</label>
+														<p><%=issue.get(j).getCatagory()%></p>
+													</div>
+													<div class="form-group">
+														<label for="exampleInputEmail1">GST NUMBER</label>
+														<p><%=issue.get(j).getGrade()%></p>
+													</div>
+													<div class="form-group">
+														<label for="exampleInputEmail1">PAN NUMBER</label>
+														<p><%=issue.get(j).getSize()%></p>
+													</div>
+													<div class="form-group">
+														<label for="exampleInputEmail1">ADDRESS</label>
+														<p><%=issue.get(j).getQuantity()%></p>
+													</div>
+													<%
+													}
+													}
+													%>
+													</form>
+												</div>
+											</div>
+											<!-- /.modal-project show -->
+										</div>
+									</div> <!-- End View Modal -->
 									<button type="button" class="btn btn-danger btn-sm"
 										data-toggle="modal"
-										data-target="#modal-projectDelete<%=ib.getIssueId()%>">
-										<i class="fas fa-trash"></i> 
+										data-target="#modal-projectDelete<%=c.getIssueId()%>">
+										<i class="fas fa-trash"></i> Delete
 									</button>
 									<div class="modal fade"
-										id="modal-projectDelete<%=ib.getIssueId()%>">
+										id="modal-projectDelete<%=c.getIssueId()%>">
 										<div class="modal-dialog">
 											<div class="modal-content bg-danger">
 												<div class="modal-header">
-													<h4 class="modal-title">Delete Project</h4>
+													<h4 class="modal-title">Delete Client</h4>
 													<button type="button" class="close" data-dismiss="modal"
 														aria-label="Close">
 														<span aria-hidden="true"></span>
 													</button>
 												</div>
 												<div class="modal-body">
-													<p>Are you sure you want to delete this project?</p>
+													<p>Are you sure you want to delete this Client?</p>
 												</div>
 												<div class="modal-footer justify-content-between">
 													<button type="button" class="btn btn-outline-light"
 														data-dismiss="modal">Close</button>
-													<form action="EMSIssueNoteListServlet" method="get">
-                                                                        <input type="hidden" name="issueId"
-                                                                            value=<%=ib.getIssueId()%>>
-                                                                        <input type="hidden" name="update"
-                                                                            value="notupdate">
-                                                                        <button type="submit"
-                                                                            class="btn btn-outline-light">Delete
-                                                                            Offer</button>
-                                                                    </form>
+													<form action="ClientServlet" method="get">
+														<input type="hidden" name="clientId"
+															value=<%=c.getIssueId()%>> <input type="hidden"
+															name="update" value="notupdate">
+														<button type="submit" value="DELETE"
+															class="btn btn-outline-light">Delete Client</button>
+													</form>
 												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="modal fade modal-xl" id="updateModal"
+										data-bs-backdrop="static" data-bs-keyboard="false"
+										tabindex="-1" aria-labelledby="staticBackdropLabel"
+										aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header ">
+													<h1 class="modal-title fs-5" id="staticBackdropLabel">Delete
+														Client</h1>
+													<button type="button" class="btn-close"
+														data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+
+													<form>
+														<input type="button" class="btn btn-warning"
+															value="Are You Sure">
+													</form>
+												</div>
+
 											</div>
 										</div>
 									</div>
 								</td>
-
-
-								<!-- Project Edit model -->
-
-
-
+								<%
+								}
+								%>
 							</tr>
-							<%
-							}
-							%>
 						</tbody>
 					</table>
 				</div>
 				<!-- /.card-body -->
 			</div>
-			<!-- /.cardÂ -->
-			<!-- Add Projext model -->
-			
 
-		</section>
-		<footer class="main-footer">
-			<strong>Copyright &copy; 2023 <a href="#">EMS Project
-					Private Limited</a>.
-			</strong> All rights reserved.
-		</footer>
-
-		<!-- Control Sidebar -->
-		<aside class="control-sidebar control-sidebar-dark">
-			<!-- Control sidebar content goes here -->
-		</aside>
-		<!-- /.control-sidebar -->
+		</div>
 	</div>
+
 	<script>
-	
-		function dropDown (projectId){
-        	console.log(typeof(projectId))
+		var newId;
+		function dropDown(clientId){
+			console.log(clientId.toString());
+			newId = clientId.toString();
+			console.log(newId);
 		
-            let value = document.getElementById("input-form"+projectId).value;
-            console.log(value);
+		document.getElementById("input-form"+newId).addEventListener("change", () => {
+            let value = document.getElementById("input-form"+newId).value;
             if (value == "Select option you want to update..") {
-                document.getElementById("input-form"+projectId).style.borderColor = "red";
-                document.getElementById("select-error"+projectId).innerText = "Please, Select any one optoins.";
-                document.getElementById("select-error"+projectId).style.color = "red";
-                document.getElementById("hide-text"+projectId).style.display = "none";
-                document.querySelector("#input-update"+projectId).classList.add("disabled");
+                document.getElementById("input-form"+newId).style.borderColor = "red";
+                document.getElementById("select-error"+newId).innerText = "Please, Select any one optoins.";
+                document.getElementById("select-error"+newId).style.color = "red";
+                document.getElementById("hide-text"+newId).style.display = "none";
+                document.querySelector("#input-update"+newId).classList.add("disabled");
             }
             else {
-                document.querySelector("#input-update"+projectId).classList.remove("disabled");
-                document.getElementById("hide-text"+projectId).style.display = "block";
-                document.getElementById("lableName"+projectId).innerHTML = document.getElementById("input-form"+projectId).value;
-                document.getElementById("placeholderChange"+projectId).setAttribute("placeholder", "Enter " + value);
-                document.getElementById("input-form"+projectId).style.borderColor = "blue";
-                document.getElementById("select-error"+projectId).innerText = "";
-                document.getElementById("select-error"+projectId).style.color = "red";
+                document.querySelector("#input-update"+newId).classList.remove("disabled");
+                document.getElementById("hide-text"+newId).style.display = "block";
+                document.getElementById("lableName"+newId).innerHTML = document.getElementById("input-form"+newId).value;
+                document.getElementById("placeholderChange"+newId).setAttribute("placeholder", "Enter " + value );
+                document.getElementById("input-form"+newId).style.borderColor = "blue";
+                document.getElementById("select-error"+newId).innerText = "";
+                document.getElementById("select-error"+newId).style.color = "red";
             }
-       
+        })
 		}
     </script>
-	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+	<!-- jQuery -->
 	<script src="assets/plugins/jquery/jquery.min.js"></script>
-	<script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+	<!-- Bootstrap 4 -->
 	<script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- Select2 -->
+	<script src="assets/plugins/select2/js/select2.full.min.js"></script>
+	<!-- Bootstrap4 Duallistbox -->
+	<!-- InputMask -->
+	<script src="assets/plugins/moment/moment.min.js"></script>
+	<script src="assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+	<!-- date-range-picker -->
 	<script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+	<!-- bootstrap color picker -->
+	<script
+		src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+	<!-- Tempusdominus Bootstrap 4 -->
 	<script
 		src="assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-	<script src="assets/dist/js/adminlte.js"></script>
-	<script src="assets/plugins/moment/moment.min.js"></script>
-	<script src="./custom/custom.js"></script>
-
+	<!-- Bootstrap Switch -->
+	<script
+		src="assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+	<!-- BS-Stepper -->
+	<script src="assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+	<!-- dropzonejs -->
+	<script src="assets/plugins/dropzone/min/dropzone.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="assets/dist/js/adminlte.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="assets/dist/js/demo.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

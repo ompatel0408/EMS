@@ -34,7 +34,6 @@ int srNo1=1;
                         <thead>
                             <tr>
                                 <th style="width: 5%">Sr.No</th>
-                                <th style="width: 17%">Project</th>
                                 <th style="width: 17%">Category</th>
                                 <th style="width: 17%">Grade</th>
                                 <th style="width: 17%">Size</th>
@@ -48,7 +47,6 @@ int srNo1=1;
 								%>
                             <tr>
                                 <td><%= srNo++%></td>
-                                <td><%=s.getProjectId() %></td>
                                 <td><%=s.getCategory() %><br></td>
                                 <td><%=s.getGrade() %><br></td>
                                 <td><%=s.getSize() %><br></td>

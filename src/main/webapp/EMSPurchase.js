@@ -1,4 +1,6 @@
-
+var givenQuote=0
+var totalAmountAppended=0
+document.getElementById('progressDescOfAvailable').innerHTML="Add Project and Items to see the Magic"
 window.onload = function getProjects1(){
 	let Data;
 	var xhr = new XMLHttpRequest();
@@ -40,7 +42,24 @@ function ProjectChange(){
     		appendVendors(Data)
   		}
 	}
-	xhr.send(JSON.stringify({token:"Vendors"}));	
+	xhr.send(JSON.stringify({token:"Vendors"}));
+	
+	
+	
+	
+	let xhr2 = new XMLHttpRequest();
+  xhr2.open('PUT', 'http://localhost:8080/EMS2/EMSPurchaseServlet',true);
+  xhr2.setRequestHeader('Content-type', 'application/json');
+  xhr2.onload = function() {
+    if (xhr2.readyState === XMLHttpRequest.DONE && xhr2.status === 200) {
+      Data = JSON.parse(xhr2.responseText);
+      console.log(JSON.stringify(Data));
+      givenQuote=Data
+      console.log(givenQuote-100)
+      document.getElementById('progressDesc').innerHTML="Your Quoatation of Given Project is: "+ (givenQuote-100)
+    }
+  };
+  xhr2.send(JSON.stringify({token:"quotations",project:document.getElementById('ProjectId1').value }));	
 }
 
 function appendVendors(projects){
@@ -254,7 +273,7 @@ document.getElementById("input-form").addEventListener("change", () => {
 })
 
 document.getElementById('ProjectId1').addEventListener('change', () => {
-
+		console.log('quoate')
         document.getElementById('ProjectId1').disabled = true;
         document.getElementById('category-id').disabled = false;
         document.getElementById('grade-id').disabled = false;
@@ -275,7 +294,7 @@ document.getElementById('ProjectId1').addEventListener('change', () => {
         document.getElementById('GST1').disabled = false;
         document.getElementById('GST2').disabled = false;
         document.getElementById('GST3').disabled = false;
-        document.querySelector('#add-store').classList.remove('disabled');
+        document.querySelector('#add-store').classList.remove('disabled');    
 });
 
 
@@ -329,6 +348,41 @@ function appendChildOfPurchase() {
                               </td>`;
             table.appendChild(newRow);
         }
+        totalAmountAppended+=parseFloat(document.getElementById('Totalamount-id').value)
+        console.log(totalAmountAppended)
+        
+        var progressBar = document.querySelector('.progress-bar');
+  		var progress = 0;  
+  		var exampleElement = document.getElementById('success');
+  		let percent=(totalAmountAppended*100)/givenQuote
+      		progress +=percent;
+      		console.log(progress)
+      		progressBar.style.width = progress + '%';
+      		progressBar.setAttribute('aria-valuenow', progress);
+    	if (progress >= 80 && progress < 85) {
+			console.log("Here")
+      		progressBar.style.backgroundColor = 'yellow';
+      		document.getElementById('profitAlert').innerHTML="You are Iching forward to make the loss"
+      		document.getElementById('profitAlert').style.color="white"
+      		exampleElement.classList.remove('bg-gradient-success');
+      		exampleElement.classList.add('bg-gradient-warning');
+    	}
+    	else if (progress >= 85 && progress < 100) {
+			console.log("Here")
+      		progressBar.style.backgroundColor = 'Red';
+      		document.getElementById('profitAlert').innerHTML="You are Iching forward to make the loss"
+      		document.getElementById('profitAlert').style.color="red"
+    	}
+    	else if(progress >= 100)
+    	{
+			progressBar.style.backgroundColor = 'Red';
+			document.getElementById('profitAlert').innerHTML="You are In totally loss"
+      		document.getElementById('profitAlert').style.color="white"
+      		exampleElement.classList.remove('bg-gradient-warning');
+      		exampleElement.classList.add('bg-danger');
+		}
+    	document.getElementById('totalNumber').innerHTML=progress+"%"
+    	document.getElementById('progressDescOfAvailable').innerHTML="So You Have now total : "+(parseFloat(givenQuote)-parseFloat(totalAmountAppended))+" Amount Left"
 }
 
 function submitForm(){
@@ -379,5 +433,3 @@ window.addEventListener("beforeunload", function (event) {
   document.cookie = "myCookie1=".concat(JSON.stringify(data));
   event.returnValue = "Are you sure you want to leave this page?"
 });
-
-

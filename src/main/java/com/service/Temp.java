@@ -1,5 +1,3 @@
-package com.controller;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -82,8 +80,7 @@ public class EMSStoreServlet extends HttpServlet {
 
 		String jsonType = jsonObject.getAsJsonObject().get("token").toString().replace("\"", "");
 		
-		
-		 if(jsonType.equals("grade"))
+		if(jsonType.equals("grade"))
 		{
 			String ctgry = jsonObject.getAsJsonObject().get("category").toString().replace("\"", "");
 			System.out.println("In grade : "+ ctgry);
@@ -97,7 +94,6 @@ public class EMSStoreServlet extends HttpServlet {
 		{
 			String ctgry = jsonObject.getAsJsonObject().get("category").toString().replace("\"", "");
 			String grd = jsonObject.getAsJsonObject().get("grade").toString().replace("\"", "");
-			
 			String json = gson.toJson(sd.getSizeFromDatabase(ctgry, grd));
 			System.out.println(json);
 			response.setContentType("application/json");

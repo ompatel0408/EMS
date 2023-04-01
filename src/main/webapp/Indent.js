@@ -69,14 +69,12 @@ function getGrade(){
 	xhr.send(JSON.stringify(data));
 }
 function getItemNames(){
-	//console.log("gg");
-	//alert('called this time!')
 	var xhr = new XMLHttpRequest();
 	xhr.open('PUT', 'http://localhost:8080/EMS2/IndentServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
-		gradeData = JSON.parse(xhr.responseText);
+			gradeData = JSON.parse(xhr.responseText);
 			appendItemName(gradeData);
 		}
 	}

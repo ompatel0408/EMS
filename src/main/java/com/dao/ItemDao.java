@@ -158,7 +158,7 @@ public class ItemDao {
 
 	public ArrayList<String> getItemNames(String projectId) {
 		
-		String selectQuery = "select ItemName from projects P JOIN Items I ON P.quotationId = I.QuotationId WHERE ProjectId = ?";
+		String selectQuery = "select ItemName from Items I JOIN projects P ON I.quotationId = p.QuotationId WHERE ProjectId = ?";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<String> a = new ArrayList<String>();	
 		
@@ -168,8 +168,8 @@ public class ItemDao {
 				PreparedStatement pstmt = conn.prepareStatement(selectQuery);
 				pstmt.setString(1, projectId);
 				ResultSet rs = pstmt.executeQuery();
-				
 				while(rs.next()) {
+					System.out.println(rs.getString(1));
 					String name = rs.getString(1);
 					a.add(name);
 				}

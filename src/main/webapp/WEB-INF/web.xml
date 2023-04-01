@@ -268,5 +268,25 @@
 		<servlet-name>EMSIssueNoteListServlet</servlet-name>
 		<url-pattern>/EMSIssueNoteListServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSDrawingServlet</servlet-name>
+		<servlet-class>com.controller.EMSDrawingServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSDrawingServlet</servlet-name>
+		<url-pattern>/EMSDrawingServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSVendorsServlet</servlet-name>
+		<servlet-class>com.controller.EMSVendorsServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSVendorsServlet</servlet-name>
+		<url-pattern>/EMSVendorsServlet</url-pattern>
+	</servlet-mapping>
+	
+	
 
 </web-app>

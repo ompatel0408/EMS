@@ -63,15 +63,7 @@ document.getElementById("input-form").addEventListener("change", () => {
 	}
 })
 
-document.getElementById('ProjectId1').addEventListener('change', () => {
 
-	document.getElementById('ProjectId1').disabled = true;
-	document.getElementById('category-id').disabled = false;
-	document.getElementById('grade-id').disabled = false;
-	document.getElementById('size-id').disabled = false;
-	document.getElementById('quantaty-id').disabled = false;
-	document.querySelector('#add-store').classList.remove('disabled');
-});
 
 function submitForm(event) {
 	event.preventDefault();
@@ -82,7 +74,6 @@ function submitForm(event) {
 
 	var json =
 	{
-		ProjectId: document.getElementById('ProjectId1').value,
 		category: document.getElementById('category-id').value,
 		grade: document.getElementById('grade-id').value,
 		size: document.getElementById('size-id').value,
@@ -101,7 +92,7 @@ function appendFunc() {
 		var newRow = document.createElement("tr");
 		newRow.innerHTML =
 			`<td id="${i + 1}">${i + 1}</td>
-             <td><a id="ProjectId-${i + 1}">${data[i].ProjectId}</a> <br></td>
+   
              <td><a id="category-${i + 1}">${data[i].category}</a> <br></td>
              <td><a id="grade-${i + 1}"> ${data[i].grade} </a> <br></td>
              <td><a id="size-${i + 1}"> ${data[i].size} </a> <br></td>
@@ -126,7 +117,7 @@ document.getElementById("deleteClicked").addEventListener("click", () => {
 	appendFunc();
 });
 
-let editValue = "";
+/*let editValue = "";
 function editFinction(editId) {
 	console.log(editId);
 	editValue = editId;
@@ -159,7 +150,7 @@ function updateField(event) {
 	console.log(data)
 	appendFunc();
 }
-
+*/
 function XHRRequestForStore() {
 	var xhr = new XMLHttpRequest();
 
@@ -181,19 +172,16 @@ function XHRRequestForStore() {
 	console.log(JSON.stringify(data));
 	document.getElementById("MyTable").innerHTML = "";
 	data = []
-
-	document.getElementById('ProjectId1').disabled = false;
 	document.getElementById('category-id').disabled = true;
 	document.getElementById('grade-id').disabled = true;
 	document.getElementById('size-id').disabled = true;
 	document.getElementById('quantaty-id').disabled = true;
-	document.querySelector('#add-store').classList.add('disabled');
 	document.querySelector('#processTo').classList.add('disabled');
 
 }
 
 
-window.onload = function getProjects() {
+/*window.onload = function getProjects() {
 	let dataText;
 	var xhr = new XMLHttpRequest();
 	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSStoreServlet', true);
@@ -220,9 +208,9 @@ function appendProjects(projects) {
 		createdAt.innerHTML = projects[i];
 		projectsSelect.appendChild(createdAt);
 	}
-}
+}*/
 
-document.getElementById("ProjectId1").addEventListener("blur", () => {
+window.onload = () => {
 	console.log("in blur of catagory ");
 	var categoryData;
 	var xhr = new XMLHttpRequest();
@@ -236,7 +224,7 @@ document.getElementById("ProjectId1").addEventListener("blur", () => {
 		}
 	}
 	xhr.send();
-});
+}
 
 function appendCategory(dataCategory) {
 	console.log(dataCategory);

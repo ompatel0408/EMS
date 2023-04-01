@@ -3,87 +3,8 @@ var data = [];
 var search = [];
 var percent;
 
-document.getElementById("input-form").addEventListener("change", () => {
 
-            let value = document.getElementById("input-form").value;
-            console.log(value);
-            if (value == "Select option you want to update..") {
-                document.getElementById("input-form").style.borderColor = "red";
-                document.getElementById("select-error").innerText = "Please, Select any one optoins.";
-                document.getElementById("select-error").style.color = "red";
-                document.getElementById("hide-text").style.display = "none";
-                document.querySelector("#input-update").classList.add("disabled");
-                document.getElementById("category-id-model").style.display = "none";
-                document.getElementById("grade-id-model").style.display = "none";
-                document.getElementById("size-id-model").style.display = "none";
-                document.getElementById("hide-date").style.display = "none";
-            }
-            else if (value == "category") {
-                document.querySelector("#input-update").classList.remove("disabled");
-                document.getElementById("category-id-model").style.display = "block";
-                document.getElementById("grade-id-model").style.display = "block";
-                document.getElementById("size-id-model").style.display = "block";
-                document.getElementById("hide-text").style.display = "none";
-                document.getElementById("lableName1").innerHTML = document.getElementById("input-form").value;
-                document.getElementById("placeholderChange1").setAttribute("placeholder", "Enter New value to that element");
-                document.getElementById("input-form").style.borderColor = "blue";
-                document.getElementById("select-error").innerText = "";
-                document.getElementById("select-error").style.color = "red";
-                document.getElementById("hide-date").style.display = "none";
-            }
-            else if (value == "grade") {
-                document.querySelector("#input-update").classList.remove("disabled");
-                document.getElementById("category-id-model").style.display = "none";
-                document.getElementById("grade-id-model").style.display = "block";
-                document.getElementById("size-id-model").style.display = "block";
-                document.getElementById("hide-text").style.display = "none";
-                document.getElementById("lableName1").innerHTML = document.getElementById("input-form").value;
-                document.getElementById("placeholderChange1").setAttribute("placeholder", "Enter New value to that element");
-                document.getElementById("input-form").style.borderColor = "blue";
-                document.getElementById("select-error").innerText = "";
-                document.getElementById("select-error").style.color = "red";
-                document.getElementById("hide-date").style.display = "none";
-            }
-            else if (value == "size") {
-                document.querySelector("#input-update").classList.remove("disabled");
-                document.getElementById("category-id-model").style.display = "none";
-                document.getElementById("grade-id-model").style.display = "none";
-                document.getElementById("size-id-model").style.display = "block";
-                document.getElementById("hide-text").style.display = "none";
-                document.getElementById("lableName1").innerHTML = document.getElementById("input-form").value;
-                document.getElementById("placeholderChange1").setAttribute("placeholder", "Enter New value to that element");
-                document.getElementById("input-form").style.borderColor = "blue";
-                document.getElementById("select-error").innerText = "";
-                document.getElementById("select-error").style.color = "red";
-                document.getElementById("hide-date").style.display = "none";
-            }
-            else if (value == "delivaryDate") {
-                document.querySelector("#input-update").classList.remove("disabled");
-                document.getElementById("hide-date").style.display = "block";
-                document.getElementById("hide-text").style.display = "none";
-                document.getElementById("lableName1").innerHTML = document.getElementById("input-form").value;
-                document.getElementById("placeholderChange1").setAttribute("placeholder", "Enter New value to that element");
-                document.getElementById("input-form").style.borderColor = "blue";
-                document.getElementById("select-error").innerText = "";
-                document.getElementById("select-error").style.color = "red";
-                document.getElementById("category-id-model").style.display = "none";
-                document.getElementById("grade-id-model").style.display = "none";
-                document.getElementById("size-id-model").style.display = "none";
-            }
-            else {
-                document.querySelector("#input-update").classList.remove("disabled");
-                document.getElementById("hide-text").style.display = "block";
-                document.getElementById("hide-date").style.display = "none";
-                document.getElementById("lableName").innerHTML = document.getElementById("input-form").value;
-                document.getElementById("placeholderChange").setAttribute("placeholder", "Enter New value to that element");
-                document.getElementById("input-form").style.borderColor = "blue";
-                document.getElementById("select-error").innerText = "";
-                document.getElementById("select-error").style.color = "red";
-                document.getElementById("category-id-model").style.display = "none";
-                document.getElementById("grade-id-model").style.display = "none";
-                document.getElementById("size-id-model").style.display = "none";
-            }
-        })
+        
 
 function submitForm(){
 	if (document.getElementById('MyTable').hasChildNodes) {
@@ -106,51 +27,33 @@ function submitForm(){
 	data.push(json)
 	search.push(json)
 	console.log(data)
-	
+	appendFunc();
+}
+
+function appendFunc() {
 	document.getElementById("MyTable").innerHTML = "";
 	var table = document.getElementById("MyTable");
 	for (var i = 0; i < data.length; i++) {
 		var newRow = document.createElement("tr");
-
-		newRow.innerHTML = `
-		
-			<tr>
-              	<td id="${i + 1}">${i + 1}</td>
-                <td><a id="OfferName${i + 1}"></a> <br></td>
-                <td><a id="catagory${i+1}"></a> <br></td>
-                <td><a id="grade${i+1}"></a> <br></td>
-                <td><a id="size${i+1}"></a> <br></td>
-                <td><a id="quantity${i+1}"></a> <br></td>
-                <td><a id="unit${i+1}"></a> <br></td>
-                <td><a id="waight${i+1}"></a> <br></td>
-                <td><a id="price${i+1}"></a> <br></td>
+		newRow.innerHTML =
+			`<td id="${i + 1}">${i + 1}</td>
+                <td><a id="OfferName${i + 1}">${data[i].OfferName}</a> <br></td>
+                <td><a id="catagory${i+1}">${data[i].catagory}</a> <br></td>
+                <td><a id="grade${i+1}">${data[i].grade}</a> <br></td>
+                <td><a id="size${i+1}">${data[i].size}</a> <br></td>
+                <td><a id="quantity${i+1}">${data[i].quantity}</a> <br></td>
+                <td><a id="unit${i+1}">${data[i].waight}</a> <br></td>
+                <td><a id="waight${i+1}">${data[i].unit}</a> <br></td>
+                <td><a id="price${i+1}">${data[i].price}</a> <br></td>
                 <td class="project-actions text-right">
-                      <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-editItem" id="Edit${i+1}">
+                      <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal-editItem" id="Edit${i+1}" onclick="editFinction(this.id)">
                               <i class="fas fa-pencil-alt"></i>
                        </button>
-                       <button type="button" class="btn btn-sm btn-danger toastrDefaultError" id="Delete${i+1}">
+                       <button type="button" class="btn btn-sm btn-danger toastrDefaultError" data-toggle="modal" data-target="#modal-itemDelete" onclick="deleteItem(this.id)" id="Delete${i+1}">
                                <i class="fas fa-trash"></i>
                        </button>
-                 </td>
-            </tr>
-    		`;
+                 </td>`;
 		table.appendChild(newRow);
-
-		document.getElementById(`OfferName${i + 1}`).innerHTML = data[i].OfferName;
-
-		document.getElementById(`catagory${i + 1}`).innerHTML = data[i].catagory;
-
-		document.getElementById(`grade${i + 1}`).innerHTML = data[i].grade;
-
-		document.getElementById(`size${i + 1}`).innerHTML = data[i].size;
-		
-		document.getElementById(`quantity${i + 1}`).innerHTML = data[i].quantity;
-
-		document.getElementById(`waight${i + 1}`).innerHTML = data[i].waight;
-		
-		document.getElementById(`unit${i + 1}`).innerHTML = data[i].unit;
-		
-		document.getElementById(`price${i + 1}`).innerHTML = data[i].price;
 	}
 }
 
@@ -165,7 +68,6 @@ function disableLogic(){
 	document.getElementById('price-id').disabled = false;
 	document.getElementById('profit-id').disabled = false;
 	document.querySelector('#add_Quatation').classList.remove('disabled');
-	console.log("ABC")
 	if(search.some(item => item.OfferName === document.getElementById('itemId').value)){
 		document.getElementById('profit-id').disabled = true;
 		document.getElementById('profit-id').value = search.filter(x => x.OfferName === document.getElementById('itemId').value)[0].percentage; 
@@ -182,8 +84,7 @@ function getXHRRequestToQuotationPerItemCatagory(){
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', 'http://localhost:8080/EMS2/EMSQuotationPerItemServlet',true);
 	xhr.onload = function() {
-  		if (xhr.status === 200) {
-			  
+  		if (xhr.status === 200) {	  
     		categoryData = JSON.parse(xhr.responseText);
 			appendCategory(categoryData);
   		}
@@ -235,6 +136,7 @@ function getXHRRequestToQuotationPerItemGrade(){
 function appendGrade(gradeData){
 	
 	console.log(gradeData);
+	
 	var gradeSelect = document.getElementById("gradeId");
 	console.log(gradeSelect)
 	gradeSelect.innerHTML = `<option value="select" selected>Select grade</option>`;
@@ -245,8 +147,6 @@ function appendGrade(gradeData){
 		createdAt.innerHTML = gradeData[i];
 		gradeSelect.appendChild(createdAt);
 	}
-	
-	
 }
 
 
@@ -296,9 +196,9 @@ function getXHRRequestToQuotationPerItemSize(){
 	var data = {grade: document.getElementById('gradeId').value,token:"grade"}
 	xhr.send(JSON.stringify(data));
 }
-
+var sizeArray;
 function appendSize(sizeData){
-	
+	sizeArray = sizeData;
 	console.log(sizeData);
 	var sizeSelect = document.getElementById("sizeId");
 	console.log(sizeSelect)
@@ -355,5 +255,107 @@ function XHRRequestForQuotationPerItem(){
 }
 
 
+var deleteValue = "";
+function deleteItem(deleteId) {
+	deleteValue = deleteId;
+}
 
+document.getElementById("deleteClicked").addEventListener("click", () => {
+	data.splice(((deleteValue.substring(6)) - 1), 1);
+	$('#modal-itemDelete').modal('hide');
+	appendFunc();
+});
+
+let editValue = "";
+function editFinction(editId) {
+	console.log(editId);
+	editValue = editId;
+	editValue = parseInt(editId.substring(4));
+	console.log(editValue);
+}
+
+function updateField() {
+	
+	console.log("edited id : " + editValue);
+	var fieldToChange = document.getElementById('input-form').value;
+
+	console.log("fieldToChange ", fieldToChange);
+
+	switch(fieldToChange)
+	{
+		case "unit" : data[editValue - 1].unit = document.getElementById("placeholderChange").value;
+		break;
+		
+		case "waight" : data[editValue - 1].waight = document.getElementById("placeholderChange1").value;
+		break;
+		
+		case "price" : data[editValue - 1].price = document.getElementById("placeholderChange1").value;
+		break;
+		
+		case "quantity" : data[editValue - 1].quantity = document.getElementById("placeholderChange1").value;
+		break;
+	}
+
+	console.log(data)
+	appendFunc();
+	$('#modal-editItem').modal('hide');
+}
+
+document.getElementById("input-form").addEventListener("change", () => {
+
+            let value = document.getElementById("input-form").value;
+            console.log(value);
+            if (value == "Select option you want to update..") {
+                document.getElementById("input-form").style.borderColor = "red";
+                document.getElementById("select-error").innerText = "Please, Select any one optoins.";
+                document.getElementById("select-error").style.color = "red";
+                document.getElementById("hide-text").style.display = "none";
+                document.querySelector("#input-update").classList.add("disabled");
+                document.getElementById("hide-num").style.display = "none";
+            }
+            else if(value == "size") {
+				console.log("in size");
+				
+				document.querySelector("#input-update").classList.remove("disabled");
+                document.getElementById("hide-text").style.display = "none";
+                document.getElementById("lableName1").innerHTML = document.getElementById("input-form").value;
+                document.getElementById("placeholderChange1").setAttribute("placeholder", "Enter New value to that element");
+                document.getElementById("input-form").style.borderColor = "blue";
+                document.getElementById("select-error").innerText = "";
+                document.getElementById("select-error").style.color = "red";
+                document.getElementById("hide-num").style.display = "none";
+                let sizeSelect = document.getElementById("size-id-select");
+				console.log(sizeSelect)
+				sizeSelect.innerHTML = `<option value="select" selected>Select size</option>`;
+				for(let i=0; i<sizeArray.length; i++)
+				{
+					let createdAt = document.createElement("option");
+					createdAt.value = sizeArray[i];
+					createdAt.innerHTML = sizeArray[i];
+					sizeSelect.appendChild(createdAt);
+				}
+			}
+            else if (value == "unit") {
+				console.log("in units");
+                document.querySelector("#input-update").classList.remove("disabled");
+                document.getElementById("hide-text").style.display = "block";
+                document.getElementById("lableName").innerHTML = document.getElementById("input-form").value;
+                document.getElementById("placeholderChange1").setAttribute("placeholder", "Enter New value to that element");
+                document.getElementById("input-form").style.borderColor = "blue";
+                document.getElementById("select-error").innerText = "";
+                document.getElementById("select-error").style.color = "red";
+                document.getElementById("hide-num").style.display = "none";
+            }
+            else {
+				console.log("in else");
+                document.querySelector("#input-update").classList.remove("disabled");
+                document.getElementById("hide-text").style.display = "none";
+                document.getElementById("hide-num").style.display = "block";
+                document.getElementById("lableName1").innerHTML = document.getElementById("input-form").value;
+                document.getElementById("placeholderChange").setAttribute("placeholder", "Enter New value to that element");
+                document.getElementById("input-form").style.borderColor = "blue";
+                document.getElementById("select-error").innerText = "";
+                document.getElementById("select-error").style.color = "red";
+            }
+        })
 

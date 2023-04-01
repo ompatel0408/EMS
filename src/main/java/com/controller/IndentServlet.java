@@ -97,9 +97,6 @@ public class IndentServlet extends HttpServlet {
 	    	String category = jsonObject.get("category").getAsString();
 	    	String grade = jsonObject.get("grade").getAsString();
 	    	String size = jsonObject.get("size").getAsString();
-//		    System.out.println(grade);
-//		    System.out.println(category);
-//		    System.out.println(size);
 		    System.out.println("Quantity");
 		    CatagoryGradeSizeDao cddao = CatagoryGradeSizeDao.getInstance();
 			int cgl = cddao.getQuantity(category,grade,size);
@@ -111,13 +108,20 @@ public class IndentServlet extends HttpServlet {
 	    }
 	    else if(jsonObject.get("token").getAsString().equals("indent")) {
 	    	System.out.println("in indent item name");
+	    	
 	    	String projectId = jsonObject.get("category").getAsString();
 	    	ArrayList<String> itemNames = new ArrayList<String>();
 	    	ItemDao id = ItemDao.getInstance();
 	    	itemNames = id.getItemNames(projectId);
-//	    	for(String name : itemNames) {
-//	    		System.out.println(name);
-//	    	}
+	    	
+	    	System.out.println("----->"+projectId);
+
+	    	System.out.println("----->"+itemNames.size());
+	    	
+	    	for(String x:itemNames) {
+	    		System.out.println(x);
+	    	}
+	    	
 	    	String json = gson.toJson(itemNames);
 		    response.setContentType("application/json");
 		    response.setCharacterEncoding("UTF-8");

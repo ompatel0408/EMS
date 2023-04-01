@@ -5,12 +5,58 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<style type="text/css">
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: red; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
 
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+</style>
 </head>
 <body>
          <jsp:include page="Header.jsp"></jsp:include>
 		<jsp:include page="LeftSideBar.jsp"></jsp:include>
 <div class="content-wrapper p-3">
+<div id="snackbar">Some text some message..</div>
             <div class="card card-default">
                 <div class="card-header">
                     <h2 class="card-title">Material Issue Card</h2>
@@ -62,10 +108,13 @@
                                     </select>
                                 </div>
                             </div>
+                            
                             <div class="col-md-6">
+                      
                                 <div class="form-group">
                                     <label>Quantity</label>
-                                    <input type="text" class="form-control" id="Quantity"
+                                    <span id="quant"></span>
+                                    <input type="number" class="form-control" id="Quantity"
                                         placeholder="Enter Quantaty" disabled>
                                 </div>
                                 
@@ -198,17 +247,17 @@
             <div class="modal-dialog">
                 <div class="modal-content bg-danger">
                     <div class="modal-header">
-                        <h4 class="modal-title">Delete IssueNote</h4>
+                        <h4 class="modal-title">Delete Project</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"></span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to delete this IssueNote?</p>
+                        <p>Are you sure you want to delete this project?</p>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-outline-light" id="deleteClicked">Delete IssueNote</button>
+                        <button type="button" class="btn btn-outline-light" id="deleteClicked">Delete Project</button>
                     </div>
                 </div>
             </div>

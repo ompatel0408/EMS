@@ -1,7 +1,6 @@
 var data = [];
 var search = [];
 var percent;
-
 document.getElementById("input-form").addEventListener("change", () => {
 
 	let value = document.getElementById("input-form").value;
@@ -236,7 +235,8 @@ document.getElementById("ProjectId1").addEventListener("change", () => {
 			appendCategory(JSON.parse(categoryData));
 		}
 	}
-	xhr.send();
+	var data1 = {token: 'catagory'}
+	xhr.send(JSON.stringify(data1));
 });
 
 function appendCategory(dataCategory) {
@@ -265,8 +265,8 @@ document.getElementById("categoryId").addEventListener("change", () => {
 			appendGrade(Data)
 		}
 	}
-	var data1 = { token: 'grade', category: document.getElementById("categoryId").value }
-	xhr.send(JSON.stringify(data1));
+	var data = { category: document.getElementById('categoryId').value,token:"grade"}
+	xhr.send(JSON.stringify(data));
 });
 
 function appendGrade(dataCategory) {
@@ -309,9 +309,65 @@ function appendSize(dataCategory) {
 		projectsSelect.appendChild(createdAt);
 	}
 }
-window.addEventListener("beforeunload", function (event) {
-  event.preventDefault();
-  document.cookie = "myCookie1=".concat(JSON.stringify(data));
-  event.returnValue = "Are you sure you want to leave this page?"
-});
+var quantity=0
+document.getElementById('sizeId').addEventListener('change',()=>{
+	console.log("for quanity");
+	let Data;
+	var xhr = new XMLHttpRequest();
+	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSIssueNoteServlet', true);
+	xhr.setRequestHeader('Content-type', 'application/json');
+	xhr.onload = function() {
+		if (xhr.status === 200) {
+			quantity = JSON.parse(xhr.responseText);
+			console.log(parseInt(quantity));
+			document.getElementById('quant').innerHTML="Available Quantity is: "+quantity
+			document.getElementById('quant').style.color='red'
+		}
+	}
+	var data1 = {catagory:document.getElementById('categoryId').value,grade:document.getElementById('gradeId').value,size:document.getElementById('sizeId').value,token:"quantity"}
+	xhr.send(JSON.stringify(data1));	
+})
+document.getElementById('Quantity').addEventListener('keydown',(event)=>{
+	console.log('quanityt')
+	if (parseInt(event.key) >= 0 && parseInt(event.key) <= 9) { // Check if the key pressed is a number
+    const newQuantity = parseInt(document.getElementById('Quantity').value + event.key);
+    if (newQuantity > quantity) {
+      event.preventDefault();
+      document.getElementById('Quantity').style.borderWidth='1px'
+      document.getElementById('Quantity').style.borderColor='red'
+      document.getElementById('Quantity').style.borderStyle='solid'
+      yourApiFunction();
+    }
+    else if (newQuantity <= quantity){
+		document.getElementById('Quantity').style.borderWidth='1px'
+      document.getElementById('Quantity').style.borderColor='grey'
+      document.getElementById('Quantity').style.borderStyle='solid'
+	}
+  }
+})
 
+function yourApiFunction(){
+  
+  //Do your api calls, the "error" variable is only set to demonstrate the use of the success/error message
+  let error = false;
+  
+  if(error){
+    showToast("Please Enter the Quantity less than or equal to "+quantity);
+  }else{
+      showToast("Please Enter the Quantity less than or equal to "+quantity);
+  }
+}
+
+function showToast(content = "Unknown error") { //You can change the default value
+  // Get the snackbar DIV
+  var x = document.getElementById("snackbar");
+  
+  //Change the text (not mandatory, but I think you might be willing to do it)
+  x.innerHTML = content;
+
+  // Add the "show" class to DIV
+  x.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
