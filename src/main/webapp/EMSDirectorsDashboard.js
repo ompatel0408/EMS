@@ -1,7 +1,7 @@
 window.onload = function(){
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://192.168.1.127:8080/EMS2/EMSDirectorsDashboardServlet',true);
+	xhr.open('GET', 'http://localhost:8080/EMS2/EMSDirectorsDashboardServlet',true);
 	xhr.onload = function() {
   		if (xhr.status === 200) {
     		Data = JSON.parse(xhr.responseText);
@@ -55,18 +55,16 @@ function appendLiveProjects(data){
 var userId;
 function getUserId(){
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'http://192.168.1.127:8080/EMS2/EMSDirectorsDashboardServlet',true);
+	xhr.open('POST', 'http://localhost:8080/EMS2/EMSDirectorsDashboardServlet',true);
 	xhr.onload = function() {
   		if (xhr.status == 200) {
     		userId = JSON.parse(xhr.responseText);
-    		console.log(userId)
+    		console.log("-------->"+userId)
     		getListSideBar(userId);
   		}
 	}
-	
 	xhr.send(JSON.stringify({Abcd:"ABCD"}));
 	//getProjectStatus();
-	
 }
 
 
@@ -75,12 +73,12 @@ function getUserId(){
 function getListSideBar(userId){
 	var gradeData;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', `http://192.168.1.127:8080/EMS2/ShowManagementAccess?change=2&userId=${userId}`,true);
+	xhr.open('GET', `http://localhost:8080/EMS2/ShowManagementAccess?change=2&userId=${userId}`,true);
     		xhr.setRequestHeader('Content-type', 'application/json');
     		xhr.onload = function() {
     	  		if (xhr.status == 200) {
     	    		gradeData = JSON.parse(xhr.responseText);
-    	    		console.log(gradeData)
+    	    		console.log(gradeData.accessManagement)
     	    		if(gradeData.accessManagement==1){
     	  				document.getElementById('accessmanagement-target-id').style.display='block';
     	  			}
@@ -102,12 +100,8 @@ function getListSideBar(userId){
     	    		//}
     	    		if(gradeData.addClient==1){
     	  				document.getElementById('addclient-target-id').style.display='block';
-    	  			}if(gradeData.showClient==1){
-    	  				document.getElementById('showclient-target-id').style.display='block';
     	  			}if(gradeData.addProject==1){
     	  				document.getElementById('addproject-target-id').style.display='block';
-    	  			}if(gradeData.showProject==1){
-    	  				document.getElementById('showproject-target-id').style.display='block';
     	  			}if(gradeData.addDrawing==1){
     	  				document.getElementById('adddrawing-target-id').style.display='block';
     	  			}if(gradeData.generatePo==1){
@@ -119,7 +113,7 @@ function getListSideBar(userId){
     	  			}if(gradeData.generateIndent==1){
     	  				document.getElementById('generateindent-target-id').style.display='block';
     	  			}if(gradeData.grnList==1){
-    	  				document.getElementById('grnList-target-id').style.display='block';
+    	  				document.getElementById('grnlist-target-id').style.display='block';
     	  			}if(gradeData.indentList==1){
     	  				document.getElementById('indentlist-target-id').style.display='block';
     	  			}if(gradeData.poList==1){
@@ -132,8 +126,6 @@ function getListSideBar(userId){
     	  				document.getElementById('orderlist-target-id').style.display='block';
     	  			}if(gradeData.showFinalQuotation==1){
     	  				document.getElementById('finalquotationlist-target-id').style.display='block';
-    	  			}if(gradeData.showOffer==1){
-    	  				document.getElementById('showoffer-target-id').style.display='block';
     	  			}if(gradeData.showQuotationPerOffer==1){
     	  				document.getElementById('quotationperofferlist-target-id').style.display='block';
     	  			}if(gradeData.addNewStock==1){
@@ -142,11 +134,9 @@ function getListSideBar(userId){
     	  				document.getElementById('stocklist-target-id').style.display='block';
     	  			}if(gradeData.addOffer==1){
     	  				document.getElementById('addoffer-target-id').style.display='block';
-    	  			}if(gradeData.addStock==1){
-    	  				document.getElementById('addstock-target-id').style.display='block';
     	  			}if(gradeData.addOrder==1){
     	  				document.getElementById('addorder-target-id').style.display='block';
-    	  			if(gradeData.issueNoteList==1){
+    	  			}if(gradeData.issueNoteList==1){
     	  				document.getElementById('issuenotelist-target-id').style.display='block';
     	  			}if(gradeData.generateIssueNote==1){
     	  				document.getElementById('generateissuenote-target-id').style.display='block';
@@ -157,7 +147,7 @@ function getListSideBar(userId){
     	  			}if(gradeData.addVendor==1){
     	  				document.getElementById('addvendor-target-id').style.display='block';
     	  			}if(gradeData.vendorList==1){
-    	  				document.getElementById('vendorList-target-id').style.display='block';
+    	  				document.getElementById('vendorlist-target-id').style.display='block';
     	  			}
     	  		}
     		}

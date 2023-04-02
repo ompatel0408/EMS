@@ -2,7 +2,7 @@ package com.bean;
 
 public class AccessBean 
 {
-	int userId,accessManagement,addProject,addOffer,quotationPerOffers,finalQuotation,generateIndent,indentList,approvalPending,generatePo,poList,generateGrn,grnList,addStock,addDrawing,drawingList,showProject,showClient,addClient,showOffer,issueNoteList,addGeneralStore,addVendor,projectStatus,vendorList,generateIssueNote,showQuotationPerOffer,addOrder,showFinalQuotation,orderList,addNewStock,stockList;
+	private int userId,accessManagement,addProject,addOffer,quotationPerOffers,finalQuotation,listOrder,generateIndent,indentList,generatePo,poList,generateGrn,grnList,addDrawing,drawingList,addClient,issueNoteList,listDrawing,addGeneralStore,addVendor,projectStatus,vendorList,generateIssueNote,showQuotationPerOffer,addOrder,showFinalQuotation,orderList,addNewStock,stockList;
 	public int getAddDrawing() {
 		return addDrawing;
 	}
@@ -10,6 +10,26 @@ public class AccessBean
 
 	public void setAddDrawing(int addDrawing) {
 		this.addDrawing = addDrawing;
+	}
+
+
+	public int getListOrder() {
+		return listOrder;
+	}
+
+
+	public void setListOrder(int listOrder) {
+		this.listOrder = listOrder;
+	}
+
+
+	public int getListDrawing() {
+		return listDrawing;
+	}
+
+
+	public void setListDrawing(int listDrawing) {
+		this.listDrawing = listDrawing;
 	}
 
 
@@ -179,14 +199,7 @@ public class AccessBean
 		this.indentList = indentList;
 	}
 
-	public int getApprovalPending() {
-		return approvalPending;
-	}
-
-	public void setApprovalPending(int approvalPending) {
-		this.approvalPending = approvalPending;
-	}
-
+	
 	public int getGeneratePo() {
 		return generatePo;
 	}
@@ -231,29 +244,9 @@ public class AccessBean
 
 
 
-	public int getAddStock() {
-		return addStock;
-	}
+	
 
-	public void setAddStock(int addStock) {
-		this.addStock = addStock;
-	}
-
-	public int getShowProject() {
-		return showProject;
-	}
-
-	public void setShowProject(int showProject) {
-		this.showProject = showProject;
-	}
-
-	public int getShowClient() {
-		return showClient;
-	}
-
-	public void setShowClient(int showClient) {
-		this.showClient = showClient;
-	}
+	
 
 	public int getAddClient() {
 		return addClient;
@@ -263,13 +256,7 @@ public class AccessBean
 		this.addClient = addClient;
 	}
 
-	public int getShowOffer() {
-		return showOffer;
-	}
-
-	public void setShowOffer(int showOffer) {
-		this.showOffer = showOffer;
-	}
+	
 
 	public int getShowQuotationPerOffer() {
 		return showQuotationPerOffer;

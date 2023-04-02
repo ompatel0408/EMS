@@ -376,7 +376,8 @@ public class QuotationPerItemDao {
 	
 	public ArrayList<QuotationPerItemBean> performSum() {
 		
-		String sumQuery = "select offerCode,sum(QuotationPerItemQuantity*TotalPricePerItem) from QuotationPerItem group by offerCode";
+		//String sumQuery = "select offerCode,sum(QuotationPerItemQuantity*TotalPricePerItem) from QuotationPerItem group by offerCode";
+		String sumQuery = "select offerCode,sum(TotalPricePerItem) from QuotationPerItem group by offerCode";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<QuotationPerItemBean> ar  = new ArrayList<QuotationPerItemBean>();
 		if(conn != null) {

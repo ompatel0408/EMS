@@ -27,23 +27,29 @@ public class AccessDao
 				access.setAccessManagement(rs.getInt("accessmanagement"));
 				access.setAddProject(rs.getInt("addproject"));
 				access.setAddOffer(rs.getInt("addoffer"));
-				access.setQuotationPerOffers(rs.getInt("quotationperoffer"));
-				access.setFinalQuotation(rs.getInt("finalquotation"));
-				access.setGenerateIndent(rs.getInt("generateindent"));
-				access.setIndentList(rs.getInt("indentlist"));
-				access.setApprovalPending(rs.getInt("approvalpending"));
-				access.setGeneratePo(rs.getInt("generatepo"));
-				access.setPoList(rs.getInt("polist"));
-				access.setGenerateGrn(rs.getInt("generategrn"));
-				access.setGrnList(rs.getInt("grnlist"));
-				
-				access.setShowProject(rs.getInt("showProject"));
-				access.setShowClient(rs.getInt("showclient"));
 				access.setAddClient(rs.getInt("addclient"));
-				access.setShowOffer(rs.getInt("showoffer"));
+				access.setAddGeneralStore(rs.getInt("addgeneralstore"));
+				access.setAddDrawing(rs.getInt("adddrawing"));
+				access.setAddNewStock(rs.getInt("addnewstock"));
+				access.setAddOrder(rs.getInt("addorder"));
+				access.setAddVendor(rs.getInt("addvendor"));
+				access.setFinalQuotation(rs.getInt("finalquotation"));
+				access.setGenerateGrn(rs.getInt("generategrn"));
+				access.setGenerateIndent(rs.getInt("generateindent"));
+				access.setGenerateIssueNote(rs.getInt("generateissuenote"));
+				access.setGeneratePo(rs.getInt("generatepo"));
+				access.setGrnList(rs.getInt("grnlist"));
+				access.setIndentList(rs.getInt("indentlist"));
+				access.setIssueNoteList(rs.getInt("issuenotelist"));
+				access.setProjectStatus(rs.getInt("projectstatus"));
+				access.setPoList(rs.getInt("polist"));
+				access.setQuotationPerOffers(rs.getInt("quotationperoffer"));	
 				access.setShowQuotationPerOffer(rs.getInt("showquotationperoffer"));
 				access.setShowFinalQuotation(rs.getInt("showfinalquotation"));
-				access.setAddStock(rs.getInt("stocklist"));
+				access.setStockList(rs.getInt("showstocklist"));
+				access.setVendorList(rs.getInt("listvendor"));
+				access.setListDrawing(rs.getInt("listdrawing"));
+				access.setListOrder(rs.getInt("listorder"));
 				
 				return access;
 			}
