@@ -44,7 +44,7 @@
 						<i class="nav-icon fas ion-person"></i>
 						<p>Client</p>
 				</a></li>
-				<li class="nav-item" id="accessmanagement-target-id" style="display: none;"><a href="#" class="nav-link"> <i
+				<li class="nav-item" id="accessmanagement-target-id" style="display: none;"><a href="AccessManagementServlet" class="nav-link"> <i
 						class="nav-icon fas fa-chart-pie"></i>
 						<p>
 							Access Management <i class="right fas fa-angle-left"></i>
@@ -157,11 +157,10 @@
 								<p>Indent list</p>
 						</a></li>
 					</ul></li>
-				<li class="nav-item" id="purchaseorder-target-id"
-					style="display: none;"><a href="#" class="nav-link"> <i
+				<li class="nav-item"><a href="#" class="nav-link"> <i
 						class="nav-icon fas fa-table"></i>
 						<p>
-							Purchase Orders <i class="fas fa-angle-left right"></i>
+							Purchase<i class="fas fa-angle-left right"></i>
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
@@ -176,7 +175,7 @@
 								<p>P.O List</p>
 						</a></li>
 					</ul></li>
-				<li class="nav-item" style="display: none;"><a href="#"
+				<li class="nav-item" ><a href="#"
 					class="nav-link"> <i class="nav-icon fas fa-copy"></i>
 						<p>
 							GRN <i class="fas fa-angle-left right"></i>
@@ -267,6 +266,18 @@
 							href="EMSVendorsServlet?vendorId=0&update=notupdate"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>list Vendor</p>
+						</a></li>
+					</ul></li>
+					<li class="nav-item"><a href="#" class="nav-link"> <!-- <i class="nav-icon fas fa-edit"></i> -->
+						<i class="nav-icon far fa-plus-square"></i>
+						<p>
+							Logs <i class="fas fa-angle-left right"></i>
+						</p>
+				</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item"><a href="EMSALLUpdateLogs.jsp" class="nav-link"> <i
+								class="far fa-circle nav-icon"></i>
+								<p>View Logs</p>
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <!-- <i class="nav-icon fas fa-edit"></i> -->

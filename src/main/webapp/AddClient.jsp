@@ -20,9 +20,9 @@
 	<%
 	ArrayList<ClientBean> clients = (ArrayList<ClientBean>) request.getAttribute("clients");
 	%>
+	<div class="wrapper">
 	<jsp:include page="Header.jsp"></jsp:include>
 	<jsp:include page="LeftSideBar.jsp"></jsp:include>
-	<div class="wrapper">
 		<div class="content-wrapper">
 			<section class="content" style="margin-left: 90%;">
 				<div class="modal fade" id="myModal">

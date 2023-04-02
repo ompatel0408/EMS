@@ -47,13 +47,13 @@ int srNo=1;
                                 <td>1</td>
                                 <td>
                                     <label class="form-check-label" for="defaultCheck1">
-                                        Show Client
+                                        Show Stock List
                                     </label>
                                 </td>
                                 <td>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="checkbox" <%=access.getShowClient()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getShowClient() %>,'ShowClient')" value="" id="defaultCheck1">
-                                    </div>
+                                        <input class="form-check-input" type="checkbox" <%=access.getStockList()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getStockList() %>,'ShowStockList')" value="" id="defaultCheck1">
+                                    </div> 
                                 </td>
                             </tr>
                             <tr>
@@ -73,12 +73,12 @@ int srNo=1;
                                 <td>3</td>
                                 <td>
                                     <label class="form-check-label" for="defaultCheck3">
-                                        Show Project
+                                        Add Drawing
                                     </label>
                                 </td>
                                 <td>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="checkbox" <%=access.getShowProject()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getShowProject() %>,'ShowProject')" value="" id="defaultCheck3">
+                                        <input class="form-check-input" type="checkbox" <%=access.getAddDrawing()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getAddDrawing() %>,'AddDrawing')" value="" id="defaultCheck3">
                                     </div>
                                 </td>
                             </tr>
@@ -99,13 +99,13 @@ int srNo=1;
                                 <td>5</td>
                                 <td>
                                     <label class="form-check-label" for="defaultCheck5">
-                                        Show Offer
+                                        List Drawing
                                     </label>
                                 </td>
                                 <td>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="checkbox" <%=access.getShowOffer()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getShowOffer() %>,'ShowOffer')" value="" id="defaultCheck5">
-                                    </div>
+                                        <input class="form-check-input" type="checkbox" <%=access.getListDrawing()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getListDrawing() %>,'ListDrawing')" value="" id="defaultCheck5">
+                                    </div> 
                                 </td>
                             </tr>
                             <tr>
@@ -182,7 +182,7 @@ int srNo=1;
                                 </td>
                                 <td>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="checkbox" <%=access.getIndentList()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getShowClient() %>,'IndentList')" value="" id="defaultCheck11">
+                                        <input class="form-check-input" type="checkbox" <%=access.getIndentList()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getIndentList()%>,'IndentList')" value="" id="defaultCheck11">
                                     </div>
                                 </td>
                             </tr>
@@ -254,42 +254,120 @@ int srNo=1;
                             <tr>
                                 <td>17</td>
                                 <td>
-                                    <label class="form-check-label" for="defaultCheck17">
-                                        Add Sell Items 
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Add Order
                                     </label>
                                 </td>
                                 <td>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="checkbox" onclick="changeStatus(<%=access.getUserId() %>,<%=access.getShowClient() %>,'ShowClient')"  value="" id="defaultCheck17">
+                                        <input class="form-check-input" type="checkbox" <%=access.getAddOrder()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getAddOrder() %>,'AddOrder')" value="" id="defaultCheck1">
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> 
                             <tr>
                                 <td>18</td>
                                 <td>
-                                    <label class="form-check-label" for="defaultCheck18">
-                                        Show Sell Item 
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        List Order
                                     </label>
                                 </td>
                                 <td>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="checkbox" <%=access.getSellItemList()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getSellItemList() %>,'SellItemList')"  value="" id="defaultCheck18">
+                                        <input class="form-check-input" type="checkbox" <%=access.getListOrder()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getListOrder() %>,'ListOrder')" value="" id="defaultCheck1">
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> 
                             <tr>
-                                <td>19</td>
+                                <td>20</td>
                                 <td>
                                     <label class="form-check-label" for="defaultCheck1">
-                                        Access Management
+                                        Generate Issue Note
                                     </label>
                                 </td>
                                 <td>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="checkbox" <%=access.getAccessManagement()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getAccessManagement() %>,'AccessManagement')" value="" id="defaultCheck1">
+                                        <input class="form-check-input" type="checkbox" <%=access.getGenerateIssueNote()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getGenerateIssueNote() %>,'GenerateIssueNote')" value="" id="defaultCheck1">
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> 
+                            <tr>
+                                <td>21</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Issue Note List
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getIssueNoteList()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getAddOrder() %>,'IssueNoteList')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>22</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Add New Stock
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getAddNewStock()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getAddNewStock() %>,'AddNewStock')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>23</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Project Status
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getProjectStatus()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getProjectStatus() %>,'ProjectStatus')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>24</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Add Vendor
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getAddVendor()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getAddVendor() %>,'AddVendor')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>25</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Vendor List
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getVendorList()==1?"checked":"" %> onclick="changeStatus(<%=access.getVendorList() %>,<%=access.getProjectStatus() %>,'ListVendor')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr> 
+                            <tr>
+                                <td>26</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Add General Store
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getAddGeneralStore()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getAddGeneralStore() %>,'AddGeneralStore')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr> 
                         </tbody>
                     </table>
                 </div>

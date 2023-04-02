@@ -22,7 +22,8 @@ public class ClientDao {
 	}
 
 	
-	public void addClient(ClientBean clientBean) {
+	public boolean addClient(ClientBean clientBean) {
+		
 		try {
 			Connection con = MySqlConnection.getInstance();
 			PreparedStatement pstmt = con.prepareStatement("insert into clients(clientname,gstno,phonenumber,email,panno,address) values(?,?,?,?,?,?)");
@@ -32,13 +33,13 @@ public class ClientDao {
 			pstmt.setString(4, clientBean.getEmail());
 			pstmt.setString(5, clientBean.getPanNo());
 			pstmt.setString(6, clientBean.getAddress());
-			
 			pstmt.executeUpdate();
-			
+			return true;
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 	public ArrayList<ClientBean> getClientList(){
 		ArrayList<ClientBean> users = new ArrayList<ClientBean>();
@@ -68,7 +69,7 @@ public class ClientDao {
 		}
 		return users;
 	}
-	public void deleteClient(int clientId) {
+	public boolean deleteClient(int clientId) {
 		try {
 			Connection con = MySqlConnection.getInstance();
 			
@@ -77,12 +78,14 @@ public class ClientDao {
 			// now pstmt will not return single value , it will return all the records of the relation
 			
 			pstmt.executeUpdate();
+			return true;
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
-	public void updateClient(int clientId, String editedColumn, String newValue) {
+	public boolean updateClient(int clientId, String editedColumn, String newValue) {
 		String updateQuery = "UPDATE Clients SET "+editedColumn+" = ? WHERE clientId = ?";
 		
 		try {
@@ -91,10 +94,12 @@ public class ClientDao {
 			pstmt.setString(1, newValue);
 			pstmt.setInt(2, clientId);
 			pstmt.executeUpdate();
+			return true;
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 	
 	public int getClientIdFormDatabase(String clientName) {

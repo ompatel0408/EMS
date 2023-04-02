@@ -106,7 +106,7 @@ public class EMSOffersDao {
 	}
 	
 	public EMSOffersBean getOfferId() {
-		String selectQuery = "SELECT ItemCode FROM Items ORDER BY ItemCode DESC LIMIT 1";
+		String selectQuery = "SELECT offerCode FROM offer ORDER BY offerCode DESC LIMIT 1";
 		Connection conn = MySqlConnection.getInstance();
 		EMSOffersBean Qb = new EMSOffersBean();
 		

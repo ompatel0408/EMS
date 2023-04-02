@@ -51,10 +51,14 @@ var data = []
 var servletData = []
 var response;
 function submitForm() {
-	data[EditId-1].tagNo = document.getElementById('TagNo').value;
-	data[EditId-1].quantity = document.getElementById('Quantity').value;
-	data[EditId-1].ItemName = document.getElementById('ItemName').value
-	data[EditId-1].delivaryDate = document.getElementById('DelivaryDate').value
+	console.log("print-------->"+EditId)
+	var js1 = data.filter(x=>x.count == EditId)
+	console.log("===========")
+	console.log(js1)
+	js1[0].tagNo = document.getElementById('TagNo').value;
+	js1[0].quantity = document.getElementById('Quantity').value;
+	js1[0].ItemName = document.getElementById('ItemName').value
+	js1[0].delivaryDate = document.getElementById('DelivaryDate').value
 	
 	var json =
 	{
@@ -259,16 +263,18 @@ function GetOfferData(){
 
 
 function appendJsonData(response){
-	
+var counter = 0;	
 	console.log(response)
 	
 	for(let i=0;i<response.length;i++){
+		
 		var json = {
 			ItemName: response[i].offerName,
 			quantity:response[i].quantity,
 			tagNo:0,
 			delivaryDate:0,
-			remarks: response[i].remarks,			
+			remarks: response[i].remarks,
+			count :++counter			
 		}
 		data.push(json)
 		console.log(data)
@@ -279,12 +285,24 @@ function appendJsonData(response){
 
 
 var deleteValue = "";
+var flag = true;
 function deleteItem(deleteId) {
 	deleteValue = deleteId;
+	
 }
 document.getElementById("deleteClicked").addEventListener("click", () => {
-	data.splice(((deleteValue.substring(6)) - 1), 1);
-	appendFunc();
+	var deleteId1 = parseInt(deleteValue.substring(6));
+	console.log("delete 1:"+deleteId1)
+	var js1 = data.filter(x=>x.count == deleteId1)
+	document.getElementById(`tr${js1[0].count}`).remove();
+	console.log("+++++++++")
+	console.log(js1)
+	//data.splice(((deleteValue.substring(6)) - 1), 1);
+	console.log("delete-------->"+deleteId1)
+	data.splice(deleteId1 - 1,1);
+	console.log(data)
+	flag = false;
+	//appendFunc();
 });
 
 let editValue = "";
@@ -313,12 +331,22 @@ function updateField(editId) {
 		var Value = document.getElementById('placeholderChange1').value;
 		data[EditId-1].delivaryDate = Value;
 	}*/
-	document.getElementById('Quantity').value =response[EditId - 1].quantity;
-	document.getElementById('ItemName').value = response[EditId - 1].offerName;
-	document.getElementById('DelivaryDate').value = response[EditId - 1].deliveryDate,
-	document.getElementById('Remarks').value = response[EditId - 1].remarks;
-	console.log(data)
-	appendFunc();
+	console.log("update-------->"+EditId)
+		var js1 = data.filter(x=>x.count == EditId)
+		console.log("------------")
+		console.log(js1)
+		document.getElementById('Quantity').value =js1[0].quantity;
+		document.getElementById('ItemName').value = js1[0].ItemName;
+		document.getElementById('DelivaryDate').value = js1[0].delivaryDate,
+		document.getElementById('Remarks').value = js1[0].remarks;
+		console.log(data)	
+	//	document.getElementById('Quantity').value =data[EditId -1].quantity;
+	//	document.getElementById('ItemName').value = data[EditId - 1].ItemName;
+	//	document.getElementById('DelivaryDate').value = data[EditId - 1].delivaryDate,
+	//	document.getElementById('Remarks').value = data[EditId - 1].remarks;
+	
+	
+	//appendFunc();
 
 }
 
@@ -328,6 +356,7 @@ function appendFunc() {
 	var table = document.getElementById("MyTable3");
 	for (var i = 0; i < data.length; i++) {
 		var newRow = document.createElement("tr");
+		newRow.setAttribute('id',`tr${i+1}`)
 
 		newRow.innerHTML = `
     		<td id="${i + 1}">${i + 1}</td>
