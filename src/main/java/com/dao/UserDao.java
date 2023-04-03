@@ -3,6 +3,7 @@ package com.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.bean.UserBean;
@@ -36,4 +37,28 @@ public class UserDao {
 		}
 		return null;
 	}
+	
+	public int addUser(UserBean ub)
+	{
+		Connection conn = MySqlConnection.getInstance();
+		if(conn != null)
+		{
+			try {
+				PreparedStatement stmt = conn.prepareStatement("insert into user(name,email,phonenumber,departmentname,role) values (?,?,?,?,?)");
+				stmt.setString(1, ub.getUserName());
+				stmt.setString(2, ub.getEmail());
+				stmt.setFloat(3, ub.getPhNum());
+				stmt.setString(4, ub.getDepartmentName());
+				stmt.setInt(5, ub.getRole());
+				int data = stmt.executeUpdate();
+				return data;
+			}
+			catch (SQLException e) 
+			{
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
 }

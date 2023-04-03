@@ -6,6 +6,15 @@ public class UserBean {
 		long phNum;
 		String userName,email,password,departmentName;
 		
+		public UserBean(int role, long phNum, String userName, String email, String departmentName) {
+			this.role = role;
+			this.phNum = phNum;
+			this.userName = userName;
+			this.email = email;
+			this.departmentName = departmentName;
+		}
+		
+		public UserBean() {}
 		public int getUserId() {
 			return userId;
 		}

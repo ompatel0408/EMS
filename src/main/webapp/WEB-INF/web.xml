@@ -286,7 +286,25 @@
 		<servlet-name>EMSVendorsServlet</servlet-name>
 		<url-pattern>/EMSVendorsServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSUsersSevlet</servlet-name>
+		<servlet-class>com.controller.EMSUsersSevlet</servlet-class>
+	</servlet>
 	
+	<servlet-mapping>
+		<servlet-name>EMSUsersSevlet</servlet-name>
+		<url-pattern>/EMSUsersSevlet</url-pattern>
+	</servlet-mapping>
+	
+	<filter>
+		<filter-name>EMSUserFilter</filter-name>
+		<filter-class>com.Filter.EMSUserFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>EMSUserFilter</filter-name>
+		<url-pattern>/EMSUsersSevlet</url-pattern>
+	</filter-mapping>
 	
 
 </web-app>
