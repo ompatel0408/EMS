@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.bean.ClientBean;
 import com.bean.EMSLogsBean;
@@ -19,6 +20,8 @@ public class ClientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static ClientServlet instance = null;
+	private static String clientName = "";
+	private static HashMap<Integer, String> map = new HashMap<Integer,String>();
 	
 	public static ClientServlet getInstance()
 	{
@@ -61,7 +64,7 @@ public class ClientServlet extends HttpServlet {
 		ClientDao cd = ClientDao.getInstance();
 		HttpSession session = req.getSession();
 		if(cd.deleteClient(clientId)) {
-			if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A client record has been deleted successfully!",Integer.parseInt(session.getAttribute("userId").toString()),"UPDATED","CLIENTS"))) {
+			if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A client record of ".concat(map.get(clientId)).concat(" has been deleted successfully!"),Integer.parseInt(session.getAttribute("userId").toString()),"DELETED","CLIENTS"))) {
 				System.out.println("clients delete Logs Inserted!");
 			}else {
 				System.out.println("client delete Logs not inserted!");
@@ -71,7 +74,7 @@ public class ClientServlet extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String clientName = request.getParameter("clientName");
+		clientName = request.getParameter("clientName");
 		String gst = request.getParameter("gst");
 		String phone = request.getParameter("phone");
 		String  email = request.getParameter("email");
@@ -89,8 +92,11 @@ public class ClientServlet extends HttpServlet {
 		ClientDao clientDao = ClientDao.getInstance();
 		HttpSession session = request.getSession();
 		if(clientDao.addClient(clientBean)) {
-			if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new client has been added!",Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","CLIENTS"))) {
+			if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new client ".concat(clientName).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","CLIENTS"))) {
 				System.out.println(" Client insert Logs Inserted!");
+				for(ClientBean Cb:ClientDao.getInstance().getClientList()) {
+					map.put(Cb.getClientId(), Cb.getClientName());
+				}
 			}else {
 				System.out.println("Client  insert Logs not inserted!");
 			}
@@ -109,13 +115,11 @@ public class ClientServlet extends HttpServlet {
 		ClientDao cd = ClientDao.getInstance();
 		HttpSession session = request.getSession();
 		if(cd.updateClient(clientId,editedColumn,newValue)) {
-			if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A client information has been updated successfully!",Integer.parseInt(session.getAttribute("userId").toString()),"UPDATED","CLIENTS"))) {
+			if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A client information of ".concat(map.get(clientId)).concat( " has been updated successfully!"),Integer.parseInt(session.getAttribute("userId").toString()),"UPDATED","CLIENTS"))) {
 				System.out.println("clients update Logs Inserted!");
 			}else {
 				System.out.println("client update Logs not inserted!");
 			}
 		}
-		
-//		response.sendRedirect("ClientServlet?clientId=0?update=notupdate");
 	}
 }

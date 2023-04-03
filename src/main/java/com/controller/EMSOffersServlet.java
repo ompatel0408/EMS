@@ -3,9 +3,12 @@ package com.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import com.bean.EMSLogsBean;
 import com.bean.EMSOffersBean;
 import com.bean.ItemBean;
 import com.bean.PrePurchaseBean;
+import com.dao.EMSLogsDao;
 import com.dao.EMSOffersDao;
 import com.dao.ItemDao;
 import com.dao.PrePurchaseDao;
@@ -47,8 +50,14 @@ public class EMSOffersServlet extends HttpServlet {
 			for(EMSOffersBean EOB:ibean) {
 				PrePurchaseDao.getInstance().addPrePurchaseInOffers(new PrePurchaseBean(EOB.getDrawingId(),EOB.getClientId()));
 			}
+			HttpSession session = request.getSession();
 			if(EMSOffersDao.getInstance().addOffer(ibean)) {
 				System.out.println("Offers Inserted Successfully!");
+				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new offer has been added!",Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","OFFERS"))) {
+					System.out.println(" OFFERS insert Logs Inserted!");
+				}else {
+					System.out.println("OFFERS  insert Logs not inserted!");
+				}
 			}else {
 				System.out.println("Offers  Inserted not Successfully!");
 			}

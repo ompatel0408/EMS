@@ -24,7 +24,7 @@ public class EMSFinalQuotationDao {
 	public ArrayList<EMSFinalQuotationBean> getSumOfAllItemCodeOfAProject(int clientId){
 		
 		//String selectQuery = "SELECT sum(TotalAmountWithProfit * ) FROM offer I JOIN ProfitInQuotationPerItem PQI ON I.offerCode = PQI.offerCode WHERE clientId= ? ";
-		String selectQuery = "SELECT SUM(TotalPricePerItem * QuotationPerItemQuantity ) from quotationperitem QPI JOIN Offer O ON QPI.offerCode = O.offerCode WHERE ClientId = ?";
+		String selectQuery = "SELECT SUM(TotalPricePerItem * QuotationPerItemQuantity ) from quotationperitem QPI JOIN Offer O ON QPI.offerCode = O.offerCode WHERE ClientId = ? AND status = 'FALSE'";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<EMSFinalQuotationBean> a = new ArrayList<EMSFinalQuotationBean>();
 		
@@ -51,7 +51,7 @@ public class EMSFinalQuotationDao {
 	}
 	
 	public int getCountOfPerticularOffer(int clientId) {
-		String selectQuery = "select count(*) from offer where ClientId = ?";
+		String selectQuery = "select count(*) from offer where ClientId = ? AND Status = 'FALSE'";
 		Connection conn = MySqlConnection.getInstance();
 		if(conn != null) {
 			
@@ -66,7 +66,6 @@ public class EMSFinalQuotationDao {
 					clientId1=rs.getInt(1);
 				}
 				return clientId1;
-				
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}
@@ -76,7 +75,13 @@ public class EMSFinalQuotationDao {
 		return 0;
 	}
 	
-	public boolean insertFinalQuotation(EMSFinalQuotationBean EFQB) {
+	public boolean updateInsert() {
+		
+		return false;
+	}
+	
+	
+	public boolean updateFinalQuotation(EMSFinalQuotationBean EFQB) {
 		
 		String updateQuery = "Update Quotations SET QuotationAmount = ? , FinalDelivaryDate = ? , Quantity = ? , DiscountPercentage = ? , DiscountAmount = ?, Remarks = ? WHERE clientId = ?";
 		Connection conn = MySqlConnection.getInstance();
@@ -101,6 +106,59 @@ public class EMSFinalQuotationDao {
 		}
 		return  false;
 	}
+	
+	public EMSFinalQuotationBean getData(int clientId) {
+		
+		String selectQuery = "SELECT * FROM Quotations WHERE clientId = ?";
+		Connection conn = MySqlConnection.getInstance();
+		EMSFinalQuotationBean EFQB = null;
+		if(conn != null) {
+			try {
+				PreparedStatement stmt = conn.prepareStatement(selectQuery);
+				stmt.setInt(1, clientId);
+				ResultSet rs= stmt.executeQuery();
+				
+				if(rs.next()) {
+					EFQB = new EMSFinalQuotationBean(rs.getInt(1),rs.getInt(2), rs.getString(3), rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7), rs.getString(8), rs.getString(9));		
+				}
+				return EFQB;
+			}catch(SQLException E) {
+				E.printStackTrace();
+			}
+		}else {
+			System.out.println("Connction is not establised!");
+		}
+		return  null;
+	}
+	
+	
+	public boolean insertIntoQuotationHistory(EMSFinalQuotationBean EFQB) {
+		
+		String insertQuery = "INSERT INTO QUOTATIONHISTORY VALUES(?,?,?,?,?,?,?,?,?)";
+		Connection conn = MySqlConnection.getInstance();
+		if(conn != null) {
+			try {
+				PreparedStatement stmt = conn.prepareStatement(insertQuery);
+				stmt.setInt(1, EFQB.getQuotationId());
+				stmt.setInt(2, EFQB.getClientId());
+				stmt.setString(3, EFQB.getQuotationDate());
+				stmt.setString(4, EFQB.getQuotationAmount());
+				stmt.setString(5, EFQB.getFinalDelivaryDate());
+				stmt.setInt(6, EFQB.getQuantity());
+				stmt.setString(7, EFQB.getDiscountPercentage());
+				stmt.setString(8, EFQB.getDiscountAmount());
+				stmt.setString(9, EFQB.getRemarks());
+				stmt.executeUpdate();
+				return true;
+			}catch(SQLException E) {
+				E.printStackTrace();
+			}
+		}else {
+			System.out.println("Connction is not establised!");
+		}
+		return  false;
+	}
+	
 	
 	public ArrayList<EMSFinalQuotationBean> getAllFinalQuotations() {
 		ArrayList<EMSFinalQuotationBean> quotations = new ArrayList<EMSFinalQuotationBean>();

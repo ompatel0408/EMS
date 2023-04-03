@@ -68,6 +68,7 @@
 								<textarea class="form-control" rows="3" placeholder="Enter..."
 									id="Remarks" style="height: 125px;" disabled></textarea>
 							</div>
+							<input type="hidden" id="offerCode">
 							<div class="form-group mt-5 d-flex justify-content-around">
 								<button type="submit" id="AddItemBtn"
 									class="btn btn-primary w-25 disabled">
@@ -198,4 +199,24 @@
 	</div>
 </body>
 <script type="text/javascript" src="EMSItem.js"></script>
+<script src="assets/dist/js/models.js"></script>
+	<script src="assets/plugins/jquery/jquery.min.js"></script>
+	<script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/plugins/select2/js/select2.full.min.js"></script>
+	<script
+		src="assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+	<script src="assets/plugins/moment/moment.min.js"></script>
+	<script src="assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+	<script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+	<script
+		src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+	<script
+		src="assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script
+		src="assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+	<script src="assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+	<script src="assets/plugins/dropzone/min/dropzone.min.js"></script>
+	<script src="assets/dist/js/adminlte.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </html>

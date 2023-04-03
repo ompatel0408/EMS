@@ -104,7 +104,7 @@ public class EMSDrawingDao {
 	
 	public ArrayList<EMSDrawingBean> getAllData(){
 		
-		String selectQuery = " SELECT D.*,P.projectId,O.offerCode FROM drawing D JOIN Prepurchase P on D.DrawingId = P.DrawingId JOIN OFFER O ON P.DrawingId = O.DrawingId";
+		String selectQuery = "SELECT D.*,P.projectId,O.offerCode FROM drawing D JOIN Prepurchase P on D.DrawingId = P.DrawingId JOIN OFFER O ON P.DrawingId = O.DrawingId";
 		Connection conn =MySqlConnection.getInstance();
 		ArrayList<EMSDrawingBean> a = new ArrayList<EMSDrawingBean>();
 		EMSDrawingBean EGB = null;
@@ -131,5 +131,6 @@ public class EMSDrawingDao {
 		}
 		return null;
 	}
+	
 	
 }

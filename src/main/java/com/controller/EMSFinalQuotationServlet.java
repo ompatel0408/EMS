@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import com.bean.ClientBean;
 import com.bean.EMSFinalQuotationBean;
+import com.dao.ClientDao;
 import com.dao.EMSFinalQuotationDao;
 import com.dao.ItemDao;
 import com.google.gson.Gson;
@@ -73,7 +74,12 @@ public class EMSFinalQuotationServlet extends HttpServlet {
 		EMSFinalQuotationDao EQD = EMSFinalQuotationDao.getInstance();
 		String clientName = jsonObject.get("clientId").getAsString();
 		if(clientName != null) {
-			if(EQD.insertFinalQuotation(new EMSFinalQuotationBean(jsonObject.get("TotalAmount").getAsString(), jsonObject.get("finalDelivaryDate").getAsString(), Integer.parseInt(jsonObject.get("Quantity").getAsString()), jsonObject.get("discountPercentage").getAsString(), jsonObject.get("discountAmount").getAsString(),map.get(clientName),jsonObject.get("remark").getAsString()))) {
+			if(EQD.updateFinalQuotation(new EMSFinalQuotationBean(jsonObject.get("TotalAmount").getAsString(), jsonObject.get("finalDelivaryDate").getAsString(), Integer.parseInt(jsonObject.get("Quantity").getAsString()), jsonObject.get("discountPercentage").getAsString(), jsonObject.get("discountAmount").getAsString(),map.get(clientName),jsonObject.get("remark").getAsString()))) {
+				if(EMSFinalQuotationDao.getInstance().insertIntoQuotationHistory(EMSFinalQuotationDao.getInstance().getData(ClientDao.getInstance().getClientIdFormDatabase(clientName)))) {
+					System.out.println("Insert");
+				}else {
+					System.out.println("Not insert");
+				}
 				System.out.println("Inserted successfully!");
 				
 			}else 

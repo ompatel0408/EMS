@@ -41,7 +41,18 @@ public class EMSFinalQuotationBean {
 		this.discountAmount = discountAmount;
 	}
 	
-	
+	public EMSFinalQuotationBean(int quotationId, int clientId,String quotationDate,String quotationAmount, String finalDelivaryDate, int quantity, String discountPercentage,String discountAmount, String remarks) {
+		this.quotationId = quotationId;
+		this.clientId = clientId;
+		this.quotationDate = quotationDate;
+		this.quotationAmount = quotationAmount;
+		this.finalDelivaryDate = finalDelivaryDate;
+		this.quantity = quantity;
+		this.discountPercentage = discountPercentage;
+		this.discountAmount = discountAmount;
+		this.remarks = remarks;
+	}
+
 	public EMSFinalQuotationBean(String quotationAmount,String finalDelivaryDate,int Quantity,String discountPercentage,String discountAmount,int clientId,String remarks) {
 		this.quotationAmount = quotationAmount;
 		this.finalDelivaryDate = finalDelivaryDate;

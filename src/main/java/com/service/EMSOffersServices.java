@@ -22,6 +22,9 @@ import jakarta.servlet.http.HttpSession;
 public class EMSOffersServices{
 		private static long offerNumber = 0;
 		private static String offerCode;
+		private static int clientId =0;
+		private static 	boolean isPresent = false;
+		private static 	boolean isUpdate = false;
 		public static ArrayList<EMSOffersBean> fetchDataFromXHRRequest(BufferedReader reader, HttpServletRequest request) {
 
 			StringBuilder sb = new StringBuilder();
@@ -49,19 +52,29 @@ public class EMSOffersServices{
 
 			// Convert the JSON array to a List of Maps
 			List<Map<String, Object>> data = gson.fromJson(jsonData, type);
+			
+			
 			// Loop through each object in the list and extract the fields
-
-			EMSOffersDao id = EMSOffersDao.getInstance();
 			for (Map<String, Object> item : data) {
-				int clientId = Integer.parseInt(item.get("ClientId").toString());
+				clientId = Integer.parseInt(item.get("ClientId").toString());
 				System.out.println("Client iD"+clientId);
-				if(QuotationDao.getQuotationIdFromDataBase(clientId) == null) {
+				
+				
+				if((isPresent == false) && (QuotationDao.getQuotationIdFromDataBase(clientId) == null)) {
 					QuotationDao.addQuotation(new QuotationBean(clientId,LocalDate.now().toString()));
+					isPresent = true;
+				}else {
+					if(!isUpdate) {
+						QuotationDao.getInstance().updateQuotations(clientId);
+						isUpdate = true;
+					}
 				}
 				EMSOffersBean Qb =  new EMSOffersBean(Integer.parseInt(item.get("ClientId").toString()), Integer.parseInt(item.get("quantity").toString()), QuotationDao.getQuotationIdFromDataBase(clientId).getQuotationId(), item.get("ItemName").toString(),item.get("remarks").toString(),EMSOffersServices.generateOfferCode(request), item.get("TotalPrice").toString(), EMSOffersServices.generateDrawingId(clientId));
 				AQb.add(Qb);
 				System.out.println(Qb);
 			}
+			isPresent = false;
+			isUpdate = false;			
 			return AQb;
 		}
 		

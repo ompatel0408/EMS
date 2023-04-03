@@ -60,9 +60,10 @@ public class EMSOffersBean {
 		this.drawingId = drawingId;
 	}
 
-	public EMSOffersBean(String offerName,int quantity,String remarks) {
+	public EMSOffersBean(String offerName,String offerCode,int quantity,String remarks) {
 		this.quantity = quantity;
 		this.offerName = offerName;
+		this.offerCode = offerCode;
 		this.remarks = remarks;
 	}
 	public int getClientId() {

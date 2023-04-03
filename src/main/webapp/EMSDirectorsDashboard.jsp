@@ -235,59 +235,6 @@ button {
 	<script src="assets/dist/js/custom.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Page specific script -->
-	<script>
-        $(function () {
-            //Initialize Select2 Elements
-            $('.select2').select2()
-
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-                theme: 'bootstrap4'
-            })
-
-            //Datemask dd/mm/yyyy
-
-
-            //Date picker
-            $('#reservationdate').datetimepicker({
-                format: 'L'
-            });
-
-            //Date and time picker
-            $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
-
-            //Date range picker
-            $('#reservation').daterangepicker()
-            //Date range picker with time picker
-            $('#reservationtime').daterangepicker({
-                timePicker: true,
-                timePickerIncrement: 30,
-                locale: {
-                    format: 'MM/DD/YYYY hh:mm A'
-                }
-            })
-            //Date range as a button
-
-
-            //Bootstrap Duallistbox
-            $('.duallistbox').bootstrapDualListbox()
-
-        })
-        // BS-Stepper Init
-        document.addEventListener('DOMContentLoaded', function () {
-            window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-        })
-
-        // DropzoneJS Demo Code Start
-        Dropzone.autoDiscover = false;
-        document.querySelectorAll(".planButton").forEach(elem => elem.addEventListener("click", () => {
-            console.log('perin')
-            document.getElementById('myModal').style.marginLeft = "300px"
-            document.getElementById('myModal').style.marginTop = "-34px"
-        }))
-  // DropzoneJS Demo Code End
-    </script>
 </body>
 
 </html>

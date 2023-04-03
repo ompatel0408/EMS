@@ -57,8 +57,8 @@ public class EMSItemServlet extends HttpServlet {
 		ESI.doGet(request,response);
 		ArrayList<ItemBean> AQb = ItemServices.fetchDataFromXHRRequest(request.getReader(),request);
 		if(ItemDao.addItems(AQb)) {
-			
 			System.out.println("Item Added SuccessFully");
+			
 		}else{
 			System.out.println("Item Added not SuccessFully");
 		}

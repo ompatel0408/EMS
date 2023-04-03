@@ -1,3 +1,4 @@
+<script src="AccessLeftSideBar.js"></script>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Brand Logo -->
 	<a href="index3.html" class="brand-link"> <img
@@ -304,36 +305,36 @@
 	<script type="text/javascript" src="UtilScript.js"></script>
 </aside>
 <script type="text/javascript" src="EMSDirectorsDashboard.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="assets/dist/js/models.js"></script>
-<!-- jQuery -->
+jQuery
 <script src="assets/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
+Bootstrap 4
 <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Select2 -->
+Select2
 <script src="assets/plugins/select2/js/select2.full.min.js"></script>
-<!-- Bootstrap4 Duallistbox -->
+Bootstrap4 Duallistbox
 <script
 	src="assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
-<!-- InputMask -->
+InputMask
 <script src="assets/plugins/moment/moment.min.js"></script>
 <script src="assets/plugins/inputmask/jquery.inputmask.min.js"></script>
-<!-- date-range-picker -->
+date-range-picker
 <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- bootstrap color picker -->
+bootstrap color picker
 <script
 	src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
+Tempusdominus Bootstrap 4
 <script
 	src="assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Bootstrap Switch -->
+Bootstrap Switch
 <script src="assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<!-- BS-Stepper -->
+BS-Stepper
 <script src="assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
-<!-- dropzonejs -->
+dropzonejs
 <script src="assets/plugins/dropzone/min/dropzone.min.js"></script>
-<!-- AdminLTE App -->
+AdminLTE App
 <script src="assets/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
+AdminLTE for demo purposes
 <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->

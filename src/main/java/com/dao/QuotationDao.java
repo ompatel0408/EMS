@@ -10,6 +10,16 @@ import com.dbConnection.MySqlConnection;
 
 public class QuotationDao {
 	
+	private static QuotationDao instance = null;
+	
+	public static QuotationDao getInstance() {
+		
+		if(instance == null) {
+			instance = new QuotationDao();
+		}
+		return instance;
+	}
+	
 	public static boolean addQuotation(QuotationBean Qb) {
 		
 		String insertQuery = "INSERT INTO Quotations(ClientId,QuotationDate,QuotationAmount,FinalDelivaryDate) VALUES(?,?,?,?)";
@@ -49,4 +59,26 @@ public class QuotationDao {
 		}
 		return null;
 	}
+	
+	public boolean updateQuotations(int clientId) {
+		
+		String updateQuery = "UPDATE Quotations SET QuotationAmount = 0,FinalDelivaryDate = null,Quantity = null,DiscountPercentage = null,DiscountAmount = null,Remarks = null WHERE ClientId = ?";
+		Connection conn = MySqlConnection.getInstance();
+		
+		if(conn != null) {
+			
+			try {
+				PreparedStatement stmt = conn.prepareStatement(updateQuery);
+				stmt.setInt(1, clientId);
+				stmt.executeUpdate();
+				return true;
+			}catch(SQLException E) {
+				E.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		return false;
+	}
+	
 }

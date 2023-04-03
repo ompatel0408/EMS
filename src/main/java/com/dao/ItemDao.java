@@ -262,6 +262,11 @@ public class ItemDao {
 		}
 	}
 	
+	public void setStatusAccept() {
+		
+		String selectQuery = "";
+	}
+	
 	
 	
 }

@@ -5,8 +5,10 @@ import java.io.IOException;
 
 import com.bean.EMSDrawingBean;
 import com.bean.EMSGRNBean;
+import com.bean.EMSLogsBean;
 import com.dao.EMSDrawingDao;
 import com.dao.EMSGRNDao;
+import com.dao.EMSLogsDao;
 import com.dao.EMSPurchaseDao;
 import com.dao.ItemDao;
 import com.google.gson.Gson;
@@ -19,6 +21,7 @@ import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @MultipartConfig(
 		 fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
@@ -59,11 +62,22 @@ public class EMSDrawingServlet extends HttpServlet {
 		System.out.println("Hello");
 		EMSDrawingBean EGB =  EMSDrawingServices.uploadPic(request);
 		if(EGB != null) {
-			System.out.println("Project Id"+request.getParameter("projectId"));
-			System.out.println("order Id"+request.getParameter("offerId"));
-			
-			System.out.println(EMSDrawingDao.getInstance().addDrawingDetails(EMSDrawingServices.getActualDrawingId(request.getParameter("offerId"), EMSDrawingDao.getInstance().getDrawingIdFromdatabase(request.getParameter("projectId"))),EGB) == true ? "Inserted Successfully!" : "not sucessfully!");        
-//			System.out.println(EMSGRNDao.getInstance().addGRN(new EMSGRNBean(request.getParameter("VendorName"), request.getParameter("ReceivedDate"),EGB.getPath1().trim(),EGB.getPath2().trim())) ?  "GRN Added Successfully!!!" :  "GRN not added!");
+			HttpSession session = request.getSession();
+			System.out.println("offerId: "+request.getParameter("offerId"));
+			System.out.println("ProjectId :"+request.getParameter("projectId"));
+			String drawingId = EMSDrawingServices.getActualDrawingId(request.getParameter("offerId"), EMSDrawingDao.getInstance().getDrawingIdFromdatabase(request.getParameter("projectId")));
+			System.out.println("Drawing Id :"+drawingId);
+			if(EMSDrawingDao.getInstance().addDrawingDetails(drawingId,EGB)) {
+				System.out.println("Inserted Successfully!");
+				
+				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new drawing of ".concat(request.getParameter("offerId")).concat(" has been added in ").concat(request.getParameter("projectId")),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","DRAWING"))) {
+					System.out.println("DRAWING insert Logs Inserted!");
+				}else {
+					System.out.println("DRAWING  insert Logs not inserted!");
+				}
+			}else {
+				System.out.println("not sucessfully!");
+			}
 			response.sendRedirect("EMSDrawingList.jsp");
 		}
 	}

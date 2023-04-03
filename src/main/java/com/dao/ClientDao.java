@@ -75,8 +75,6 @@ public class ClientDao {
 			
 			PreparedStatement pstmt = con.prepareStatement("delete from clients where clientid = ?");
 			pstmt.setInt(1, clientId);
-			// now pstmt will not return single value , it will return all the records of the relation
-			
 			pstmt.executeUpdate();
 			return true;
 		}

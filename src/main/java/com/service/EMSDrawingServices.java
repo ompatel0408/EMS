@@ -55,7 +55,9 @@ public class EMSDrawingServices {
 	public static String getActualDrawingId(String offerId,ArrayList<String> drawingIds) {
 		
 		for(String s:drawingIds) {
+			System.out.println("-->"+s.substring(s.indexOf('_')+1));
 			if(offerId.equals(s.substring(s.indexOf('_')+1))) {
+				
 				return s;
 			}
 		}

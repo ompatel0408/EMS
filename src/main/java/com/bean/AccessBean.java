@@ -2,7 +2,7 @@ package com.bean;
 
 public class AccessBean 
 {
-	private int userId,accessManagement,addProject,addOffer,quotationPerOffers,finalQuotation,listOrder,generateIndent,indentList,generatePo,poList,generateGrn,grnList,addDrawing,drawingList,addClient,issueNoteList,listDrawing,addGeneralStore,addVendor,projectStatus,vendorList,generateIssueNote,showQuotationPerOffer,addOrder,showFinalQuotation,orderList,addNewStock,stockList;
+	private int userId,accessManagement,addProject,addOffer,quotationPerOffers,finalQuotation,listOrder,generateIndent,indentList,generatePo,poList,generateGrn,grnList,addDrawing,drawingList,addClient,issueNoteList,addGeneralStore,addVendor,projectStatus,vendorList,generateIssueNote,showQuotationPerOffer,addOrder,showFinalQuotation,orderList,addNewStock,stockList;
 	public int getAddDrawing() {
 		return addDrawing;
 	}
@@ -23,14 +23,7 @@ public class AccessBean
 	}
 
 
-	public int getListDrawing() {
-		return listDrawing;
-	}
-
-
-	public void setListDrawing(int listDrawing) {
-		this.listDrawing = listDrawing;
-	}
+	
 
 
 	public int getDrawingList() {

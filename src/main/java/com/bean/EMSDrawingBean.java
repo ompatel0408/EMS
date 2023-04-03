@@ -9,7 +9,7 @@ public class EMSDrawingBean {
 	private String EMSDrawing;
 	private String offerCode;
 	
-	
+
 	public EMSDrawingBean(String projectId, String drawingId, int clientId, String clientDrawing,String eMSDrawing) {
 		this.projectId = projectId;
 		this.drawingId = drawingId;

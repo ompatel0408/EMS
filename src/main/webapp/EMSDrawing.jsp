@@ -37,7 +37,6 @@ input[type="file"] {
 }
 
 input[type="file"]:not(:focus)+.custom-file-upload::after {
-	content: "File Selected";
 	color: green;
 	font-weight: bold;
 }
@@ -92,9 +91,7 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 								</div>
 								<div class="btn-group">
 									<div class="dropzone">
-										<input type="file" name="file" id="inputFile" /> <img
-											src="http://100dayscss.com/codepen/upload.svg"
-											class="upload-icon" /> <label for="inputFile" 
+										<input type="file" name="file" id="inputFile" /> <label for="inputFile" 
 											class="custom-file-upload"> <i
 											class="fas fa-cloud-upload-alt"></i> Choose File
 										</label> 
@@ -122,9 +119,7 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 								</div>
 								<div class="btn-group">
 									<div class="dropzone">
-										<input type="file" name="file1" id="inputFile1" /> <img
-											src="http://100dayscss.com/codepen/upload.svg"
-											class="upload-icon" /> <label for="inputFile1"
+										<input type="file" name="file1" id="inputFile1" />  <label for="inputFile1"
 											class="custom-file-upload"> <i
 											class="fas fa-cloud-upload-alt"></i> Choose File
 										</label>
@@ -147,79 +142,26 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 		</div>
 	</div>
 </body>
-<script src="assets/plugins/jquery/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
-<script src="assets/plugins/sweetalert2/sweetalert2.min.js"></script>
-<script src="assets/plugins/toastr/toastr.min.js"></script>
-<script src="assets/plugins/dropzone/min/dropzone.min.js"></script>
-<script
-	src="assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<script src="assets/dist/js/adminlte.js"></script>
-<script src="assets/plugins/moment/moment.min.js"></script>
-<script>
-	// DropzoneJS Demo Code Start
-	Dropzone.autoDiscover = false
-
-	// Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
-	var previewNode = document.querySelector("#template");
-	previewNode.id = "";
-	var previewTemplate = previewNode.parentNode.innerHTML
-	previewNode.parentNode.removeChild(previewNode)
-
-	var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-		url : "EMSDrawingServlet", // Set the url
-		thumbnailWidth : 80,
-		thumbnailHeight : 80,
-		parallelUploads : 20,
-		previewTemplate : previewTemplate,
-		autoQueue : false, // Make sure the files aren't queued until manually added
-		previewsContainer : "#previews", // Define the container to display the previews
-		clickable : ".fileinput-button" // Define the element that should be used as click trigger to select files.
-	})
-
-	myDropzone.on("addedfile", function(file) {
-		// Hookup the start button
-		file.previewElement.querySelector(".start").onclick = function() {
-			myDropzone.enqueueFile(file)
-		}
-	})
-
-	// Update the total progress bar
-	myDropzone
-			.on(
-					"totaluploadprogress",
-					function(progress) {
-						document.querySelector("#total-progress .progress-bar").style.width = progress
-								+ "%"
-					})
-
-	myDropzone.on("sending", function(file) {
-		// Show the total progress bar when upload starts
-		document.querySelector("#total-progress").style.opacity = "1"
-		// And disable the start button
-		file.previewElement.querySelector(".start").setAttribute("disabled",
-				"disabled")
-	})
-
-	// Hide the total progress bar when nothing's uploading anymore
-	myDropzone.on("queuecomplete", function(progress) {
-		document.querySelector("#total-progress").style.opacity = "0"
-	})
-
-	// Setup the buttons for all transfers
-	// The "add files" button doesn't need to be setup because the config
-	// `clickable` has already been specified.
-	document.querySelector("#actions .start").onclick = function() {
-		myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
-	}
-	document.querySelector("#actions .cancel").onclick = function() {
-		myDropzone.removeAllFiles(true)
-	}
-	// DropzoneJS Demo Code End
-</script>
+<script src="assets/dist/js/models.js"></script>
+	<script src="assets/plugins/jquery/jquery.min.js"></script>
+	<script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/plugins/select2/js/select2.full.min.js"></script>
+	<script
+		src="assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+	<script src="assets/plugins/moment/moment.min.js"></script>
+	<script src="assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+	<script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+	<script
+		src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+	<script
+		src="assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script
+		src="assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+	<script src="assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+	<!-- <script src="assets/plugins/dropzone/min/dropzone.min.js"></script> -->
+	<script src="assets/dist/js/adminlte.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
 	
 	window.onload = function getProject1(){
@@ -277,4 +219,25 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 			}
 		}
 </script>
+<script src="assets/dist/js/models.js"></script>
+	<script src="assets/plugins/jquery/jquery.min.js"></script>
+	<script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/plugins/select2/js/select2.full.min.js"></script>
+	<script
+		src="assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+	<script src="assets/plugins/moment/moment.min.js"></script>
+	<script src="assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+	<script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+	<script
+		src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+	<script
+		src="assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script
+		src="assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+	<script src="assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+	<script src="assets/plugins/dropzone/min/dropzone.min.js"></script>
+	<script src="assets/dist/js/adminlte.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </html>

@@ -68,7 +68,8 @@ function submitForm() {
 		remarks: document.getElementById('Remarks').value,
 		quantity: document.getElementById('Quantity').value,
 		delivaryDate: document.getElementById('DelivaryDate').value,
-		TotalPrice: JSON.stringify(parseInt(document.getElementById('Quantity').value) * 0)
+		TotalPrice: JSON.stringify(parseInt(document.getElementById('Quantity').value) * 0),
+		offerCode:document.getElementById('offerCode').value
 	}
 	servletData.push(json);
 	console.log("--------------")
@@ -207,6 +208,7 @@ function XHRRequestForItem() {
 		}
 	}
 	// send the request
+	console.log()
 	xhr.send(JSON.stringify(servletData));
 }
 
@@ -274,7 +276,8 @@ var counter = 0;
 			tagNo:0,
 			delivaryDate:0,
 			remarks: response[i].remarks,
-			count :++counter			
+			count :++counter,
+			offerCode:response[i].offerCode			
 		}
 		data.push(json)
 		console.log(data)
@@ -339,6 +342,7 @@ function updateField(editId) {
 		document.getElementById('ItemName').value = js1[0].ItemName;
 		document.getElementById('DelivaryDate').value = js1[0].delivaryDate,
 		document.getElementById('Remarks').value = js1[0].remarks;
+		document.getElementById('offerCode').value = js1[0].offerCode;
 		console.log(data)	
 	//	document.getElementById('Quantity').value =data[EditId -1].quantity;
 	//	document.getElementById('ItemName').value = data[EditId - 1].ItemName;

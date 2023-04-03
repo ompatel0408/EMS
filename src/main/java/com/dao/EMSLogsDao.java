@@ -53,4 +53,5 @@ public class EMSLogsDao {
 		
 		return false;
 	}
+	
 }

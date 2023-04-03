@@ -48,7 +48,7 @@ public class AccessDao
 				access.setShowFinalQuotation(rs.getInt("showfinalquotation"));
 				access.setStockList(rs.getInt("showstocklist"));
 				access.setVendorList(rs.getInt("listvendor"));
-				access.setListDrawing(rs.getInt("listdrawing"));
+				access.setDrawingList(rs.getInt("listdrawing"));
 				access.setListOrder(rs.getInt("listorder"));
 				
 				return access;
