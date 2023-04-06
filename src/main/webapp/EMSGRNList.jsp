@@ -27,7 +27,7 @@
 					</div>
 				</div>
 				<div class="card-body p-0">
-					<table class="table table-striped projects">
+					<table class="table table-striped projects" id="Table">
 						<thead>
 							<tr>
 								<th style="width: 15%">Sr.No</th>
@@ -36,6 +36,7 @@
 								<th style="width: 20%"></th>
 							</tr>
 						</thead>
+						
 						<tbody id="myTable">
 							<%for (EMSGRNBean EGB : EMSGRNDao.getInstance().getAllData()) {%>
 							<tr>
@@ -114,7 +115,9 @@
 							</tr>
 							<%}%>
 						</tbody>
+					
 					</table>
+					
 				</div>
 				<!-- /.card-body -->
 			</div>
@@ -144,6 +147,16 @@
 	}
 
 </script>
+<script type="text/javascript">
+
+var options = {
+  valueNames: [ 'name', 'category' ]
+};
+
+var myList = new List('Table', options);
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
 <script src="assets/dist/js/models.js"></script>
 	<script src="assets/plugins/jquery/jquery.min.js"></script>
 	<script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

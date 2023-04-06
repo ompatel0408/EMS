@@ -67,55 +67,6 @@ int srNo1=1;
                     </table>
                 </div>
                 </div>
-			<div class="card card-default">
-                <!-- /.card-header -->
-                <div class="card-header">
-                    <h3 class="card-title"> <strong> Remaining Stock List </strong> </h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                    </div>
-                </div>
-				 <div class="card-body p-0">
-                    <table class="table table-striped projects">
-                        <thead>
-                            <tr>
-                                <th style="width: 5%">Sr.No</th>
-                                <th style="width: 17%">Category</th>
-                                <th style="width: 17%">Grade</th>
-                                <th style="width: 17%">Size</th>
-                                <th style="width: 17%">Quantity</th>
-                                <th style="width: 17%"></th>
-                            </tr>
-                        </thead>
-                        <tbody id="">
-                            <%
-							for (EMSStoreBean as : allStore) {
-							%>
-                            <tr>
-                                <td><%= srNo1++%></td>
-                                <td><%=as.getCategory() %><br></td>
-                                <td><%=as.getGrade() %><br></td>
-                                <td><%=as.getSize() %><br></td>
-                                <td><%=as.getQuantity() %><br></td>
-                                <td class="project-actions text-right">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                        data-target="#modal-projectDetails">
-                                        <i class="fas fa-folder"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                        data-target="#modal-stockDelete" id="Delete1">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <%} %>
-                        </tbody>
-                    </table>
-                </div>
-                
-                </div>
             </section>
                 <!-- /.card-body -->
             

@@ -47,18 +47,20 @@ public class CatagoryGradeSizeDao {
 		return catagories;
 	}
 
-	public void addCatagory(CatagoryGradeSizeBean cBean) {
+	public boolean addCatagory(CatagoryGradeSizeBean cBean) {
 		try {
 			Connection con = MySqlConnection.getInstance();
 			PreparedStatement pstmt = con.prepareStatement("insert into emscatagory(catagory) values (?)");
 			pstmt.setString(1, cBean.getCatagoryName());
 			pstmt.executeUpdate();
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 
-	public void addGrade(String selectedId, String gradeName) {
+	public boolean addGrade(String selectedId, String gradeName) {
 		String updateQuery = "insert into catagorygrade(Grade,catagoryid) values (?,?)";
 		try {
 			Connection con = MySqlConnection.getInstance();
@@ -66,12 +68,14 @@ public class CatagoryGradeSizeDao {
 			pstmt.setString(1, gradeName);
 			pstmt.setString(2, selectedId);
 			pstmt.executeUpdate();
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 
-	public void addSize(String CatagoryId, String GradeName, String size) {
+	public boolean addSize(String CatagoryId, String GradeName, String size) {
 		int id = 0;
 		try {
 			Connection con = MySqlConnection.getInstance();
@@ -83,22 +87,27 @@ public class CatagoryGradeSizeDao {
 				id = rs.getInt(1);
 			}
 
-			addFinalSize(id, size);
+			if(addFinalSize(id, size)) {
+				return true;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 
-	private void addFinalSize(int id, String size) {
+	private boolean addFinalSize(int id, String size) {
 		try {
 			Connection con = MySqlConnection.getInstance();
 			PreparedStatement pstmt = con.prepareStatement("insert into catagorygradesize(Gradeid,size) values (?,?)");
 			pstmt.setInt(1, id);
 			pstmt.setString(2, size);
 			pstmt.executeUpdate();
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 
 	public ArrayList<CatagoryGradeSizeBean> getGradeList(String catId) {

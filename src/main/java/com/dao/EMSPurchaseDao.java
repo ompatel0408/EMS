@@ -178,6 +178,35 @@ public class EMSPurchaseDao {
 		
 		return null;
 	}
+	
+	
+public ArrayList<EMSPurchaseBean> getAllPurchaseOrderByUsingProjectId(String projectId) {
+		
+		String selectQuery = "SELECT I.PROJECTID,EC.Catagory,I.Quantity,I.UOM,I.REMARKS,I.ITEMNAME,CG.GRADE,CGS.SIZE FROM INDENT I JOIN EMSCatagory EC ON I.ITEMCATAGORY = EC.catagoryId JOIN CatagoryGrade CG ON CG.catagoryId = EC.catagoryId JOIN CATAGORYGRADESIZE CGS ON CG.gradeId = CGS.gradeId WHERE PROJECTId = ?";
+		Connection conn = MySqlConnection.getInstance();
+		ArrayList<EMSPurchaseBean> pos = new ArrayList<EMSPurchaseBean>();
+		if(conn != null) {
+			
+			try {
+				PreparedStatement stmt = conn.prepareStatement(selectQuery);
+				stmt.setString(1, projectId);
+				ResultSet rs =stmt.executeQuery();
+
+				while(rs.next()) {
+					pos.add(new EMSPurchaseBean(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7), rs.getString(8)));
+				}
+				return pos;
+			}catch(SQLException E) {
+				E.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection Not Esablised!");
+		}
+		
+		return null;
+	}
+	
+	
 	public void deleteParticularPO(int poid) {
 		try {
 			Connection con = MySqlConnection.getInstance();

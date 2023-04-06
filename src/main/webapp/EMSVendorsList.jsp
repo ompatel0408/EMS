@@ -98,6 +98,7 @@ int srNo=1;
 															</div>
 															<input type="hidden" name="vendorId" value="<%=v.getVendorId()%>">
 															<input type="hidden" name="update" value="update">
+															<input type="hidden" name="vendorName" value="<%=v.getVendorName()%>">
 															<button type="submit"
 																class="btn btn-primary mt-2 disabled" id="input-update<%=v.getVendorId()%>">Save
 																changes</button>
@@ -137,6 +138,7 @@ int srNo=1;
                                                                             value=<%=v.getVendorId()%>>
                                                                         <input type="hidden" name="update"
                                                                             value="notupdate">
+                                                                            <input type="hidden" name="vendorName" value="<%=v.getVendorName()%>">
                                                                         <button type="submit"
                                                                             class="btn btn-outline-light">Delete
                                                                             Vendor</button>

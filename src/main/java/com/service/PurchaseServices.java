@@ -23,7 +23,7 @@ public class PurchaseServices {
 	private static int count = 0;
 	
 	public static ArrayList<EMSPurchaseBean> fetchDataFromXHRRequest(BufferedReader reader,HttpServletRequest request) {
-		System.out.println("Reached at Fetch");
+	
 		StringBuilder sb = new StringBuilder();
 		ArrayList<EMSPurchaseBean> APB = new ArrayList<EMSPurchaseBean>();
 		String line;
@@ -51,7 +51,7 @@ public class PurchaseServices {
 
 		// Loop through each object in the list and extract the fields
 		for (Map<String, Object> item : data) {
-			EMSPurchaseBean EPB = new EMSPurchaseBean(item.get("category").toString().concat(" ").concat(item.get("grade").toString()), item.get("size").toString(), Integer.parseInt(item.get("orderQuan").toString()), item.get("unit").toString(), item.get("rate").toString(), item.get("discountAmount").toString(), item.get("TotalAmount").toString(), Double.parseDouble(item.get("GST").toString())/2, Double.parseDouble(item.get("GST").toString())/2, EMSPurchaseDao.getInstance().getIndentId(item.get("ProjectId").toString()), LocalDate.now().toString(), PurchaseServices.generatePOId(), item.get("vendorName").toString());
+			EMSPurchaseBean EPB = new EMSPurchaseBean(item.get("ProjectId").toString(),item.get("category").toString().concat(" ").concat(item.get("grade").toString()), item.get("size").toString(), Integer.parseInt(item.get("orderQuan").toString()), item.get("unit").toString(), item.get("rate").toString(), item.get("discountAmount").toString(), item.get("TotalAmount").toString(), Double.parseDouble(item.get("GST").toString())/2, Double.parseDouble(item.get("GST").toString())/2, EMSPurchaseDao.getInstance().getIndentId(item.get("ProjectId").toString()), LocalDate.now().toString(), PurchaseServices.generatePOId(), item.get("vendorName").toString());
 			APB.add(EPB);
 		}
 		count = 0;

@@ -59,19 +59,20 @@ public class EMSItemServlet extends HttpServlet {
 		ESI.doGet(request,response);
 		HttpSession session = request.getSession();
 		ArrayList<ItemBean> AQb = ItemServices.fetchDataFromXHRRequest(request.getReader(),request);
+		
 		if(ItemDao.addItems(AQb)) {
 			System.out.println("Item Added SuccessFully");
-			if(session.getAttribute("userId") != null) {
-			if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("We have just received an order from ".concat(AQb.get(0).getClientName()),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","ORDERS"))) {
-				System.out.println(" Orders insert Logs Inserted!");
-			}else {
-				System.out.println("Orders  insert Logs not inserted!");
-			}
+			
+			for(ItemBean IB : AQb) {
+				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("We have just received an order from ".concat(IB.getClientName()),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","ORDERS"))) {
+					System.out.println(" Orders insert Logs Inserted!");
+				}else {
+					System.out.println("Orders  insert Logs not inserted!");
+				}
 			}
 		}else{
 			System.out.println("Item Added not SuccessFully");
 		}
-		
 	}
 	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

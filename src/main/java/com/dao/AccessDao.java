@@ -95,7 +95,6 @@ public class AccessDao
 		// TODO Auto-generated method stub
 		try {
 			Connection con = MySqlConnection.getInstance();
-			
 			PreparedStatement pstmt = con.prepareStatement("select userId from user where email=?");
 			pstmt.setString(1, email);
 			ResultSet rs = pstmt.executeQuery();

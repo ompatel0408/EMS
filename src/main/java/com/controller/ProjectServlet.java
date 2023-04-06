@@ -6,7 +6,9 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.bean.EMSLogsBean;
 import com.bean.ProjectBean;
+import com.dao.EMSLogsDao;
 import com.dao.ProjectDao;
 import com.service.*;
 
@@ -14,6 +16,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 public class ProjectServlet extends HttpServlet {
@@ -60,7 +63,7 @@ public class ProjectServlet extends HttpServlet {
 		String projectId="";
 		String clientName="";
 		String clientPoId = request.getParameter("clientPoId");
-		System.out.println("clIENT po id"+clientPoId);
+		
 		Integer advancePayPercent = Integer.parseInt(request.getParameter("advancePayPercent"));
 		Integer afterPayPercent = Integer.parseInt(request.getParameter("afterPayPercent"));
 		String finalDeliveryDate = request.getParameter("finalDeliveryDate");
@@ -77,7 +80,19 @@ public class ProjectServlet extends HttpServlet {
 		ProjectServices ps = new ProjectServices();
 		projectId = ps.projectGenerate(clientName);
 		projectbean.setProjectId(projectId);
-		ProjectDao.getInstance().addProject(projectbean);
+		
+		HttpSession session = request.getSession();
+		if(ProjectDao.getInstance().addProject(projectbean)) {
+			System.out.println("Project Added successfully!");
+
+			if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new project for client ".concat(clientName).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","PROJECTS"))) {
+				System.out.println("projects insert Logs Inserted!");
+			}else {
+				System.out.println("projects insert Logs not inserted!");
+			}
+		}else {
+			System.out.println("Project not added!");
+		}
 		ProjectDao.getInstance().updatePrPurchase(clientId,projectId);
 		response.sendRedirect("ProjectServlet?projectId=0&update=notupdate");
 	}

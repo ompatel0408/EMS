@@ -8,8 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import com.bean.EMSIssueNoteBean;
+import com.bean.EMSLogsBean;
 import com.bean.EMSProductionBean;
 import com.dao.EMSIssueNoteDao;
+import com.dao.EMSLogsDao;
 import com.dao.EMSProductionDao;
 import com.dao.EMSStoreDao;
 import com.google.gson.Gson;
@@ -135,9 +137,18 @@ public class EMSIssueNoteServlet extends HttpServlet {
 		
 		ArrayList<EMSIssueNoteBean> areind = IssueNoteServices.fetchDataFromXHRRequestInIssueBean(request.getReader(),request);
 		
+		HttpSession session = request.getSession();
 		if(eind.addItems(areind))
 		{
 			System.out.println("Items added successfylly....");
+			for(EMSIssueNoteBean EINB:areind) {
+				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A person Named ".concat(EINB.getIssuePerson()).concat(" collected ").concat(EINB.getCatagory()).concat(" ").concat(EINB.getGrade()).concat(" ").concat(EINB.getSize()).concat(" for ").concat(EINB.getPid()),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","GRN"))) {
+					System.out.println("purchase insert Logs Inserted!");
+				}else {
+					System.out.println("purchase insert Logs not inserted!");
+				}
+			}
+			
 		}
 		else {
 			System.out.println("Items Not added....");

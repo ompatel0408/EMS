@@ -24,6 +24,7 @@ public class ServerListener implements ServletContextListener {
 	public void contextDestroyed(ServletContextEvent event) {
 		System.out.println("Listener Destroyed");
 //		Trial.stopDailyMailService();
+		
 	}
 	
 	

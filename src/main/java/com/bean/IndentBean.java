@@ -1,7 +1,10 @@
 package com.bean;
 public class IndentBean {
+	
 	private int categoryId,quantity,sizeId,gradeId;
 	private String projectId,ItemName,remark,UOM,grade,size,catagory;
+	
+	
 	public String getGrade() {
 		return grade;
 	}

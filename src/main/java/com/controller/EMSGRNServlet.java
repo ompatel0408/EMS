@@ -8,6 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,8 +16,10 @@ import java.io.FileOutputStream;
 import org.apache.tomcat.jakartaee.commons.compress.utils.IOUtils;
 
 import com.bean.EMSGRNBean;
+import com.bean.EMSLogsBean;
 import com.dao.EMSFinalQuotationDao;
 import com.dao.EMSGRNDao;
+import com.dao.EMSLogsDao;
 import com.dao.EMSPurchaseDao;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -33,7 +36,8 @@ import jakarta.servlet.http.Part;
 		)
 public class EMSGRNServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static String vendorName = "";
+	
     public EMSGRNServlet() {
         // TODO Auto-generated constructor stub
     }
@@ -52,15 +56,26 @@ public class EMSGRNServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		EMSGRNBean EGB =  GRNServices.uploadPic(request);
+		vendorName = request.getParameter("VendorName");
+		HttpSession session = request.getSession();
 		if(EGB != null) {
-			System.out.println(EMSGRNDao.getInstance().addGRN(new EMSGRNBean(request.getParameter("VendorName"), request.getParameter("ReceivedDate"),EGB.getPath1().trim(),EGB.getPath2().trim())) ?  "GRN Added Successfully!!!" :  "GRN not added!");
+			if(EMSGRNDao.getInstance().addGRN(new EMSGRNBean(vendorName, request.getParameter("ReceivedDate"),EGB.getPath1().trim(),EGB.getPath2().trim()))) {
+				System.out.println("GRN added successfully!");
+				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new GRN from vendor ".concat(vendorName).concat(" has been reached At gate!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","GRN"))) {
+					System.out.println("purchase insert Logs Inserted!");
+				}else {
+					System.out.println("purchase insert Logs not inserted!");
+				}
+			}else {
+				System.out.println("GRN added successfully!");
+			}
 			response.sendRedirect("EMSGRNList.jsp");
 		}
 		
 	}
 	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Delete Called!");
+		
 		BufferedReader reader = request.getReader();
 	    StringBuilder sb = new StringBuilder();
 	    String line;
@@ -72,9 +87,19 @@ public class EMSGRNServlet extends HttpServlet {
 	    Gson gson = new Gson();
 	    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
 		
-		
+		HttpSession session = request.getSession();
 		if(EMSGRNDao.getInstance().deleteGRN(Integer.parseInt(jsonObject.get("grnId").getAsString()))) {
+		
 			System.out.println("Deleted successfully!");
+			
+
+			if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A GRN record of ".concat(vendorName).concat(" has been deleted successfully!"),Integer.parseInt(session.getAttribute("userId").toString()),"DELETED","GRN"))) {
+			
+				System.out.println("GRN delete Logs Inserted!");
+			}else{
+				System.out.println("GRN delete Logs not inserted!");
+			}
+			
 		}else {
 			System.out.println("not Deleted successfully!");
 		}

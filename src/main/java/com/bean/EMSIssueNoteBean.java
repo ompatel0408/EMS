@@ -13,23 +13,25 @@ public class EMSIssueNoteBean {
 	 private String contractor;
 	 private int issueId;
 	 private String issueDate;
-	 
 		public EMSIssueNoteBean() {}
 	  
        	public EMSIssueNoteBean(String pid, String catagory, String grade, String size, int quantity, String remark,
 			String uom, String issuePerson, String contractor) 
        	{
-		this.pid = pid;
-		this.catagory = catagory;
-		this.grade = grade;
-		this.size = size;
-		this.quantity = quantity;
-		this.remark = remark;
-		this.uom = uom;
-		this.issuePerson = issuePerson;
-		this.contractor = contractor;
+				this.pid = pid;
+				this.catagory = catagory;
+				this.grade = grade;
+				this.size = size;
+				this.quantity = quantity;
+				this.remark = remark;
+				this.uom = uom;
+				this.issuePerson = issuePerson;
+				this.contractor = contractor;
 	     }
+       	
 
+
+       	
        	public String getIssueDate() {
     		return issueDate;
     	}

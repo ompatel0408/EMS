@@ -3,7 +3,9 @@ package com.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import com.bean.EMSLogsBean;
 import com.bean.EMSProductionBean;
+import com.dao.EMSLogsDao;
 import com.dao.EMSProductionDao;
 import com.dao.ItemDao;
 import com.google.gson.Gson;
@@ -13,6 +15,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 public class EMSProductionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static EMSProductionServlet instance = null;
@@ -40,15 +43,22 @@ public class EMSProductionServlet extends HttpServlet {
 		     String qualityCheck = request.getParameter("qualityCheck");
 		    
 		     
-		     
-		     
 		     EMSProductionDao ED = EMSProductionDao.getInstance();
 		     
 		     
-		     
+		     HttpSession session = request.getSession();
 		     if(ED.addDataToDatabase(new EMSProductionBean(projectId, remark, Integer.parseInt(workDonePer),qualityCheck))) {
 		    	 
 		    	 System.out.println("inserted successfully!");
+		    	 
+		    	 
+		    	 if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean(workDonePer.concat(" work of the project ").concat(projectId).concat(" is completed!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","PRODUCTION"))) {
+						init();
+						System.out.println(" Client insert Logs Inserted!");
+					}else {
+						System.out.println("Client insert Logs not inserted!");
+					}
+		    	 
 		    	 response.sendRedirect("EMSDirectorsDashboard.jsp");
 		     }else {
 		    	 System.out.println("Not inserted!");

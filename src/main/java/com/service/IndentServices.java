@@ -45,21 +45,7 @@ public class IndentServices {
 		List<Map<String, Object>> data = gson.fromJson(jsonData, type);
 		System.out.println(data);
 		// Loop through each object in the list and extract the fields
-//		for (Map<String, Object> item : data) {
-//			IndentBean Qb = new IndentBean();
-//			System.out.println(item);
-//			Qb.setProjectId(item.get("ProjectId").toString());
-//			Qb.setItemCategory(item.get("category-id").toString());
-//			Qb.setItemName(item.get("item-id").toString());
-//			Qb.setQuantity(Integer.parseInt(item.get("quantity-id").toString()));
-//			Qb.setRemarks(item.get("remark-id").toString());
-//			Qb.setGradeid(Integer.parseInt(item.get("grade").toString()));
-//			Qb.setSizeid(Integer.parseInt(item.get("size").toString()));
-//			Qb.setUom("botjod");
-//			System.out.println(Qb);
-//		   
-//		    AQb.add(Qb);
-//		}
+
 		IndentDao id = IndentDao.getInstance();
 		for (Map<String, Object> item : data) {
 			IndentBean Qb = new IndentBean();
@@ -80,7 +66,6 @@ public class IndentServices {
 			String UOM = "KG";
 			Qb.setUOM(UOM);
 			AQb.add(Qb);
-			System.out.println(Qb);
 		}
 		return AQb;
 	}

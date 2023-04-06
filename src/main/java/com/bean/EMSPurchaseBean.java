@@ -16,12 +16,29 @@ public class EMSPurchaseBean {
 	private String PONumber;
 	private String VendorName;
 	private int poId;
+	private String projectName;
+	private String ProjectId;
+	private String category;
+	private String grade;
+	private String remarks;
+	private String itemName;	
 	
+	public EMSPurchaseBean(String projectId,String category,int quantity,String uom,String remarks,String itemName,String grade,String size) {
+		this.Size = size;
+		this.quantity = quantity;
+		this.Uom = uom;
+		this.ProjectId = projectId;
+		this.category = category;
+		this.grade = grade;
+		this.remarks = remarks;
+		this.itemName = itemName;
+	}
+
 	public EMSPurchaseBean() {}
-	
-	
-	public EMSPurchaseBean(String productDescription, String size, int quantity, String uom, String ratePerKg,String discount, String netAmount, double sGST, double cGST, int indentId, String currentDate, String pONumber,String vendorName) {
+
+	public EMSPurchaseBean(String projectName,String productDescription, String size, int quantity, String uom, String ratePerKg,String discount, String netAmount, double sGST, double cGST, int indentId, String currentDate, String pONumber,String vendorName) {
 		this.ProductDescription = productDescription;
+		this.projectName = projectName; 
 		this.Size = size;
 		this.quantity = quantity;
 		this.Uom = uom;
@@ -34,6 +51,57 @@ public class EMSPurchaseBean {
 		this.CurrentDate = currentDate;
 		this.PONumber = pONumber;
 		this.VendorName = vendorName;
+	}
+	
+	public String getProjectId() {
+		return ProjectId;
+	}
+
+	public void setProjectId(String projectId) {
+		ProjectId = projectId;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	
+	public String getProjectName() {
+		return projectName;
+	}
+
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 	
 	

@@ -92,12 +92,14 @@ function getListSideBar(userId){
     	  				document.getElementById('addvendor-target-id').style.display='block';
     	  			}if(gradeData.vendorList==1){
     	  				document.getElementById('vendorlist-target-id').style.display='block';
-    	  			}if(gradeData.addUser==1){
+    	  			}
+    	  			if(gradeData.showLogs==1){
+    	  				document.getElementById('showlogs-target-id').style.display='block';
+    	  			}
+    	  			if(gradeData.addUser==1){
     	  				document.getElementById('adduser-target-id').style.display='block';
     	  			}if(gradeData.addGraph==1){
     	  				document.getElementById('addgraph-target-id').style.display='block';
-    	  			}if(gradeData.showLogs==1){
-    	  				document.getElementById('showlogs-target-id').style.display='block';
     	  			}if(gradeData.showOrder==1){
     	  				document.getElementById('showorder-target-id').style.display='block';
     	  			}

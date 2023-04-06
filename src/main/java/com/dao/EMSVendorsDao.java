@@ -74,32 +74,36 @@ public class EMSVendorsDao {
 			return null;
 		}
 		
-		public void deleteVendor(int vendorId) {
+		public boolean deleteVendor(int vendorId) {
 			try {
 				Connection con = MySqlConnection.getInstance();
 				PreparedStatement pstmt = con.prepareStatement("delete from vendors where vendorid = ?");
 				pstmt.setInt(1, vendorId);
 				pstmt.executeUpdate();
+				return true;
 				
 			}
 			catch (Exception e) {
 				e.printStackTrace();
 			}
+			return false;
+			
 		}
 		
 		
 		
-		public void updateVendor(String newData, String changeField, int vendorId) {
+		public boolean updateVendor(String newData, String changeField, int vendorId) {
 			try {
 				Connection con = MySqlConnection.getInstance();
 				PreparedStatement pstmt = con.prepareStatement("update vendors set " + changeField + "= ? where vendorid = ? ");
 				pstmt.setString(1, newData);
 				pstmt.setInt(2, vendorId);
 				pstmt.executeUpdate();
-				
+				return true;
 			}
 			catch (Exception e) {
 				e.printStackTrace();
 			}
+			return false;
 		}
 	}

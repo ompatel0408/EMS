@@ -65,13 +65,13 @@
                 </div>
 
                 <div class="card-body">
-                    <form onsubmit="event.preventDefault();submitForm()">
+                    <form onsubmit="event.preventDefault();submitFormToServlet()">
                         <div class="row">
                             <div class="col-sm-3">
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label for="item-id">Project</label>
-                                    <select id="ProjectId1" class="form-control" onload="getProjects1()" onblur="ProjectChange()" required>
+                                    <select id="ProjectId1" class="form-control" onload="getProjects1()" onblur="ProjectChange()" onchange="getIndentList();" required>
                                     </select>
                                 </div>
                             </div>
@@ -79,29 +79,21 @@
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label>Category</label>
-                                    <select  id="category-id" class="form-control" onchange="getXHRRequestToPurchaseGrade()"
-                                         required disabled>
-                                    </select>
+                                    <input type="text" class="form-control" id="category-id" placeholder="Category" disabled>
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <div class="form-group">
+                            
+                            <div class="form-group">
                                     <label>Grade</label>
-                                    <select id="grade-id" class="form-control" onchange="getXHRRequestToPurchaseSize()"
-                                        required disabled>
-                                        <option value="select" selected>Select grade</option>
-                                    </select>
-                                </div>
+                                    <input type="text" class="form-control" id="grade-id" placeholder="Grade" disabled>
+                            </div>
                             </div>
                             <div class="col-sm-3">
-                                <div class="form-group">
+                            <div class="form-group">
                                     <label>Size</label>
-                                    <select id="size-id" class="form-control"
-                                        required disabled>
-                                        <option value="">Select size</option>
-                                        
-                                    </select>
-                                </div>
+                                    <input type="text" class="form-control" id="size-id" placeholder="Size" disabled>
+                            </div>
                             </div>
 
                             <div class="col-sm-6">
@@ -109,7 +101,7 @@
                                 <div class="form-group">
                                     <label>Rate</label>
                                     <div>
-                                        <input class="form-control" id="rate-id" maxlength="20" name="HSNcode"
+                                        <input class="form-control" id="rate-id" maxlength="20" name="HSNcode" onkeyup="calculateAmount()"
                                             placeholder="Enter Rate" type="text" value="" disabled="disabled">
                                     </div>
                                 </div>
@@ -127,7 +119,7 @@
                                 <div class="form-group">
                                     <label>Order Quantity</label>
                                     <div>
-                                        <input class="form-control" id="orderQuan-id" maxlength="20" name="HSNcode" onkeyup="calculateAmount()"
+                                        <input class="form-control" id="orderQuan-id" maxlength="20" name="HSNcode"
                                             placeholder="Enter Order quantity" type="text" value="" disabled>
                                     </div>
                                 </div>
@@ -218,7 +210,7 @@
                             <!-- </div> -->
 
                             <div class="col-sm-6 d-flex justify-content-center align-items-center mt-auto ">
-                                <button type="button" class="btn btn-primary disabled" id="add-store" onclick="appendChildOfPurchase()"> <strong>+
+                                <button type="button" class="btn btn-primary disabled" id="add-store" onclick="submitForm()"> <strong>+
                                         Add to Purchase </strong></button>
                             </div>
                             <div class="col-md-12 d-flex justify-content-center align-items-center mt-2">
@@ -249,8 +241,7 @@
                     <table class="table table-striped projects overflow-scroll">
                         <thead>
                             <tr>
-                                <th style="width: 2%">Sr.No</th>
-                                <th style="width: 15%">ProjectId</th>
+                                <th style="width: 10%">Sr.No</th>
                                 <th style="width: 10%">Category</th>
                                 <th style="width: 10%">Grade</th>
                                 <th style="width: 12%">Size</th>
@@ -259,106 +250,31 @@
                                 <th style="width: 9%"></th>
                             </tr>
                         </thead>
-                        <tbody id="MyTable"></tbody>
+                        <tbody id="MyTable16"></tbody>
                     </table>
                 </div>
-                <div class="modal fade" id="modal-editItem">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Project Details</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                                    id="enableItemName">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="col-m-5">
-                                <div class="form-group p-3">
-                                    <label>Select </label>
-                                    <p id="select-error"></p>
-                                    <form onsubmit="event.preventDefault();updateField()">
-                                        <select class="form-control select2 select2-hidden-accessible my-3"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
-                                            id="input-form">
-                                            <br>
-                                            <option selected="selected" data-select2-id="3">Select
-                                                option you want to update..</option>
-                                            <option value="category">Category</option>
-                                            <option value="grade">Grade</option>
-                                            <option value="size">Size</option>
-                                            <option value="quantity">Quantaty</option>
-                                        </select>
-
-                                        <div class="form-group" id="hide-text" style="display: none;">
-                                            <label for="placeholderChange" id="lableName" class="mt-2"></label>
-                                            <input type="text" class="form-control" id="placeholderChange"
-                                                placeholder="Enter">
-                                        </div>
-                                        <div class="form-group" id="hide-date" style="display: none;">
-                                            <label for="" id="lableName1">Proje</label> <input type="date"
-                                                class="form-control" id="placeholderChange1"
-                                                placeholder="Enter Delivery Date">
-                                        </div>
-                                        <!-- text input -->
-                                        <div class="form-group" id="category-id-model" style="display: none;">
-                                            <label>Category</label>
-                                            <select type="text" id="category-id" class="form-control"
-                                                placeholder="select category" required>
-                                                <option value="select" selected>Select category</option>
-                                                <option value="ms">MS</option>
-                                                <option value="ss">SS</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group" id="grade-id-model" style="display: none;">
-                                            <label>Grade</label>
-                                            <select type="text" id="grade-id" class="form-control"
-                                                placeholder="select Grade" required>
-                                                <option value="">Select Grade</option>
-                                                <option value="">aaa</option>
-                                                <option value="">bbb</option>
-                                                <option value="">ccc</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group" id="size-id-model" style="display: none;">
-                                            <label>Size</label>
-                                            <select type="text" id="size-id" class="form-control"
-                                                placeholder="select size" required>
-                                                <option value="">Select size</option>
-                                                <option value="">AAA</option>
-                                                <option value="">BBB</option>
-                                                <option value="">CCC</option>
-                                            </select>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary mt-2 disabled"
-                                            id="input-update">Save
-                                            changes</button>
-                                    </form>
-                                </div>
-                            </div>
-                            <!-- /.modal-project show -->
-                        </div>
-                    </div>
-                    <!-- /.modal-edit items -->
-                </div>
-                <div class="modal fade" id="modal-projectDelete">
-                    <div class="modal-dialog">
-                        <div class="modal-content bg-danger">
-                            <div class="modal-header">
-                                <h4 class="modal-title" onclick=" deleteItem()">Delete Project</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true"></span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Are you sure you want to delete this project?</p>
-                            </div>
-                            <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-outline-light">Delete Project</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="modal fade" id="modal-itemDelete">
+		<div class="modal-dialog">
+			<div class="modal-content bg-danger">
+				<div class="modal-header">
+					<h4 class="modal-title">Delete Item</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true"></span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Are you sure you want to delete this Item?</p>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button type="button" class="btn btn-outline-light"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-outline-light"
+						 data-dismiss="modal" id="deleteClicked">Delete Item</button>
+				</div>
+			</div>
+		</div>
+	</div>
             </div>
         </div>
         </div>

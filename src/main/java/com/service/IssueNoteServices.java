@@ -52,7 +52,7 @@ public class IssueNoteServices
 		for (Map<String, Object> item : data) {
 			int categoryid = qpid.getCategoryIdFromDatabase(item.get("category").toString());
 			EMSIssueNoteBean stb = new EMSIssueNoteBean(item.get("ProjectId").toString(), item.get("category").toString(), item.get("grade").toString(), item.get("size").toString(),  Integer.parseInt(item.get("quantity").toString()), item.get("remark").toString(), item.get("unit").toString(), item.get("issuePer").toString(), item.get("contracter").toString());
-//			EMSIssueNoteBean stb = new EMSStoreBean(item.get("ProjectId").toString(), categoryid, sd.getGradeIdFromDatabase(categoryid,item.get("grade").toString()), sd.getSizeIdFromDatabase(categoryid, sd.getGradeIdFromDatabase(categoryid,item.get("grade").toString()), item.get("size").toString()), Integer.parseInt(item.get("quantity").toString()));
+
 			alinb.add(stb);
 		}
 		return alinb;

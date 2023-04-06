@@ -8,8 +8,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
+import com.bean.EMSLogsBean;
 import com.bean.EMSStoreBean;
+import com.dao.EMSLogsDao;
 import com.dao.EMSStoreDao;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -32,10 +35,18 @@ public class EMSStoreServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<EMSStoreBean> alsb = EMSStoreServices.fetchDataFromXHRRequestInStore(request.getReader(),request);
-		
+		HttpSession session = request.getSession();
 		if(std.addItems(alsb))
 		{
 			System.out.println("Items added successfylly....");
+			
+			for(EMSStoreBean ESB:alsb) {
+				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new size ".concat(ESB.getSize()).concat(" of grade ").concat(ESB.getGrade()).concat(" and category ").concat(ESB.getCategory()).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","GENERALSTORE"))) {
+					System.out.println("GENERALSTORE insert Logs Inserted!");
+				}else {
+					System.out.println("GENERALSTORE insert Logs not inserted!");
+				}
+			}
 		}
 		else {
 			System.out.println("Items Not added....");

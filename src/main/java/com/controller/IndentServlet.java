@@ -6,14 +6,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import com.bean.CatagoryGradeSizeBean;
+import com.bean.EMSLogsBean;
 import com.bean.IndentBean;
 import com.dao.CatagoryGradeSizeDao;
+import com.dao.EMSLogsDao;
 import com.dao.IndentDao;
 import com.dao.ItemDao;
 import com.dao.ProjectDao;
@@ -29,15 +32,17 @@ public class IndentServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-		System.out.println("AAGye");
+
+
 		ProjectDao pd = ProjectDao.getInstance();
 		ArrayList<String> projectIds = new ArrayList<String>();
 		projectIds = pd.getOnlyProjectId();
+
 		request.setAttribute("projectIds", projectIds);
 		ArrayList<CatagoryGradeSizeBean> cgl = new ArrayList<CatagoryGradeSizeBean>();
 		CatagoryGradeSizeDao cddao = CatagoryGradeSizeDao.getInstance();
 		cgl = cddao.getCatagoryList();
+		
 		request.setAttribute("categoryIds", cgl);
 		RequestDispatcher rd = request.getRequestDispatcher("Indent.jsp");
 		rd.forward(request, response);
@@ -47,15 +52,26 @@ public class IndentServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("reached!");
+		
 		ArrayList<IndentBean> ibean = new ArrayList<IndentBean>(); 
 		ibean = IndentServices.fetchDataFromXHRRequest(request.getReader(), request);
-		System.out.println(ibean);
-		for (IndentBean indentBean : ibean) {
-			System.out.println(indentBean.getCategoryId());
-		}
+		
+		HttpSession session = request.getSession();
 		IndentDao indentDao = IndentDao.getInstance();
-		indentDao.addIndent(ibean);
+		if(indentDao.addIndent(ibean)) {
+			System.out.println("Indent Added!");
+			
+			for(IndentBean IB:ibean) {
+
+				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new indent request for project ".concat(IB.getProjectId()).concat(" and Order ").concat(IB.getItemName()).concat(" has been created!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","PROJECTS"))) {
+					System.out.println("projects insert Logs Inserted!");
+				}else {
+					System.out.println("projects insert Logs not inserted!");
+				}
+			}
+		}else {
+			System.out.println("Indent not Added!");
+		}
 	}
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("put of indent");

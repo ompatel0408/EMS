@@ -38,7 +38,7 @@ public static ProjectDao instance = null;
 		return null;
 	}
 	
-	public void addProject(ProjectBean projectBean) {
+	public boolean addProject(ProjectBean projectBean) {
 		try {
 			Connection con = MySqlConnection.getInstance();
 			PreparedStatement pstmt = con.prepareStatement("insert into projects values (?,?,?,?,?,?)");
@@ -49,10 +49,12 @@ public static ProjectDao instance = null;
 			pstmt.setInt(5,projectBean.getAfterPayPercent());
 			pstmt.setInt(6,projectBean.getClientId());
 			pstmt.executeUpdate();
+			return true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 	
 	public ArrayList<ProjectBean> getAllProject() {
@@ -154,8 +156,7 @@ public static ProjectDao instance = null;
 	}
 	
 	public boolean updatePrPurchase(int clientId,String projectId) {
-		System.out.println(clientId);
-		System.out.println(projectId);
+		
 		String updateQuery = "UPDATE PrePurchase SET PROJECTID = ? WHERE ClientId = ?";
 		Connection conn = MySqlConnection.getInstance();
 		
