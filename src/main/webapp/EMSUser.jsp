@@ -6,7 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
 	<%
 		String nameErr = (String)request.getAttribute("nameErr");
 		String phoneErr = (String)request.getAttribute("phoneErr");
@@ -19,7 +19,7 @@
 		<div class="content-wrapper p-3">
 			<div class="card card-default">
 				<div class="card-header">
-					<h3 class="card-title">Add Vendor</h3>
+					<h3 class="card-title">Add User</h3>
 
 					<div class="card-tools">
 						<button type="button" class="btn btn-tool"
@@ -34,7 +34,7 @@
 				</div>
 
 				<div class="card-body">
-					<form action="AddUserSevlet" method="Post">
+					<form action="EMSUsersSevlet" method="Post">
 						<div class="row">
 							<div class="col-sm-6">
 								<!-- text input -->
@@ -96,4 +96,23 @@
 		</div>
 	</div>
 </body>
+<script src="assets/plugins/jquery/jquery.min.js"></script>
+	<script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/plugins/select2/js/select2.full.min.js"></script>
+	<script
+		src="assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+	<script src="assets/plugins/moment/moment.min.js"></script>
+	<script src="assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+	<script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+	<script
+		src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+	<script
+		src="assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script
+		src="assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+	<script src="assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+	<script src="assets/plugins/dropzone/min/dropzone.min.js"></script>
+	<script src="assets/dist/js/adminlte.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </html>

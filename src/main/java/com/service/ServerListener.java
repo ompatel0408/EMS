@@ -4,7 +4,6 @@ import com.util.Trial;
 
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
-import jakarta.servlet.annotation.WebListener;
 
 
 public class ServerListener implements ServletContextListener {

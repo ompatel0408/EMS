@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 	<jsp:include page="Header.jsp"></jsp:include>
 	<jsp:include page="LeftSideBar.jsp"></jsp:include>

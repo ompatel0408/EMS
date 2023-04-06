@@ -17,7 +17,7 @@
 }
 </style>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 	<%
 	ArrayList<EMSPurchaseBean> pos = (ArrayList<EMSPurchaseBean>) request.getAttribute("pos");
 	%>

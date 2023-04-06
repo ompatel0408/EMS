@@ -37,6 +37,19 @@ public class ItemBean {
     	this.drawingId = drawingId;	
     }
     
+    public ItemBean(String clientName,int clientId,String ItemCode,int quotationId,String drawingId,String ItemName,int Quantity,String tagNo,String remarks,String totalPrice,String date) {
+    	this.clientName =clientName;
+    	this.ItemName = ItemName;
+    	this.Quantity = Quantity;
+    	this.tagNo = tagNo;
+    	this.remarks = remarks;
+    	this.totalPrice = totalPrice;
+    	this.date = date;
+    	this.clientId = clientId;
+    	this.ItemCode = ItemCode;
+    	this.quotationId = quotationId;
+    	this.drawingId = drawingId;	
+    }
     
     
     public ItemBean(int clientId,int quotationId) {

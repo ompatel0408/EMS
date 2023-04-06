@@ -3,13 +3,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.bean.EMSFinalQuotationBean;
+import com.bean.EMSLogsBean;
 import com.dao.EMSFinalQuotationDao;
-
+import com.dao.EMSLogsDao;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 public class EMSFinalQuotationListServlet extends HttpServlet {
@@ -43,11 +45,20 @@ public class EMSFinalQuotationListServlet extends HttpServlet {
 	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		System.out.println("ClientName :"+request.getParameter("ClientName"));
+		HttpSession session = request.getSession();
 		int quotationId = Integer.parseInt(request.getParameter("quotationId"));
 		String changeField = request.getParameter("changeField");
 		String newData = request.getParameter("newData");
 		EMSFinalQuotationDao EMSFinalQuotationDao = new EMSFinalQuotationDao();
-		EMSFinalQuotationDao.updateQuotation(newData, changeField, quotationId);
+		if(EMSFinalQuotationDao.updateQuotation(newData, changeField, quotationId)) {
+				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A Final Quotation information of ".concat(request.getParameter("ClientName")).concat( " has been updated successfully!"),Integer.parseInt(session.getAttribute("userId").toString()),"UPDATED","FINALQUOTATION"))) {
+					System.out.println("clients update Logs Inserted!");
+				}else {
+					System.out.println("client update Logs not inserted!");
+				}
+		}
 	}
 	
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

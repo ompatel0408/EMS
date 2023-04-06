@@ -29,6 +29,7 @@ public class ItemServices {
 	private static String ItemCode;
 	private static boolean isPresent = false;
 	private static List<String> itemCode;
+	private static ArrayList<String> orderCode = new ArrayList<String>();
 	private static int clientId;
 	public static ArrayList<ItemBean> fetchDataFromXHRRequest(BufferedReader reader,HttpServletRequest request) {
 		
@@ -43,10 +44,8 @@ public class ItemServices {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+				
 		String jsonData = sb.toString();
-	
 
 		// Create a Gson object
 		Gson gson = new Gson();
@@ -58,34 +57,26 @@ public class ItemServices {
 		List<Map<String, Object>> data = gson.fromJson(jsonData, type);
 
 		// Loop through each object in the list and extract the fields
+		
 		for (Map<String, Object> item : data) {
 			String ClientName = item.get("ClientId").toString();
-			System.out.println("offercode"+item.get("offerCode").toString());
+			
 			clientId = ClientDao.getInstance().getClientIdFormDatabase(ClientName);
-//			if(QuotationDao.getQuotationIdFromDataBase(clientId) == null) {
-//				QuotationDao.addQuotation(new QuotationBean(clientId,LocalDate.now().toString()));
-//			}
-//			
+			
 			itemCode = EMSOffersDao.getInstance().getOfferCodeFromdatabase(ClientName).stream()
             .filter(n -> n.equals(item.get("offerCode").toString()))
             .collect(Collectors.toList());
 			
-			
-			ItemBean Qb = new ItemBean(clientId,itemCode.get(0),QuotationDao.getQuotationIdFromDataBase(clientId).getQuotationId(),ItemServices.generateDrawingId(clientId,itemCode.get(0)),item.get("ItemName").toString(), Integer.parseInt((String) item.get("quantity")), item.get("tagNo").toString(),item.get("remarks").toString(), item.get("TotalPrice").toString(),item.get("delivaryDate").toString());
-			
-		    AQb.add(Qb);
+			if(!itemCode.isEmpty()) {
+				orderCode.add(itemCode.get(0));
+				AQb.add(new ItemBean(ClientName,clientId,itemCode.get(0),QuotationDao.getQuotationIdFromDataBase(clientId).getQuotationId(),ItemServices.generateDrawingId(clientId,itemCode.get(0)),item.get("ItemName").toString(), Integer.parseInt((String) item.get("quantity")), item.get("tagNo").toString(),item.get("remarks").toString(), item.get("TotalPrice").toString(),item.get("delivaryDate").toString()));
+			}
 		}
-		EMSOffersDao.getInstance().updateStatus(new ArrayList<>(itemCode));
+		EMSOffersDao.getInstance().updateStatus(new ArrayList<>(orderCode));
 		EMSOffersDao.getInstance().updateStatus(clientId);
-		
-		for(ItemBean It :AQb) {
-			System.out.println(It.getItemCode());
-		}
 		return AQb;
 	}
-	
 	public static String generateDrawingId(int clientId,String offerCode) {
-		
 		String drawingId = "";
 		drawingId = String.valueOf(clientId).concat("_").concat(offerCode);
 		return drawingId;

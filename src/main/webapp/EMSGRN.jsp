@@ -55,7 +55,7 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 }
 </style>
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
 		<jsp:include page="Header.jsp"></jsp:include>
 		<jsp:include page="LeftSideBar.jsp"></jsp:include>

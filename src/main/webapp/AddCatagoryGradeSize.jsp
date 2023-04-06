@@ -9,7 +9,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
 	<%
 	ArrayList<CatagoryGradeSizeBean> catagories = (ArrayList<CatagoryGradeSizeBean>) request.getAttribute("data");
 	ArrayList<String> catName = new ArrayList<String>();

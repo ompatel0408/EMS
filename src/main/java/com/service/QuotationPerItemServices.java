@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import com.bean.QuotationPerItemBean;
+import com.dao.EMSOffersDao;
 import com.dao.QuotationPerItemDao;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -14,6 +15,8 @@ import com.google.gson.reflect.TypeToken;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class QuotationPerItemServices {
+	private static String offerName = "";
+	private static boolean isPresent = false;
 	
 	public static ArrayList<QuotationPerItemBean> fetchDataFromXHRRequestInQuotaionPerItem(BufferedReader reader,HttpServletRequest request) {
 	
@@ -40,6 +43,7 @@ public class QuotationPerItemServices {
 
 		// Convert the JSON array to a List of Maps
 		List<Map<String, Object>> data = gson.fromJson(jsonData, type);
+		
 
 		// Loop through each object in the list and extract the fields
 		for (Map<String, Object> item : data) {
@@ -47,11 +51,18 @@ public class QuotationPerItemServices {
 			int categoryId = QPI.getCategoryIdFromDatabase(category);
 			int gradeId = QPI.getgradeIdFromDatabase(item.get("grade").toString());
 			int sizeId = QPI.getsizeIdFromDatabase(item.get("size").toString());
+			
+			if(!isPresent) {
+				offerName = EMSOffersDao.getInstance().getOfferNameFromDatabase(item.get("OfferName").toString());
+				isPresent = true;
+			}
+			
 			String TotalpricePerItem = String.valueOf(Double.parseDouble(item.get("price").toString()) * Double.parseDouble(item.get("quantity").toString()));
-			QuotationPerItemBean QPIB = new QuotationPerItemBean(item.get("OfferName").toString(),categoryId,gradeId,sizeId,Double.parseDouble(item.get("quantity").toString()), item.get("waight").toString(), item.get("unit").toString(), item.get("price").toString(),item.get("percentage").toString(),TotalpricePerItem);
+			QuotationPerItemBean QPIB = new QuotationPerItemBean(offerName,item.get("OfferName").toString(),categoryId,gradeId,sizeId,Double.parseDouble(item.get("quantity").toString()), item.get("waight").toString(), item.get("unit").toString(), item.get("price").toString(),item.get("percentage").toString(),TotalpricePerItem);
 			
 			AQPIB.add(QPIB);
 		}
+		isPresent = false;
 		
 		return AQPIB;
 	}

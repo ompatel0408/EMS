@@ -2,7 +2,7 @@ package com.bean;
 
 public class AccessBean 
 {
-	private int userId,accessManagement,addProject,addOffer,quotationPerOffers,finalQuotation,listOrder,generateIndent,indentList,generatePo,poList,generateGrn,grnList,addDrawing,drawingList,addClient,issueNoteList,addGeneralStore,addVendor,projectStatus,vendorList,generateIssueNote,showQuotationPerOffer,addOrder,showFinalQuotation,orderList,addNewStock,stockList;
+	private int userId,accessManagement,addProject,showOrder,addUser,showLogs,addGraph,addOffer,quotationPerOffers,finalQuotation,listOrder,generateIndent,indentList,generatePo,poList,generateGrn,grnList,addDrawing,drawingList,addClient,issueNoteList,addGeneralStore,addVendor,projectStatus,vendorList,generateIssueNote,showQuotationPerOffer,addOrder,showFinalQuotation,orderList,addNewStock,stockList;
 	public int getAddDrawing() {
 		return addDrawing;
 	}
@@ -10,6 +10,36 @@ public class AccessBean
 
 	public void setAddDrawing(int addDrawing) {
 		this.addDrawing = addDrawing;
+	}
+
+
+	public int getShowOrder() {
+		return showOrder;
+	}
+
+
+	public void setShowOrder(int showOrder) {
+		this.showOrder = showOrder;
+	}
+
+
+	public int getAddUser() {
+		return addUser;
+	}
+
+
+	public void setAddUser(int addUser) {
+		this.addUser = addUser;
+	}
+
+
+	public int getShowLogs() {
+		return showLogs;
+	}
+
+
+	public void setShowLogs(int showLogs) {
+		this.showLogs = showLogs;
 	}
 
 
@@ -43,6 +73,16 @@ public class AccessBean
 
 	public void setIssueNoteList(int issueNoteList) {
 		this.issueNoteList = issueNoteList;
+	}
+
+
+	public int getAddGraph() {
+		return addGraph;
+	}
+
+
+	public void setAddGraph(int addGraph) {
+		this.addGraph = addGraph;
 	}
 
 

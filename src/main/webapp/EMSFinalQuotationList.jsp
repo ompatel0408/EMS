@@ -131,7 +131,7 @@ int srNo = 1;
 														<label>Select </label>
 														<p id="select-error<%=qb.getQuotationId()%>"></p>
 														<form action="EMSFinalQuotationListServlet">
-
+															<input type="hidden" name="ClientName" value="<%=qb.getClientName()%>">
 															<select
 																class="form-control select2 select2-hidden-accessible"
 																name="changeField" style="width: 100%;"

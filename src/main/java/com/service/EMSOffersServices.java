@@ -12,6 +12,7 @@ import java.util.Map;
 
 import com.bean.EMSOffersBean;
 import com.bean.QuotationBean;
+import com.dao.ClientDao;
 import com.dao.EMSOffersDao;
 import com.dao.QuotationDao;
 import com.google.gson.Gson;
@@ -38,7 +39,7 @@ public class EMSOffersServices{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			
 			String jsonData = sb.toString();
 			System.out.println(jsonData);
 
@@ -56,7 +57,7 @@ public class EMSOffersServices{
 			
 			// Loop through each object in the list and extract the fields
 			for (Map<String, Object> item : data) {
-				clientId = Integer.parseInt(item.get("ClientId").toString());
+				clientId = Integer.valueOf(item.get("ClientId").toString());
 				System.out.println("Client iD"+clientId);
 				
 				
@@ -69,7 +70,7 @@ public class EMSOffersServices{
 						isUpdate = true;
 					}
 				}
-				EMSOffersBean Qb =  new EMSOffersBean(Integer.parseInt(item.get("ClientId").toString()), Integer.parseInt(item.get("quantity").toString()), QuotationDao.getQuotationIdFromDataBase(clientId).getQuotationId(), item.get("ItemName").toString(),item.get("remarks").toString(),EMSOffersServices.generateOfferCode(request), item.get("TotalPrice").toString(), EMSOffersServices.generateDrawingId(clientId));
+				EMSOffersBean Qb =  new EMSOffersBean(ClientDao.getInstance().getClientNameFormDatabase(clientId),Integer.parseInt(item.get("ClientId").toString()), Integer.parseInt(item.get("quantity").toString()), QuotationDao.getQuotationIdFromDataBase(clientId).getQuotationId(), item.get("ItemName").toString(),item.get("remarks").toString(),EMSOffersServices.generateOfferCode(request), item.get("TotalPrice").toString(), EMSOffersServices.generateDrawingId(clientId));
 				AQb.add(Qb);
 				System.out.println(Qb);
 			}

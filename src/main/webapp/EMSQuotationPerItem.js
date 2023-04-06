@@ -246,6 +246,7 @@ function XHRRequestForQuotationPerItem(){
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var response = xhr.responseText;
 			console.log(response);
+			window.location.href = "QuotationPerItemListServlet?offer=1"
 		}
 	}
 	// send the request
@@ -357,5 +358,11 @@ document.getElementById("input-form").addEventListener("change", () => {
                 document.getElementById("select-error").innerText = "";
                 document.getElementById("select-error").style.color = "red";
             }
-        })
+    })
+
+window.addEventListener("beforeunload", function (event) {
+  event.preventDefault();
+  document.cookie = "myCookie2=".concat(JSON.stringify(data));
+  event.returnValue = "Are you sure you want to leave this page?"
+});
 

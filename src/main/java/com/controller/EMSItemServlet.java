@@ -13,8 +13,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import com.bean.ClientBean;
+import com.bean.EMSLogsBean;
 import com.bean.ItemBean;
 import com.bean.PrePurchaseBean;
+import com.dao.EMSLogsDao;
 import com.dao.ItemDao;
 import com.dao.PrePurchaseDao;
 import com.google.gson.Gson;
@@ -55,10 +57,17 @@ public class EMSItemServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		EMSItemServlet ESI = new EMSItemServlet();
 		ESI.doGet(request,response);
+		HttpSession session = request.getSession();
 		ArrayList<ItemBean> AQb = ItemServices.fetchDataFromXHRRequest(request.getReader(),request);
 		if(ItemDao.addItems(AQb)) {
 			System.out.println("Item Added SuccessFully");
-			
+			if(session.getAttribute("userId") != null) {
+			if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("We have just received an order from ".concat(AQb.get(0).getClientName()),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","ORDERS"))) {
+				System.out.println(" Orders insert Logs Inserted!");
+			}else {
+				System.out.println("Orders  insert Logs not inserted!");
+			}
+			}
 		}else{
 			System.out.println("Item Added not SuccessFully");
 		}

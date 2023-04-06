@@ -133,7 +133,7 @@ public class QuotationPerItemDao {
 	}
 	
 	public ArrayList<String> getItemCodeFromDatabase() {
-		String selectQuery = "SELECT OfferCode FROM offer";
+		String selectQuery = "SELECT OfferCode FROM offer WHERE STATUS = 'FALSE' order by 1 DESC";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<String> a = new  ArrayList<String>();
 		

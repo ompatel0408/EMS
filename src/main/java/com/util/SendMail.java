@@ -67,7 +67,7 @@ public class SendMail {
 			message.setSubject(LocalDate.now()+" Login Password From EMS Projects PVT LTD");
 
 			// Now set the actual message
-			message.setText(" Dear, ".concat(name).concat("\n Your today's Login Password is : ")+token+"\n Please Don't share with anyone.");
+			message.setText(" Dear, ".concat(name).concat("\n Your today's Login Password is : \n\n")+token+"\n\n Please Don't share with anyone.");
 			System.out.println("sending...");
 			// Send message
 			Transport.send(message);

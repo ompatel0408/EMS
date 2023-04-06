@@ -1,19 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page import="com.bean.EMSLogsBean,java.util.ArrayList,com.dao.EMSLogsDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" isELIgnored="false"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>EMSAllLogs</title>
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
+
 <div class="wrapper">
 <jsp:include page="Header.jsp"></jsp:include>
 <jsp:include page="LeftSideBar.jsp"></jsp:include>
 <div class="content-wrapper p-3">
 	<div class="card card-default">
                 <div class="card-header">
-                    <h3 class="card-title"> Progress of Purchase and Quotation </h3>
+                    <h3 class="card-title"> All Logs </h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
@@ -23,6 +26,7 @@
                         </button>
                     </div>
                 </div>
+                <%for(EMSLogsBean ELB:EMSLogsDao.getInstance().getAllData()){%>
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="timeline">
@@ -31,22 +35,21 @@
                                 <!-- timeline time label -->
                                 <div class="time-label">
                                     <span class="bg-gradient-info">
-                                        10 Feb. 2014
+                                        <%=ELB.getCurrentTime()%>
                                     </span>
                                 </div>
                                 <!-- END timeline item -->
                                 <!-- timeline item -->
+                                 <%if(ELB.getCategory().equals("INSERTED")){ %>
                                 <div>
                                     <i class="fas fa-user bg-info"></i>
-
                                     <div class="timeline-item">
-                                        <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-
+                                        <!-- <span class="time"><i class="far fa-clock"></i> 5 mins ago</span> -->
                                         <h3 class="timeline-header border-0">
                                        	 Updated by
                                        <b>
                                        	 	<i> 
-                                       			 Paresh patel 
+                                       			 <%=ELB.getUserName()%>
                                        		</i>
                                        	</b>
                                              
@@ -59,31 +62,31 @@
                                     <i class="fas fa-comments bg-gradient-success"></i>
 
                                     <div class="timeline-item">
-                                        <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
+                                        <!-- <span class="time"><i class="far fa-clock"></i> 27 mins ago</span> -->
 
                                         <h3 class="timeline-header">
                                         <!--<a href="#">Jay White</a> -->
                                          <font color="lightgreen">
-                                         <b>No worries!</b>
+                                         <b><%=ELB.getCategory()%></b>
                                          </font>
                                          </h3>
 											
                                         <div class="timeline-body">
-                                            No worries! Your purchase amount is currently below the quotation amount. You have room to make additional purchases without incurring any additional fees or charges. Please let us know if you have any questions or concerns.
+                                            <%=ELB.getLOGS()%>
                                         </div>    
                                     </div>
                                 </div>
+                                <%}else if(ELB.getCategory().equals("UPDATED")){%>
                                 <div>
                                     <i class="fas fa-user bg-info"></i>
 
                                     <div class="timeline-item">
-                                        <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-                                        
+                                        <!-- <span class="time"><i class="far fa-clock"></i> 5 mins ago</span> -->
                                         <h3 class="timeline-header border-0">
                                        	 Updated by
                                        	<b>
                                        	 	<i> 
-                                       			 Paresh patel 
+                                       			 <%=ELB.getUserName()%>
                                        		</i>
                                        	</b>
                                            
@@ -91,30 +94,57 @@
                                     </div>
                                 </div>
                                 <div>
-									<i class="fas fa-comments bg-danger"></i>
+									<i class="fas fa-comments bg-warning"></i>
                                     <div class="timeline-item">
-                                        <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
+                                        <!--<span class="time"><i class="far fa-clock"></i> 27 mins ago</span> -->
 
                                         <h3 class="timeline-header">
                                         <!--<a href="#">Jay White</a> -->
-                                        <font color="red">
-                                        	<b> Warning:</b>
+                                        <font color="orange">
+                                        	<b><%=ELB.getCategory()%></b>
                                         </font> 
                                         
                                             </h3>
                                         <div class="timeline-body">
-                                            Your purchase amount has exceeded the quotation amount. Please be aware that any additional purchases will be applied towards the quotation amount and may result in additional fees or charges. We strongly advise that you review your purchase history and adjust your spending accordingly to avoid any further overage charges.
+                                            <%=ELB.getLOGS()%>
                                         </div>
-                                        
                                     </div>
                                 </div>
-                                <!-- END timeline item -->
-                                <!-- timeline time label -->
-                                <div class="time-label">
-                                    <span class="bg-gradient-info">
-                                        3 Jan. 2014
-                                    </span>
+                                <%}else{%>
+                                <div>
+                                    <i class="fas fa-user bg-info"></i>
+
+                                    <div class="timeline-item">
+                                        <!-- <span class="time"><i class="far fa-clock"></i> 5 mins ago</span> -->
+                                        <h3 class="timeline-header border-0">
+                                       	 Updated by
+                                       	<b>
+                                       	 	<i> 
+                                       			 <%=ELB.getUserName()%>
+                                       		</i>
+                                       	</b>
+                                           
+                                        </h3>
+                                    </div>
                                 </div>
+                                 <div>
+									<i class="fas fa-comments bg-danger"></i>
+                                    <div class="timeline-item">
+                                        <!-- <span class="time"><i class="far fa-clock"></i> 27 mins ago</span> -->
+
+                                        <h3 class="timeline-header">
+                                        <!--<a href="#">Jay White</a> -->
+                                        <font color="red">
+                                        	<b><%=ELB.getCategory()%></b>
+                                        </font> 
+                                        
+                                            </h3>
+                                        <div class="timeline-body">
+                                            <%=ELB.getLOGS()%>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%}%>
                                 <div>
                                     <i class="far fa-clock bg-gray"></i>
                                 </div>
@@ -124,6 +154,7 @@
                     </div>
                     <!-- /.tab-content -->
              </div><!-- /.card-body -->
+             <%}%>
         </div>
         </div>
   </div>

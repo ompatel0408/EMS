@@ -30,6 +30,15 @@ public class ClientServlet extends HttpServlet {
 		}
 		return instance;
 	}
+	
+	
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		for(ClientBean Cb:ClientDao.getInstance().getClientList()) {
+			map.put(Cb.getClientId(), Cb.getClientName());
+		}
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -47,9 +56,7 @@ public class ClientServlet extends HttpServlet {
 		ArrayList<ClientBean> clients = new ArrayList<ClientBean>();
 		ClientDao  clientDao = ClientDao.getInstance();
 		clients = clientDao.getClientList();
-		for (ClientBean clientBean : clients) {
-			System.out.println(clientBean.getClientName());
-		}
+		
 		request.setAttribute("clients", clients);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("AddClient.jsp");
@@ -58,19 +65,23 @@ public class ClientServlet extends HttpServlet {
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("doDelete method");
 		int clientId=Integer.parseInt(req.getParameter("clientId"));
-		System.out.println(clientId);
+		
+		
 		ClientDao cd = ClientDao.getInstance();
+		
 		HttpSession session = req.getSession();
+		
 		if(cd.deleteClient(clientId)) {
+			
 			if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A client record of ".concat(map.get(clientId)).concat(" has been deleted successfully!"),Integer.parseInt(session.getAttribute("userId").toString()),"DELETED","CLIENTS"))) {
+			
 				System.out.println("clients delete Logs Inserted!");
-			}else {
+			}else{
 				System.out.println("client delete Logs not inserted!");
 			}
+			
 		}
-		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -80,7 +91,6 @@ public class ClientServlet extends HttpServlet {
 		String  email = request.getParameter("email");
 		String pan = request.getParameter("pan");
 		String address = request.getParameter("address");
-		System.out.println("Client Servlet Hit");
 		
 		ClientBean clientBean = new ClientBean();
 		clientBean.setAddress(address);
@@ -92,29 +102,28 @@ public class ClientServlet extends HttpServlet {
 		ClientDao clientDao = ClientDao.getInstance();
 		HttpSession session = request.getSession();
 		if(clientDao.addClient(clientBean)) {
-			if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new client ".concat(clientName).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","CLIENTS"))) {
-				System.out.println(" Client insert Logs Inserted!");
-				for(ClientBean Cb:ClientDao.getInstance().getClientList()) {
-					map.put(Cb.getClientId(), Cb.getClientName());
+			
+				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new client ".concat(clientName).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","CLIENTS"))) {
+					init();
+					System.out.println(" Client insert Logs Inserted!");
+				}else {
+					System.out.println("Client insert Logs not inserted!");
 				}
-			}else {
-				System.out.println("Client  insert Logs not inserted!");
-			}
+			
 		}
 		response.sendRedirect("ClientServlet?clientId=0&update=notupdate");
 	}
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("PUT reached!");
+		
 		String editedColumn=request.getParameter("editedColumn");
 		String newValue=request.getParameter("changes");
 		int clientId=Integer.parseInt(request.getParameter("clientId"));
-		System.out.println(newValue);
-		System.out.println(clientId);
-		System.out.println(editedColumn);
+		
 		ClientDao cd = ClientDao.getInstance();
 		HttpSession session = request.getSession();
 		if(cd.updateClient(clientId,editedColumn,newValue)) {
+	
 			if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A client information of ".concat(map.get(clientId)).concat( " has been updated successfully!"),Integer.parseInt(session.getAttribute("userId").toString()),"UPDATED","CLIENTS"))) {
 				System.out.println("clients update Logs Inserted!");
 			}else {
@@ -122,4 +131,5 @@ public class ClientServlet extends HttpServlet {
 			}
 		}
 	}
+		
 }

@@ -7,7 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.bean.EMSLogsBean;
 import com.bean.QuotationPerItemBean;
+import com.dao.EMSLogsDao;
 import com.dao.QuotationPerItemDao;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -17,6 +19,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 public class EMSQuotationPerItemServlet extends HttpServlet {
@@ -64,9 +67,15 @@ public class EMSQuotationPerItemServlet extends HttpServlet {
 
 	
 		ArrayList<QuotationPerItemBean> AQPIB = QuotationPerItemServices.fetchDataFromXHRRequestInQuotaionPerItem(request.getReader(),request);
-		
+		HttpSession session = request.getSession();
 		if(QPd.addQuotationPerItem(AQPIB)) {
 			System.out.println("QuotataionPerItem Added SuccessFully");
+			if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new Quotation for Offer ".concat(AQPIB.get(0).getOfferName()).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","QUOTATIONPEROFFER"))) {
+				init();
+				System.out.println("QUOTATIONPEROFFER insert Logs Inserted!");
+			}else {
+				System.out.println("QUOTATIONPEROFFER insert Logs not inserted!");
+			}
 		}else{
 			System.out.println("QuotataionPerItem Added not SuccessFully");
 		}

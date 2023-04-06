@@ -37,8 +37,7 @@ public class Trial implements Job{
 			    .build(); 
 
 			// Schedule the job with the trigger
-	
-			
+				
 			try {
 				scheduler = new StdSchedulerFactory().getScheduler();
 				scheduler.start();

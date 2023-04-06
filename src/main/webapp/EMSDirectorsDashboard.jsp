@@ -29,7 +29,7 @@ button {
 </style>
 </head>
 
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
 		<jsp:include page="Header.jsp"></jsp:include>
 		<jsp:include page="LeftSideBar.jsp"></jsp:include>
@@ -61,18 +61,18 @@ button {
 				<div class="container-fluid">
 					<!-- Small boxes (Stat box) -->
 					<div class="row">
-						<div class="col-lg-3 col-6">
+						<div class="col-lg-3 col-6" id="showorder-target-id" style="display: none;">
 							<!-- small box -->
 							<div class="small-box bg-info">
 								<div class="inner">
-									<h3>150</h3>
-
+									<h3 id="liveorders"></h3>
+		
 									<p>New Orders</p>
 								</div>
 								<div class="icon">
 									<i class="ion ion-bag"></i>
 								</div>
-								<a href="#" class="small-box-footer">More info <i
+								<a href="GeneralListServlet?clientId=null" class="small-box-footer">More info <i
 									class="fas fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
@@ -95,7 +95,7 @@ button {
 							</div> 
 						</div>
 						<!-- ./col -->
-						<div class="col-lg-3 col-6">
+						<div class="col-lg-3 col-6" id="adduser-target-id" style="display: none;">
 							<!-- small box -->
 							<div class="small-box bg-warning">
 								<div class="inner">
@@ -106,7 +106,7 @@ button {
 								<div class="icon">
 									<i class="ion ion-person-add"></i>
 								</div>
-								<a href="#" class="small-box-footer">More info <i
+								<a href="EMSUser.jsp" class="small-box-footer">More info <i
 									class="fas fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
@@ -130,7 +130,7 @@ button {
 					<div class="row"></div>
 				</div>
 			</section>
-
+		<div id="addgraph-target-id" style="display: none;">
 			<section class="content">
 				<div class="p-4">
 					<h1 class="">Net Profit Graph</h1>
@@ -150,6 +150,7 @@ button {
 					<div id="chart"></div>
 				</div>
 			</section>
+			</div>
 			<div class="mt-5 p-4">
                 <!-- Main content -->
                 <section class="content">

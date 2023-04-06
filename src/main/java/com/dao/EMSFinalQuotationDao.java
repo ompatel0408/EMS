@@ -24,7 +24,8 @@ public class EMSFinalQuotationDao {
 	public ArrayList<EMSFinalQuotationBean> getSumOfAllItemCodeOfAProject(int clientId){
 		
 		//String selectQuery = "SELECT sum(TotalAmountWithProfit * ) FROM offer I JOIN ProfitInQuotationPerItem PQI ON I.offerCode = PQI.offerCode WHERE clientId= ? ";
-		String selectQuery = "SELECT SUM(TotalPricePerItem * QuotationPerItemQuantity ) from quotationperitem QPI JOIN Offer O ON QPI.offerCode = O.offerCode WHERE ClientId = ? AND status = 'FALSE'";
+		//String selectQuery = "SELECT SUM(TotalPricePerItem * QuotationPerItemQuantity ) from quotationperitem QPI JOIN Offer O ON QPI.offerCode = O.offerCode WHERE ClientId = ? AND status = 'FALSE'";
+		String selectQuery = "SELECT SUM(TotalPrice) from offer WHERE ClientId = ? AND status = 'FALSE'";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<EMSFinalQuotationBean> a = new ArrayList<EMSFinalQuotationBean>();
 		
@@ -100,6 +101,7 @@ public class EMSFinalQuotationDao {
 				return true;
 			}catch(SQLException E) {
 				E.printStackTrace();
+				
 			}
 		}else {
 			System.out.println("Connction is not establised!");
@@ -203,18 +205,20 @@ public class EMSFinalQuotationDao {
 
 
 
-	public void updateQuotation(String newData, String changeField, int quotationId) {
+	public boolean updateQuotation(String newData, String changeField, int quotationId) {
 		try {
 			Connection con = MySqlConnection.getInstance();
 			PreparedStatement pstmt = con.prepareStatement("update quotations set " + changeField + "= ? where quotationid = ? ");
 			pstmt.setString(1, newData);
 			pstmt.setInt(2, quotationId);
 			pstmt.executeUpdate();
+			return true;
 			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 	
 	

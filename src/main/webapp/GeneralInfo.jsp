@@ -1,5 +1,3 @@
-<%@page import="com.bean.EMSOffersBean"%>
-
 <%@page import="java.util.ArrayList,com.bean.ClientBean"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,50 +16,53 @@
 }
 </style>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini">
 	<%
-	ArrayList<EMSOffersBean> offers = (ArrayList<EMSOffersBean>) request.getAttribute("offers");
+	ArrayList<ClientBean> clients = (ArrayList<ClientBean>) request.getAttribute("clients");
 	%>
 	<jsp:include page="Header.jsp"></jsp:include>
 	<jsp:include page="LeftSideBar.jsp"></jsp:include>
 	<div class="wrapper">
-
 		<div class="content-wrapper">
-			<section class="content" style="margin-left: 90%;"></section>
+			<section class="content" style="margin-left: 90%;">
+			</section>
 			<!-- Content Header (Page header) -->
 			<div class="card m-2">
 				<div class="card-header">
-					<h3 class="card-title">Offers</h3>
+					<h3 class="card-title mt-2"> <b>Clients </b></h3>
 				</div>
 				<div class="card-body p-0">
 					<table class="table table-striped projects">
 						<thead>
 							<tr>
 								<th style="width: 2%">Sr.No</th>
-								<th style="width: 17%">Offer Code</th>
-								<th style="width: 17%">Offer Name</th>
-								<th style="width: 20%">Client ID</th>
-								<th style="width: 20%">Quantity</th>
-								<th style="width: 20%"></th>
+								<th style="width: 17%">Client Id</th>
+								<th style="width: 17%">Client Name</th>
+								<th style="width: 20%">Phone number</th>
+								<th style="width: 15%">Email</th>
+								<th style="width: 30%"></th>
 							</tr>
 						</thead>
 						<tbody>
 
 							<%
 							int temp = 0;
-							for (EMSOffersBean offer : offers) {
+							for (ClientBean c : clients) {
 							%>
 							<tr>
 								<td><%=++temp%></td>
-								<td><a><%=offer.getOfferCode()%></a> <br></td>
-								<td><a><%=offer.getOfferName()%> </a> <br></td>
-								<td><a><%=offer.getClientId()%></a> <br></td>
-								<td><a><%=offer.getQuantity()%></a> <br></td>
-								<td>
-									<a href="QuotationPerItemListServlet?offer=0&offerCode=<%=offer.getOfferCode()%>"><button type="button" class="btn btn-success float-right btn-sm"
-										data-toggle="modal" data-target="#modal-editItem"
-										onclick="Demo(this.id)" id="">
-										<i class="fas fa-pencil-alt"></i>
+								<td><a><%=c.getClientId()%></a> <br></td>
+								<td><a><%=c.getClientName()%> </a> <br></td>
+								<td><a><%=c.getPhoneNumber()%></a> <br></td>
+								<td><a><%=c.getEmail()%></a> <br></td>
+								<td class="project-actions text-right">
+									<a href="GeneralListServlet?clientId=<%=c.getClientId()%>"><button type="button" class="btn btn-info btn-sm"
+										data-toggle="modal"
+										data-target="#modal-projectDetails<%=c.getClientId()%>">View Projects
+									</button></a>
+									<a href="EMSItemListServlet?clientId=<%=c.getClientId()%>"><button type="button" class="btn btn-info btn-sm"
+										data-toggle="modal"
+										data-target="#modal-projectDetails<%=c.getClientId()%>">View Orders
 									</button></a>
 								</td>
 								<%
@@ -75,7 +76,7 @@
 			</div>
 
 		</div>
-	</div>
+	</div>s
 	<!-- jQuery -->
 	<script src="assets/plugins/jquery/jquery.min.js"></script>
 	<!-- Bootstrap 4 -->

@@ -16,7 +16,7 @@
 }
 </style>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 	<%
 	ArrayList<ClientBean> clients = (ArrayList<ClientBean>) request.getAttribute("clients");
 	%>

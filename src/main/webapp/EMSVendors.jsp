@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Vendor</title>
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
 		<jsp:include page="Header.jsp"></jsp:include>
 		<jsp:include page="LeftSideBar.jsp"></jsp:include>
@@ -104,7 +104,7 @@
 								<th style="width: 12%">Mobile</th>
 							</tr>
 						</thead>
-						<tbody id="MyTable"></tbody>
+						<tbody id="MyTable10"></tbody>
 					</table>
 				</div>
 				<!-- /.card-body -->

@@ -46,10 +46,12 @@ public class EMSDirectorsDashboardServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		HttpSession session = request.getSession();
-		String json = gson.toJson(session.getAttribute("userId").toString());
-	    response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(json);
+		if(session.getAttribute("userId") != null) {
+			String json = gson.toJson(session.getAttribute("userId").toString());
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("UTF-8");
+		    response.getWriter().write(json);
+		}
 	}
 	
 

@@ -52,7 +52,7 @@
 }
 </style>
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
          <jsp:include page="Header.jsp"></jsp:include>
 		<jsp:include page="LeftSideBar.jsp"></jsp:include>
 <div class="content-wrapper p-3">

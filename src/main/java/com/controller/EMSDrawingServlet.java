@@ -45,10 +45,8 @@ public class EMSDrawingServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-    	System.out.println("get Reached!!!!!!!11111");
-    	
+    
     	Gson gson = new Gson();
-    	System.out.println(ItemDao.getInstance().getProjects().size());
     	String json = gson.toJson(ItemDao.getInstance().getProjects());
     	response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -59,7 +57,7 @@ public class EMSDrawingServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Hello");
+		
 		EMSDrawingBean EGB =  EMSDrawingServices.uploadPic(request);
 		if(EGB != null) {
 			HttpSession session = request.getSession();

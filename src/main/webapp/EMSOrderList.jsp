@@ -15,7 +15,6 @@
 </head>
 <%
 ArrayList<ItemBean> items= (ArrayList<ItemBean>) request.getAttribute("items");
-
 int srNo=1;
 %>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -32,18 +31,19 @@ int srNo=1;
 			<!-- Default box -->
 			<div class="card m-2">
 				<div class="card-header">
-					<h3 class="card-title">Final Quotation</h3>
+					<h3 class="card-title">Item List for Client: `${clientName}` </h3>
 				</div>
 				<div class="card-body p-0">
 					<table class="table table-striped projects">
 						<thead>
 							<tr>
 								<th style="width: 2%">Sr.No</th>
-								<th style="width: 17%">Client Name</th>
 								<th style="width: 17%">Item Name</th>
 								<th style="width: 17%">Tag No</th>
 								<th style="width: 17%">Quantity</th>
 								<th style="width: 17%">Delivery Date</th>
+								<th style="width: 17%">Quatation Id</th>
+								<th style="width: 17%">Price</th>
 								
 							</tr>
 						</thead>
@@ -55,113 +55,13 @@ int srNo=1;
 							<tr>
 
 								<td><%=srNo++%></td>
-								<td><%=ib.getClientName()%></td>
 								<td><%=ib.getItemName()%></td>
 								<td><%=ib.getTagNo()%></td>
 								<td><%=ib.getQuantity()%></td>
 								<td><%=ib.getDeliveryDate()%></td>
+								<td><%=ib.getQuotationId()%></td>
+								<td><%=ib.getTotalPrice()%></td>
 								<td class="project-actions text-right">
-									<button type="button" class="btn btn-success btn-sm"
-										data-toggle="modal"
-										data-target="#modal-projectEdit<%=ib.getItemCode()%>">
-										<i class="fas fa-pencil-alt"></i> Edit
-									</button>
-									<div class="modal fade"
-										id="modal-projectEdit<%=ib.getItemCode()%>">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h4 class="modal-title">Project Details</h4>
-													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-
-												<div class="col-m-5">
-													<div class="form-group p-3">
-													
-														<label>Select </label>
-														<p id="select-error<%=ib.getItemCode()%>"></p>
-														<form
-															action="EMSItemListServlet">
-															
-															<select
-																class="form-control select2 select2-hidden-accessible"
-																name="changeField" style="width: 100%;"
-																data-select2-id="1" tabindex="-1" aria-hidden="true"
-																id="input-form<%=ib.getItemCode()%>" onchange="dropDown('<%=ib.getItemCode()%>')">
-																<option selected="selected" data-select2-id="3">Select
-																	option you want to update..</option>
-																	
-																<option>ItemName</option>
-																 <option>Quantity</option> 
-																 <option>TagNo</option> 
-																 <option>DeliveryDate</option> 
-															</select>
-															<div class="form-group" id="hide-text<%=ib.getItemCode()%>"
-																style="display: none;">
-																<label for="placeholderChange" id="lableName<%=ib.getItemCode()%>"
-																	class="mt-2"></label> <input type="text"
-																	class="form-control" name="newData"
-																	id="placeholderChange<%=ib.getItemCode()%>">
-															</div>
-															<input type="hidden" name="itemCode" value="<%=ib.getItemCode()%>">
-															<input type="hidden" name="update" value="update">
-															<button type="submit"
-																class="btn btn-primary mt-2 disabled" id="input-update<%=ib.getItemCode()%>">Save
-																changes</button>
-														</form>
-													</div>
-												</div>
-
-												<!-- /.modal-project show -->
-											</div>
-										</div>
-									</div>
-
-									<button type="button" class="btn btn-danger btn-sm"
-										data-toggle="modal"
-										data-target="#modal-projectDelete<%=ib.getItemCode()%>">
-										<i class="fas fa-trash"></i> Delete
-									</button>
-									<div class="modal fade"
-										id="modal-projectDelete<%=ib.getItemCode()%>">
-										<div class="modal-dialog">
-											<div class="modal-content bg-danger">
-												<div class="modal-header">
-													<h4 class="modal-title">Delete Order</h4>
-													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close">
-														<span aria-hidden="true"></span>
-													</button>
-												</div>
-												<div class="modal-body">
-													<p>Are you sure you want to delete this Order?</p>
-												</div>
-												<div class="modal-footer justify-content-between">
-													<button type="button" class="btn btn-outline-light"
-														data-dismiss="modal">Close</button>
-													<form action="EMSItemListServlet" method="get">
-                                                                        <input type="hidden" name="itemCode"
-                                                                            value=<%=ib.getItemCode()%>>
-                                                                        <input type="hidden" name="update"
-                                                                            value="notupdate">
-                                                                        <button type="submit"
-                                                                            class="btn btn-outline-light">Delete
-                                                                            Order</button>
-                                                                    </form>
-												</div>
-											</div>
-										</div>
-									</div>
-								</td>
-
-
-								<!-- Project Edit model -->
-
-
-
 							</tr>
 							<%
 							}

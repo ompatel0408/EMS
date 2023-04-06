@@ -80,7 +80,7 @@ public class EMSOffersDao {
 	}
 	
 	public ArrayList<EMSOffersBean> getAllData(String ClientName) {
-		String selectQuery = "SELECT OFFERName,OfferCode,quantity,remarks from clients c join offer o ON c.ClientId = o.ClientId  WHERE ClientName = ?";
+		String selectQuery = "SELECT OFFERName,OfferCode,quantity,remarks from clients c join offer o ON c.ClientId = o.ClientId  WHERE ClientName = ? AND STATUS = 'FALSE'";
 		Connection conn = MySqlConnection.getInstance();
 		EMSOffersBean EOB = null;
 		ArrayList<EMSOffersBean> arr = new ArrayList<EMSOffersBean>();
@@ -177,6 +177,11 @@ public class EMSOffersDao {
 	
 	public void updateStatus(ArrayList<String> offerCode) {
 		
+		
+		for(String x:offerCode) {
+			System.out.println("OfferCode -->"+offerCode);
+		}
+		System.out.println("Update status ArrayList reached!!!!!!!!!!!!!!!");
 		String updateQuery = "UPDATE offer SET STATUS = 'ACCEPTED' WHERE OFFERCODE = ?";
 		Connection con = MySqlConnection.getInstance();		
 		
@@ -201,13 +206,11 @@ public class EMSOffersDao {
 	
 	public void updateStatus(int clientId) {
 		
-		String updateQuery = "UPDATE offer SET STATUS = 'REJECTED' WHERE ClientId = ?";
+		String updateQuery = "UPDATE offer SET STATUS = 'REJECTED' WHERE ClientId = ? AND status = 'FALSE'";
 		Connection con = MySqlConnection.getInstance();		
 		
 		if(con != null) {
-			
 			try {
-				
 				PreparedStatement stmt = con.prepareStatement(updateQuery);	
 				stmt.setInt(1, clientId);
 				stmt.executeUpdate();
@@ -217,6 +220,32 @@ public class EMSOffersDao {
 		}else {
 			System.out.println("Connection is not establised!");
 		} 
+	}
+	
+	
+	public String getOfferNameFromDatabase(String offerCode) {
+		
+		String selectQuery = "SELECT offerName from offer WHERE offerCode = ?";	
+		Connection con = MySqlConnection.getInstance();		
+		
+		if(con != null) {
+			try {
+				PreparedStatement stmt = con.prepareStatement(selectQuery);	
+				stmt.setString(1, offerCode);
+				ResultSet rs =stmt.executeQuery();
+				
+				String offerName = "";
+				if(rs.next()) {
+					offerName = rs.getString(1);
+				}
+				return offerName;
+			}catch(SQLException E) {
+				E.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		} 
+		return null;
 	}
 	
 	

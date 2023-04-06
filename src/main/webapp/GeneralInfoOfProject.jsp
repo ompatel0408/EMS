@@ -1,6 +1,5 @@
-<%@page import="com.bean.EMSOffersBean"%>
-
-<%@page import="java.util.ArrayList,com.bean.ClientBean"%>
+<%@page
+	import="java.util.ArrayList,com.bean.ProjectBean,com.bean.ItemBean"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,30 +17,31 @@
 }
 </style>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini">
 	<%
-	ArrayList<EMSOffersBean> offers = (ArrayList<EMSOffersBean>) request.getAttribute("offers");
+	ArrayList<ProjectBean> projects = (ArrayList<ProjectBean>) request.getAttribute("projects");
+	ArrayList<String> items = (ArrayList<String>) request.getAttribute("items");
 	%>
 	<jsp:include page="Header.jsp"></jsp:include>
 	<jsp:include page="LeftSideBar.jsp"></jsp:include>
 	<div class="wrapper">
-
 		<div class="content-wrapper">
 			<section class="content" style="margin-left: 90%;"></section>
 			<!-- Content Header (Page header) -->
 			<div class="card m-2">
 				<div class="card-header">
-					<h3 class="card-title">Offers</h3>
+					<h3 class="card-title mt-2">
+						<b>ClientName : ${clientName } </b>
+					</h3>
 				</div>
 				<div class="card-body p-0">
 					<table class="table table-striped projects">
 						<thead>
 							<tr>
 								<th style="width: 2%">Sr.No</th>
-								<th style="width: 17%">Offer Code</th>
-								<th style="width: 17%">Offer Name</th>
-								<th style="width: 20%">Client ID</th>
-								<th style="width: 20%">Quantity</th>
+								<th style="width: 17%">Project Id</th>
+								<th style="width: 17%">After Pay</th>
+								<th style="width: 20%">Before Pay</th>
 								<th style="width: 20%"></th>
 							</tr>
 						</thead>
@@ -49,20 +49,41 @@
 
 							<%
 							int temp = 0;
-							for (EMSOffersBean offer : offers) {
+							for (ProjectBean p : projects) {
 							%>
 							<tr>
 								<td><%=++temp%></td>
-								<td><a><%=offer.getOfferCode()%></a> <br></td>
-								<td><a><%=offer.getOfferName()%> </a> <br></td>
-								<td><a><%=offer.getClientId()%></a> <br></td>
-								<td><a><%=offer.getQuantity()%></a> <br></td>
-								<td>
-									<a href="QuotationPerItemListServlet?offer=0&offerCode=<%=offer.getOfferCode()%>"><button type="button" class="btn btn-success float-right btn-sm"
-										data-toggle="modal" data-target="#modal-editItem"
-										onclick="Demo(this.id)" id="">
-										<i class="fas fa-pencil-alt"></i>
-									</button></a>
+								<td><a><%=p.getProjectId()%></a> <br></td>
+								<td><a><%=p.getAfterPayPercent()%> </a> <br></td>
+								<td><a><%=p.getAdvancePayPercent()%></a> <br></td>
+								<td class="project-actions text-right">
+									<button type="button" class="btn btn-info btn-sm"
+										data-toggle="modal"
+										data-target="#modal-projectDetails${clientId }">View
+										Items</button>
+									<button type="button" class="btn btn-success btn-sm"
+										data-toggle="modal" data-target="">
+										<i class="fas fa-pencil-alt"></i> View General Status
+									</button> <!-- Modal View Code -->
+									<div class="modal fade" id="modal-projectDetails${clientId }">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h4 class="modal-title">Items</h4>
+												</div>
+												<div class="modal-body">
+													<%
+												 	for(int i=0;i<items.size();i++){
+												 %>
+													<div class="form-group">
+														<p class=""><%=items.get(i)%></p>
+													</div>
+													<%} %>
+												</div>
+											</div>
+											<!-- /.modal-project show -->
+										</div>
+									</div> <!-- Modal View End -->
 								</td>
 								<%
 								}

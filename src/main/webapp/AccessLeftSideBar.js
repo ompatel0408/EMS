@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	xhr.open('POST', 'http://localhost:8080/EMS2/EMSDirectorsDashboardServlet', true);
 	xhr.onload = function() {
 		if (xhr.status == 200) {
-			userId = JSON.parse(xhr.responseText);
+			var userId = JSON.parse(xhr.responseText);
 			console.log("-------->" + userId)
 			getListSideBar(userId);
 		}
@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 }); 	
 
 function getListSideBar(userId){
+	
 	var gradeData;
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', `http://localhost:8080/EMS2/ShowManagementAccess?change=2&userId=${userId}`,true);
@@ -20,9 +21,10 @@ function getListSideBar(userId){
     		xhr.onload = function() {
     	  		if (xhr.status == 200) {
     	    		gradeData = JSON.parse(xhr.responseText);
-    	    		console.log(gradeData.accessManagement)
+    	    		console.log(gradeData)
     	    		if(gradeData.accessManagement==1){
     	  				document.getElementById('accessmanagement-target-id').style.display='block';
+    	  				console.log(gradeData.accessManagement)
     	  			}
     	    		//if(gradeData.addClient==1 || gradeData.showClient==1){
     	    		//	document.getElementById('client-target-id').style.display='block';
@@ -90,8 +92,16 @@ function getListSideBar(userId){
     	  				document.getElementById('addvendor-target-id').style.display='block';
     	  			}if(gradeData.vendorList==1){
     	  				document.getElementById('vendorlist-target-id').style.display='block';
+    	  			}if(gradeData.addUser==1){
+    	  				document.getElementById('adduser-target-id').style.display='block';
+    	  			}if(gradeData.addGraph==1){
+    	  				document.getElementById('addgraph-target-id').style.display='block';
+    	  			}if(gradeData.showLogs==1){
+    	  				document.getElementById('showlogs-target-id').style.display='block';
+    	  			}if(gradeData.showOrder==1){
+    	  				document.getElementById('showorder-target-id').style.display='block';
     	  			}
     	  		}
-    		}
+ 	}
 			xhr.send();
 	}

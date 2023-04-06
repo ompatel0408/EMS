@@ -3,8 +3,19 @@ package com.bean;
 public class EMSOffersBean {
 	
 	private int clientId,quantity,quotationId;
-	private String offerName,remarks,offerCode,TotalPrice,drawingId;
+	private String offerName,remarks,offerCode,TotalPrice,drawingId,clientName;
 	
+	public EMSOffersBean(String clientName,int clientId, int quantity, int quotationId, String offerName, String remarks, String offerCode, String totalPrice, String drawingId) {
+		this.clientName = clientName;
+		this.clientId = clientId;
+		this.quantity = quantity;
+		this.quotationId = quotationId;
+		this.offerName = offerName;
+		this.remarks = remarks;
+		this.offerCode = offerCode;
+		this.TotalPrice = totalPrice;
+		this.drawingId = drawingId;
+	}
 	
 	public EMSOffersBean(int clientId, int quantity, int quotationId, String offerName, String remarks, String offerCode, String totalPrice, String drawingId) {
 		this.clientId = clientId;
@@ -17,6 +28,15 @@ public class EMSOffersBean {
 		this.drawingId = drawingId;
 	}
 	
+	public String getClientName() {
+		return clientName;
+	}
+
+
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+
 
 	public EMSOffersBean() {}
 	

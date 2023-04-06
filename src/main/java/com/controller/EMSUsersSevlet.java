@@ -3,7 +3,7 @@ import java.io.IOException;
 
 import com.bean.UserBean;
 import com.dao.UserDao;
-
+import com.dao.AccessDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,8 +29,13 @@ public class EMSUsersSevlet extends HttpServlet
 		
 		UserBean ubBean = new UserBean(role, phoneNum, name, email, departnemt);
 		UserDao ud = new UserDao();
+		AccessDao ad = new AccessDao();
 		int success = ud.addUser(ubBean);
 		System.out.println(success);
-		request.getRequestDispatcher("AddUser.jsp").forward(request, response);
+		int userId = ad.getUserIdFromDatabase(email);
+		if(success==1) {
+			ad.addAcess(userId);
+		}
+		request.getRequestDispatcher("EMSUser.jsp").forward(request, response);
 	}
 }

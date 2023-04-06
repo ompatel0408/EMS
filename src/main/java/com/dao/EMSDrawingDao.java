@@ -77,6 +77,30 @@ public class EMSDrawingDao {
 		return null;
 	}
 	
+	public boolean isDrawingIdPresent(String drawingId) {
+		
+		String selectQuery = "SELECT * FROM DRAWING WHERE DRAWINGID = ?";
+		Connection conn = MySqlConnection.getInstance();
+		if(conn != null) {
+			try {
+				
+				PreparedStatement stmt = conn.prepareStatement(selectQuery);
+				stmt.setString(1,drawingId);
+				ResultSet rs = stmt.executeQuery();
+				
+				if(rs.next()) {
+					return true;
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		
+		return false;
+	}
+	
 	public boolean addDrawingDetails(String drawingId,EMSDrawingBean EDB) {
 		
 		String insertQuery = "INSERT INTO Drawing(DrawingId,ClientDrawing,EMSDrawing) Values(?,?,?)";
@@ -90,6 +114,35 @@ public class EMSDrawingDao {
 				stmt.setString(1,drawingId);
 				stmt.setString(2, EDB.getClientDrawing());
 				stmt.setString(3, EDB.getEMSDrawing());
+				stmt.executeUpdate();
+				return true;
+			}catch(SQLException e) {
+				if(EMSDrawingDao.getInstance().updateDrawing(drawingId,EDB)) {
+					return true;
+				}
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		
+		return false;
+	}
+	
+	
+	public boolean updateDrawing(String drawingId,EMSDrawingBean EDB) {
+		
+
+		String insertQuery = "UPDATE Drawing SET ClientDrawing = ? , EMSDrawing = ? WHERE DRAWINGID = ?";
+		Connection conn = MySqlConnection.getInstance();
+		
+		if(conn != null) {
+			
+			try {
+				
+				PreparedStatement stmt = conn.prepareStatement(insertQuery);
+				stmt.setString(3,drawingId);
+				stmt.setString(1, EDB.getClientDrawing());
+				stmt.setString(2, EDB.getEMSDrawing());
 				stmt.executeUpdate();
 				return true;
 			}catch(SQLException e) {

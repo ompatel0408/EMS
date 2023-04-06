@@ -110,7 +110,7 @@ function submitForm(){
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var response = xhr.responseText;
-			window.location.href = "EMSItem.jsp"
+			window.location.href = "EMSFinalQuotationListServlet?quotationId=0&update=notupdate"
 		}
 	}
 	// send the request

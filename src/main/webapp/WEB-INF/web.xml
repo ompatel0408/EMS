@@ -17,7 +17,7 @@
 		<listener-class>com.service.ServerListener</listener-class>
 	</listener>
 	<session-config>
-		<session-timeout>90</session-timeout> <!-- Set session timeout to 90 minutes -->
+		<session-timeout>1440</session-timeout> <!-- Set session timeout to 1440 minutes -->
 	</session-config>
 
 	<servlet>
@@ -42,6 +42,7 @@
 	<servlet>
 		<servlet-name>ClientServlet</servlet-name>
 		<servlet-class>com.controller.ClientServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
@@ -207,6 +208,7 @@
 	<servlet>
 		<servlet-name>EMSOffersServlet</servlet-name>
 		<servlet-class>com.controller.EMSOffersServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
 	<servlet-mapping>
@@ -306,5 +308,24 @@
 		<url-pattern>/EMSUsersSevlet</url-pattern>
 	</filter-mapping>
 	
+	<servlet>
+		<servlet-name>EMSLogsServlet</servlet-name>
+		<servlet-class>com.controller.EMSLogsServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSLogsServlet</servlet-name>
+		<url-pattern>/EMSLogsServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>GeneralListServlet</servlet-name>
+		<servlet-class>com.controller.GeneralListServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GeneralListServlet</servlet-name>
+		<url-pattern>/GeneralListServlet</url-pattern>
+	</servlet-mapping>
 
 </web-app>

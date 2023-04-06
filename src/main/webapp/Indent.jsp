@@ -7,7 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 	<%
 	ArrayList<String> projectIds = (ArrayList<String>) request.getAttribute("projectIds");
 	ArrayList<CatagoryGradeSizeBean> catagories = (ArrayList<CatagoryGradeSizeBean>) request.getAttribute("categoryIds");
@@ -81,7 +81,7 @@
 							</div>
 							<div class="col-sm-3">
 								<div class="form-group">
-									<label>Size</label> <select type="text" id="size-id"
+									<label>Size</label><span id="quantity"></span><select type="text" id="size-id" onchange="getCount()" 
 										class="form-control" placeholder="select size" required>
 										<option value="Select Size">Select Size</option>
 									</select>
@@ -160,7 +160,7 @@
 								<th style="width: 9%"></th>
 							</tr>
 						</thead>
-						<tbody id="MyTable"></tbody>
+						<tbody id="MyTable11"></tbody>
 					</table>
 				</div>
 				<!-- /.card-body -->

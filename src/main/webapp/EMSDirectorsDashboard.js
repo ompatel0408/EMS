@@ -11,6 +11,20 @@ window.onload = function(){
 	}
 	
 	xhr.send();
+	let Data1;
+	var xhr1 = new XMLHttpRequest();
+	xhr1.open('PUT', 'http://localhost:8080/EMS2/EMSItemListServlet',true);
+	xhr1.onload = function() {
+  		if (xhr1.status === 200) {
+    		Data1 = JSON.parse(xhr1.responseText);
+    		console.log(Data1)
+    		if(document.getElementById("liveorders") != null){
+				document.getElementById("liveorders").innerHTML=Data1	
+			}
+  		}
+	}
+	
+	xhr1.send(JSON.stringify({token:"orderSum"}));
 		
 }
 
@@ -42,16 +56,16 @@ function appendLiveProjects(data){
                                   </a>                 
                            </td>
     		`;
-		table.appendChild(newRow);
-
-		document.getElementById(`ClientId${i + 1}`).innerHTML = data[i].clientName;
-
-		document.getElementById(`projectId${i + 1}`).innerHTML = data[i].projectName;
-
+    	if(newRow != null && table != null){
+			table.appendChild(newRow);
+			document.getElementById(`ClientId${i + 1}`).innerHTML = data[i].clientName;
+			document.getElementById(`projectId${i + 1}`).innerHTML = data[i].projectName;			
+		}
 		}
 		//getListSideBar();
 		//getUserId()
 }
+/*
 var userId;
 function getUserId(){
 	var xhr = new XMLHttpRequest();
@@ -153,4 +167,4 @@ function getListSideBar(userId){
     		}
 			xhr.send();
 }
-
+*/

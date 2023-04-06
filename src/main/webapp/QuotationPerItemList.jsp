@@ -17,7 +17,7 @@
 }
 </style>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
 	<%
 	ArrayList<QuotationPerItemBean> lists = (ArrayList<QuotationPerItemBean>) request.getAttribute("lists");
 	%>

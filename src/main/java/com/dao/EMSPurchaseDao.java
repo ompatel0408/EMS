@@ -84,7 +84,6 @@ public class EMSPurchaseDao {
 			try {
 				
 				PreparedStatement stmt = conn.prepareStatement(insertQuery);
-				
 				for(EMSPurchaseBean EPB:AEPB) {
 					stmt.setInt(1,EPB.getIndentId());
 					stmt.setString(2, EPB.getProductDescription());

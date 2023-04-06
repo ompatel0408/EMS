@@ -55,14 +55,14 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 }
 </style>
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
 		<jsp:include page="Header.jsp"></jsp:include>
 		<jsp:include page="LeftSideBar.jsp"></jsp:include>
 		<div class="content-wrapper p-3">
 			<div class="card card-default">
 				<div class="card-header">
-					<h3 class="card-title">Issue GRN</h3>
+					<h3 class="card-title">ADD DRAWING</h3>
 
 					<div class="card-tools">
 						<button type="button" class="btn btn-tool"

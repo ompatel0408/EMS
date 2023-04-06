@@ -178,4 +178,57 @@ public static ProjectDao instance = null;
 		
 	}
 	
+	public ArrayList<ProjectBean> getAllProjectUsingClientId(String clientId) {
+		ArrayList<ProjectBean> projects = new ArrayList<ProjectBean>();
+		try {
+			Connection con =MySqlConnection.getInstance();
+			PreparedStatement pstmt = con.prepareStatement("select projectid,advancepaypercent,afterpaypercent,clientName from projects join clients using (clientId) where clientId = ?");
+			pstmt.setString(1, clientId);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ProjectBean project = new ProjectBean();
+				project.setProjectId(rs.getString(1));
+				project.setAdvancePayPercent(rs.getInt(2));
+				project.setAfterPayPercent(rs.getInt(3));
+				project.setClientName(rs.getString(4));
+				projects.add(project);
+			}
+			return projects;
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+public String getClientNameFormDatabase(String clientid) {
+		
+		String selectQuery = "SELECT ClientName From Clients WHERE Clientid = ?";
+		Connection conn = MySqlConnection.getInstance();
+		
+		if(conn != null) {
+			
+			try {
+				
+				PreparedStatement stmt = conn.prepareStatement(selectQuery);
+				stmt.setString(1, clientid);
+				ResultSet rs = stmt.executeQuery();
+				
+				String clientName = "";
+				while(rs.next()) {
+					clientName = rs.getString(1);
+				}
+				return clientName;
+			}catch(SQLException E) {
+				E.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		
+		return null;
+	}
+	
 }

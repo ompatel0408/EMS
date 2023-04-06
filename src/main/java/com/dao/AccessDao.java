@@ -50,7 +50,10 @@ public class AccessDao
 				access.setVendorList(rs.getInt("listvendor"));
 				access.setDrawingList(rs.getInt("listdrawing"));
 				access.setListOrder(rs.getInt("listorder"));
-				
+				access.setAddUser(rs.getInt("addUser"));
+				access.setShowLogs(rs.getInt("logs"));
+				access.setShowOrder(rs.getInt("orders"));
+				access.setAddGraph(rs.getInt("graph"));
 				return access;
 			}
 		
@@ -75,5 +78,36 @@ public class AccessDao
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void addAcess(int userId) {
+		try {
+			Connection con = MySqlConnection.getInstance();
+			
+			PreparedStatement pstmt = con.prepareStatement("insert into access (userId) values (?)");
+			pstmt.setInt(1, userId);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public int getUserIdFromDatabase(String email) {
+		// TODO Auto-generated method stub
+		try {
+			Connection con = MySqlConnection.getInstance();
+			
+			PreparedStatement pstmt = con.prepareStatement("select userId from user where email=?");
+			pstmt.setString(1, email);
+			ResultSet rs = pstmt.executeQuery();
+			int userId=0;
+			while(rs.next()) {
+				userId=rs.getInt("userId");
+			}
+			return userId;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+
 	}
 }

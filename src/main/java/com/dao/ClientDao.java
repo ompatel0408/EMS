@@ -127,4 +127,34 @@ public class ClientDao {
 		
 		return 0;
 	}
+	
+	public String getClientNameFormDatabase(int clientId) {
+		
+		String selectQuery = "SELECT clientName From Clients WHERE clientId = ?";
+		Connection conn = MySqlConnection.getInstance();
+		
+		if(conn != null) {
+			
+			try {
+				
+				PreparedStatement stmt = conn.prepareStatement(selectQuery);
+				stmt.setInt(1, clientId);
+				ResultSet rs = stmt.executeQuery();
+				
+				String clientName = "";
+				while(rs.next()) {
+					clientName = rs.getString(1);
+				}
+				return clientName;
+			}catch(SQLException E) {
+				E.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		
+		return null;
+	}
+	
+	
 }

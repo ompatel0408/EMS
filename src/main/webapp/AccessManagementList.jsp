@@ -104,7 +104,7 @@ int srNo=1;
                                 </td>
                                 <td>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="checkbox" <%=access.getListDrawing()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getListDrawing() %>,'ListDrawing')" value="" id="defaultCheck5">
+                                        <input class="form-check-input" type="checkbox" <%=access.getDrawingList()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getDrawingList()%>,'ListDrawing')" value="" id="defaultCheck5">
                                     </div> 
                                 </td>
                             </tr>
@@ -368,6 +368,58 @@ int srNo=1;
                                     </div>
                                 </td>
                             </tr> 
+                            <tr>
+                                <td>27</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Add User
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getAddUser()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getAddUser() %>,'AddUser')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>28</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Show Logs
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getShowLogs()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getShowLogs() %>,'Logs')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>29</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Show Graph
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getAddGraph()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getAddGraph() %>,'Graph')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>30</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Show Order On Database
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getShowOrder()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getShowOrder() %>,'Orders')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

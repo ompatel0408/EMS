@@ -7,8 +7,10 @@ import java.util.HashMap;
 
 import com.bean.ClientBean;
 import com.bean.EMSFinalQuotationBean;
+import com.bean.EMSLogsBean;
 import com.dao.ClientDao;
 import com.dao.EMSFinalQuotationDao;
+import com.dao.EMSLogsDao;
 import com.dao.ItemDao;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -18,6 +20,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 public class EMSFinalQuotationServlet extends HttpServlet {
@@ -73,6 +76,7 @@ public class EMSFinalQuotationServlet extends HttpServlet {
 		
 		EMSFinalQuotationDao EQD = EMSFinalQuotationDao.getInstance();
 		String clientName = jsonObject.get("clientId").getAsString();
+		HttpSession session = request.getSession();
 		if(clientName != null) {
 			if(EQD.updateFinalQuotation(new EMSFinalQuotationBean(jsonObject.get("TotalAmount").getAsString(), jsonObject.get("finalDelivaryDate").getAsString(), Integer.parseInt(jsonObject.get("Quantity").getAsString()), jsonObject.get("discountPercentage").getAsString(), jsonObject.get("discountAmount").getAsString(),map.get(clientName),jsonObject.get("remark").getAsString()))) {
 				if(EMSFinalQuotationDao.getInstance().insertIntoQuotationHistory(EMSFinalQuotationDao.getInstance().getData(ClientDao.getInstance().getClientIdFormDatabase(clientName)))) {
@@ -82,6 +86,12 @@ public class EMSFinalQuotationServlet extends HttpServlet {
 				}
 				System.out.println("Inserted successfully!");
 				
+
+					if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new  Final Quotation for Client ".concat(clientName).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","FINALQUOTATION"))) {
+						System.out.println("FINALQUOTATION insert Logs Inserted!");
+					}else {
+						System.out.println("FINALQUOTATION insert Logs not inserted!");
+					}
 			}else 
 				System.out.println("Not inserted!");
 			}
@@ -105,7 +115,6 @@ public class EMSFinalQuotationServlet extends HttpServlet {
 		String clientName = jsonObject.get("ClientId").getAsString();
 		String json = "";
 		if(clientName != null) {
-			System.out.println("---------------------------------"+map.get(clientName));
 			json = gson.toJson(EFQD.getSumOfAllItemCodeOfAProject(map.get(clientName)));
 		}
 	    response.setContentType("application/json");

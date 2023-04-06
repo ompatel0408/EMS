@@ -7,32 +7,6 @@ public class QuotationPerItemBean {
 	private int gradeId;
 	private int size;
 	private String catagory,grade,sizeName;
-	
-	
-	public String getCatagory() {
-		return catagory;
-	}
-
-	public void setCatagory(String catagory) {
-		this.catagory = catagory;
-	}
-
-	public String getGrade() {
-		return grade;
-	}
-
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
-
-	public String getSizeName() {
-		return sizeName;
-	}
-
-	public void setSizeName(String sizeName) {
-		this.sizeName = sizeName;
-	}
-
 	private double quantity;
 	private String units;
 	private String weight;
@@ -41,6 +15,7 @@ public class QuotationPerItemBean {
 	private String profitPercentage;
 	private String TotalAmountWithoutProfit;
 	private String TotalAmountWithProfit;
+	private String offerName;
 	
 	
 	public QuotationPerItemBean() {}
@@ -66,6 +41,19 @@ public class QuotationPerItemBean {
 		this.TotalAmountWithProfit = TotalAmountWithProfit;
 	}
 
+	public QuotationPerItemBean(String offerName,String itemId,  int catagoryId,int gradeId, int size,double quantity,String weight, String units,String pricePerItem,String profitPercentage,String totalPricePerItem) {
+		this.offerName = offerName;
+		this.itemId = itemId;
+		this.catagoryId = catagoryId;
+		this.quantity = quantity;
+		this.units = units;
+		this.weight = weight;
+		this.pricePerItem = pricePerItem;
+		this.totalPricePerItem = totalPricePerItem;
+		this.profitPercentage = profitPercentage;
+		this.gradeId = gradeId;
+		this.size = size;
+	}
 	public QuotationPerItemBean(String itemId,  int catagoryId,int gradeId, int size,double quantity,String weight, String units,String pricePerItem,String profitPercentage,String totalPricePerItem) {
 		this.itemId = itemId;
 		this.catagoryId = catagoryId;
@@ -78,8 +66,41 @@ public class QuotationPerItemBean {
 		this.gradeId = gradeId;
 		this.size = size;
 	}
+	
+
+	public String getCatagory() {
+		return catagory;
+	}
+
+	public void setCatagory(String catagory) {
+		this.catagory = catagory;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	public String getSizeName() {
+		return sizeName;
+	}
+
+	public void setSizeName(String sizeName) {
+		this.sizeName = sizeName;
+	}
 
 	
+	public String getOfferName() {
+		return offerName;
+	}
+
+	public void setOfferName(String offerName) {
+		this.offerName = offerName;
+	}
+
 	public String getTotalAmountWithoutProfit() {
 		return TotalAmountWithoutProfit;
 	}

@@ -1,5 +1,9 @@
 var givenQuote=0
 var totalAmountAppended=0
+var progressBar = document.querySelector('.progress-bar');
+var progress = 0;  
+var percent=0
+var exampleElement = document.getElementById('success');
 document.getElementById('progressDescOfAvailable').innerHTML="Add Project and Items to see the Magic"
 window.onload = function getProjects1(){
 	let Data;
@@ -55,8 +59,7 @@ function ProjectChange(){
       Data = JSON.parse(xhr2.responseText);
       console.log(JSON.stringify(Data));
       givenQuote=Data
-      console.log(givenQuote-100)
-      document.getElementById('progressDesc').innerHTML="Your Quoatation of Given Project is: "+ (givenQuote-100)
+      document.getElementById('progressDesc').innerHTML="Your Quoatation of Given Project is: "+ (givenQuote)
     }
   };
   xhr2.send(JSON.stringify({token:"quotations",project:document.getElementById('ProjectId1').value }));	
@@ -339,52 +342,63 @@ function appendChildOfPurchase() {
                               <td><a id="TotalAmount-${i + 1}"> ${data[i].TotalAmount} </a> <br></td>
                               <td><a id="vendor-${i + 1}"> ${data[i].vendorName} </a> <br></td>                       
                               <td class="project-actions text-right">
-                              <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-editItem" onclick="Demo(this.id)" id="Edit${i + 1}">
+                              <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-editItem" onclick="editFinction(this.id)" id="Edit${i + 1}">
                                       <i class="fas fa-pencil-alt"></i>
                               </button>
-                              <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-projectDelete" id="Delete${i + 1}">
+                              <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-projectDelete" id="Delete${i + 1}" onclick="deleteItem(this.id)">
                                       <i class="fas fa-trash"></i>
                               </button>
                               </td>`;
             table.appendChild(newRow);
         }
         totalAmountAppended+=parseFloat(document.getElementById('Totalamount-id').value)
-        console.log(totalAmountAppended)
-        
-        var progressBar = document.querySelector('.progress-bar');
-  		var progress = 0;  
-  		var exampleElement = document.getElementById('success');
-  		let percent=(totalAmountAppended*100)/givenQuote
-      		progress +=percent;
-      		console.log(progress)
-      		progressBar.style.width = progress + '%';
-      		progressBar.setAttribute('aria-valuenow', progress);
-    	if (progress >= 80 && progress < 85) {
-			console.log("Here")
+        percent=(totalAmountAppended*100)/givenQuote
+      	progressBar.style.width = percent + '%';
+      	progressBar.setAttribute('aria-valuenow', percent);
+      	change()
+}
+function change()
+{
+	
+if(percent >=0 && percent<80)
+      	{
+			  document.getElementById('profitAlert').innerHTML="Good to Go"
+			  document.getElementById('profitAlert').style.color="white"
+			  exampleElement.classList.remove('bg-gradient-warning');
+			  exampleElement.classList.remove('bg-danger');
+			  exampleElement.classList.add('bg-gradient-success');
+			  document.getElementById("progressBarId").style.backgroundColor = "white";
+			  progressBar.style.backgroundColor = 'white';
+		  }
+    	else if (percent >= 80 && percent < 85) {
+			document.getElementById("progressBarId").style.backgroundColor = "yellow";
       		progressBar.style.backgroundColor = 'yellow';
       		document.getElementById('profitAlert').innerHTML="You are Iching forward to make the loss"
       		document.getElementById('profitAlert').style.color="white"
+      		exampleElement.classList.remove('bg-danger');
       		exampleElement.classList.remove('bg-gradient-success');
       		exampleElement.classList.add('bg-gradient-warning');
     	}
-    	else if (progress >= 85 && progress < 100) {
-			console.log("Here")
+    	else if (percent >= 85 && percent < 100) {
       		progressBar.style.backgroundColor = 'Red';
+      		exampleElement.classList.remove('bg-danger');
+      		exampleElement.classList.remove('bg-gradient-success');
+      		exampleElement.classList.add('bg-gradient-warning');
       		document.getElementById('profitAlert').innerHTML="You are Iching forward to make the loss"
       		document.getElementById('profitAlert').style.color="red"
     	}
-    	else if(progress >= 100)
+    	else if(percent >= 100)
     	{
 			progressBar.style.backgroundColor = 'Red';
 			document.getElementById('profitAlert').innerHTML="You are In totally loss"
-      		document.getElementById('profitAlert').style.color="white"
+      		document.getElementById('profitAlert').style.color="red"
       		exampleElement.classList.remove('bg-gradient-warning');
+      		exampleElement.classList.remove('bg-gradient-success');
       		exampleElement.classList.add('bg-danger');
 		}
-    	document.getElementById('totalNumber').innerHTML=progress+"%"
-    	document.getElementById('progressDescOfAvailable').innerHTML="So You Have now total : "+(parseFloat(givenQuote)-parseFloat(totalAmountAppended))+" Amount Left"
+    	document.getElementById('totalNumber').innerHTML=percent+"%"
+    	document.getElementById('progressDescOfAvailable').innerHTML="So You Have now total : "+(parseFloat(givenQuote)-parseFloat(totalAmountAppended))+" Amount Left <br> and the Purchase Amount till now is: "+parseFloat(totalAmountAppended)
 }
-
 function submitForm(){
 		document.getElementById('ProjectId1').disabled = false;
         document.getElementById('category-id').disabled = true;
@@ -433,3 +447,78 @@ window.addEventListener("beforeunload", function (event) {
   document.cookie = "myCookie1=".concat(JSON.stringify(data));
   event.returnValue = "Are you sure you want to leave this page?"
 });
+
+var deleteValue = "";
+function deleteItem(deleteId) {
+	deleteValue = deleteId;
+}
+document.getElementById("deleteClicked").addEventListener("click", () => {
+	data.splice(((deleteValue.substring(6)) - 1), 1);
+	document.getElementById("MyTable").innerHTML = "";
+        var table = document.getElementById("MyTable");
+        for (var i = 0; i < data.length; i++) {
+            var newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                              <td id="${i + 1}">${i + 1}</td>
+                              <td><a id="ProjectId-${i + 1}">${data[i].ProjectId}</a> <br></td>
+                              <td><a id="category-${i + 1}">${data[i].category}</a> <br></td>
+                              <td><a id="grade-${i + 1}"> ${data[i].grade} </a> <br></td>
+                              <td><a id="size-${i + 1}"> ${data[i].size} </a> <br></td>
+                              <td><a id="TotalAmount-${i + 1}"> ${data[i].TotalAmount} </a> <br></td>
+                              <td><a id="vendor-${i + 1}"> ${data[i].vendorName} </a> <br></td>                       
+                              <td class="project-actions text-right">
+                              <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-editItem" onclick="editFinction(this.id)" id="Edit${i + 1}">
+                                      <i class="fas fa-pencil-alt"></i>
+                              </button>
+                              <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-projectDelete" id="Delete${i + 1}" onclick="deleteItem(this.id)">
+                                      <i class="fas fa-trash"></i>
+                              </button>
+                              </td>`;
+            table.appendChild(newRow);
+        }
+        totalAmountAppended-=parseFloat(document.getElementById('Totalamount-id').value)
+        percent=(totalAmountAppended*100)/givenQuote
+      	progressBar.style.width = percent + '%';
+      	progressBar.setAttribute('aria-valuenow', percent);
+      	change()
+});
+
+let editValue = "";
+function editFinction(editId) {
+	console.log(editId);
+	editValue = editId;
+}
+
+function updateField() {
+	editValue = editValue.substring(4)
+	console.log("edited id : " + editValue);
+	var fieldToChange = document.getElementById('input-form').value;
+	
+	if (fieldToChange == "quantity") {
+		data[editValue - 1].quantity = document.getElementById('placeholderChange').value;
+	}
+	console.log(data)
+	document.getElementById("MyTable").innerHTML = "";
+        var table = document.getElementById("MyTable");
+        for (var i = 0; i < data.length; i++) {
+            var newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                              <td id="${i + 1}">${i + 1}</td>
+                              <td><a id="ProjectId-${i + 1}">${data[i].ProjectId}</a> <br></td>
+                              <td><a id="category-${i + 1}">${data[i].category}</a> <br></td>
+                              <td><a id="grade-${i + 1}"> ${data[i].grade} </a> <br></td>
+                              <td><a id="size-${i + 1}"> ${data[i].size} </a> <br></td>
+                              <td><a id="TotalAmount-${i + 1}"> ${data[i].TotalAmount} </a> <br></td>
+                              <td><a id="vendor-${i + 1}"> ${data[i].vendorName} </a> <br></td>                       
+                              <td class="project-actions text-right">
+                              <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-editItem" onclick="editFinction(this.id)" id="Edit${i + 1}">
+                                      <i class="fas fa-pencil-alt"></i>
+                              </button>
+                              <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-projectDelete" id="Delete${i + 1}" onclick="deleteItem(this.id)">
+                                      <i class="fas fa-trash"></i>
+                              </button>
+                              </td>`;
+            table.appendChild(newRow);
+        }
+        $('#modal-projectDelete').modal('hide');
+}

@@ -2,9 +2,12 @@ package com.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import com.bean.EMSLogsBean;
 import com.dbConnection.MySqlConnection;
@@ -52,6 +55,32 @@ public class EMSLogsDao {
 		}
 		
 		return false;
+	}
+	
+	
+	public ArrayList<EMSLogsBean> getAllData(){
+		
+		String selectQuery = " select L.*,U.Name from logs L JOIN User U using(userId) order By CurrentTime DESC";
+		Connection conn = MySqlConnection.getInstance();
+		ArrayList<EMSLogsBean> a = new ArrayList<EMSLogsBean>();
+		if(conn != null) {
+			
+			try{
+				
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(selectQuery);
+				
+				while(rs.next()) {
+					a.add(new EMSLogsBean(rs.getString(3), rs.getInt(5),rs.getString(6) , rs.getString(2), rs.getInt(1), rs.getString(4),rs.getString(7)));
+				}
+				return a;
+			}catch(SQLException E) {
+				E.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		return null;
 	}
 	
 }

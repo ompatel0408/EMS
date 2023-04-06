@@ -15,7 +15,7 @@ function Demo(tt) {
 }
 function deleteItem() {
 	data.splice((EditId - 1), 1);
-	var parent = document.getElementById('MyTable')
+	var parent = document.getElementById('MyTable11')
 	var child = parent.querySelector('tr')
 	parent.removeChild(child);
 	for (var i = 0; i < data.length; i++) {
@@ -183,19 +183,23 @@ function getCount(){
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
-		countSize = JSON.parse(xhr.responseText);
+		let countSize = JSON.parse(xhr.responseText);
+		console.log("total count size : " + countSize);
+		document.getElementById('quantity').innerHTML="Available Stock in Store is :"+parseInt(countSize)
+		document.getElementById('quantity').style.color="red"
 		}
 	}
 	var data = {category: document.getElementById('category-id').value,
 				grade: document.getElementById('grade-id').value,
 				size: document.getElementById('size-id').value,token:"quantity"}
 	xhr.send(JSON.stringify(data));	
+	
 }
 var EditId;
 var data = [];
 function submitForm(event) {
 	event.preventDefault();
-	if (document.getElementById('MyTable').hasChildNodes() != null) {
+	if (document.getElementById('MyTable11').hasChildNodes() != null) {
 		document.querySelector('#ProcessId').classList.remove('disabled')
 	}
 	var json =
@@ -211,8 +215,8 @@ function submitForm(event) {
 	data.push(json)
 	console.log(json)
 	console.log(data)
-	document.getElementById("MyTable").innerHTML = "";
-	var table = document.getElementById("MyTable");
+	document.getElementById("MyTable11").innerHTML = "";
+	var table = document.getElementById("MyTable11");
 	for (var i = 0; i < data.length; i++) {
 		var newRow = document.createElement("tr");
 		alert("iN")

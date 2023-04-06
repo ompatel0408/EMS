@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
 	<%
 ArrayList<EMSStoreBean> store = (ArrayList<EMSStoreBean>) request.getAttribute("store");
 	ArrayList<EMSStoreBean> allStore = (ArrayList<EMSStoreBean>) request.getAttribute("allstore");

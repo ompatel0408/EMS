@@ -85,7 +85,7 @@ public class EMSIssueNoteServlet extends HttpServlet {
 			System.out.println(json);
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-//			response.getWriter().write(json);		
+			response.getWriter().write(json);		
 		}
 		else if(jsonType.equals("Projects"))
 		{

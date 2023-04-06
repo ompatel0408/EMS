@@ -102,10 +102,19 @@ function XHRRequestForOffer(){
   		if (xhr.status === 200) {
     		//countSize = JSON.parse(xhr.responseText);
     		console.log(xhr.responseText)
+    		window.location.href = "EMSQuotationPerItem.jsp";
   		}
 	}
 	xhr.send(JSON.stringify(data));
 	document.querySelector('#ProcessId').classList.add('disabled')
 	document.getElementById("MyTable2").innerHTML = "";
-	
 }
+
+window.addEventListener("beforeunload", function (event) {
+  event.preventDefault();
+  document.cookie = "myCookie2=".concat(JSON.stringify(data));
+  event.returnValue = "Are you sure you want to leave this page?"
+});
+
+
+

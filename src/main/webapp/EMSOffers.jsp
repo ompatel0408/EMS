@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>EMSQuotation</title>
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
 <%
 	ArrayList<ClientBean> clients = (ArrayList<ClientBean>) request.getAttribute("clients");
 	%>

@@ -261,13 +261,78 @@ public class ItemDao {
 			e.printStackTrace();
 		}
 	}
+
 	
-	public void setStatusAccept() {
-		
-		String selectQuery = "";
+	public ArrayList<String> getItemNamesForProject(String clientId) {
+		ArrayList<String> items = new ArrayList<String>();
+		try {
+			Connection con = MySqlConnection.getInstance();
+			PreparedStatement pstmt = con.prepareStatement("select itemname from items where clientId = ?;");
+			pstmt.setString(1, clientId);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String name = rs.getString("itemname");
+				items.add(name);
+			}
+			return items;
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
+	public int getSumOfItems()
+	{
+		try {
+			Connection con = MySqlConnection.getInstance();
+			PreparedStatement pstmt = con.prepareStatement("select count(DISTINCT quotationid) from items");
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				System.out.println(rs.getInt(1));
+				Integer total = rs.getInt(1);
+				return total;
+			}
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 	
+	public ArrayList<ItemBean> getAllItemsOfClient(int clientId) {
+		// TODO Auto-generated method stub
+		String query="select itemcode,itemname,clientname,tagno,quantity,deliverydate,QuotationId,TotalPricePerItem from items join clients using (clientid) join quotationperitem qp on items.itemcode=qp.offerCode where items.clientid=?;";
+		ArrayList<ItemBean> items = new ArrayList<ItemBean>();
+		try {
+			Connection con = MySqlConnection.getInstance();
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, clientId);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ItemBean item = new ItemBean();
+				item.setItemCode(rs.getString("itemCode"));
+				item.setItemName(rs.getString("itemname"));
+				item.setClientName(rs.getString("clientname"));
+				item.setTagNo(rs.getString("tagno"));
+				item.setQuantity(rs.getInt("quantity"));
+				item.setDeliveryDate(rs.getString("deliveryDate"));
+				item.setQuotationId(rs.getInt("QuotationId"));
+				item.setTotalPrice(rs.getString("TotalPricePerItem"));
+				items.add(item);
+			}
+			return items;
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 }
 

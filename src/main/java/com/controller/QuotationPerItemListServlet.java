@@ -34,6 +34,7 @@ public class QuotationPerItemListServlet extends HttpServlet{
 			EMSOffersDao odao = EMSOffersDao.getInstance();
 			offers=odao.getAllOffer();
 			request.setAttribute("offers", offers);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("OfferList.jsp");
 			rd.forward(request, response);
 		}
@@ -47,20 +48,5 @@ public class QuotationPerItemListServlet extends HttpServlet{
 			RequestDispatcher rd = request.getRequestDispatcher("QuotationPerItemList.jsp");
 			rd.forward(request, response);
 		}
-//		else if(offer == 2) {
-//			System.out.println("delete aaya");
-//			String offerCode = request.getParameter("offerCode");
-//			int cid = Integer.parseInt(request.getParameter("cid"));
-//			int gid = Integer.parseInt(request.getParameter("gid"));
-//			int sid = Integer.parseInt(request.getParameter("sid"));
-//			
-//			QuotationPerItemDao qdao = QuotationPerItemDao.getInstance();
-//			qdao.deleteFromQuotationPerItem(cid, gid, sid);
-//			ArrayList<QuotationPerItemBean> lists = new ArrayList<QuotationPerItemBean>();
-//			lists=qdao.getList(offerCode);
-//			request.setAttribute("lists", lists);
-//			RequestDispatcher rd = request.getRequestDispatcher("QuotationPerItemList.jsp");
-//			rd.forward(request, response);
-//		}
 	}
 }

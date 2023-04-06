@@ -3,7 +3,7 @@ var search = [];
 var percent;
 
 function submitForm(){
-	if (document.getElementById('MyTable').hasChildNodes) {
+	if (document.getElementById('MyTable10').hasChildNodes) {
 		document.querySelector('#processTo').classList.remove('disabled')
 	}
 	
@@ -19,8 +19,8 @@ function submitForm(){
 	search.push(json)
 	console.log(data)
 	
-	document.getElementById("MyTable").innerHTML = "";
-	var table = document.getElementById("MyTable");
+	document.getElementById("MyTable10").innerHTML = "";
+	var table = document.getElementById("MyTable10");
 	for (var i = 0; i < data.length; i++) {
 		var newRow = document.createElement("tr");
 
@@ -59,7 +59,6 @@ document.getElementById("deleteClicked").addEventListener("click", () => {
 let editValue;
 function editFinction(editId) {
 	console.log(editId);
-	/editValue = editId;/
 	editValue = parseInt(editId.substring(4));
 }
 
@@ -117,6 +116,6 @@ function XHRRequestForVendor(){
 	}
 	// send the request
 	xhr.send(JSON.stringify(data));
-	document.getElementById("MyTable").innerHTML = "";
+	document.getElementById("MyTable10").innerHTML = "";
 	data=[]
 }
