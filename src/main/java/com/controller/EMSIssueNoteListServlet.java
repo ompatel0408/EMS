@@ -12,6 +12,7 @@ import com.bean.ClientBean;
 import com.bean.EMSIssueNoteBean;
 import com.dao.ClientDao;
 import com.dao.EMSIssueNoteDao;
+import com.service.ExceptionHandler;
 
 /**
  * Servlet implementation class EMSIssueNoteList
@@ -27,20 +28,22 @@ private static EMSIssueNoteListServlet instance = null;
 		return instance;
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<EMSIssueNoteBean> clients = new ArrayList<EMSIssueNoteBean>();
-		EMSIssueNoteDao  clientDao = EMSIssueNoteDao.getInstance();
-		clients = clientDao.getAllList();
-		for (EMSIssueNoteBean clientBean : clients) {
-			System.out.println(clientBean.getIssueId());
-		}
-		request.setAttribute("issue", clients);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("EMSIssueList.jsp");
-		rd.forward(request, response);
+		try {
+			
+			ArrayList<EMSIssueNoteBean> clients = new ArrayList<EMSIssueNoteBean>();
+			EMSIssueNoteDao  clientDao = EMSIssueNoteDao.getInstance();
+			clients = clientDao.getAllList();
+			for (EMSIssueNoteBean clientBean : clients) {
+				System.out.println(clientBean.getIssueId());
+			}
+			request.setAttribute("issue", clients);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("EMSIssueList.jsp");
+			rd.forward(request, response);
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+	
 }

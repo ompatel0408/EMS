@@ -14,6 +14,7 @@ import com.dao.ItemDao;
 import com.dao.QuotationPerItemDao;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.service.ExceptionHandler;
 import com.service.PurchaseServices;
 
 import jakarta.servlet.ServletException;
@@ -43,70 +44,88 @@ public class EMSPurchaseServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub		
-		Gson gson = new Gson();
-	    String json = gson.toJson(ItemDao.getInstance().getProjects());
-	    response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(json);
+		
+		try {
+			Gson gson = new Gson();
+		    String json = gson.toJson(ItemDao.getInstance().getProjects());
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("UTF-8");
+		    response.getWriter().write(json);
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
 		
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Reached At Post!");
 		
-		ArrayList<EMSPurchaseBean> AEPB = PurchaseServices.fetchDataFromXHRRequest(request.getReader(), request);
-		
-		HttpSession session = request.getSession();
-		if(EMSPurchaseDao.getInstance().addPurchase(AEPB)) {
-			System.out.println("Purchase Added successfully!");
+		try {
+
+			ArrayList<EMSPurchaseBean> AEPB = PurchaseServices.fetchDataFromXHRRequest(request.getReader(), request);
 			
-			for(EMSPurchaseBean EPB:AEPB) {
-				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new purchase order for project ".concat(EPB.getProjectName()).concat(" has been created!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","PURCHASE"))) {
-					System.out.println("purchase insert Logs Inserted!");
-				}else {
-					System.out.println("purchase insert Logs not inserted!");
+			HttpSession session = request.getSession();
+			if(EMSPurchaseDao.getInstance().addPurchase(AEPB)) {
+				System.out.println("Purchase Added successfully!");
+				
+				for(EMSPurchaseBean EPB:AEPB) {
+					if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new purchase order for project ".concat(EPB.getProjectName()).concat(" has been created!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","PURCHASE"))) {
+						System.out.println("purchase insert Logs Inserted!");
+					}else {
+						System.out.println("purchase insert Logs not inserted!");
+					}
 				}
+			}else {
+				System.out.println("Purchase not added!");
 			}
-		}else {
-			System.out.println("Purchase not added!");
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
 		}
 		
 	}
 	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BufferedReader reader = request.getReader();
-	    StringBuilder sb = new StringBuilder();
-	    String line;
-	    while ((line = reader.readLine()) != null) {
-	        sb.append(line);
-	    }
-	    String requestBody = sb.toString();
-	    
-	    Gson gson = new Gson();
-	    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
+		
+		
+		try {
 
-	    	// access a property of the JSON object
-	    		
-	    	String json = "";
-			if(jsonObject.get("Token").getAsString().equals("Vendors")) {
-		    	json = gson.toJson(EMSPurchaseDao.getInstance().getVendorNameFromDatabase());
-			    response.setContentType("application/json");
-			    response.setCharacterEncoding("UTF-8");
-			    response.getWriter().write(json);
-			}
-		    else {
-		    	ArrayList<EMSPurchaseBean> arr1 = EMSPurchaseDao.getInstance().getAllPurchaseOrderByUsingProjectId(jsonObject.get("projectId").getAsString());
-				if(arr1 != null) {
-		    		 json = gson.toJson(arr1);
-		    	}
-		    	System.out.println("Json :"+json);
-			    response.setContentType("application/json");
-			    response.setCharacterEncoding("UTF-8");
-			    response.getWriter().write(json);
+			BufferedReader reader = request.getReader();
+		    StringBuilder sb = new StringBuilder();
+		    String line;
+		    while ((line = reader.readLine()) != null) {
+		        sb.append(line);
 		    }
-	    
+		    String requestBody = sb.toString();
+		    
+		    Gson gson = new Gson();
+		    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
+
+		    	// access a property of the JSON object
+		    ArrayList<EMSPurchaseBean> arr1 = new ArrayList<EMSPurchaseBean>();
+		    	String json = "";
+				if(jsonObject.get("Token").getAsString().equals("Vendors")) {
+			    	json = gson.toJson(EMSPurchaseDao.getInstance().getVendorNameFromDatabase());
+				    response.setContentType("application/json");
+				    response.setCharacterEncoding("UTF-8");
+				    response.getWriter().write(json);
+				}
+			    else {
+			    	
+			    	for(EMSPurchaseBean EPB: EMSPurchaseDao.getInstance().getSpecificData(jsonObject.get("projectId").getAsString()))
+			    	{
+			    		arr1.add(EMSPurchaseDao.getInstance().getAllPurchaseOrderByUsingProjectId(jsonObject.get("projectId").getAsString(),EPB));
+			    	}	
+			    	json=gson.toJson(arr1);
+			    	System.out.println(json);
+				    response.setContentType("application/json");
+				    response.setCharacterEncoding("UTF-8");
+				    response.getWriter().write(json);
+			    }
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
+		
 	}
 		
 }

@@ -14,6 +14,7 @@ import com.dao.ItemDao;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.service.EMSDrawingServices;
+import com.service.ExceptionHandler;
 import com.service.GRNServices;
 
 import jakarta.servlet.ServletException;
@@ -46,59 +47,76 @@ public class EMSDrawingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
     
-    	Gson gson = new Gson();
-    	String json = gson.toJson(ItemDao.getInstance().getProjects());
-    	response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
-    	
+		try {
+			
+	    	Gson gson = new Gson();
+	    	String json = gson.toJson(ItemDao.getInstance().getProjects());
+	    	response.setContentType("application/json");
+	        response.setCharacterEncoding("UTF-8");
+	        response.getWriter().write(json);
+	    
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
+			
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		EMSDrawingBean EGB =  EMSDrawingServices.uploadPic(request);
-		if(EGB != null) {
-			HttpSession session = request.getSession();
-			System.out.println("offerId: "+request.getParameter("offerId"));
-			System.out.println("ProjectId :"+request.getParameter("projectId"));
-			String drawingId = EMSDrawingServices.getActualDrawingId(request.getParameter("offerId"), EMSDrawingDao.getInstance().getDrawingIdFromdatabase(request.getParameter("projectId")));
-			System.out.println("Drawing Id :"+drawingId);
-			if(EMSDrawingDao.getInstance().addDrawingDetails(drawingId,EGB)) {
-				System.out.println("Inserted Successfully!");
-				
-				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new drawing of ".concat(request.getParameter("offerId")).concat(" has been added in ").concat(request.getParameter("projectId")),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","DRAWING"))) {
-					System.out.println("DRAWING insert Logs Inserted!");
+		try{
+
+			
+			EMSDrawingBean EGB =  EMSDrawingServices.uploadPic(request);
+			if(EGB != null) {
+				HttpSession session = request.getSession();
+				System.out.println("offerId: "+request.getParameter("offerId"));
+				System.out.println("ProjectId :"+request.getParameter("projectId"));
+				String drawingId = EMSDrawingServices.getActualDrawingId(request.getParameter("offerId"), EMSDrawingDao.getInstance().getDrawingIdFromdatabase(request.getParameter("projectId")));
+				System.out.println("Drawing Id :"+drawingId);
+				if(EMSDrawingDao.getInstance().addDrawingDetails(drawingId,EGB)) {
+					System.out.println("Inserted Successfully!");
+					
+					if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new drawing of ".concat(request.getParameter("offerId")).concat(" has been added in ").concat(request.getParameter("projectId")),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","DRAWING"))) {
+						System.out.println("DRAWING insert Logs Inserted!");
+					}else {
+						System.out.println("DRAWING  insert Logs not inserted!");
+					}
 				}else {
-					System.out.println("DRAWING  insert Logs not inserted!");
+					System.out.println("not sucessfully!");
 				}
-			}else {
-				System.out.println("not sucessfully!");
+				response.sendRedirect("EMSDrawingList.jsp");
 			}
-			response.sendRedirect("EMSDrawingList.jsp");
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
 		}
+		
 	}
 	
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-    	System.out.println("Put Reached!!!!!!!");
     	
-    	BufferedReader reader = request.getReader();
-	    StringBuilder sb = new StringBuilder();
-	    String line;
-	    while ((line = reader.readLine()) != null) {
-	        sb.append(line);
-	    }
-	    String requestBody = sb.toString();
-	   
-	    Gson gson = new Gson();
-	    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
-    	String json = gson.toJson(EMSDrawingDao.getInstance().getOfferNameFromDatabase(jsonObject.get("ProjectId").getAsString()));
-    	response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+    	try {
+    		
+
+        	BufferedReader reader = request.getReader();
+    	    StringBuilder sb = new StringBuilder();
+    	    String line;
+    	    while ((line = reader.readLine()) != null) {
+    	        sb.append(line);
+    	    }
+    	    String requestBody = sb.toString();
+    	   
+    	    Gson gson = new Gson();
+    	    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
+        	String json = gson.toJson(EMSDrawingDao.getInstance().getOfferNameFromDatabase(jsonObject.get("ProjectId").getAsString()));
+        	response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+    	}catch(Exception e) {
+    		ExceptionHandler.handleException(request, response, e);
+    	}
 	}
     
-
 }

@@ -5,6 +5,8 @@ import java.io.IOException;
 import com.dao.EMSLoginDao;
 import com.google.gson.Gson;
 import com.service.Authentication;
+import com.service.ExceptionHandler;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
@@ -21,17 +23,21 @@ public class EMSLoginServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		int userId = (Integer) session.getAttribute("userId");
 
-		System.out.println("-------->"+userId);
-		
-		Gson gson = new Gson();
-		
-	    String json = gson.toJson(userId);
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(json);
+		try {
+			
+			HttpSession session = request.getSession();
+			int userId = (Integer) session.getAttribute("userId");
+			
+			Gson gson = new Gson();
+			
+		    String json = gson.toJson(userId);
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(json);
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
 		
 	}
 
@@ -39,10 +45,14 @@ public class EMSLoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	
-		if("get".equals((String)request.getAttribute("InvalidAuth"))) {
-			response.sendRedirect("InvalidToken.jsp");
-		}else {
-			response.sendRedirect("EMSDirectorsDashboard.jsp");
+		try {
+			if("get".equals((String)request.getAttribute("InvalidAuth"))) {
+				response.sendRedirect("InvalidToken.jsp");
+			}else {
+				response.sendRedirect("EMSDirectorsDashboard.jsp");
+			}
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
 		}
 	}
 

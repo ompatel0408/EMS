@@ -180,22 +180,24 @@ public class EMSPurchaseDao {
 	}
 	
 	
-public ArrayList<EMSPurchaseBean> getAllPurchaseOrderByUsingProjectId(String projectId) {
+public EMSPurchaseBean getAllPurchaseOrderByUsingProjectId(String projectId,EMSPurchaseBean EPB) {
 		
-		String selectQuery = "SELECT I.PROJECTID,EC.Catagory,I.Quantity,I.UOM,I.REMARKS,I.ITEMNAME,CG.GRADE,CGS.SIZE FROM INDENT I JOIN EMSCatagory EC ON I.ITEMCATAGORY = EC.catagoryId JOIN CatagoryGrade CG ON CG.catagoryId = EC.catagoryId JOIN CATAGORYGRADESIZE CGS ON CG.gradeId = CGS.gradeId WHERE PROJECTId = ?";
+		String selectQuery = "SELECT I.PROJECTID,EC.Catagory,I.Quantity,I.UOM,I.REMARKS,I.ITEMNAME,CG.GRADE,CGS.SIZE FROM INDENT I JOIN EMSCatagory EC ON I.ITEMCATAGORY = EC.catagoryId JOIN CatagoryGrade CG ON CG.catagoryId = EC.catagoryId JOIN CATAGORYGRADESIZE CGS ON CG.gradeId = CGS.gradeId WHERE PROJECTId = ? AND EC.CatagoryId = ? and CG.gradeId = ? and CGS.sizeId  = ?";
 		Connection conn = MySqlConnection.getInstance();
-		ArrayList<EMSPurchaseBean> pos = new ArrayList<EMSPurchaseBean>();
+		EMSPurchaseBean EPB1 = null;
 		if(conn != null) {
 			
 			try {
 				PreparedStatement stmt = conn.prepareStatement(selectQuery);
 				stmt.setString(1, projectId);
+				stmt.setInt(2, EPB.getITEMCATAGORY());
+				stmt.setInt(3, EPB.getGradeId());
+				stmt.setInt(4, EPB.getSIZEId());
 				ResultSet rs =stmt.executeQuery();
-
 				while(rs.next()) {
-					pos.add(new EMSPurchaseBean(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7), rs.getString(8)));
+					EPB1 = new EMSPurchaseBean(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7), rs.getString(8));
 				}
-				return pos;
+				return EPB1;
 			}catch(SQLException E) {
 				E.printStackTrace();
 			}
@@ -238,5 +240,35 @@ public ArrayList<EMSPurchaseBean> getAllPurchaseOrderByUsingProjectId(String pro
 		}
 		return 0;
 	}
+	
+	public ArrayList<EMSPurchaseBean> getSpecificData(String projectId) {
+		
+		String selectQuery = "select ITEMCATAGORY,GradeId,SIZEId from indent where PROJECTID = ?";
+		Connection conn = MySqlConnection.getInstance();
+		ArrayList<EMSPurchaseBean> AEPB = new ArrayList<EMSPurchaseBean>();
+		EMSPurchaseBean EPB= null;
+		if(conn != null) {
+			
+			try {
+				PreparedStatement stmt = conn.prepareStatement(selectQuery);
+				stmt.setString(1, projectId);
+				ResultSet rs = stmt.executeQuery();
+				
+				while(rs.next()) {
+					EPB  = new EMSPurchaseBean(rs.getInt(1), rs.getInt(2), rs.getInt(3));
+					AEPB.add(EPB);
+				}
+				return AEPB;
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		return null;
+		
+	}
+	
 	
 }

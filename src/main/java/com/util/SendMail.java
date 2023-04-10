@@ -95,6 +95,68 @@ public class SendMail {
 		}
 	}
 	
+	public static void sendErrorLogs(String email,String ErrorLogs) {
+
+		// Recipient's email ID needs to be mentioned.
+		String to = email;
+
+		// Sender's email ID needs to be mentioned
+		final String from = "royalclubjan@gmail.com";
+
+		// Assuming you are sending email from through gmails smtp
+		String host = "smtp.gmail.com";
+
+		// Get system properties
+		Properties properties = System.getProperties();
+
+		// Setup mail server
+		properties.put("mail.smtp.host", host);
+		properties.put("mail.smtp.port", "465");
+		properties.put("mail.smtp.ssl.enable", "true");
+		properties.put("mail.smtp.auth", "true");
+
+		
+		Session session = Session.getInstance(properties, new Authenticator() {
+
+			protected PasswordAuthentication getPasswordAuthentication() {
+
+				return new PasswordAuthentication(from, "efwzsnwttkfumekf");
+
+			}
+
+		});
+
+		// Used to debug SMTP issues
+		session.setDebug(true);
+
+		try {
+			// Create a default MimeMessage object.
+			MimeMessage message = new MimeMessage(session);
+
+			// Set From: header field of the header.
+			message.setFrom(new InternetAddress(from));
+
+			// Set To: header field of the header.
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+			// Set Subject: header field
+			message.setSubject(LocalDate.now()+" Login Password From EMS Projects PVT LTD");
+
+			// Now set the actual message
+			message.setText(ErrorLogs);
+			System.out.println("sending...");
+			// Send message
+			Transport.send(message);
+			System.out.println("Sent message successfully....");
+		} catch (MessagingException m) {
+			m.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
 	public static void main(String[] args) {
 		SendMail.mailTokenEveryDay();
 	}

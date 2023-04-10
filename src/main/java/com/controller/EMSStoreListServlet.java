@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.bean.EMSStoreBean;
 import com.dao.EMSStoreDao;
+import com.service.ExceptionHandler;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,17 +17,18 @@ public class EMSStoreListServlet extends HttpServlet {
 
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EMSStoreDao esd = new EMSStoreDao();
-		ArrayList<EMSStoreBean> store =  esd.getAllData();
-		ArrayList<EMSStoreBean> allStore =  esd.getAllStoreList();
-		request.setAttribute("store", store);
-		request.setAttribute("allstore", allStore);
-		request.getRequestDispatcher("EMSStoreList.jsp").forward(request, response);
+		
+		try {
+			EMSStoreDao esd = new EMSStoreDao();
+			ArrayList<EMSStoreBean> store =  esd.getAllData();
+			ArrayList<EMSStoreBean> allStore =  esd.getAllStoreList();
+			request.setAttribute("store", store);
+			request.setAttribute("allstore", allStore);
+			request.getRequestDispatcher("EMSStoreList.jsp").forward(request, response);
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
 
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+	
 }

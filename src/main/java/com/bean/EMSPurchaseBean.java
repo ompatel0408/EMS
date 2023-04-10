@@ -21,7 +21,13 @@ public class EMSPurchaseBean {
 	private String category;
 	private String grade;
 	private String remarks;
-	private String itemName;	
+	private String itemName;
+	private int ITEMCATAGORY;
+	private int GradeId;
+	private int SIZEId;
+	
+	
+	
 	
 	public EMSPurchaseBean(String projectId,String category,int quantity,String uom,String remarks,String itemName,String grade,String size) {
 		this.Size = size;
@@ -51,6 +57,40 @@ public class EMSPurchaseBean {
 		this.CurrentDate = currentDate;
 		this.PONumber = pONumber;
 		this.VendorName = vendorName;
+	}
+	
+
+	public EMSPurchaseBean(int iTEMCATAGORY, int gradeId, int sIZEId) {
+		this.ITEMCATAGORY = iTEMCATAGORY;
+		this.GradeId = gradeId;
+		this.SIZEId = sIZEId;
+	}
+
+	
+	
+
+	public int getITEMCATAGORY() {
+		return ITEMCATAGORY;
+	}
+
+	public void setITEMCATAGORY(int iTEMCATAGORY) {
+		this.ITEMCATAGORY = iTEMCATAGORY;
+	}
+
+	public int getGradeId() {
+		return GradeId;
+	}
+
+	public void setGradeId(int gradeId) {
+		this.GradeId = gradeId;
+	}
+
+	public int getSIZEId() {
+		return SIZEId;
+	}
+	
+	public void setSIZEId(int sIZEId) {
+		this.SIZEId = sIZEId;
 	}
 	
 	public String getProjectId() {

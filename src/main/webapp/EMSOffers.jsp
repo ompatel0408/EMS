@@ -116,9 +116,10 @@
 					<thead>
 						<tr>
 							<th style="width: 2%">Sr.No</th>
-							<th style="width: 20%">Client Name</th>
-							<th style="width: 20%">Offer Name</th>
+							<th style="width: 10%">Client Name</th>
+							<th style="width: 10%">Offer Name</th>
 							<th style="width: 15%">Quantity</th>
+							<th style="width: 25%">Remark</th>
 							<th style="width: 20%"></th>
 						</tr>
 					</thead>
@@ -143,28 +144,27 @@
 					<div class="form-group p-3">
 						<label>Select </label>
 						<p id="select-error"></p>
-						<form action="OfferServlet">
+						<form onsubmit="updateField(event)">
 							<select class="form-control select2 select2-hidden-accessible"
 								style="width: 100%;" data-select2-id="1" tabindex="-1"
 								aria-hidden="true" id="input-form">
-								<br>
 								<option selected="selected" data-select2-id="3">Select
-									option you want to update..</option>
-								<option value="ItemName">Item Name</option>
-								<option value="quantity">Quantity</option>
-								<option value="delivaryDate">Delivery Date</option>
-							</select>
+										option you want to update..</option>
+									<option value="ItemName">Item Name</option>
+									<option value="quantity">Quantity</option>
+									<option value="remark">Remark</option>
+								</select>
 
 							<div class="form-group" id="hide-text" style="display: none;">
-								<label for="placeholderChange" id="lableName" class="mt-2"></label>
-								<input type="text" class="form-control" id="placeholderChange"
-									placeholder="Enter">
-							</div>
-							<div class="form-group" id="hide-are" style="display: none;">
-								<label for="placeholderChange" id="lableName" class="mt-2"></label>
-								<input type="text" class="form-control" id="placeholderChange"
-									placeholder="Enter">
-							</div>
+									<label for="placeholderChange" id="lableName" class="mt-2"></label>
+									<input type="text" class="form-control" id="placeholderChange"
+										placeholder="Enter">
+								</div>
+								<div class="form-group" id="hide-area" style="display: none;">
+									<label for="placeholderChange" id="lableName" class="mt-2"></label>
+									<textarea class="form-control" rows="3" placeholder="Enter..."
+										id="RemarkModel" style="height: 125px;"></textarea>
+								</div>
 							<button type="submit" class="btn btn-primary mt-2 disabled"
 								id="input-update">Save changes</button>
 						</form>

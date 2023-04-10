@@ -8,6 +8,7 @@ import com.bean.ProjectBean;
 import com.dao.ClientDao;
 import com.dao.ItemDao;
 import com.dao.ProjectDao;
+import com.service.ExceptionHandler;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -30,33 +31,37 @@ public class GeneralListServlet extends HttpServlet {
 	}
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("In Do get of general List");
-		String clientId = req.getParameter("clientId");
-		String order = req.getParameter("order");
 		
-		if(clientId.equals("null")) {
-			ArrayList<ClientBean> clients = new ArrayList<ClientBean>();
-			ClientDao  clientDao = ClientDao.getInstance();
-			clients = clientDao.getClientList();
-			for (ClientBean clientBean : clients) {
-				System.out.println(clientBean.getClientName());
+		try {
+	
+			String clientId = req.getParameter("clientId");
+			
+			if(clientId.equals("null")) {
+				ArrayList<ClientBean> clients = new ArrayList<ClientBean>();
+				ClientDao  clientDao = ClientDao.getInstance();
+				clients = clientDao.getClientList();
+				for (ClientBean clientBean : clients) {
+					System.out.println(clientBean.getClientName());
+				}
+				req.setAttribute("clients", clients);
+				RequestDispatcher rd = req.getRequestDispatcher("GeneralInfo.jsp");
+				rd.forward(req, resp);
 			}
-			req.setAttribute("clients", clients);
-			RequestDispatcher rd = req.getRequestDispatcher("GeneralInfo.jsp");
-			rd.forward(req, resp);
-		}
-		else {
-			ClientDao  clientDao = ClientDao.getInstance();
-			ProjectDao projectDao = ProjectDao.getInstance();
-			ItemDao idao  = ItemDao.getInstance();
-			ArrayList<String> items = idao.getItemNamesForProject(clientId);
-			String clientName = clientDao.getClientNameFormDatabase(Integer.parseInt(clientId));
-			ArrayList<ProjectBean> projects = projectDao.getAllProjectUsingClientId(clientId);
-			req.setAttribute("clientId", clientId);
-			req.setAttribute("clientName", clientName);
-			req.setAttribute("projects", projects);
-			req.setAttribute("items", items);
-			req.getRequestDispatcher("GeneralInfoOfProject.jsp").forward(req, resp);
+			else {
+				ClientDao  clientDao = ClientDao.getInstance();
+				ProjectDao projectDao = ProjectDao.getInstance();
+				ItemDao idao  = ItemDao.getInstance();
+				ArrayList<String> items = idao.getItemNamesForProject(clientId);
+				String clientName = clientDao.getClientNameFormDatabase(Integer.parseInt(clientId));
+				ArrayList<ProjectBean> projects = projectDao.getAllProjectUsingClientId(clientId);
+				req.setAttribute("clientId", clientId);
+				req.setAttribute("clientName", clientName);
+				req.setAttribute("projects", projects);
+				req.setAttribute("items", items);
+				req.getRequestDispatcher("GeneralInfoOfProject.jsp").forward(req, resp);
+			}
+		}catch(Exception e) {
+			ExceptionHandler.handleException(req, resp, e);
 		}
 		
 	}

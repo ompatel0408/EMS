@@ -11,6 +11,7 @@ import com.bean.CatagoryGradeSizeBean;
 import com.dao.GetGradeListDao;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
+import com.service.ExceptionHandler;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,49 +29,47 @@ public class GetGradeListServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException
     {
     	
-    	StringBuilder sb = new StringBuilder();
-    	String line;
-		try {
-			BufferedReader reader = request.getReader();
-			while ((line = reader.readLine()) != null) {
-			    sb.append(line);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		String jsonData =sb.toString();
-		Gson gson = new Gson();
-		CatagoryGradeSizeBean grade =gson.fromJson(jsonData, CatagoryGradeSizeBean.class);
-		String query =grade.getQuery();
-//        String query = request.getParameter("query");
-        System.out.println(query);
-        GetGradeListDao gradeList = GetGradeListDao.getInstance1();
-        ArrayList<CatagoryGradeSizeBean> grades = new ArrayList<CatagoryGradeSizeBean>();
-        grades=gradeList.getGradeList(query);
-        ArrayList<String> gradeName = new ArrayList<String>();
-    	ArrayList<Integer> gradeId = new ArrayList<Integer>();
-        for (CatagoryGradeSizeBean i : grades)
-    	{
-         	gradeName.add(i.getCatagoryName());
-    		gradeId.add(i.getCatagoryId());
+    	try{
+    		StringBuilder sb = new StringBuilder();
+        	String line;
+    		try {
+    			BufferedReader reader = request.getReader();
+    			while ((line = reader.readLine()) != null) {
+    			    sb.append(line);
+    			}
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		
+    		String jsonData =sb.toString();
+    		Gson gson = new Gson();
+    		CatagoryGradeSizeBean grade =gson.fromJson(jsonData, CatagoryGradeSizeBean.class);
+    		String query =grade.getQuery();
+
+            GetGradeListDao gradeList = GetGradeListDao.getInstance1();
+            ArrayList<CatagoryGradeSizeBean> grades = new ArrayList<CatagoryGradeSizeBean>();
+            grades=gradeList.getGradeList(query);
+            ArrayList<String> gradeName = new ArrayList<String>();
+        	ArrayList<Integer> gradeId = new ArrayList<Integer>();
+            for (CatagoryGradeSizeBean i : grades)
+        	{
+             	gradeName.add(i.getCatagoryName());
+        		gradeId.add(i.getCatagoryId());
+        	}
+            PrintWriter out = response.getWriter();
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            String json = gson.toJson(gradeName);
+            out.print(json);
+            out.flush();
+    	}catch(Exception e) {
+    		ExceptionHandler.handleException(request,response, e);
     	}
-        PrintWriter out = response.getWriter();
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        String json = gson.toJson(gradeName);
-//        out.print("{\"data\": \"" + json + "\"}");
-//        String json1 = gson.toJson(data);
-//        System.out.println(json+ ""+json1);
-//        System.out.println(data);
-//        out.print(data);
-        out.print(json);
-//        out.print("{\"data\": \"" + json+"\"}");
-        out.flush();
+    	
     }
 
     

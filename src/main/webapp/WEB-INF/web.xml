@@ -306,18 +306,7 @@
 	<filter-mapping>
 		<filter-name>EMSUserFilter</filter-name>
 		<url-pattern>/EMSUsersSevlet</url-pattern>
-	</filter-mapping>
-	
-	<servlet>
-		<servlet-name>EMSLogsServlet</servlet-name>
-		<servlet-class>com.controller.EMSLogsServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>EMSLogsServlet</servlet-name>
-		<url-pattern>/EMSLogsServlet</url-pattern>
-	</servlet-mapping>
+	</filter-mapping> 
 	<servlet>
 		<servlet-name>GeneralListServlet</servlet-name>
 		<servlet-class>com.controller.GeneralListServlet</servlet-class>
@@ -326,6 +315,14 @@
 	<servlet-mapping>
 		<servlet-name>GeneralListServlet</servlet-name>
 		<url-pattern>/GeneralListServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>TestServlet</servlet-name>
+		<servlet-class>com.controller.TestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TestServlet</servlet-name>
+		<url-pattern>/TestServlet</url-pattern>
 	</servlet-mapping>
 
 </web-app>

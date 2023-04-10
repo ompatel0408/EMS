@@ -13,6 +13,7 @@ import com.dao.EMSLogsDao;
 import com.dao.QuotationPerItemDao;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.service.ExceptionHandler;
 import com.service.QuotationPerItemServices;
 
 import jakarta.servlet.ServletException;
@@ -51,12 +52,17 @@ public class EMSQuotationPerItemServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		
-		String[] catagory= QPd.getCatagoryFromDataBase();
-		Gson gson = new Gson();
-	    String json = gson.toJson(catagory);
-	    response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(json);
+		try {
+
+			String[] catagory= QPd.getCatagoryFromDataBase();
+			Gson gson = new Gson();
+		    String json = gson.toJson(catagory);
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("UTF-8");
+		    response.getWriter().write(json);
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
 		
 	}
 
@@ -64,109 +70,113 @@ public class EMSQuotationPerItemServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		try {
 
-	
-		ArrayList<QuotationPerItemBean> AQPIB = QuotationPerItemServices.fetchDataFromXHRRequestInQuotaionPerItem(request.getReader(),request);
-		HttpSession session = request.getSession();
-		if(QPd.addQuotationPerItem(AQPIB)) {
-			System.out.println("QuotataionPerItem Added SuccessFully");
-			if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new Quotation for Offer ".concat(AQPIB.get(0).getOfferName()).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","QUOTATIONPEROFFER"))) {
-				init();
-				System.out.println("QUOTATIONPEROFFER insert Logs Inserted!");
-			}else {
-				System.out.println("QUOTATIONPEROFFER insert Logs not inserted!");
+			ArrayList<QuotationPerItemBean> AQPIB = QuotationPerItemServices.fetchDataFromXHRRequestInQuotaionPerItem(request.getReader(),request);
+			HttpSession session = request.getSession();
+			if(QPd.addQuotationPerItem(AQPIB)) {
+				System.out.println("QuotataionPerItem Added SuccessFully");
+				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new Quotation for Offer ".concat(AQPIB.get(0).getOfferName()).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","QUOTATIONPEROFFER"))) {
+					init();
+					System.out.println("QUOTATIONPEROFFER insert Logs Inserted!");
+				}else {
+					System.out.println("QUOTATIONPEROFFER insert Logs not inserted!");
+				}
+			}else{
+				System.out.println("QuotataionPerItem Added not SuccessFully");
 			}
-		}else{
-			System.out.println("QuotataionPerItem Added not SuccessFully");
-		}
-		
-		for(QuotationPerItemBean QPIB:AQPIB) {
-			if(!map.containsKey(QPIB.getItemId())) {
-				map.put(QPIB.getItemId(),QPIB.getProfitPercentage());
-			}
-		}
-		
-		ArrayList<QuotationPerItemBean> ar = new ArrayList<QuotationPerItemBean>();
-		
-		for(QuotationPerItemBean QPIB:QPd.performSum()){
-			if(!arr.contains(QPIB.getItemId())) {
-				if(map.get(QPIB.getItemId()) != null) {
-					String profitAmount  = String.valueOf((Double.parseDouble(QPIB.getTotalAmountWithoutProfit()) * (Double.parseDouble(map.get(QPIB.getItemId()))/100.0)) + (Double.parseDouble(QPIB.getTotalAmountWithoutProfit())));
-					QuotationPerItemBean QPIB1 = new QuotationPerItemBean(QPIB.getItemId(),QPIB.getTotalAmountWithoutProfit() , profitAmount);
-					ar.add(QPIB1);
+			
+			for(QuotationPerItemBean QPIB:AQPIB) {
+				if(!map.containsKey(QPIB.getItemId())) {
+					map.put(QPIB.getItemId(),QPIB.getProfitPercentage());
 				}
 			}
-		}
-		
-		for(QuotationPerItemBean QPIB:AQPIB) {
-			if(!arr.contains(QPIB.getItemId())) {
-				arr.add(QPIB.getItemId());
+			
+			ArrayList<QuotationPerItemBean> ar = new ArrayList<QuotationPerItemBean>();
+			
+			for(QuotationPerItemBean QPIB:QPd.performSum()){
+				if(!arr.contains(QPIB.getItemId())) {
+					if(map.get(QPIB.getItemId()) != null) {
+						String profitAmount  = String.valueOf((Double.parseDouble(QPIB.getTotalAmountWithoutProfit()) * (Double.parseDouble(map.get(QPIB.getItemId()))/100.0)) + (Double.parseDouble(QPIB.getTotalAmountWithoutProfit())));
+						QuotationPerItemBean QPIB1 = new QuotationPerItemBean(QPIB.getItemId(),QPIB.getTotalAmountWithoutProfit() , profitAmount);
+						ar.add(QPIB1);
+					}
+				}
 			}
-		}
-		
-		
-		if(QPd.addProfitForQuotationPerItem(ar)) {
-			System.out.println("Profit added successfully!");
-		}else {
-			System.out.println("Profit not added");
-		}
-		
-		for(QuotationPerItemBean QPIB :ar) {
-			System.out.println("getTotalAmountWithProfit :"+QPIB.getTotalAmountWithProfit());
-		}		
-				
-		if(QPd.updateTotalPrice(ar)) {
-			System.out.println("totalPrice added successfully!");
-		}else {
+			
+			for(QuotationPerItemBean QPIB:AQPIB) {
+				if(!arr.contains(QPIB.getItemId())) {
+					arr.add(QPIB.getItemId());
+				}
+			}
+			
+			
+			if(QPd.addProfitForQuotationPerItem(ar)) {
+				System.out.println("Profit added successfully!");
+			}else {
+				System.out.println("Profit not added");
+			}
+			
+			for(QuotationPerItemBean QPIB :ar) {
+				System.out.println("getTotalAmountWithProfit :"+QPIB.getTotalAmountWithProfit());
+			}		
+					
+			if(QPd.updateTotalPrice(ar)) {
+				System.out.println("totalPrice added successfully!");
+			}else {
 
-			System.out.println("totalPrice not added");
-		}
-		
-		
+				System.out.println("totalPrice not added");
+			}
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}	
 	}
 	
 	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		try {
 
-		BufferedReader reader = request.getReader();
-	    StringBuilder sb = new StringBuilder();
-	    String line;
-	    while ((line = reader.readLine()) != null) {
-	        sb.append(line);
-	    }
-	    String requestBody = sb.toString();
-	    
-	    Gson gson = new Gson();
-	    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
-
-	    // access a property of the JSON object
-	    
-	    if(jsonObject.get("token").getAsString().equals("category")) {
-	    	category = jsonObject.get("category").getAsString();
-	    	String json = gson.toJson(QPd.getGradeFromDatabase(jsonObject.get("category").getAsString()));
-		    response.setContentType("application/json");
-		    response.setCharacterEncoding("UTF-8");
-		    response.getWriter().write(json);
-	    }else if(jsonObject.get("token").getAsString().equals("grade")){
-	    	String json = gson.toJson(QPd.getSizeFromDatabase(category,jsonObject.get("grade").getAsString()));
-		    response.setContentType("application/json");
-		    response.setCharacterEncoding("UTF-8");
-		    response.getWriter().write(json);
+			BufferedReader reader = request.getReader();
+		    StringBuilder sb = new StringBuilder();
+		    String line;
+		    while ((line = reader.readLine()) != null) {
+		        sb.append(line);
+		    }
+		    String requestBody = sb.toString();
 		    
-	    }else if(jsonObject.get("token").getAsString().equals("Offers")) {
-	    	ArrayList<String> a = QPd.getItemCodeFromDatabase();
-	    	String[] offers = new String[a.size()];
-	    	
-	    	for(int i=0;i<a.size();i++) {
-	    		offers[i] = a.get(i);
-	    	}
-	    	String json = gson.toJson(offers);
-		    response.setContentType("application/json");
-		    response.setCharacterEncoding("UTF-8");
-		    response.getWriter().write(json);
-	    }
-		
+		    Gson gson = new Gson();
+		    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
+
+		    // access a property of the JSON object
+		    
+		    if(jsonObject.get("token").getAsString().equals("category")) {
+		    	category = jsonObject.get("category").getAsString();
+		    	String json = gson.toJson(QPd.getGradeFromDatabase(jsonObject.get("category").getAsString()));
+			    response.setContentType("application/json");
+			    response.setCharacterEncoding("UTF-8");
+			    response.getWriter().write(json);
+		    }else if(jsonObject.get("token").getAsString().equals("grade")){
+		    	String json = gson.toJson(QPd.getSizeFromDatabase(category,jsonObject.get("grade").getAsString()));
+			    response.setContentType("application/json");
+			    response.setCharacterEncoding("UTF-8");
+			    response.getWriter().write(json);
+			    
+		    }else if(jsonObject.get("token").getAsString().equals("Offers")) {
+		    	ArrayList<String> a = QPd.getItemCodeFromDatabase();
+		    	String[] offers = new String[a.size()];
+		    	
+		    	for(int i=0;i<a.size();i++) {
+		    		offers[i] = a.get(i);
+		    	}
+		    	String json = gson.toJson(offers);
+			    response.setContentType("application/json");
+			    response.setCharacterEncoding("UTF-8");
+			    response.getWriter().write(json);
+		    }
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
 	}
 	
 

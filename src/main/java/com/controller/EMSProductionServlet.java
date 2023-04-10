@@ -10,6 +10,7 @@ import com.dao.EMSProductionDao;
 import com.dao.ItemDao;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.service.ExceptionHandler;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -30,13 +31,11 @@ public class EMSProductionServlet extends HttpServlet {
 
     public EMSProductionServlet() {
     }
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		
+		try {
+
 		     String projectId= request.getParameter("projectId");
 		     String remark=request.getParameter("Remark");
 		     String workDonePer=request.getParameter("workDonePer");
@@ -64,29 +63,36 @@ public class EMSProductionServlet extends HttpServlet {
 		    	 System.out.println("Not inserted!");
 		    	 response.sendRedirect("EMSProduction.jsp");
 		     }    
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
 		 
 	}
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		BufferedReader reader = request.getReader();
-	    StringBuilder sb = new StringBuilder();
-	    String line;
-	    while ((line = reader.readLine()) != null) {
-	        sb.append(line);
-	    }
-	    String requestBody = sb.toString();
-	    
-	    ItemDao Id = ItemDao.getInstance();
-	    Gson gson = new Gson();
-	    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
-	    
-	    if(jsonObject.get("token").getAsString().equals("Projects")) {  
-	    	System.out.println("Hello");
-	    	String json = gson.toJson(Id.getProjects());
-		    response.setContentType("application/json");
-		    response.setCharacterEncoding("UTF-8");
-		    response.getWriter().write(json);
-	    }
-	}
-	
+		
+		try {
 
+			BufferedReader reader = request.getReader();
+		    StringBuilder sb = new StringBuilder();
+		    String line;
+		    while ((line = reader.readLine()) != null) {
+		        sb.append(line);
+		    }
+		    String requestBody = sb.toString();
+		    
+		    ItemDao Id = ItemDao.getInstance();
+		    Gson gson = new Gson();
+		    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
+		    
+		    if(jsonObject.get("token").getAsString().equals("Projects")) {  
+		    	String json = gson.toJson(Id.getProjects());
+			    response.setContentType("application/json");
+			    response.setCharacterEncoding("UTF-8");
+			    response.getWriter().write(json);
+		    }
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
+		
+	}
 }

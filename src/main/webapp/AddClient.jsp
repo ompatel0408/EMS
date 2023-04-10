@@ -183,7 +183,7 @@
 																					<div class="form-group">
 																						<label for="exampleInputPassword1">Email</label> <input
 																							type="text" class="form-control"
-																							id="exampleInputPassword1" placeholder="Password"
+																							id="exampleInputPassword1" placeholder="Enter email "
 																							name="email">
 																					</div>
 																					<div class="form-group">

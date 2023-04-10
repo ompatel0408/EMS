@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.bean.EMSDirectorsDashboardBean;
 import com.dao.EMSDirectorsDashboardDao;
 import com.google.gson.Gson;
+import com.service.ExceptionHandler;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -34,25 +35,35 @@ public class EMSDirectorsDashboardServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("GET");
-		EMSDirectorsDashboardDao EDDD = EMSDirectorsDashboardDao.getInstacne();
-		String json = gson.toJson(EDDD.getDataOfLiveProjects());
-	    response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(json);
+		
+		
+		try {
+			
+			EMSDirectorsDashboardDao EDDD = EMSDirectorsDashboardDao.getInstacne();
+			String json = gson.toJson(EDDD.getDataOfLiveProjects());
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("UTF-8");
+		    response.getWriter().write(json);
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
+		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		HttpSession session = request.getSession();
-		if(session.getAttribute("userId") != null) {
-			String json = gson.toJson(session.getAttribute("userId").toString());
-		    response.setContentType("application/json");
-		    response.setCharacterEncoding("UTF-8");
-		    response.getWriter().write(json);
+		try {
+			
+			HttpSession session = request.getSession();
+			if(session.getAttribute("userId") != null) {
+				String json = gson.toJson(session.getAttribute("userId").toString());
+			    response.setContentType("application/json");
+			    response.setCharacterEncoding("UTF-8");
+			    response.getWriter().write(json);
+			}
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
 		}
 	}
 	
-
 }

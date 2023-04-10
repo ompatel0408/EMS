@@ -19,7 +19,7 @@ function submitForm() {
 	{
 		ClientId: document.getElementById('ProjectId1').value,
 		ItemName: document.getElementById('ItemName').value,
-		remarks: document.getElementById('Remarks').value,
+		remark: document.getElementById('Remarks').value,
 		quantity: document.getElementById('Quantity').value,
 		TotalPrice:0,
 		//delivaryDate: document.getElementById('DelivaryDate').value,
@@ -48,24 +48,22 @@ function editFinction(editId) {
 
 function updateField(event) {
 	event.preventDefault();
-	alert(editValue)
 	editValue = editValue.substring(4)
 	console.log("edited id : " + editValue);
 	var fieldToChange = document.getElementById('input-form').value;
-	var newValue = document.getElementById('placeholderChange').value;
-
+	
 	console.log("fieldToChange ", fieldToChange);
-	console.log("newValue  ", newValue);
-
+	
 	if (fieldToChange == "ItemName") {
-		data[editValue - 1].ItemName = document.getElementById("size-id-select").value;
+		data[editValue - 1].ItemName = document.getElementById("placeholderChange").value;
 	} else if (fieldToChange == "quantity") {
-		data[editValue - 1].size = document.getElementById("size-id-select").value;
-	} else if (fieldToChange == "delivaryDate") {
-		data[editValue - 1].size = document.getElementById("size-id-select").value;
+		data[editValue - 1].quantity = document.getElementById("placeholderChange").value;
+	} else if (fieldToChange == "remark") {
+		data[editValue - 1].remark = document.getElementById("RemarkModel").value;
 	} 
 	console.log(data)
 	appendFunc();
+	document.getElementById("modal-editItem").click();
 }
 
 function appendFunc() 
@@ -80,6 +78,7 @@ function appendFunc()
     		<td><a id="ClientName${i + 1}">${data[i].ClientId}</a> <br></td>
     		<td><a id="ItemName${i + 1}">${data[i].ItemName}</a> <br></td>
     		<td><a id="Quantity${i + 1}">${data[i].quantity}</a> <br></td>
+    		<td><a id="Quantity${i + 1}">${data[i].remark.length >= 25 ? data[i].remark.substring(0,23).concat("...") : data[i].remark}</a> <br></td>
     		 <td class="project-actions text-right">
                   <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-editItem" onclick="editFinction(this.id)" id="Edit${i+1}">
                         <i class="fas fa-pencil-alt"></i>
@@ -115,6 +114,40 @@ window.addEventListener("beforeunload", function (event) {
   document.cookie = "myCookie2=".concat(JSON.stringify(data));
   event.returnValue = "Are you sure you want to leave this page?"
 });
+
+document.getElementById("input-form").addEventListener("change", () => {
+
+	let value = document.getElementById("input-form").value;
+	console.log(value);
+	if (value == "selected") {
+		document.getElementById("input-form").style.borderColor = "red";
+		document.getElementById("select-error").innerText = "Please, Select any one optoins.";
+		document.getElementById("select-error").style.color = "red";
+		document.getElementById("hide-text").style.display = "none";
+		document.querySelector("#input-update").classList.add("disabled");
+		document.getElementById("hide-area").style.display = "none  ";
+	}
+	else if (value == "remark") {
+		document.querySelector("#input-update").classList.remove("disabled");
+		document.getElementById("hide-area").style.display = "block";
+		document.getElementById("hide-text").style.display = "none";
+		//document.getElementById("lableName1").innerHTML = document.getElementById("input-form").value;
+		document.getElementById("placeholderChange1").setAttribute("placeholder", "Enter New value to that element");
+		document.getElementById("input-form").style.borderColor = "blue";
+		document.getElementById("select-error").innerText = "";
+		document.getElementById("select-error").style.color = "red";
+	}
+	else {
+		document.querySelector("#input-update").classList.remove("disabled");
+		document.getElementById("hide-text").style.display = "block";
+		document.getElementById("lableName").innerHTML = document.getElementById("input-form").value;
+		document.getElementById("placeholderChange").setAttribute("placeholder", "Enter New value to that element");
+		document.getElementById("input-form").style.borderColor = "blue";
+		document.getElementById("select-error").innerText = "";
+		document.getElementById("select-error").style.color = "red";
+		document.getElementById("hide-area").style.display = "none";
+	}
+})
 
 
 

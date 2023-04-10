@@ -81,7 +81,7 @@
 							</div>
 							<div class="col-sm-3">
 								<div class="form-group">
-									<label>Size</label><span id="quantity"></span><select type="text" id="size-id" onchange="getCount()" 
+									<label>Size</label>&nbsp;&nbsp;&nbsp;&nbsp;<span id="quantity"></span><select type="text" id="size-id" onchange="getCount()" 
 										class="form-control" placeholder="select size" required>
 										<option value="Select Size">Select Size</option>
 									</select>

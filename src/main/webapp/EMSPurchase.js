@@ -607,7 +607,8 @@ function getIndentList(){
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			response = JSON.parse(xhr.responseText);
-			
+			console.log("-------")
+			console.log(response)
 			appendJsonData(response)			
 		}
 	}
