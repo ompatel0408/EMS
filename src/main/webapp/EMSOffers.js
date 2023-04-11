@@ -22,7 +22,6 @@ function submitForm() {
 		remark: document.getElementById('Remarks').value,
 		quantity: document.getElementById('Quantity').value,
 		TotalPrice:0,
-		//delivaryDate: document.getElementById('DelivaryDate').value,
 	}
 	data.push(json);
 	console.log(json)
@@ -93,13 +92,13 @@ function appendFunc()
 }
 
 function XHRRequestForOffer(){
-	
+	console.log("------------>")
+	console.log(data)
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'http://localhost:8080/EMS2/EMSOffersServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {
-    		//countSize = JSON.parse(xhr.responseText);
     		console.log(xhr.responseText)
     		window.location.href = "EMSQuotationPerItem.jsp";
   		}

@@ -1,12 +1,17 @@
 package com.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 import com.bean.EMSDirectorsDashboardBean;
 import com.dao.EMSDirectorsDashboardDao;
+import com.dao.EMSFinalQuotationDao;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import com.service.ExceptionHandler;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -65,5 +70,58 @@ public class EMSDirectorsDashboardServlet extends HttpServlet {
 			ExceptionHandler.handleException(request, response, e);
 		}
 	}
+	
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		try {
+			
+			BufferedReader reader = request.getReader();
+		    StringBuilder sb = new StringBuilder();
+		    String line;
+		    while ((line = reader.readLine()) != null) {
+		        sb.append(line);
+		    }
+		    String requestBody = sb.toString();
+		   
+		    Gson gson = new Gson();
+		    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
+			
+			if(jsonObject.get("Token").getAsString().equals("Hii")) {
+				String json = gson.toJson(EMSDirectorsDashboardDao.getInstacne().getTotalUsers());
+			    response.setContentType("application/json");
+			    response.setCharacterEncoding("UTF-8");
+			    response.getWriter().write(json);
+			}else {
+			    String json = gson.toJson(EMSDirectorsDashboardDao.getInstacne().getAllNotifications());
+			    response.setContentType("application/json");
+			    response.setCharacterEncoding("UTF-8");
+			    response.getWriter().write(json);
+			}
+			
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
+	}
+	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		BufferedReader reader = request.getReader();
+	    StringBuilder sb = new StringBuilder();
+	    String line;
+	    while ((line = reader.readLine()) != null) {
+	        sb.append(line);
+	    }
+	    String requestBody = sb.toString();
+	   
+	    Gson gson = new Gson();
+	    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
+		System.out.println("--->"+jsonObject.get("name").getAsString());
+	    EMSDirectorsDashboardDao.getInstacne().updateisPaid(jsonObject.get("name").getAsString());
+	    String json = gson.toJson("Hii");
+	    response.setContentType("application/json");
+	    response.setCharacterEncoding("UTF-8");
+	    response.getWriter().write(json);
+	}
+	
+	
 	
 }

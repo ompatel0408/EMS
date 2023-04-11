@@ -100,16 +100,22 @@ public class EMSPurchaseServlet extends HttpServlet {
 		    
 		    Gson gson = new Gson();
 		    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
-
 		    	// access a property of the JSON object
-		    ArrayList<EMSPurchaseBean> arr1 = new ArrayList<EMSPurchaseBean>();
+		    	ArrayList<EMSPurchaseBean> arr1 = new ArrayList<EMSPurchaseBean>();
 		    	String json = "";
 				if(jsonObject.get("Token").getAsString().equals("Vendors")) {
 			    	json = gson.toJson(EMSPurchaseDao.getInstance().getVendorNameFromDatabase());
 				    response.setContentType("application/json");
 				    response.setCharacterEncoding("UTF-8");
 				    response.getWriter().write(json);
-				}
+				}else if(jsonObject.getAsJsonObject().get("Token").toString().replace("\"", "").equals("quotations")){
+			    	System.out.println("quoat");
+			    	json = gson.toJson(EMSPurchaseDao.getInstance().getTotalQuotation(jsonObject.get("project").getAsString()));
+			    	System.out.println(json);
+				    response.setContentType("application/json");
+				    response.setCharacterEncoding("UTF-8");
+				    response.getWriter().write(json);   
+			    }
 			    else {
 			    	
 			    	for(EMSPurchaseBean EPB: EMSPurchaseDao.getInstance().getSpecificData(jsonObject.get("projectId").getAsString()))

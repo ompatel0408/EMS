@@ -25,22 +25,16 @@ public class EMSUsersSevlet extends HttpServlet
 			int role = Integer.parseInt(request.getParameter("role"));
 			
 			UserBean ub = new UserBean(role, phoneNum, name, email, departnemt);
-			System.out.println(ub.getUserName());
-			System.out.println(ub.getEmail());
-			System.out.println(ub.getPhNum());
-			System.out.println(ub.getDepartmentName());
-			System.out.println(ub.getRole());
 			
 			UserBean ubBean = new UserBean(role, phoneNum, name, email, departnemt);
 			UserDao ud = new UserDao();
 			AccessDao ad = new AccessDao();
 			int success = ud.addUser(ubBean);
-			System.out.println(success);
 			int userId = ad.getUserIdFromDatabase(email);
 			if(success==1) {
 				ad.addAcess(userId);
 			}
-			request.getRequestDispatcher("EMSUser.jsp").forward(request, response);
+			request.getRequestDispatcher("EMSDirectorsDashboard.jsp").forward(request, response);
 		}catch(Exception e) {
 			ExceptionHandler.handleException(request, response, e);
 		}

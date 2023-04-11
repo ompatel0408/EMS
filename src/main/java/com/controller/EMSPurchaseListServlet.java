@@ -28,7 +28,6 @@ public class EMSPurchaseListServlet extends HttpServlet {
 			
 			pos = edao.getAllPurchaseOrder();
 			req.setAttribute("pos", pos);
-			System.out.println("above getttt---");
 			RequestDispatcher rd = req.getRequestDispatcher("EMSPurchaseOrder.jsp");
 			rd.forward(req, resp);
 		}catch(Exception e) {
@@ -45,7 +44,7 @@ public class EMSPurchaseListServlet extends HttpServlet {
 			odao.deleteParticularPO(poid);
 			ArrayList<EMSPurchaseBean> pos = new ArrayList<EMSPurchaseBean>();
 			pos = odao.getAllPurchaseOrder();
-			System.out.println("In del");
+			
 			req.setAttribute("pos", pos);
 		}catch(Exception e) {
 			ExceptionHandler.handleException(req, resp, e);

@@ -27,7 +27,7 @@ function appendClient(clients){
 }
 
 function getQuotation(){
-	
+	console.log("hiiiiii")
 	let Data;
 	var xhr = new XMLHttpRequest();
 	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSFinalQuotationServlet',true);
@@ -69,7 +69,6 @@ var count = 0;
 var originalAmount;
 function clickOfRadioButton(){
 	count++;
-	alert("hello")
 	if(count <=1){
 		alert("firstTime")
 		originalAmount = parseFloat(document.getElementById('TotalAmount').value);

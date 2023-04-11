@@ -152,11 +152,6 @@ public class SendMail {
 			m.printStackTrace();
 		}
 	}
-	
-	
-	
-	
-	
 	public static void main(String[] args) {
 		SendMail.mailTokenEveryDay();
 	}

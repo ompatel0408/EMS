@@ -52,9 +52,6 @@ public class ProjectServlet extends HttpServlet {
 			}
 			System.out.println("List");
 			
-			
-			
-			
 			ArrayList<ProjectBean> projects = projectDao.getAllProject();
 			request.setAttribute("projects", projects);
 			request.getRequestDispatcher("ListProject.jsp").forward(request, response);

@@ -75,7 +75,7 @@ public class EMSPurchaseDao {
 	
 	public boolean addPurchase(ArrayList<EMSPurchaseBean> AEPB) {
 		
-		String insertQuery = "INSERT INTO POSTPURCHASE(INDENTID,ProductDescription,Size,Quantity,UNITS,RatePerKg,discount,TotalAmount,SGST,CGST,CurrentDate,PONumber,VendorName) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String insertQuery = "INSERT INTO POSTPURCHASE(INDENTID,ProductDescription,Size,Quantity,UNITS,RatePerKg,discount,TotalAmount,SGST,CGST,CurrentDate,PONumber,VendorName,PaymentTerms) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		Connection conn = MySqlConnection.getInstance();
 		
 		if(conn != null) {
@@ -98,6 +98,7 @@ public class EMSPurchaseDao {
 					stmt.setString(11, EPB.getCurrentDate());
 					stmt.setString(12, EPB.getPONumber());
 					stmt.setString(13, EPB.getVendorName());
+					stmt.setString(14, EPB.getPaymentTerms());
 					stmt.addBatch();
 				}
 				stmt.executeBatch();

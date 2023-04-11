@@ -7,6 +7,14 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+	<link rel="stylesheet"
+	href="assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet"
+	href="assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet"
+	href="assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
 </head>
 <style>
 #myModal {
@@ -15,6 +23,7 @@
 	overflow: hidden;
 	height: 1100px;
 }
+	
 </style>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -25,17 +34,29 @@
 	<jsp:include page="LeftSideBar.jsp"></jsp:include>
 	<div class="wrapper">
 
-		<div class="content-wrapper">
-			<section class="content" style="margin-left: 90%;"></section>
-			<!-- Content Header (Page header) -->
-			<div class="card m-2">
-				<div class="card-header">
-					<h3 class="card-title">Purchase Orders</h3>
-				</div>
-				<div class="card-body p-0">
-					<table class="table table-striped projects">
+	<div class="content-wrapper">
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+
+								<div class="card-header">
+									<h3 class="card-title mt-2">
+										<b>Purchase Order </b>
+									</h3>
+											
+								</div>
+								<div class="card-body">
+									<div id="example1_wrapper"
+										class="dataTables_wrapper dt-bootstrap4">
+										<div class="row">
+											<div class="col-sm-12">
+												<table id="example1"
+													class="table table-bordered table-striped dataTable dtr-inline"
+													aria-describedby="example1_info">
 						<thead>
-							<tr>
+						<tr>
 								<th style="width: 2%">Sr.No</th>
 								<th style="width: 17%">Vendor Name</th>
 								<th style="width: 17%">PO Number</th>
@@ -104,7 +125,7 @@
 												<h4 class="modal-title">Project Details</h4>
 												<button type="button" class="close" data-dismiss="modal"
 													aria-label="Close">
-													<span aria-hidden="true">×</span>
+													<span aria-hidden="true"> </span>
 												</button>
 											</div>
 											<div class="modal-body">
@@ -176,46 +197,113 @@
 								<%
 								}
 								%>
-							</tr>
-						</tbody>
-					</table>
+								</tr>
+													</tbody>
+												</table>
+												<!-- <table>-->
+											</div>
+											<!-- col-sm-12 -->
+										</div>
+										<!-- row -->
+									</div>
+									<!-- example1_wrapper -->
+								</div>
+								<!-- /.card-body -->
+							</div>
+							<!-- card -->
+						</div>
+						<!-- col-12 -->
+					</div>
+					<!-- row -->
 				</div>
-				<!-- /.card-body -->
-			</div>
-
+				<!-- container-fluid -->
+			</section>
+			<!-- content -->
 		</div>
+		<!-- content-wrapper -->
 	</div>
 	<!-- jQuery -->
+	<script>
+		var newId;
+		function dropDown(clientId){
+			console.log(clientId.toString());
+			newId = clientId.toString();
+			console.log(newId);
+		
+		document.getElementById("input-form"+newId).addEventListener("change", () => {
+            let value = document.getElementById("input-form"+newId).value;
+            if (value == "Select option you want to update..") {
+                document.getElementById("input-form"+newId).style.borderColor = "red";
+                document.getElementById("select-error"+newId).innerText = "Please, Select any one optoins.";
+                document.getElementById("select-error"+newId).style.color = "red";
+                document.getElementById("hide-text"+newId).style.display = "none";
+                document.querySelector("#input-update"+newId).classList.add("disabled");
+            }
+            else {
+                document.querySelector("#input-update"+newId).classList.remove("disabled");
+                document.getElementById("hide-text"+newId).style.display = "block";
+                document.getElementById("lableName"+newId).innerHTML = document.getElementById("input-form"+newId).value;
+                document.getElementById("placeholderChange"+newId).setAttribute("placeholder", "Enter " + value );
+                document.getElementById("input-form"+newId).style.borderColor = "blue";
+                document.getElementById("select-error"+newId).innerText = "";
+                document.getElementById("select-error"+newId).style.color = "red";
+            }
+        })
+		}
+    </script>
+	<script src="assets/dist/js/models.js"></script>
 	<script src="assets/plugins/jquery/jquery.min.js"></script>
-	<!-- Bootstrap 4 -->
 	<script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<!-- Select2 -->
 	<script src="assets/plugins/select2/js/select2.full.min.js"></script>
-	<!-- Bootstrap4 Duallistbox -->
-	<!-- InputMask -->
+	<script
+		src="assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
 	<script src="assets/plugins/moment/moment.min.js"></script>
 	<script src="assets/plugins/inputmask/jquery.inputmask.min.js"></script>
-	<!-- date-range-picker -->
 	<script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
-	<!-- bootstrap color picker -->
 	<script
 		src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-	<!-- Tempusdominus Bootstrap 4 -->
 	<script
 		src="assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-	<!-- Bootstrap Switch -->
 	<script
 		src="assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-	<!-- BS-Stepper -->
 	<script src="assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
-	<!-- dropzonejs -->
 	<script src="assets/plugins/dropzone/min/dropzone.min.js"></script>
-	<!-- AdminLTE App -->
 	<script src="assets/dist/js/adminlte.min.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="assets/dist/js/demo.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+	<script src="assets/dist/js/demo.js"></script>
+	<!-- DataTables  & Plugins -->
+	<script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script
+		src="assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+	<script
+		src="assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+	<script
+		src="assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+	<script
+		src="assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+	<script
+		src="assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+	<script src="assets/plugins/jszip/jszip.min.js"></script>
+	<script src="assets/plugins/pdfmake/pdfmake.min.js"></script>
+	<script src="assets/plugins/pdfmake/vfs_fonts.js"></script>
+	<script src="assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+	<script src="assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+	<script
+		src="assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+	<!-- AdminLTE App -->
+	<script>
+                $(document).ready(function () {
+                  $("#example1").DataTable({
+                    "responsive": true, "lengthChange": false, "autoWidth": false,
+                    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                  }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+                })
+              </script>
+	<script>
+                function changeStatus(userId, currentStatus) {
+                  location.href = "ChangeStudentStatus?userId=" + userId + "&currentStatus=" + currentStatus;
+                }
+              </script>
 
 </html>

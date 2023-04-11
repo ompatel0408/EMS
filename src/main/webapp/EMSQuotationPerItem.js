@@ -263,8 +263,8 @@ function deleteItem(deleteId) {
 
 document.getElementById("deleteClicked").addEventListener("click", () => {
 	data.splice(((deleteValue.substring(6)) - 1), 1);
-	$('#modal-itemDelete').modal('hide');
 	appendFunc();
+	document.getElementById("modal-itemDelete").click();
 });
 
 let editValue = "";
@@ -299,7 +299,7 @@ function updateField() {
 
 	console.log(data)
 	appendFunc();
-	$('#modal-editItem').modal('hide');
+	document.getElementById("modal-editItem").click();
 }
 
 document.getElementById("input-form").addEventListener("change", () => {

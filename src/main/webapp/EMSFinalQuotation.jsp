@@ -41,7 +41,7 @@
 									<label>Final Delivery Date</label>
 									<div class="input-group date" id="reservationdate"
 										data-target-input="nearest">
-										<input type="date" class="form-control datetimepicker-input"
+										<input type="date" class="form-control"
 											required name="finalDeliveryDate" id="finalDeliveryDate"
 											data-target="#reservationdate" />
 										<div class="input-group-append" data-target="#reservationdate"

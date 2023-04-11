@@ -37,7 +37,7 @@
 									<span class="info-box-text py-3">Percentage of profit</span> <span class="info-box-number" id="totalNumber">0%</span>
 
 									<div class="progress h-25">
-										<div class="progress-bar" style="width: 0%;"></div>
+										<div class="progress-bar" id="progressBarId" style="width: 0%;"></div>
 									</div>
 									<span class="progress-description m-2 h-75" id="progressDesc"></span>
 									<span class="progress-description m-2 h-75" id="progressDescOfAvailable"></span>
@@ -147,6 +147,16 @@
                                     <textarea class="form-control" rows="3" placeholder="Enter Remark..." id="remark-Id"
                                         style="height: 39px;" disabled></textarea>
                                 </div>
+                                <div class="form-group">
+                                    <label for="PaymentTermsId">Payment Terms</label>
+                                    <select id="PaymentTermsId" class="form-control" required>
+                                    	<option value="">Select Payment terms</option>
+                                    	<option value="1">Immidiete</option>
+                                    	<option value="7">within one week</option>
+                                    	<option value="15">within one half month</option>
+                                    	<option value="30">within one month</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
@@ -168,6 +178,7 @@
                                 </div>
                                 <!-- </div> -->
                             </div>
+                            
 
                             <div class="col-md-2">
                                 <label><input type="radio" class="chk" name="chks" value="0.00" id="Nil" onclick="clickOfRadioButton()"  disabled>&nbsp;&nbsp;Nil
@@ -196,18 +207,6 @@
                             </div>
 
 
-                            <!-- <div class="row m-t-10"> -->
-                            <div class="col-md-6">
-                                <br>
-                                <label><input type="radio" checked="checked" name="GSTTaxType" id="GST1"
-                                        value="1" disabled>&nbsp;&nbsp;SGST/CGST</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                <label><input type="radio" name="GSTTaxType" id="GST2"
-                                        value="2" disabled>&nbsp;&nbsp;IGST</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <label><input type="radio" name="GSTTaxType" id="GST3"
-                                        value="3" disabled>&nbsp;&nbsp;UTGST</label>
-                            </div>
-                            <!-- </div> -->
 
                             <div class="col-sm-6 d-flex justify-content-center align-items-center mt-auto ">
                                 <button type="button" class="btn btn-primary disabled" id="add-store" onclick="submitForm()"> <strong>+
@@ -229,7 +228,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Added Items</h3>
                     <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-wi dget="collapse">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
                         </button>
                         <button type="button" class="btn btn-tool" data-card-widget="remove">

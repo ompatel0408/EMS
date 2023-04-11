@@ -164,6 +164,7 @@ function XHRRequestForStore() {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var response = xhr.responseText;
+			console.log("888888888")
 			console.log(response);
 		}
 	}

@@ -45,7 +45,7 @@ public class EMSStoreServices
 		// Loop through each object in the list and extract the fields
 		for (Map<String, Object> item : data) {
 			int categoryid = qpid.getCategoryIdFromDatabase(item.get("category").toString());
-			EMSStoreBean stb = new EMSStoreBean(categoryid, sd.getGradeIdFromDatabase(categoryid,item.get("grade").toString()), sd.getSizeIdFromDatabase(categoryid, sd.getGradeIdFromDatabase(categoryid,item.get("grade").toString()), item.get("size").toString()), Integer.parseInt(item.get("quantity").toString()));
+			EMSStoreBean stb = new EMSStoreBean(categoryid, sd.getGradeIdFromDatabase(categoryid,item.get("grade").toString()), sd.getSizeIdFromDatabase(categoryid, sd.getGradeIdFromDatabase(categoryid,item.get("grade").toString()), item.get("size").toString()), Integer.parseInt(item.get("quantity").toString()),item.get("category").toString(),item.get("grade").toString(),item.get("size").toString());
 			alsb.add(stb);
 		}
 		return alsb;

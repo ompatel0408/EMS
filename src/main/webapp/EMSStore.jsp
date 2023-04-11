@@ -104,7 +104,6 @@
 						<thead>
 							<tr>
 								<th style="width: 5%">Sr.No</th>
-								<th style="width: 15%">Project</th>
 								<th style="width: 15%">Category</th>
 								<th style="width: 15%">Grade</th>
 								<th style="width: 15%">Size</th>

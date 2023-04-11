@@ -25,10 +25,9 @@ public class EMSPurchaseBean {
 	private int ITEMCATAGORY;
 	private int GradeId;
 	private int SIZEId;
+	private String paymentTerms;
 	
-	
-	
-	
+
 	public EMSPurchaseBean(String projectId,String category,int quantity,String uom,String remarks,String itemName,String grade,String size) {
 		this.Size = size;
 		this.quantity = quantity;
@@ -42,7 +41,7 @@ public class EMSPurchaseBean {
 
 	public EMSPurchaseBean() {}
 
-	public EMSPurchaseBean(String projectName,String productDescription, String size, int quantity, String uom, String ratePerKg,String discount, String netAmount, double sGST, double cGST, int indentId, String currentDate, String pONumber,String vendorName) {
+	public EMSPurchaseBean(String projectName,String productDescription, String size, int quantity, String uom, String ratePerKg,String discount, String netAmount, double sGST, double cGST, int indentId, String currentDate, String pONumber,String vendorName,String paymentTerms) {
 		this.ProductDescription = productDescription;
 		this.projectName = projectName; 
 		this.Size = size;
@@ -57,6 +56,7 @@ public class EMSPurchaseBean {
 		this.CurrentDate = currentDate;
 		this.PONumber = pONumber;
 		this.VendorName = vendorName;
+		this.paymentTerms = paymentTerms;
 	}
 	
 
@@ -67,7 +67,13 @@ public class EMSPurchaseBean {
 	}
 
 	
-	
+	public String getPaymentTerms() {
+		return paymentTerms;
+	}
+
+	public void setPaymentTerms(String paymentTerms) {
+		this.paymentTerms = paymentTerms;
+	}
 
 	public int getITEMCATAGORY() {
 		return ITEMCATAGORY;

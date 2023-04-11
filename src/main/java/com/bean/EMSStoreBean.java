@@ -43,14 +43,16 @@ public class EMSStoreBean
 		this.size = size;
 		this.quantity = quantity;
 	}
-	public EMSStoreBean( int categoryId, int gradeId, int sizeId, int quantity) {
+	public EMSStoreBean( int categoryId, int gradeId, int sizeId, int quantity,String category ,String grade ,String size) {
 		
 		this.categoryId = categoryId;
 		this.gradeId = gradeId;
 		this.sizeId = sizeId;
 		this.quantity = quantity;
+		this.category = category;
+		this.grade = grade;
+		this.size = size;
 	}
-	
 
 	public String getCategory() {
 		return category;

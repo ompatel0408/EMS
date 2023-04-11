@@ -25,9 +25,18 @@ window.onload = function(){
 	}
 	
 	xhr1.send(JSON.stringify({token:"orderSum"}));
-		
+	
+	let Data2;
+	var xhr2 = new XMLHttpRequest();
+	xhr2.open('PUT', 'http://localhost:8080/EMS2/EMSDirectorsDashboardServlet',true);
+	xhr2.onload = function() {
+  		if (xhr2.status === 200) {
+    		Data2 = JSON.parse(xhr2.responseText);
+    		document.getElementById('TotalUser').innerHTML = Data2; 
+  		}
+	}
+	xhr2.send(JSON.stringify({Token:"Hii"}));	
 }
-
 function appendLiveProjects(data){
 	
 	var table = document.getElementById("MyTable");

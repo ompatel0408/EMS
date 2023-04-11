@@ -23,8 +23,7 @@ public class EMSFinalQuotationDao {
 	
 	public ArrayList<EMSFinalQuotationBean> getSumOfAllItemCodeOfAProject(int clientId){
 		
-		//String selectQuery = "SELECT sum(TotalAmountWithProfit * ) FROM offer I JOIN ProfitInQuotationPerItem PQI ON I.offerCode = PQI.offerCode WHERE clientId= ? ";
-		//String selectQuery = "SELECT SUM(TotalPricePerItem * QuotationPerItemQuantity ) from quotationperitem QPI JOIN Offer O ON QPI.offerCode = O.offerCode WHERE ClientId = ? AND status = 'FALSE'";
+		
 		String selectQuery = "SELECT SUM(TotalPrice) from offer WHERE ClientId = ? AND status = 'FALSE'";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<EMSFinalQuotationBean> a = new ArrayList<EMSFinalQuotationBean>();

@@ -19,10 +19,12 @@ import com.google.gson.JsonObject;
 import com.service.EMSStoreServices;
 import com.service.ExceptionHandler;
 
+@SuppressWarnings("serial")
 public class EMSStoreServlet extends HttpServlet {
 	
 	private static EMSStoreServlet instance = null;
 	private static EMSStoreDao std = EMSStoreDao.getInstance();
+	private static String userId = "";
 	
 	public static EMSStoreServlet getInstance() {
 		if (instance == null) {
@@ -30,7 +32,6 @@ public class EMSStoreServlet extends HttpServlet {
 		}
 		return instance;
 	}
-	private static ArrayList<EMSStoreBean> alsb = new ArrayList<EMSStoreBean>();
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,6 +40,7 @@ public class EMSStoreServlet extends HttpServlet {
 
 			ArrayList<EMSStoreBean> alsb = EMSStoreServices.fetchDataFromXHRRequestInStore(request.getReader(),request);
 			HttpSession session = request.getSession();
+	
 			if(std.addItems(alsb))
 			{
 				System.out.println("Items added successfylly....");

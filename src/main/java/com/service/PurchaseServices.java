@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +53,8 @@ public class PurchaseServices {
 
 		// Loop through each object in the list and extract the fields
 		for (Map<String, Object> item : data) {
-			EMSPurchaseBean EPB = new EMSPurchaseBean(item.get("ProjectId").toString(),item.get("category").toString().concat(" ").concat(item.get("grade").toString()), item.get("size").toString(), Integer.parseInt(item.get("orderQuan").toString()), item.get("unit").toString(), item.get("rate").toString(), item.get("discountAmount").toString(), item.get("TotalAmount").toString(), Double.parseDouble(item.get("GST").toString())/2, Double.parseDouble(item.get("GST").toString())/2, EMSPurchaseDao.getInstance().getIndentId(item.get("ProjectId").toString()), LocalDate.now().toString(), PurchaseServices.generatePOId(), item.get("vendorName").toString());
+			System.out.println("Time---->"+LocalDate.now().plus(Period.ofDays(Integer.parseInt(item.get("PaymentTerms").toString()))));
+			EMSPurchaseBean EPB = new EMSPurchaseBean(item.get("ProjectId").toString(),item.get("category").toString().concat(" ").concat(item.get("grade").toString()), item.get("size").toString(), Integer.parseInt(item.get("orderQuan").toString()), item.get("unit").toString(), item.get("rate").toString(), item.get("discountAmount").toString(), item.get("TotalAmount").toString(), Double.parseDouble(item.get("GST").toString())/2, Double.parseDouble(item.get("GST").toString())/2, EMSPurchaseDao.getInstance().getIndentId(item.get("ProjectId").toString()), LocalDate.now().toString(), PurchaseServices.generatePOId(), item.get("vendorName").toString(),String.valueOf(LocalDate.now().plus(Period.ofDays(Integer.parseInt(item.get("PaymentTerms").toString())))));
 			APB.add(EPB);
 		}
 		count = 0;

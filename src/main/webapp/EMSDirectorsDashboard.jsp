@@ -99,9 +99,8 @@ button {
 							<!-- small box -->
 							<div class="small-box bg-warning">
 								<div class="inner">
-									<h3>44</h3>
-
-									<p>User Registrations</p>
+									<h3 id="TotalUser"></h3>
+									<p>Add user</p>
 								</div>
 								<div class="icon">
 									<i class="ion ion-person-add"></i>

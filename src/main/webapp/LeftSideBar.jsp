@@ -278,10 +278,6 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="#" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>Account setting</p>
-						</a></li>
 						<li class="nav-item"><a href="EMSLogin.jsp" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Logout</p>
