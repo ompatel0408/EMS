@@ -1,7 +1,7 @@
 window.onload = function getClients1(){
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://localhost:8080/EMS2/EMSFinalQuotationServlet',true);
+	xhr.open('GET', 'http://192.168.1.130:8080/EMS2/EMSFinalQuotationServlet',true);
 	
 	xhr.onreadystatechange = function() {
   		if (xhr.status === 200) {
@@ -30,7 +30,7 @@ function getQuotation(){
 	console.log("hiiiiii")
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSFinalQuotationServlet',true);
+	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSFinalQuotationServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {
@@ -100,7 +100,7 @@ function submitForm(){
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('POST', 'http://localhost:8080/EMS2/EMSFinalQuotationServlet', true);
+	xhr.open('POST', 'http://192.168.1.130:8080/EMS2/EMSFinalQuotationServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');

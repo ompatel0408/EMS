@@ -55,7 +55,7 @@ public class EMSDrawingServices {
 	public static String getActualDrawingId(String offerId,ArrayList<String> drawingIds) {
 		
 		for(String s:drawingIds) {
-			System.out.println("-->"+s.substring(s.indexOf('_')+1));
+		
 			if(offerId.equals(s.substring(s.indexOf('_')+1))) {
 				
 				return s;
@@ -64,5 +64,28 @@ public class EMSDrawingServices {
 		return null;
 	}
 	
-	
+	public static EMSGRNBean uploadFileWithFile(HttpServletRequest request) {
+		Part filePart;
+		try {
+			
+			filePart = request.getPart("file");
+			
+			String fileName = filePart.getSubmittedFileName();
+			
+	        File file = new File("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS2/src/main/webapp/EMSPOFiles/".concat(fileName));
+	        
+	        FileOutputStream outputStream = new FileOutputStream(file);
+    
+	        IOUtils.copy(filePart.getInputStream(), outputStream);
+	        
+	        EMSGRNBean EGB = new EMSGRNBean();
+	        EGB.setPath1("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS2/src/main/webapp/EMSPOFiles/".concat(fileName));
+	        
+	        return EGB;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}	
 }

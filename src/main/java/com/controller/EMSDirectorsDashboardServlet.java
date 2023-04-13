@@ -85,19 +85,26 @@ public class EMSDirectorsDashboardServlet extends HttpServlet {
 		   
 		    Gson gson = new Gson();
 		    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
-			
+		    String json = "";
 			if(jsonObject.get("Token").getAsString().equals("Hii")) {
-				String json = gson.toJson(EMSDirectorsDashboardDao.getInstacne().getTotalUsers());
+				json = gson.toJson(EMSDirectorsDashboardDao.getInstacne().getTotalUsers());
 			    response.setContentType("application/json");
 			    response.setCharacterEncoding("UTF-8");
 			    response.getWriter().write(json);
-			}else {
-			    String json = gson.toJson(EMSDirectorsDashboardDao.getInstacne().getAllNotifications());
+			}else if(jsonObject.get("Token").getAsString().equals("Notify1")) {
+				System.out.println("Hii From Notify1");
+				json = gson.toJson(EMSDirectorsDashboardDao.getInstacne().getAllNotificationsForPayment());
+				response.setContentType("application/json");
+			    response.setCharacterEncoding("UTF-8");
+			    response.getWriter().write(json);
+			}
+			else {
+				System.out.println("Hii From Notify");
+			    json = gson.toJson(EMSDirectorsDashboardDao.getInstacne().getAllNotifications());
 			    response.setContentType("application/json");
 			    response.setCharacterEncoding("UTF-8");
 			    response.getWriter().write(json);
 			}
-			
 		}catch(Exception e) {
 			ExceptionHandler.handleException(request, response, e);
 		}
@@ -114,12 +121,22 @@ public class EMSDirectorsDashboardServlet extends HttpServlet {
 	   
 	    Gson gson = new Gson();
 	    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
-		System.out.println("--->"+jsonObject.get("name").getAsString());
-	    EMSDirectorsDashboardDao.getInstacne().updateisPaid(jsonObject.get("name").getAsString());
-	    String json = gson.toJson("Hii");
-	    response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(json);
+	    
+	    if(jsonObject.get("Token").getAsString().equals("Hello")) {
+		    EMSDirectorsDashboardDao.getInstacne().updateisPaidForPayment(jsonObject.get("name").getAsString());
+		    String json = gson.toJson("Hii");
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("UTF-8");
+		    response.getWriter().write(json);
+	    }else {
+
+		    EMSDirectorsDashboardDao.getInstacne().updateisPaid(jsonObject.get("name").getAsString());
+		    String json = gson.toJson("Hii");
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("UTF-8");
+		    response.getWriter().write(json);
+	    }
+	    
 	}
 	
 	

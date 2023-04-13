@@ -166,6 +166,11 @@
 								class="far fa-circle nav-icon"></i>
 								<p>P.O List</p>
 						</a></li>
+						<li class="nav-item"><a
+							href="VendorProjectListPO.jsp" class="nav-link"> <i
+								class="far fa-circle nav-icon"></i>
+								<p>P.O List Print</p>
+						</a></li>
 					</ul></li>
 				<li class="nav-item" ><a href="#"
 					class="nav-link"> <i class="nav-icon fas fa-copy"></i>

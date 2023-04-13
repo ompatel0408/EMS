@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.bean.EMSDirectorsDashboardBean;
+import com.bean.QuotationBean;
 import com.dbConnection.MySqlConnection;
 
 
@@ -126,5 +127,53 @@ public class EMSDirectorsDashboardDao {
 		return false;
 	}
 	
+public ArrayList<QuotationBean> getAllNotificationsForPayment() {
+		
+		String selectQuery = "SELECT P.ProjectId,Q.QuotationAmount,P.isPaid,(Q.QuotationAmount  - ((Q.QuotationAmount * P.AdvancePayPercent)/100)) RemainingPayment  FROM PROJECTS P JOIN QUOTATIONS Q ON P.quotationId = Q.quotationId WHERE isPaid = 'false'";
+		Connection conn = MySqlConnection.getInstance();
+		ArrayList<QuotationBean> arr = new ArrayList<QuotationBean>();
+		if(conn != null) {
+			
+			try{
+				
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(selectQuery);
+				
+				while(rs.next()) {
+					arr.add(new QuotationBean(rs.getString(1),Double.parseDouble(rs.getString(2)),Double.parseDouble(rs.getString(3))));
+				}
+				return arr;
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		
+		return null;
+	}
+	
+public boolean updateisPaidForPayment(String projectId) {
+	
+	String updateQuery = "UPDATE PROJECTS SET isPaid = 1 WHERE projectId = ?";
+	Connection conn = MySqlConnection.getInstance();
+	
+	if(conn != null) {
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement(updateQuery);
+			stmt.setString(1, projectId);
+			stmt.executeUpdate();
+			return true;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}else {
+		System.out.println("Connection is not establised!");
+	}
+	
+	
+	return false;
+}
 	
 }

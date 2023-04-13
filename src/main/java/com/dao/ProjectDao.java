@@ -41,7 +41,7 @@ public static ProjectDao instance = null;
 	public boolean addProject(ProjectBean projectBean) {
 		try {
 			Connection con = MySqlConnection.getInstance();
-			PreparedStatement pstmt = con.prepareStatement("insert into projects values (?,?,?,?,?,?)");
+			PreparedStatement pstmt = con.prepareStatement("insert into projects(ProjectId,QuotationId,PODATE,AdvancePayPercent,AfterPayPercent,ClientId) values (?,?,?,?,?,?)");
 			pstmt.setString(1,projectBean.getProjectId());
 			pstmt.setString(2, projectBean.getClientPoId());
 			pstmt.setString(3, projectBean.getPoDate());

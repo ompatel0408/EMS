@@ -71,7 +71,7 @@
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label for="item-id">Project</label>
-                                    <select id="ProjectId1" class="form-control" onload="getProjects1()" onblur="ProjectChange()" onchange="getIndentList();" required>
+                                    <select id="ProjectId1" class="form-control" onload="getProjects1()" onblur="ProjectChange()" onchange="getIndentList()" required>
                                     </select>
                                 </div>
                             </div>

@@ -92,7 +92,7 @@ public class EMSPurchaseDao {
 					stmt.setString(5, EPB.getUom());
 					stmt.setString(6, EPB.getRatePerKg());
 					stmt.setString(7, EPB.getDiscount());
-					stmt.setString(8, EPB.getNetAmount());
+					stmt.setString(8, String.valueOf(EPB.getNetAmount()));
 					stmt.setString(9, String.valueOf(EPB.getSGST()));
 					stmt.setString(10, String.valueOf(EPB.getCGST()));
 					stmt.setString(11, EPB.getCurrentDate());

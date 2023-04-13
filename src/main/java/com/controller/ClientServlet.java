@@ -120,14 +120,14 @@ public class ClientServlet extends HttpServlet {
 			ClientDao clientDao = ClientDao.getInstance();
 			HttpSession session = request.getSession();
 			if(clientDao.addClient(clientBean)) {
-				
+				if(session.getAttribute("userId") != null) {
 					if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new client ".concat(clientName).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","CLIENTS"))) {
 						init();
 						System.out.println(" Client insert Logs Inserted!");
 					}else {
 						System.out.println("Client insert Logs not inserted!");
 					}
-				
+				}
 			}
 			response.sendRedirect("ClientServlet?clientId=0&update=notupdate");
 		}catch(Exception e) {

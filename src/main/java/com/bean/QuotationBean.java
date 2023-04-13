@@ -8,7 +8,9 @@ public class QuotationBean {
 	private String QuotationDate;
 	private long QuotationAmount;
 	private String finalDeliveryDate;
-	
+	private double remainingAmount;
+	private double QuotationAmountForNotify;
+
 	public QuotationBean() {}
 	
 	public QuotationBean(String projectId,String QuotationDate,long QuotationAmount,String finalDeliveryDate) {
@@ -23,6 +25,29 @@ public class QuotationBean {
 		this.QuotationDate = QuotationDate;
 	}
 	
+	public QuotationBean(String projectId,double QuotationAmountForNotify,double remainingAmount) {
+		this.projectId = projectId;
+		this.QuotationAmountForNotify = QuotationAmountForNotify;
+		this.remainingAmount = remainingAmount;
+	}
+	
+	
+
+	public double getRemainingAmount() {
+		return remainingAmount;
+	}
+
+	public double getQuotationAmountForNotify() {
+		return QuotationAmountForNotify;
+	}
+
+	public void setQuotationAmountForNotify(double quotationAmountForNotify) {
+		QuotationAmountForNotify = quotationAmountForNotify;
+	}
+
+	public void setRemainingAmount(double remainingAmount) {
+		this.remainingAmount = remainingAmount;
+	}
 	public int getClientId() {
 		return clientId;
 	}

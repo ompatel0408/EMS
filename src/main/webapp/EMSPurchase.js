@@ -11,7 +11,7 @@ document.getElementById('progressDescOfAvailable').innerHTML="Add Project and It
 window.onload = function getProjects1(){
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://localhost:8080/EMS2/EMSPurchaseServlet',true);
+	xhr.open('GET', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onreadystatechange = function() {
 			if (xhr.status === 200) {
@@ -41,7 +41,7 @@ function appendProjects(projects){
 function ProjectChange(){
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSPurchaseServlet',true);
+	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 			if (xhr.status === 200) {
@@ -55,7 +55,7 @@ function ProjectChange(){
 	
 	
 let xhr2 = new XMLHttpRequest();
-  xhr2.open('PUT', 'http://localhost:8080/EMS2/EMSPurchaseServlet',true);
+  xhr2.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet',true);
   xhr2.setRequestHeader('Content-type', 'application/json');
   xhr2.onload = function() {
 	if (xhr2.readyState === XMLHttpRequest.DONE && xhr2.status === 200) {
@@ -254,7 +254,7 @@ function submitForm(){
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('POST', 'http://localhost:8080/EMS2/EMSPurchaseServlet', true);
+	xhr.open('POST', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -358,7 +358,7 @@ function getIndentList(){
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSPurchaseServlet',true);
+	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet',true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -509,7 +509,7 @@ document.getElementById('progressDescOfAvailable').innerHTML="Add Project and It
 window.onload = function getProjects1() {
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://localhost:8080/EMS2/EMSPurchaseServlet', true);
+	xhr.open('GET', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onreadystatechange = function() {
 		if (xhr.status === 200) {
@@ -561,7 +561,7 @@ function ProjectChange() {
 
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSPurchaseServlet', true);
+	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -594,7 +594,7 @@ function getIndentList() {
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSPurchaseServlet', true);
+	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -614,7 +614,7 @@ function getIndentList() {
 	
 	let Data = ""
 	let xhr2 = new XMLHttpRequest();
-	xhr2.open('PUT', 'http://localhost:8080/EMS2/EMSPurchaseServlet', true);
+	xhr2.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet', true);
 	xhr2.setRequestHeader('Content-type', 'application/json');
 	xhr2.onreadystatechange = function() {
 		if (xhr2.readyState === XMLHttpRequest.DONE && xhr2.status === 200) {
@@ -628,6 +628,8 @@ function getIndentList() {
 }
 
 function appendJsonData(response) {
+	
+	console.log("->"+response)
 	var counter = 0;
 	for (let i = 0; i < response.length; i++) {
 
@@ -697,6 +699,12 @@ document.getElementById("deleteClicked").addEventListener("click", () => {
 	data.splice(deleteId1 - 1, 1);
 
 	flag = false;
+	totalAmountAppended-=parseFloat(js1[0].TotalAmount)
+    percent=(totalAmountAppended*100)/givenQuote
+    console.log(percent)
+    progressBar.style.width = percent + '%';
+    progressBar.setAttribute('aria-valuenow', percent);
+    change()
 
 });
 
@@ -818,7 +826,7 @@ function submitFormToServlet() {
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('POST', 'http://localhost:8080/EMS2/EMSPurchaseServlet', true);
+	xhr.open('POST', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');

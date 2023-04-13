@@ -1,6 +1,7 @@
 
 <%@page import="com.bean.EMSDirectorsDashboardBean"%>
-<%@page import="java.util.ArrayList,com.bean.ClientBean" isELIgnored="false"%>
+<%@page import="java.util.ArrayList,com.bean.ClientBean"
+	isELIgnored="false"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,15 +72,24 @@
 				</div>
 			</li>
 			<!-- Notifications Dropdown Menu -->
-			<li class="nav-item dropdown"><a
-				class="nav-link" data-toggle="dropdown" href="#"> <i
+			<li class="nav-item dropdown"><a class="nav-link"
+				data-toggle="dropdown" href="#"> <i style="color:red;"
 					class="far fa-bell" onclick="getNotification()"></i> <span
-					class="badge badge-danger navbar-badge" onclick="getNotification()" id="UpperId"></span>
+					class="badge badge-danger navbar-badge" onclick="getNotification()"
+					id="UpperId"></span>
 			</a>
 				<div class="dropdown-menu dropdown-menu-right"
 					style="left: inherit; right: 0px; width: 800px;" id="Notification">
-				</div>
-				</li>
+				</div></li>
+			<li class="nav-item dropdown"><a class="nav-link"
+				data-toggle="dropdown" href="#"> <i style="color:green;"
+					class="far fa-bell" onclick="getNotificationForPayment()"></i> <span
+					class="badge badge-danger navbar-badge" onclick="getNotificationForPayment()"
+					id="UpperId"></span>
+			</a>
+				<div class="dropdown-menu dropdown-menu-right"
+					style="left: inherit; right: 0px; width: 800px;" id="Notification1">
+				</div></li>
 			<li class="nav-item"><a class="nav-link"
 				data-widget="fullscreen" href="#" role="button"> <i
 					class="fas fa-expand-arrows-alt"></i>

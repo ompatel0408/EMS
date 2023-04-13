@@ -35,7 +35,6 @@
 			<div class="card-body">
 				<form onsubmit="event.preventDefault();submitForm()">
 					<div class="row">
-
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Client Name</label>

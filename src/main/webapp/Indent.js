@@ -57,7 +57,7 @@ function getGrade(){
 	console.log("gg");
 	let gradeData;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS2/IndentServlet',true);
+	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/IndentServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -70,7 +70,7 @@ function getGrade(){
 }
 function getItemNames(){
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS2/IndentServlet',true);
+	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/IndentServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -113,7 +113,7 @@ function getSize(){
 	console.log("gg");
 	let sizeData;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS2/IndentServlet',true);
+	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/IndentServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -141,7 +141,7 @@ function appendSize(sizeData){
 }
 function submitForm1(){
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'http://localhost:8080/EMS2/IndentServlet',true);
+	xhr.open('POST', 'http://192.168.1.130:8080/EMS2/IndentServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onreadystatechange = function() {
 		if (xhr.status == 200) {
@@ -163,7 +163,7 @@ function XHRRequestForItem() {
 	document.querySelector('#ProcessId').classList.add('disabled')
 	var xhr = new XMLHttpRequest();
 	// specify the servlet URL and HTTP method
-	xhr.open('POST', 'http://localhost:8080/EMS2/EMSItemServlet', true);
+	xhr.open('POST', 'http://192.168.1.130:8080/EMS2/EMSItemServlet', true);
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
 	// handle the response
@@ -179,7 +179,7 @@ function XHRRequestForItem() {
 function getCount(){
 	//alert('Called!')
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS2/IndentServlet',true);
+	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/IndentServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {

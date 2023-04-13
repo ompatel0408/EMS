@@ -95,7 +95,7 @@ function XHRRequestForOffer(){
 	console.log("------------>")
 	console.log(data)
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'http://localhost:8080/EMS2/EMSOffersServlet',true);
+	xhr.open('POST', 'http://192.168.1.130:8080/EMS2/EMSOffersServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {

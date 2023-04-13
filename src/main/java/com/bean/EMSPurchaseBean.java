@@ -1,5 +1,6 @@
 package com.bean;
 
+
 public class EMSPurchaseBean {
 	
 	private String  ProductDescription;
@@ -26,6 +27,8 @@ public class EMSPurchaseBean {
 	private int GradeId;
 	private int SIZEId;
 	private String paymentTerms;
+	private double taxableValue;
+	private double totalAmount;
 	
 
 	public EMSPurchaseBean(String projectId,String category,int quantity,String uom,String remarks,String itemName,String grade,String size) {
@@ -65,7 +68,22 @@ public class EMSPurchaseBean {
 		this.GradeId = gradeId;
 		this.SIZEId = sIZEId;
 	}
+	
+	public double getTaxableValue() {
+		return taxableValue;
+	}
 
+	public void setTaxableValue(double taxableValue) {
+		this.taxableValue = taxableValue;
+	}
+
+	public double getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 	
 	public String getPaymentTerms() {
 		return paymentTerms;

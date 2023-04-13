@@ -270,9 +270,9 @@ public class EMSIssueNoteDao {
 
 			while (rs.next()) {
 				// CatagoryGradeSizeBean grade = new CatagoryGradeSizeBean();
-				sd.add(rs.getString("projectid"));
-				return sd;
+				sd.add(rs.getString(1));
 			}
+			return sd;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

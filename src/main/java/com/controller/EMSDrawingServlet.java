@@ -71,10 +71,9 @@ public class EMSDrawingServlet extends HttpServlet {
 			EMSDrawingBean EGB =  EMSDrawingServices.uploadPic(request);
 			if(EGB != null) {
 				HttpSession session = request.getSession();
-				System.out.println("offerId: "+request.getParameter("offerId"));
-				System.out.println("ProjectId :"+request.getParameter("projectId"));
+				
 				String drawingId = EMSDrawingServices.getActualDrawingId(request.getParameter("offerId"), EMSDrawingDao.getInstance().getDrawingIdFromdatabase(request.getParameter("projectId")));
-				System.out.println("Drawing Id :"+drawingId);
+				
 				if(EMSDrawingDao.getInstance().addDrawingDetails(drawingId,EGB)) {
 					System.out.println("Inserted Successfully!");
 					

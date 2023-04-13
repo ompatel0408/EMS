@@ -317,12 +317,20 @@
 		<url-pattern>/GeneralListServlet</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>TestServlet</servlet-name>
-		<servlet-class>com.controller.TestServlet</servlet-class>
+		<servlet-name>PrintPo</servlet-name>
+		<servlet-class>com.controller.PrintPo</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>TestServlet</servlet-name>
-		<url-pattern>/TestServlet</url-pattern>
+		<servlet-name>PrintPo</servlet-name>
+		<url-pattern>/PrintPo</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSSendMailWithAttechedFileServlet</servlet-name>
+		<servlet-class>com.controller.EMSSendMailWithAttechedFileServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EMSSendMailWithAttechedFileServlet</servlet-name>
+		<url-pattern>/EMSSendMailWithAttechedFileServlet</url-pattern>
 	</servlet-mapping>
 
 </web-app>
