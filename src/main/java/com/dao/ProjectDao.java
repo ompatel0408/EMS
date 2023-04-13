@@ -204,7 +204,7 @@ public static ProjectDao instance = null;
 		return null;
 	}
 	
-public String getClientNameFormDatabase(String clientid) {
+	public String getClientNameFormDatabase(String clientid) {
 		
 		String selectQuery = "SELECT ClientName From Clients WHERE Clientid = ?";
 		Connection conn = MySqlConnection.getInstance();
@@ -231,5 +231,28 @@ public String getClientNameFormDatabase(String clientid) {
 		
 		return null;
 	}
+
+	public boolean setLoss(String projectId) {
+		
+		String updateQuery = "UPDATE PROJECTS SET profitLoss = 0 WHERE projectId = ?";
+		Connection conn = MySqlConnection.getInstance();
+		
+		if(conn != null) {
+			
+			try {
+				
+				PreparedStatement stmt = conn.prepareStatement(updateQuery);
+				stmt.setString(1, projectId);
+				stmt.executeUpdate();
+				return true;
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		return false;
+	}
+
 	
 }

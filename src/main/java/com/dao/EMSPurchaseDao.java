@@ -183,7 +183,7 @@ public class EMSPurchaseDao {
 	
 public EMSPurchaseBean getAllPurchaseOrderByUsingProjectId(String projectId,EMSPurchaseBean EPB) {
 		
-		String selectQuery = "SELECT I.PROJECTID,EC.Catagory,I.Quantity,I.UOM,I.REMARKS,I.ITEMNAME,CG.GRADE,CGS.SIZE FROM INDENT I JOIN EMSCatagory EC ON I.ITEMCATAGORY = EC.catagoryId JOIN CatagoryGrade CG ON CG.catagoryId = EC.catagoryId JOIN CATAGORYGRADESIZE CGS ON CG.gradeId = CGS.gradeId WHERE PROJECTId = ? AND EC.CatagoryId = ? and CG.gradeId = ? and CGS.sizeId  = ?";
+		String selectQuery = "SELECT I.PROJECTID,EC.Catagory,I.Quantity,I.UOM,I.REMARKS,I.ITEMNAME,CG.GRADE,CGS.SIZE FROM INDENT I JOIN EMSCatagory EC ON I.ITEMCATAGORY = EC.catagoryId JOIN CatagoryGrade CG ON CG.catagoryId = EC.catagoryId JOIN CATAGORYGRADESIZE CGS ON CG.gradeId = CGS.gradeId WHERE PROJECTId = ? AND EC.CatagoryId = ? and CG.gradeId = ? and CGS.sizeId  = ? AND isPurchased = 0";
 		Connection conn = MySqlConnection.getInstance();
 		EMSPurchaseBean EPB1 = null;
 		if(conn != null) {
@@ -249,6 +249,7 @@ public EMSPurchaseBean getAllPurchaseOrderByUsingProjectId(String projectId,EMSP
 		ArrayList<EMSPurchaseBean> AEPB = new ArrayList<EMSPurchaseBean>();
 		EMSPurchaseBean EPB= null;
 		if(conn != null) {
+			
 			
 			try {
 				PreparedStatement stmt = conn.prepareStatement(selectQuery);

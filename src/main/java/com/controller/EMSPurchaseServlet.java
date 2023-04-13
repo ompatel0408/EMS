@@ -10,6 +10,7 @@ import com.bean.EMSPurchaseBean;
 import com.dao.EMSLogsDao;
 import com.dao.EMSOffersDao;
 import com.dao.EMSPurchaseDao;
+import com.dao.IndentDao;
 import com.dao.ItemDao;
 import com.dao.QuotationPerItemDao;
 import com.google.gson.Gson;
@@ -68,7 +69,11 @@ public class EMSPurchaseServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			if(EMSPurchaseDao.getInstance().addPurchase(AEPB)) {
 				System.out.println("Purchase Added successfully!");
-				
+				if(IndentDao.getInstance().setIsPurchased(AEPB.get(0).getProjectName())) {
+					System.out.println("Updated successfully!");
+				}else {
+					System.out.println("not Updated");
+				}
 				for(EMSPurchaseBean EPB:AEPB) {
 					if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new purchase order for project ".concat(EPB.getProjectName()).concat(" has been created!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","PURCHASE"))) {
 						System.out.println("purchase insert Logs Inserted!");
@@ -118,7 +123,6 @@ public class EMSPurchaseServlet extends HttpServlet {
 				    response.getWriter().write(json);   
 			    }
 			    else {
-			    	System.out.println("Helloooooooo");
 			    	for(EMSPurchaseBean EPB: EMSPurchaseDao.getInstance().getSpecificData(jsonObject.get("projectId").getAsString()))
 			    	{
 			    		arr1.add(EMSPurchaseDao.getInstance().getAllPurchaseOrderByUsingProjectId(jsonObject.get("projectId").getAsString(),EPB));

@@ -39,8 +39,8 @@
 									<div class="progress h-25">
 										<div class="progress-bar" id="progressBarId" style="width: 0%;"></div>
 									</div>
-									<span class="progress-description m-2 h-75" id="progressDesc"></span>
-									<span class="progress-description m-2 h-75" id="progressDescOfAvailable"></span>
+									<span class="progress-description m-1 h-75" id="progressDesc"></span>
+									<span class="progress-description m-1 h-75" id="progressDescOfAvailable"></span>
 									<span id="profitAlert"></span>
 									<!-- <span class="progress-description m-2 h-75"> Your total quotation without profit is <b> 1000000</b>, With profit <b>1500000</b>.
 									<br> You are purchased items total amount's of <span id="totalPurchase">600000</span>, and your profit is 400000.

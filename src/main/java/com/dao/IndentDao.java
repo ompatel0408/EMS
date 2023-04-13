@@ -165,4 +165,27 @@ public class IndentDao {
 		}
 		return indents;
 	}
+	
+	public boolean setIsPurchased(String projectId) {
+		System.out.println("Project Id :"+projectId);
+		System.out.println("<---------Hiiiiiiii-------->");
+		String updateQuery = "UPDATE Indent SET isPurchased = 1 WHERE projectId = ?";
+		Connection conn = MySqlConnection.getInstance();
+		
+		if(conn != null) {
+			
+			try {
+				PreparedStatement stmt = conn.prepareStatement(updateQuery);
+				stmt.setString(1, projectId);
+				stmt.executeUpdate();
+				return true;
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		return false;
+	}
+	
 }

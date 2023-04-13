@@ -13,7 +13,9 @@ import java.util.Map;
 import com.bean.EMSPurchaseBean;
 import com.bean.ItemBean;
 import com.bean.QuotationBean;
+import com.dao.EMSProductionDao;
 import com.dao.EMSPurchaseDao;
+import com.dao.ProjectDao;
 import com.dao.QuotationDao;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -23,6 +25,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class PurchaseServices {
 	
 	private static int count = 0;
+	private static boolean isPresent = false;
 	
 	public static ArrayList<EMSPurchaseBean> fetchDataFromXHRRequest(BufferedReader reader,HttpServletRequest request) {
 	
@@ -53,11 +56,15 @@ public class PurchaseServices {
 
 		// Loop through each object in the list and extract the fields
 		for (Map<String, Object> item : data) {
-			System.out.println("Time---->"+LocalDate.now().plus(Period.ofDays(Integer.parseInt(item.get("PaymentTerms").toString()))));
+			if((isPresent == false) && (item.get("loss").toString().equals("true"))) {
+				ProjectDao.getInstance().setLoss(item.get("ProjectId").toString());
+				isPresent = true;
+			}
 			EMSPurchaseBean EPB = new EMSPurchaseBean(item.get("ProjectId").toString(),item.get("category").toString().concat(" ").concat(item.get("grade").toString()), item.get("size").toString(), Integer.parseInt(item.get("orderQuan").toString()), item.get("unit").toString(), item.get("rate").toString(), item.get("discountAmount").toString(), item.get("TotalAmount").toString(), Double.parseDouble(item.get("GST").toString())/2, Double.parseDouble(item.get("GST").toString())/2, EMSPurchaseDao.getInstance().getIndentId(item.get("ProjectId").toString()), LocalDate.now().toString(), PurchaseServices.generatePOId(), item.get("vendorName").toString(),String.valueOf(LocalDate.now().plus(Period.ofDays(Integer.parseInt(item.get("PaymentTerms").toString())))));
 			APB.add(EPB);
 		}
 		count = 0;
+		isPresent = false;
 		return APB;
 	}
 	

@@ -11,7 +11,7 @@ document.getElementById('progressDescOfAvailable').innerHTML="Add Project and It
 window.onload = function getProjects1(){
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet',true);
+	xhr.open('GET', 'http://localhost:8080/EMS2/EMSPurchaseServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onreadystatechange = function() {
 			if (xhr.status === 200) {
@@ -41,7 +41,7 @@ function appendProjects(projects){
 function ProjectChange(){
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet',true);
+	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSPurchaseServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 			if (xhr.status === 200) {
@@ -55,7 +55,7 @@ function ProjectChange(){
 	
 	
 let xhr2 = new XMLHttpRequest();
-  xhr2.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet',true);
+  xhr2.open('PUT', 'http://localhost:8080/EMS2/EMSPurchaseServlet',true);
   xhr2.setRequestHeader('Content-type', 'application/json');
   xhr2.onload = function() {
 	if (xhr2.readyState === XMLHttpRequest.DONE && xhr2.status === 200) {
@@ -254,7 +254,7 @@ function submitForm(){
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('POST', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet', true);
+	xhr.open('POST', 'http://localhost:8080/EMS2/EMSPurchaseServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -358,7 +358,7 @@ function getIndentList(){
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet',true);
+	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSPurchaseServlet',true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -504,12 +504,13 @@ var progress = 0;
 var percent = 0
 var data = [];
 var servletData = []
+var Loss = false;
 var exampleElement = document.getElementById('success');
 document.getElementById('progressDescOfAvailable').innerHTML="Add Project and Items to see the Magic"
 window.onload = function getProjects1() {
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet', true);
+	xhr.open('GET', 'http://localhost:8080/EMS2/EMSPurchaseServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onreadystatechange = function() {
 		if (xhr.status === 200) {
@@ -561,7 +562,7 @@ function ProjectChange() {
 
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet', true);
+	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSPurchaseServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -594,7 +595,7 @@ function getIndentList() {
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet', true);
+	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSPurchaseServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -614,7 +615,7 @@ function getIndentList() {
 	
 	let Data = ""
 	let xhr2 = new XMLHttpRequest();
-	xhr2.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet', true);
+	xhr2.open('PUT', 'http://localhost:8080/EMS2/EMSPurchaseServlet', true);
 	xhr2.setRequestHeader('Content-type', 'application/json');
 	xhr2.onreadystatechange = function() {
 		if (xhr2.readyState === XMLHttpRequest.DONE && xhr2.status === 200) {
@@ -629,7 +630,6 @@ function getIndentList() {
 
 function appendJsonData(response) {
 	
-	console.log("->"+response)
 	var counter = 0;
 	for (let i = 0; i < response.length; i++) {
 
@@ -690,14 +690,16 @@ document.getElementById("deleteClicked").addEventListener("click", () => {
 
 
 	var deleteId1 = parseInt(deleteValue.substring(6));
-
-
-	var js1 = data.filter(x => x.count == deleteId1)
-
+	var js1 = data.filter(x=>x.count == deleteId1)
+	
 	document.getElementById(`tr${js1[0].count}`).remove();
+	
+	console.log("Before")
+	console.log(data)
+	data = data.filter(x=>x.count !== deleteId1)
 
-	data.splice(deleteId1 - 1, 1);
-
+	console.log("After")
+	console.log(data)
 	flag = false;
 	totalAmountAppended-=parseFloat(js1[0].TotalAmount)
     percent=(totalAmountAppended*100)/givenQuote
@@ -712,25 +714,22 @@ document.getElementById("deleteClicked").addEventListener("click", () => {
 
 let editValue = "";
 function updateField(editId) {
-	console.log(editId);
-
 	editValue = editId;
-
+	
 	EditId = parseInt(editValue.substring(4));
 	var js1 = data.filter(x => x.count == EditId)
-	console.log(js1)
+	
+	
 	document.getElementById('orderQuan-id').value = js1[0].quantity;
 	document.getElementById('category-id').value = js1[0].category,
-		document.getElementById('grade-id').value = js1[0].grade;
+	document.getElementById('grade-id').value = js1[0].grade;
 	document.getElementById('size-id').value = js1[0].size;
-	console.log(data)
-	appendFunc()
+	
 }
 function calculateAmount() {
 	document.getElementById('amount-id').value = parseFloat(document.getElementById('rate-id').value) * parseFloat(document.getElementById('orderQuan-id').value);
 }
 function calculateDiscountAmount() {
-
 	document.getElementById('DiscountAmount').disabled = true;
 	document.getElementById('DiscountAmount').value = parseFloat(document.getElementById('amount-id').value) * (parseFloat(document.getElementById('DiscountPercentage').value) / 100);
 	document.getElementById('Totalamount-id').value = parseFloat(document.getElementById('amount-id').value) - (parseFloat(document.getElementById('amount-id').value) * (parseFloat(document.getElementById('DiscountPercentage').value) / 100));
@@ -749,10 +748,10 @@ var gst;
 var count = 0;
 var originalAmount;
 function clickOfRadioButton() {
-	count++;
-	if (count <= 1) {
+	
 		originalAmount = parseFloat(document.getElementById('Totalamount-id').value);
-	}
+	
+	console.log("originalAmount :"+originalAmount)
 	var radioButton = document.getElementsByName('chks');
 	for (var i = 0; i < radioButton.length; i++) {
 		if (radioButton[i].checked) {
@@ -761,15 +760,22 @@ function clickOfRadioButton() {
 			break;
 		}
 	}
+	console.log("GST :"+gst)
+	console.log("GST Amount :"+gstAmount)
+	console.log("Total Amount :"+(gstAmount + originalAmount))
 	document.getElementById('Totalamount-id').value = gstAmount + originalAmount;
 }
 
 var submitData = []
 
 function submitForm() {
-
+	
+	console.log("Edit Id :"+EditId)
+	
 	var js1 = data.filter(x => x.count == EditId)
-
+	
+	console.log(")))***********")
+	console.log(js1)
 	js1[0].TotalAmount = document.getElementById('Totalamount-id').value;
 	js1[0].vendorName = document.getElementById('vendor-id').value;
 	appendFunc()
@@ -787,7 +793,8 @@ function submitForm() {
 		discountAmount: document.getElementById('DiscountAmount').value,
 		TotalAmount: document.getElementById('Totalamount-id').value,
 		GST: gst,
-		PaymentTerms:document.getElementById('PaymentTermsId').value
+		PaymentTerms:document.getElementById('PaymentTermsId').value,
+		loss:Loss
 	}
 
 	submitData.push(json)
@@ -826,7 +833,7 @@ function submitFormToServlet() {
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('POST', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet', true);
+	xhr.open('POST', 'http://localhost:8080/EMS2/EMSPurchaseServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -855,6 +862,7 @@ if(percent >=0 && percent<80)
 			  exampleElement.classList.add('bg-gradient-success');
 			  document.getElementById("progressBarId").style.backgroundColor = "white";
 			  progressBar.style.backgroundColor = 'white';
+			  Loss = false;
 		  }
     	else if (percent >= 80 && percent < 85) {
 			document.getElementById("progressBarId").style.backgroundColor = "yellow";
@@ -864,6 +872,7 @@ if(percent >=0 && percent<80)
       		exampleElement.classList.remove('bg-danger');
       		exampleElement.classList.remove('bg-gradient-success');
       		exampleElement.classList.add('bg-gradient-warning');
+      		Loss = false;
     	}
     	else if (percent >= 85 && percent < 100) {
       		progressBar.style.backgroundColor = 'Red';
@@ -872,6 +881,7 @@ if(percent >=0 && percent<80)
       		exampleElement.classList.add('bg-gradient-warning');
       		document.getElementById('profitAlert').innerHTML="You are Iching forward to make the loss"
       		document.getElementById('profitAlert').style.color="red"
+      		Loss = false;
     	}
     	else if(percent >= 100)
     	{
@@ -881,9 +891,10 @@ if(percent >=0 && percent<80)
       		exampleElement.classList.remove('bg-gradient-warning');
       		exampleElement.classList.remove('bg-gradient-success');
       		exampleElement.classList.add('bg-danger');
+      		Loss = true;
 		}
     	document.getElementById('totalNumber').innerHTML=percent+"%"
-    	document.getElementById('progressDescOfAvailable').innerHTML="So You Have now total : "+(parseFloat(givenQuote)-parseFloat(totalAmountAppended))+" Amount Left <br> and the Purchase Amount till now is: "+parseFloat(totalAmountAppended)
+    	document.getElementById('progressDescOfAvailable').innerHTML="So You Have now total : "+(parseFloat(givenQuote)-parseFloat(totalAmountAppended))+" Amount Left &nbsp;&nbsp;&nbsp;&nbsp; and the Purchase Amount till now is: "+parseFloat(totalAmountAppended)
 }
 
 
@@ -892,6 +903,9 @@ window.addEventListener("beforeunload", function(event) {
 	document.cookie = "myCookie1=".concat(JSON.stringify(data));
 	event.returnValue = "Are you sure you want to leave this page?"
 });
+
+
+
 
 
 

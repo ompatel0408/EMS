@@ -1,40 +1,3 @@
-
-/*
-document.getElementById("input-form").addEventListener("change", () => {
-
-               let value = document.getElementById("input-form").value;
-               console.log(value);
-               if (value == "Select option you want to update..") {
-                   document.getElementById("input-form").style.borderColor = "red";
-                   document.getElementById("select-error").innerText = "Please, Select any one optoins.";
-                   document.getElementById("select-error").style.color = "red";
-                   document.getElementById("hide-text").style.display = "none";
-                   document.querySelector("#input-update").classList.add("disabled");
-               }
-               else if(value == "delivaryDate")
-               {
-				   document.querySelector("#input-update").classList.remove("disabled");
-				   document.querySelector("#hide-text").classList.remove("disabled");
-				   document.getElementById("hide-date").style.display = "block";
-                   document.getElementById("hide-text").style.display = "none";
-                   document.getElementById("lableName1").innerHTML = document.getElementById("input-form").value;
-                   document.getElementById("placeholderChange1").setAttribute("placeholder", "Enter New value to that element");
-                   document.getElementById("input-form").style.borderColor = "blue";
-                   document.getElementById("select-error").innerText = "";
-                   document.getElementById("select-error").style.color = "red";
-			   }
-               else {
-                   document.querySelector("#input-update").classList.remove("disabled");
-                   document.getElementById("hide-text").style.display = "block";
-                    document.getElementById("hide-date").style.display = "none";
-                   document.getElementById("lableName").innerHTML = document.getElementById("input-form").value;
-                   document.getElementById("placeholderChange").setAttribute("placeholder", "Enter New value to that element");
-                   document.getElementById("input-form").style.borderColor = "blue";
-                   document.getElementById("select-error").innerText = "";
-                   document.getElementById("select-error").style.color = "red";
-               }
- })
-*/
 document.getElementById('ClientId1').addEventListener('change', () => {
 
 	document.getElementById('ClientId1').disabled = true;
@@ -51,10 +14,9 @@ var data = []
 var servletData = []
 var response;
 function submitForm() {
-	console.log("print-------->"+EditId)
+	
 	var js1 = data.filter(x=>x.count == EditId)
-	console.log("===========")
-	console.log(js1)
+	
 	js1[0].tagNo = document.getElementById('TagNo').value;
 	js1[0].quantity = document.getElementById('Quantity').value;
 	js1[0].ItemName = document.getElementById('ItemName').value
@@ -72,9 +34,6 @@ function submitForm() {
 		offerCode:document.getElementById('offerCode').value
 	}
 	servletData.push(json);
-	console.log("--------------")
-	console.log(json);
-	console.log(servletData);
 	appendFunc();
 	
 	
@@ -83,7 +42,7 @@ function submitForm() {
 window.onload = function getClients1(){
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSItemServlet',true);
+	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSItemServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {
@@ -110,75 +69,6 @@ function appendClients(Clients){
 		ClientsSelect.appendChild(createdAt);
 	}
 }
-/*
-function Demo(tt){
-	EditId=parseInt(tt.slice(4));
-	console.log("Edit Id :"+EditId)
-}
-
-function Demo1(tt){
-	deleteId=parseInt(tt.slice(6));
-	console.log("Delete Id :"+deleteId)
-}
-
-function updateField(){
-	var fieldToChange = document.getElementById('input-form').value;
-	var newValue = document.getElementById('placeholderChange').value;
-	
-	console.log("fieldToChange "+fieldToChange)
-	console.log("newValue  "+newValue)
-	
-	if(fieldToChange == "ItemName"){
-		data[EditId-1].ItemName = newValue;
-	}else if(fieldToChange == "tagNo"){
-		data[EditId-1].tagNo = newValue;
-	}else if(fieldToChange == "quantity"){	
-		data[EditId-1].quantity = newValue;
-	}else{
-		var Value = document.getElementById('placeholderChange1').value;
-		data[EditId-1].delivaryDate = Value;
-	}
-	console.log(data)
-	for (var i = 0; i < data.length; i++) {
-		document.getElementById(`ItemName${i + 1}`).innerHTML = data[i].ItemName;
-
-		document.getElementById(`TagNo${i + 1}`).innerHTML = data[i].tagNo;
-
-		document.getElementById(`Quantity${i + 1}`).innerHTML = data[i].quantity;
-
-		document.getElementById(`DelivaryDate${i + 1}`).innerHTML = data[i].delivaryDate;
-
-
-	}
-	
-}
-
-
-function deleteItem(){
-	console.log("delete Id -------->"+deleteId)
-	data.splice((deleteId-1),1);
-	var parent = document.getElementById('MyTable')
-	//var child = parent.querySelector('tr')
-	//parent.removeChild(child);
-	document.getElementById(`Edit${deleteId}`).removeChild('tr')
-	parent.innerHTML = "";
-	for (var i = 0; i < data.length; i++) {	
-		document.getElementById(`ItemName${i + 1}`).innerHTML = data[i].ItemName;
-
-		document.getElementById(`TagNo${i + 1}`).innerHTML = data[i].tagNo;
-
-		document.getElementById(`Quantity${i + 1}`).innerHTML = data[i].quantity;
-
-		document.getElementById(`DelivaryDate${i + 1}`).innerHTML = data[i].delivaryDate;
-
-	}
-	console.log(data)
-}
-
-*/
-
-
-
 
 function XHRRequestForItem() {
 
@@ -193,7 +83,7 @@ function XHRRequestForItem() {
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('POST', 'http://192.168.1.130:8080/EMS2/EMSItemServlet', true);
+	xhr.open('POST', 'http://localhost:8080/EMS2/EMSItemServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -203,12 +93,10 @@ function XHRRequestForItem() {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			response = xhr.responseText;
-			console.log(response);
 			XHRRequestForQuotationId()
 		}
 	}
 	// send the request
-	console.log()
 	xhr.send(JSON.stringify(servletData));
 }
 
@@ -217,7 +105,7 @@ function XHRRequestForQuotationId()
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSItemServlet', true);
+	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSItemServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -245,7 +133,7 @@ function GetOfferData(){
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSOffersServlet', true);
+	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSOffersServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -280,13 +168,13 @@ var counter = 0;
 			offerCode:response[i].offerCode			
 		}
 		data.push(json)
-		console.log(data)
 	}
 	
 	appendFunc()
 }
 
-
+var maincounter = 1;
+var updateJson = []
 var deleteValue = "";
 var flag = true;
 function deleteItem(deleteId) {
@@ -295,62 +183,31 @@ function deleteItem(deleteId) {
 }
 document.getElementById("deleteClicked").addEventListener("click", () => {
 	var deleteId1 = parseInt(deleteValue.substring(6));
-	console.log("delete 1:"+deleteId1)
 	var js1 = data.filter(x=>x.count == deleteId1)
+	
 	document.getElementById(`tr${js1[0].count}`).remove();
-	console.log("+++++++++")
-	console.log(js1)
-	//data.splice(((deleteValue.substring(6)) - 1), 1);
-	console.log("delete-------->"+deleteId1)
-	data.splice(deleteId1 - 1,1);
-	console.log(data)
-	flag = false;
-	//appendFunc();
+	
+	data = data.filter(x=>x.count !== deleteId1)
+	
 });
 
 let editValue = "";
-/*
-function editFinction(editId) {
-	console.log(editId);
-	editValue = editId;
-}
-*/
+
 function updateField(editId) {
 	console.log(editId);
 	editValue = editId;
 	
 	EditId = parseInt(editValue.substring(4));
-	//var fieldToChange = document.getElementById('input-form').value;
-	//var newValue = document.getElementById('placeholderChange').value;
 	
-	/*
-	if(fieldToChange == "ItemName"){
-		data[EditId-1].ItemName =newValue;
-	}else if(fieldToChange == "tagNo"){
-		data[EditId-1].tagNo = newValue;
-	}else if(fieldToChange == "quantity"){	
-		data[EditId-1].quantity = newValue;
-	}else{
-		var Value = document.getElementById('placeholderChange1').value;
-		data[EditId-1].delivaryDate = Value;
-	}*/
-	console.log("update-------->"+EditId)
-		var js1 = data.filter(x=>x.count == EditId)
-		console.log("------------")
-		console.log(js1)
-		document.getElementById('Quantity').value =js1[0].quantity;
-		document.getElementById('ItemName').value = js1[0].ItemName;
-		document.getElementById('DelivaryDate').value = js1[0].delivaryDate,
-		document.getElementById('Remarks').value = js1[0].remarks;
-		document.getElementById('offerCode').value = js1[0].offerCode;
-		console.log(data)	
-	//	document.getElementById('Quantity').value =data[EditId -1].quantity;
-	//	document.getElementById('ItemName').value = data[EditId - 1].ItemName;
-	//	document.getElementById('DelivaryDate').value = data[EditId - 1].delivaryDate,
-	//	document.getElementById('Remarks').value = data[EditId - 1].remarks;
+		
+	var js1 = data.filter(x=>x.count == EditId)
+	document.getElementById('Quantity').value =js1[0].quantity;
+	document.getElementById('ItemName').value = js1[0].ItemName;
+	document.getElementById('DelivaryDate').value = js1[0].delivaryDate,
+	document.getElementById('Remarks').value = js1[0].remarks;
+	document.getElementById('offerCode').value = js1[0].offerCode;
+		
 	
-	
-	//appendFunc();
 
 }
 

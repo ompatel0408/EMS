@@ -2,7 +2,7 @@ window.onload=function()
 {
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet',true);
+	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSPurchaseServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {
@@ -31,7 +31,7 @@ function appendVendors(Clients){
 document.getElementById("vendorList").addEventListener('change',()=>{
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://192.168.1.130:8080/EMS2/EMSPurchaseServlet',true);
+	xhr.open('GET', 'http://localhost:8080/EMS2/EMSPurchaseServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onreadystatechange = function() {
   		if (xhr.status === 200) {
