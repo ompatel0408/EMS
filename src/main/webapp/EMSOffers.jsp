@@ -47,7 +47,7 @@
 							</div>
 							<div class="form-group">
 								<label>Quantity</label> <input type="number"
-									class="form-control" id="Quantity" placeholder="Enter Quantity"
+									class="form-control" id="Quantity" required placeholder="Enter Quantity"
 									>
 							</div>
 							<!-- <div class="form-group">
@@ -63,7 +63,7 @@
 							<div class="form-group">
 								<label>Offer name</label> <input type="text"
 									class="form-control" id="ItemName"
-									placeholder="Enter Offer name">
+									placeholder="Enter Offer name" required>
 							</div>
 							<!-- /.form-group -->
 							<div class="form-group">

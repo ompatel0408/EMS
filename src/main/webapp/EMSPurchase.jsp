@@ -79,20 +79,20 @@
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label>Category</label>
-                                    <input type="text" class="form-control" id="category-id" placeholder="Category" disabled>
+                                    <input type="text" class="form-control" id="category-id" placeholder="Category" required disabled>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                             
                             <div class="form-group">
                                     <label>Grade</label>
-                                    <input type="text" class="form-control" id="grade-id" placeholder="Grade" disabled>
+                                    <input type="text" class="form-control" id="grade-id" placeholder="Grade" required disabled>
                             </div>
                             </div>
                             <div class="col-sm-3">
                             <div class="form-group">
                                     <label>Size</label>
-                                    <input type="text" class="form-control" id="size-id" placeholder="Size" disabled>
+                                    <input type="text" class="form-control" id="size-id" placeholder="Size" requireddisabled>
                             </div>
                             </div>
 
@@ -102,7 +102,7 @@
                                     <label>Rate</label>
                                     <div>
                                         <input class="form-control" id="rate-id" maxlength="20" name="HSNcode" onkeyup="calculateAmount()"
-                                            placeholder="Enter Rate" type="text" value="" disabled="disabled">
+                                            placeholder="Enter Rate" type="text" value="" required disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -120,7 +120,7 @@
                                     <label>Order Quantity</label>
                                     <div>
                                         <input class="form-control" id="orderQuan-id" maxlength="20" name="HSNcode"
-                                            placeholder="Enter Order quantity" type="text" value="" disabled>
+                                            placeholder="Enter Order quantity" type="text" value="" required disabled>
                                     </div>
                                 </div>
                                 </div>
@@ -130,7 +130,7 @@
                                     <label>Unit</label>
                                     <div>
                                         <input class="form-control" id="unit-id" maxlength="20" name="unit" 
-                                            placeholder="Enter Unit" type="text" value="" disabled>
+                                            placeholder="Enter Unit" type="text" value="" required disabled>
                                     </div>
                                 </div>
                                 </div>
@@ -161,7 +161,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Discount(%)</label>
-                                    <input type="text" class="form-control" id="DiscountPercentage" onkeyup="calculateDiscountAmount()" placeholder="0" disabled>
+                                    <input type="text" class="form-control" id="DiscountPercentage" onkeyup="calculateDiscountAmount()" placeholder="0" required disabled>
                                 </div>
                             </div>
                             <div class="col-md-2">

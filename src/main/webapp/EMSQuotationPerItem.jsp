@@ -73,29 +73,29 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Quantity</label> <input type="text" class="form-control"
-										id="Quantity" placeholder="Enter Quantity" disabled>
+										id="Quantity" placeholder="Enter Quantity" required disabled>
 								</div>
 								<!-- /.form-group -->
 								<div class="form-group">
 									<label>Weight</label> <input type="text" class="form-control"
-										id="waight-id" placeholder="Enter Waight" disabled>
+										id="waight-id" placeholder="Enter Waight" required disabled>
 								</div>
 								<div class="form-group">
 									<label>Profit Percentage</label> <input type="text"
 										class="form-control" id="profit-id"
 										placeholder="Enter Profit Percentage"
-										onblur="DisablePercentage()" disabled>
+										onblur="DisablePercentage()" required disabled>
 								</div>
 							</div>
 							<!-- /.col -->
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Units</label> <input type="text" class="form-control"
-										id="unit-id" placeholder="Enter Units" disabled>
+										id="unit-id" placeholder="Enter Units" required disabled>
 								</div>
 								<div class="form-group">
 									<label>Price</label> <input type="text" class="form-control"
-										id="price-id" placeholder="Enter Price" disabled>
+										id="price-id" placeholder="Enter Price" required disabled>
 								</div>
 							</div>
 							<div class="col">
@@ -187,12 +187,12 @@
 									<div class="form-group" id="hide-text" style="display: none;">
 										<label for="placeholderChange" id="lableName" class="mt-2"></label>
 										<input type="text" class="form-control" id="placeholderChange"
-											placeholder="Enter">
+											placeholder="Enter" required>
 									</div>
 									<div class="form-group" id="hide-num" style="display: none;">
 										<label for="" id="lableName1">Value</label> <input
 											type="number" class="form-control" id="placeholderChange1"
-											placeholder="Enter value">
+											placeholder="Enter value" required>
 									</div>
 									<button type="submit" class="btn btn-primary mt-2 disabled"
 										id="input-update">Save changes</button>

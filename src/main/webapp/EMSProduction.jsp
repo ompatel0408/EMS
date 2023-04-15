@@ -43,7 +43,7 @@
 								<div class="form-group">
 									<label>ProjectID</label> <select id="ProjectId1"
 										name="projectId" class="form-control"
-										placeholder="select projectId">
+										placeholder="select projectId" required>
 										<option value="select" selected>Select projectId</option>
 										
 									</select>
@@ -59,7 +59,7 @@
 								<div class="form-group ">
 									<label for="workdoneper">WorkDonePercentage</label> <input
 										type="number" name="workDonePer" class="form-control"
-										id="workdoneper" placeholder="Enter WorkDonePercentage">
+										id="workdoneper" placeholder="Enter WorkDonePercentage" required>
 								</div>
 							</div>
 						</div>

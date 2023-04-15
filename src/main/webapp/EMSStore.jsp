@@ -34,14 +34,14 @@
 								<!-- text input -->
 								<div class="form-group">
 									<label>Category</label> <select id="category-id"
-										class="form-control">
+										class="form-control" required>
 										<option value="select" selected>Select category</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-sm-4">
 								<div class="form-group">
-									<label>Grade</label> <select id="grade-id" class="form-control">
+									<label>Grade</label> <select id="grade-id" class="form-control" required>
 										<option value="select grade">Select Grade</option>
 									</select>
 								</div>
@@ -49,7 +49,7 @@
 							<div class="col-sm-4">
 								<div class="form-group">
 									<label>Size</label> <select type="text" id="size-id"
-										class="form-control">
+										class="form-control" required>
 										<option >Select size</option>
 									</select>
 								</div>
@@ -57,7 +57,7 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Quantity</label> <input type="text" class="form-control"
-										id="quantaty-id" placeholder="Quantity">
+										id="quantaty-id" placeholder="Quantity" required>
 								</div>
 							</div>
 							<div
@@ -148,7 +148,7 @@
 								<div class="form-group" id="hide-text" style="display: none;">
 									<label for="placeholderChange" id="lableName" class="mt-2"></label>
 									<input type="text" class="form-control" id="placeholderChange"
-										placeholder="Enter">
+										placeholder="Enter" required>
 								</div>
 								<!-- text input -->
 								<div class="form-group" id="category-id-model"

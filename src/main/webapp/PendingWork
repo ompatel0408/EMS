@@ -8,3 +8,11 @@ all logs stuff is remaining
 
 
 
+ required="required"
+Email :-  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$"
+number :- pattern="[0-9]{10}" 
+Name: pattern="[A-Za-z]{1,50}"
+GSTNo pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$"
+PanNO :-> pattern= "[A-Z]{5}[0-9]{4}[A-Z]{1}" 
+
+

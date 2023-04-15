@@ -71,7 +71,7 @@
 							</div>
 							<div class="col-md-2">
 								<div class="form-group">
-									<label>Discount(%)</label> <input type="text"
+									<label>Discount(%)</label> <input type="text" required="required"
 										class="form-control" id="discountPercentage"
 										name="discountPercentage" placeholder="0" 
 										onkeyup="calculateDiscountAmount()" pattern="^\d+(\.\d+)?$">

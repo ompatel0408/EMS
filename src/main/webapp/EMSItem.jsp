@@ -40,17 +40,17 @@
 
 							<div class="form-group">
 								<label>Tag No</label> <input type="text" class="form-control"
-									id="TagNo" placeholder="Enter Tag No" disabled>
+									id="TagNo" placeholder="Enter Tag No" required disabled>
 							</div>
 							 <div class="form-group">
 								<label>Quantity</label> <input type="number"
 									class="form-control" id="Quantity" placeholder="Enter Quantity"
-									disabled>
+									required disabled>
 							</div> 
 							<div class="form-group">
 								<label for="">Delivery Date</label> <input type="date"
 									class="form-control" id="DelivaryDate"
-									placeholder="Enter Delivery Date" disabled>
+									placeholder="Enter Delivery Date" required disabled>
 							</div>
 
 							<!-- /.form-group -->
@@ -60,13 +60,13 @@
 							<div class="form-group">
 								<label>Order name</label> <input type="text"
 									class="form-control" id="ItemName"
-									placeholder="Enter Order name" disabled>
+									placeholder="Enter Order name" required disabled>
 							</div> 
 							<!-- /.form-group -->
 							<div class="form-group">
 								<label>Remark</label>
 								<textarea class="form-control" rows="3" placeholder="Enter..."
-									id="Remarks" style="height: 125px;" disabled></textarea>
+									id="Remarks" style="height: 125px;" required disabled></textarea>
 							</div>
 							<input type="hidden" id="offerCode">
 							<div class="form-group mt-5 d-flex justify-content-around">

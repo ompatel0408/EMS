@@ -78,7 +78,7 @@
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label>ProjectID</label>
-                                      <select type="text" id="ProjectId1" 	class="form-control" ></select>
+                                      <select type="text" id="ProjectId1" 	class="form-control" required="required"></select>
                                 </div>
                             </div>
                             <div class="col-sm-3">
@@ -115,7 +115,7 @@
                                     <label>Quantity</label>
                                     <span id="quant"></span>
                                     <input type="number" class="form-control" id="Quantity"
-                                        placeholder="Enter Quantaty" disabled>
+                                        placeholder="Enter Quantaty" required disabled>
                                 </div>
                                 
                                 <div class="form-group">
@@ -128,22 +128,22 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Units</label>
-                                    <input type="text" class="form-control"  id="unit-id" placeholder="Enter Units" disabled>
+                                    <input type="text" class="form-control"  id="unit-id" placeholder="Enter Units" required disabled>
                                 </div>
                                 	<div class="form-group">
                                     <label>Issue Person</label>
                                     <input type="text" class="form-control" id="issue-per-id"
-                                        placeholder="Enter Issue Person" disabled="">
+                                        placeholder="Enter Issue Person" required disabled="">
                                 </div>
                                 <div class="form-group">
                                     <label>Contractor </label>
                                     <input type="text" class="form-control" id="contracter-id"
-                                        placeholder="Enter Contracter" disabled="">
+                                        placeholder="Enter Contracter" required  disabled="">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mt-2 d-flex justify-content-around">
-                                    <button type="submit" id="submit-item-btn" class="btn btn-primary w-25" disabled=""> <strong>+</strong> Add
+                                    <button type="submit" id="submit-item-btn" class="btn btn-primary w-25"  disabled=""> <strong>+</strong> Add
                                         Item</button>
                                 </div>
                             </div>

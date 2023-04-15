@@ -226,6 +226,7 @@ public class SendMail {
 			// Send message
 			Transport.send(message);
 			System.out.println("Sent message successfully....");
+			
 			return true;
 		} catch (MessagingException m) {
 			m.printStackTrace();

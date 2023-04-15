@@ -34,19 +34,19 @@
 								<!-- text input -->
 								<div class="form-group">
 									<label>Vendor Name</label> <input type="text" id="vendorName"
-										class="form-control" placeholder="Enter VendorName">
+										class="form-control" placeholder="Enter VendorName" pattern="[A-Za-z]{1,50}" required="required">
 								</div>
 							</div>
 							<div class="col-sm-3">
 								<div class="form-group">
 									<label>Email</label> <input type="email" class="form-control"
-										id="email" placeholder="Enter Email">
+										id="email" placeholder="Enter Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$" required="required">>
 								</div>
 							</div>
 							<div class="col-sm-3">
 								<div class="form-group">
 									<label>Phone Number</label> <input type="number" id="mobile"
-										class="form-control" placeholder="Enter Mob-Number">
+										class="form-control" placeholder="Enter Mob-Number" pattern="[0-9]{10}" required="required">
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -127,7 +127,7 @@
 									<select
 										class="form-control select2 select2-hidden-accessible my-3"
 										style="width: 100%;" data-select2-id="1" tabindex="-1"
-										aria-hidden="true" id="input-form">
+										aria-hidden="true" id="input-form" required="required">
 										<br>
 										<option selected="selected" data-select2-id="3">Select
 											option you want to update..</option>
@@ -144,12 +144,12 @@
 									<div class="form-group" id="hide-text" style="display: none;">
 										<label for="placeholderChange" id="lableName" class="mt-2"></label>
 										<input type="text" class="form-control" id="placeholderChange"
-											placeholder="Enter">
+											placeholder="Enter" required="required">
 									</div>
 									<div class="form-group" id="hide-date" style="display: none;">
 										<label for="" id="lableName1">Delivery Date</label> <input
 											type="date" class="form-control" id="placeholderChange1"
-											placeholder="Enter Delivery Date">
+											placeholder="Enter Delivery Date" required="required">
 									</div>
 									<!-- text input -->
 									
@@ -186,7 +186,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 </body>
 <script type="text/javascript" src="EMSVendors.js"></script>

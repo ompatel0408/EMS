@@ -40,17 +40,17 @@
 									<div class="form-group">
 										<label for="exampleInputPassword1">Client Name</label> <input
 											type="text" class="form-control" id="exampleInputPassword1"
-											placeholder="Enter Client Name" name="clientName">
+											placeholder="Enter Client Name" name="clientName" pattern="[A-Za-z]{1,50}" required="required">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">GST</label> <input
 											type="text" class="form-control" id="exampleInputPassword1"
-											placeholder="Enter GST" name="gst">
+											placeholder="Enter GST" name="gst" pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$" required="required">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Phone</label> <input
 											type="number" class="form-control" id="exampleInputPassword1"
-											placeholder="Enter Phone Number" name="phone">
+											placeholder="Enter Phone Number" name="phone" pattern="[0-9]{10}" required="required">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Email</label> <input
@@ -60,7 +60,7 @@
 									<div class="form-group">
 										<label for="exampleInputPassword1">PAN No</label> <input
 											type="text" class="form-control" id="exampleInputPassword1"
-											placeholder="Enter PAN No" name="pan">
+											placeholder="Enter PAN No" name="pan" pattern= "[A-Z]{5}[0-9]{4}[A-Z]{1}" required="required">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Address</label> <input

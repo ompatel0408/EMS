@@ -91,7 +91,7 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 								</div>
 								<div class="btn-group">
 									<div class="dropzone">
-										<input type="file" name="file" id="inputFile" /> <label for="inputFile" 
+										<input type="file" name="file" id="inputFile" required="required"/> <label for="inputFile" 
 											class="custom-file-upload"> <i
 											class="fas fa-cloud-upload-alt"></i> Choose File
 										</label> 
@@ -102,18 +102,18 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Offers</label> <select class="form-control"
-										 id="OfferId" name="offerId">
+										 id="OfferId" name="offerId" required="required">
 									<option value="select Offers"selected>Select Offers</option>
 									</select>
 								</div>
 								
 								<!-- /.form-group -->
 								<div class="card-header">
-									<h3 class="card-title">Upload The Truck Pic</h3>
+									<h3 class="card-title" >Upload The Truck Pic</h3>
 								</div>
 								<div class="btn-group">
 									<div class="dropzone">
-										<input type="file" name="file1" id="inputFile1" />  <label for="inputFile1"
+										<input type="file" name="file1" id="inputFile1" required="required"/>  <label for="inputFile1"
 											class="custom-file-upload"> <i
 											class="fas fa-cloud-upload-alt"></i> Choose File
 										</label>

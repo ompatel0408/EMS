@@ -65,7 +65,7 @@ int srNo=1;
                                 </td>
                                 <td>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="checkbox" <%=access.getAddClient()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getAddClient() %>,'AddClient')" value="" id="defaultCheck2">
+                                        <input  required class="form-check-input" type="checkbox" <%=access.getAddClient()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getAddClient() %>,'AddClient')" value="" id="defaultCheck2">
                                     </div>
                                 </td>
                             </tr>

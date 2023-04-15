@@ -47,13 +47,13 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Email</label> <input type="email" class="form-control"
-										name="email" placeholder="Enter Email">
+										name="email" placeholder="Enter Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$" required="required">
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Phone Number</label> <input type="number" name="mobile"
-										class="form-control" placeholder="Enter phone number"> <br>
+										class="form-control" placeholder="Enter phone number" pattern="[0-9]{10}" required="required"> <br>
 										<p style="color : red;";><%=phoneErr == null ? "" : phoneErr %></p>
 								</div>
 							</div>

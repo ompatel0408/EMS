@@ -29,8 +29,8 @@ public class EMSDrawingServices {
 
 			System.out.println("File 1"+fileName1);
 	        
-	        File file = new File("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS2/src/main/webapp/DrawingImages/".concat(fileName));
-	        File file1 = new File("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS2/src/main/webapp/DrawingImages/".concat(fileName1));
+	        File file = new File("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/DrawingImages/".concat(fileName));
+	        File file1 = new File("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/DrawingImages/".concat(fileName1));
 	        
 	        FileOutputStream outputStream = new FileOutputStream(file);
 
@@ -72,14 +72,14 @@ public class EMSDrawingServices {
 			
 			String fileName = filePart.getSubmittedFileName();
 			
-	        File file = new File("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS2/src/main/webapp/EMSPOFiles/".concat(fileName));
+	        File file = new File("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/EMSPOFiles/".concat(fileName));
 	        
 	        FileOutputStream outputStream = new FileOutputStream(file);
     
 	        IOUtils.copy(filePart.getInputStream(), outputStream);
 	        
 	        EMSGRNBean EGB = new EMSGRNBean();
-	        EGB.setPath1("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS2/src/main/webapp/EMSPOFiles/".concat(fileName));
+	        EGB.setPath1("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/EMSPOFiles/".concat(fileName));
 	        
 	        return EGB;
 		} catch (Exception e) {
