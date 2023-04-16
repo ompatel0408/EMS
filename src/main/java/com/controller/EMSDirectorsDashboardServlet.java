@@ -111,6 +111,7 @@ public class EMSDirectorsDashboardServlet extends HttpServlet {
 	}
 	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		BufferedReader reader = request.getReader();
 	    StringBuilder sb = new StringBuilder();
 	    String line;
@@ -121,15 +122,13 @@ public class EMSDirectorsDashboardServlet extends HttpServlet {
 	   
 	    Gson gson = new Gson();
 	    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
-	    
-	    if(jsonObject.get("Token").getAsString().equals("Hello")) {
+	    if((jsonObject.get("Token") != null) && (jsonObject.get("Token").toString().equals("Hello"))) {
 		    EMSDirectorsDashboardDao.getInstacne().updateisPaidForPayment(jsonObject.get("name").getAsString());
 		    String json = gson.toJson("Hii");
 		    response.setContentType("application/json");
 		    response.setCharacterEncoding("UTF-8");
 		    response.getWriter().write(json);
 	    }else {
-
 		    EMSDirectorsDashboardDao.getInstacne().updateisPaid(jsonObject.get("name").getAsString());
 		    String json = gson.toJson("Hii");
 		    response.setContentType("application/json");

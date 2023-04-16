@@ -1,19 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page
-	import="com.dao.EMSGRNDao,com.bean.EMSGRNBean,java.util.ArrayList"%>
+<%@page import="com.bean.EMSDispatchBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet"
-	href="assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-<link rel="stylesheet"
-	href="assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
+<%
+int srNo = 0;
+ArrayList<EMSDispatchBean> aledb = (ArrayList<EMSDispatchBean>) request.getAttribute("data");
+%>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
 		<jsp:include page="Header.jsp"></jsp:include>
@@ -24,10 +22,9 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
-
 								<div class="card-header">
 									<h3 class="card-title mt-2">
-										<b>Clients </b>
+										<b>Final Quotation</b>
 									</h3>
 								</div>
 								<div class="card-body">
@@ -40,94 +37,60 @@
 													aria-describedby="example1_info">
 													<thead>
 														<tr>
-															<th style="width: 15%">Sr.No</th>
-															<th style="width: 30%">Vendor name</th>
-															<th style="width: 30%">Received Date</th>
-															<th style="width: 20%"></th>
+															<th style="width: 2%">Sr.No</th>
+															<th style="width: 12%">Client Name</th>
+															<th style="width: 15%">Offer Name</th>
+															<th style="width: 12%">Dispatch Date</th>
+															<th style="width: 12%">Vehicle Number</th>
+															<th style="width: 12%">Travel Company Owner</th>
+															<th style="width: 12%">Travel Company</th>
+															<th style="width: 12%">Checked By</th>
+															<th style="width: 10%">Address</th>
 														</tr>
 													</thead>
-													<tbody id="myTable">
-														<%for (EMSGRNBean EGB : EMSGRNDao.getInstance().getAllData()) {%>
+													<tbody>
+														<%
+														for (EMSDispatchBean db : aledb) {
+														%>
 														<tr>
-															<td id="GRNId"><%=EGB.getGRNID()%></td>
-															<td><a><%=EGB.getVendorName()%></a> <br></td>
-															<td><a><%=EGB.getReceiveDate()%></a> <br></td>
-															<td class="project-actions text-right">
+															<td><%=++srNo%></td>
+															<td><%=db.getclientId()%></td>
+															<td><%=db.getOfferId()%></td>
+															<td><%=db.getDate()%></td>
+															<td><%=db.getVehicleNo()%></td>
+															<td><%=db.getTravelComOwnr()%></td>
+															<td><%=db.getTravelCom()%></td>
+															<td><%=db.getCheckBy()%></td>
+															<td>
 																<button type="button" class="btn btn-primary btn-sm"
 																	data-toggle="modal"
-																	data-target="#modal-grnDetails<%=EGB.getGRNID()%>">
+																	data-target="#modal-projectDetails<%=srNo%>">
 																	<i class="fas fa-folder"></i>
 																</button>
-																<div class="modal fade"
-																	id="modal-grnDetails<%=EGB.getGRNID()%>">
-																	<div class="modal fade show" id="modal-xl"
-																		style="padding-right: 19px; display: block;"
-																		aria-modal="true" role="dialog">
-																		<div class="modal-dialog modal-xl">
-																			<div class="modal-content">
-																				<div class="modal-header">
-																					<h4 class="modal-title">Extra Large Modal</h4>
-																					<button type="button" class="close"
-																						data-dismiss="modal" aria-label="Close">
-																						<span aria-hidden="true">×</span>
-																					</button>
-																				</div>
-																				<div class="modal-body">
-																					<div class="form-group">
-																						<label for="">GRN picture</label> <br> <img
-																							src="GRNImages/<%=EGB.getPath1()%>" alt="path1"
-																							class="h-100 w-100">
-																					</div>
-																					<div class="form-group">
-																						<label for="">GRN picture</label> <br> <img
-																							src="GRNImages/<%=EGB.getPath2()%>" alt="path2"
-																							class="h-100 w-100">
-																					</div>
-																				</div>
-																				<div class="modal-footer justify-content-between">
-																					<button type="button" class="btn btn-default"
-																						data-dismiss="modal">Close</button>
-																				</div>
-																			</div>
-																			<!-- /.modal-content -->
-																		</div>
-																		<!-- /.modal-dialog -->
-																	</div>
-																</div>
-																<button type="button" class="btn btn-danger btn-sm"
-																	data-toggle="modal"
-																	data-target="#modal-stockDelete<%=EGB.getGRNID()%>"
-																	id="Delete1">
-																	<i class="fas fa-trash"></i>
-																</button>
-																<div class="modal fade"
-																	id="modal-stockDelete<%=EGB.getGRNID()%>">
+																<div class="modal fade" id="modal-projectDetails<%=srNo%>">
 																	<div class="modal-dialog">
-																		<div class="modal-content bg-danger">
+																		<div class="modal-content">
 																			<div class="modal-header">
-																				<h4 class="modal-title">Delete GRN</h4>
+																				<h4 class="modal-title">Destination Address</h4>
 																				<button type="button" class="close"
 																					data-dismiss="modal" aria-label="Close">
-																					<span aria-hidden="true"></span>
+																					<span aria-hidden="true">&times;</span>
 																				</button>
 																			</div>
 																			<div class="modal-body">
-																				<p>Are you sure you want to delete this GRN?</p>
-																			</div>
-																			<div class="modal-footer justify-content-between">
-																				<button type="button" class="btn btn-outline-light"
-																					data-dismiss="modal">Close</button>
-																				<button type="button" class="btn btn-outline-light"
-																					id="deleteClicked" onclick="deleteGNR()">Delete
-																					GRN</button>
+																				<div class="form-group">
+																					<label for="exampleInputEmail1">Destination Address</label>
+																					<p><%=db.getDest()%></p>
+																				</div>
 																			</div>
 																		</div>
 																	</div>
 																</div>
 															</td>
 														</tr>
-														<%}%>
-
+														<%
+														}
+														%>
 													</tbody>
 												</table>
 												<!-- <table>-->
@@ -152,32 +115,6 @@
 		</div>
 		<!-- content-wrapper -->
 	</div>
-	<script type="text/javascript">
-		function deleteGNR() {
-			var xhr = new XMLHttpRequest();
-
-			// specify the servlet URL and HTTP method
-			xhr
-					.open('DELETE', 'http://localhost:8080/EMS/EMSGRNServlet',
-							true);
-
-			// set headers
-			xhr.setRequestHeader('Content-type', 'application/json');
-
-			// handle the response
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState == 4 && xhr.status == 200) {
-					var response = xhr.responseText;
-					console.log(response)
-					window.location.href = "EMSGRNList.jsp"
-				}
-			}
-			// send the request
-			xhr.send(JSON.stringify({
-				grnId : document.getElementById('GRNId').innerHTML
-			}));
-		}
-	</script>
 	<script src="assets/dist/js/models.js"></script>
 	<script src="assets/plugins/jquery/jquery.min.js"></script>
 	<script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -198,7 +135,6 @@
 	<script src="assets/dist/js/adminlte.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="assets/dist/js/demo.js"></script>
 	<!-- DataTables  & Plugins -->
 	<script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script
@@ -239,5 +175,38 @@
 					+ "&currentStatus=" + currentStatus;
 		}
 	</script>
+	<script>
+		var newId;
+		function dropDown(projectId) {
+			console.log(typeof (projectId))
+			console.log(projectId.toString());
+			newId = projectId.toString();
+			console.log(newId);
+
+			let value = document.getElementById("input-form" + newId).value;
+			console.log(value);
+			if (value == "Select option you want to update..") {
+				document.getElementById("input-form" + newId).style.borderColor = "red";
+				document.getElementById("select-error" + newId).innerText = "Please, Select any one optoins.";
+				document.getElementById("select-error" + newId).style.color = "red";
+				document.getElementById("hide-text" + newId).style.display = "none";
+				document.querySelector("#input-update" + newId).classList
+						.add("disabled");
+			} else {
+				document.querySelector("#input-update" + newId).classList
+						.remove("disabled");
+				document.getElementById("hide-text" + newId).style.display = "block";
+				document.getElementById("lableName" + newId).innerHTML = document
+						.getElementById("input-form" + newId).value;
+				document.getElementById("placeholderChange" + newId)
+						.setAttribute("placeholder", "Enter " + value);
+				document.getElementById("input-form" + newId).style.borderColor = "blue";
+				document.getElementById("select-error" + newId).innerText = "";
+				document.getElementById("select-error" + newId).style.color = "red";
+			}
+
+		}
+	</script>
+
 </body>
 </html>

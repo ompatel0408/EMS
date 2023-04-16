@@ -102,7 +102,7 @@ function XHRRequestForVendor(){
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('POST', 'http://localhost:8080/EMS2/EMSVendorsServlet', true);
+	xhr.open('POST', 'http://localhost:8080/EMS/EMSVendorsServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');

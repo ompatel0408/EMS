@@ -13,8 +13,13 @@ var deleteId;
 var data = []
 var servletData = []
 var response;
+var myMap = new Map();
+var myArray = []
 function submitForm() {
 	
+	console.log("******************")
+	console.log(data)
+	console.log(EditId)
 	var js1 = data.filter(x=>x.count == EditId)
 	
 	js1[0].tagNo = document.getElementById('TagNo').value;
@@ -34,15 +39,41 @@ function submitForm() {
 		offerCode:document.getElementById('offerCode').value
 	}
 	servletData.push(json);
-	appendFunc();
+	appendMap();
+}
+
+function appendMap(){
 	
-	
+	document.getElementById("MyTable3").innerHTML = "";
+	var table = document.getElementById("MyTable3");
+	console.log(myArray)
+	console.log(myMap)
+	for (var i = 0; i < myArray.length; i++) {
+		var newRow = document.createElement("tr");
+		newRow.setAttribute('id',`tr${myArray[i]}`)
+		newRow.innerHTML = `
+    		<td id="${myArray[i]}">${myArray[i]}</td>
+    		<td><a id="ItemName${myArray[i]}">${myMap.get(myArray[i]).ItemName}</a> <br></td>
+    		<td><a id="Quantity${myArray[i]}">${myMap.get(myArray[i]).quantity}</a> <br></td>
+    		<td><a id="TagNo${myArray[i]}">${myMap.get(myArray[i]).tagNo}</a> <br></td>
+    		<td><a id="DelivaryDate${myArray[i]}">${myMap.get(myArray[i]).delivaryDate}</a> <br></td>
+    		 <td class="project-actions text-right">
+                  <button type="button" class="btn btn-success btn-sm" onclick = "updateField(this.id)" id="Edit${myArray[i]}">
+                        <i class="fas fa-pencil-alt"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-itemDelete" onclick="deleteItem(this.id)" id="Delete${myArray[i]}">
+                        <i class="fas fa-trash"></i>
+                  </button>
+              </td>
+    		`;
+		table.appendChild(newRow);
+	}	
 }
 
 window.onload = function getClients1(){
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSItemServlet',true);
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSItemServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {
@@ -83,7 +114,7 @@ function XHRRequestForItem() {
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('POST', 'http://localhost:8080/EMS2/EMSItemServlet', true);
+	xhr.open('POST', 'http://localhost:8080/EMS/EMSItemServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -105,7 +136,7 @@ function XHRRequestForQuotationId()
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSItemServlet', true);
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSItemServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -133,7 +164,7 @@ function GetOfferData(){
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSOffersServlet', true);
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSOffersServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -183,23 +214,27 @@ function deleteItem(deleteId) {
 }
 document.getElementById("deleteClicked").addEventListener("click", () => {
 	var deleteId1 = parseInt(deleteValue.substring(6));
+	console.log(deleteId1)
+	console.log(data)
+	
 	var js1 = data.filter(x=>x.count == deleteId1)
 	
 	document.getElementById(`tr${js1[0].count}`).remove();
 	
 	data = data.filter(x=>x.count !== deleteId1)
-	
+	myArray = myArray.filter(x=>x !== deleteId1)
 });
 
 let editValue = "";
 
 function updateField(editId) {
-	console.log(editId);
+	
 	editValue = editId;
 	
 	EditId = parseInt(editValue.substring(4));
 	
-		
+	console.log(data)
+	console.log(EditId)
 	var js1 = data.filter(x=>x.count == EditId)
 	document.getElementById('Quantity').value =js1[0].quantity;
 	document.getElementById('ItemName').value = js1[0].ItemName;
@@ -218,7 +253,8 @@ function appendFunc() {
 	for (var i = 0; i < data.length; i++) {
 		var newRow = document.createElement("tr");
 		newRow.setAttribute('id',`tr${i+1}`)
-
+		myMap.set(i+1,data[i])
+		myArray.push(i+1);
 		newRow.innerHTML = `
     		<td id="${i + 1}">${i + 1}</td>
     		<td><a id="ItemName${i + 1}">${data[i].ItemName}</a> <br></td>

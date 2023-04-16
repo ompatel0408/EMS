@@ -81,16 +81,16 @@ button {
 							<!-- small box -->
 							<div class="small-box bg-success">
 								<div class="inner">
-									<h3>
-										53<sup style="font-size: 20px">%</sup>
+									<h3 id="projectCount">
+										0
 									</h3>
 
-									<p>Bounce Rate</p>
+									<p>Done Projects</p>
 								</div>
 								<div class="icon">
 									<i class="ion ion-stats-bars"></i>
 								</div>
-								<a href="#" class="small-box-footer">More info <i
+								<a href="EMSDispatchItemsListServlet" class="small-box-footer">show Projects <i
 									class="fas fa-arrow-circle-right"></i></a>
 							</div> 
 						</div>

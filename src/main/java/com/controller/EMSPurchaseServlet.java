@@ -106,8 +106,7 @@ public class EMSPurchaseServlet extends HttpServlet {
 		    Gson gson = new Gson();
 		    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
 		    	// access a property of the JSON object
-		    System.out.println("Token :"+jsonObject.getAsJsonObject().get("Token").toString());
-		    	ArrayList<EMSPurchaseBean> arr1 = new ArrayList<EMSPurchaseBean>();
+		   
 		    	String json = "";
 				if(jsonObject.get("Token").getAsString().equals("Vendors")) {
 			    	json = gson.toJson(EMSPurchaseDao.getInstance().getVendorNameFromDatabase());
@@ -123,11 +122,7 @@ public class EMSPurchaseServlet extends HttpServlet {
 				    response.getWriter().write(json);   
 			    }
 			    else {
-			    	for(EMSPurchaseBean EPB: EMSPurchaseDao.getInstance().getSpecificData(jsonObject.get("projectId").getAsString()))
-			    	{
-			    		arr1.add(EMSPurchaseDao.getInstance().getAllPurchaseOrderByUsingProjectId(jsonObject.get("projectId").getAsString(),EPB));
-			    	}	
-			    	json=gson.toJson(arr1);
+			    	json=gson.toJson(EMSPurchaseDao.getInstance().getAllPurchaseOrderByUsingProjectId(jsonObject.get("projectId").getAsString()));
 				    response.setContentType("application/json");
 				    response.setCharacterEncoding("UTF-8");
 				    response.getWriter().write(json);

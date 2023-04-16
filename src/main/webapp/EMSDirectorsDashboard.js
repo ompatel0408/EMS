@@ -1,7 +1,7 @@
 window.onload = function(){
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://localhost:8080/EMS2/EMSDirectorsDashboardServlet',true);
+	xhr.open('GET', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet',true);
 	xhr.onload = function() {
   		if (xhr.status === 200) {
     		Data = JSON.parse(xhr.responseText);
@@ -13,7 +13,7 @@ window.onload = function(){
 	xhr.send();
 	let Data1;
 	var xhr1 = new XMLHttpRequest();
-	xhr1.open('PUT', 'http://localhost:8080/EMS2/EMSItemListServlet',true);
+	xhr1.open('PUT', 'http://localhost:8080/EMS/EMSItemListServlet',true);
 	xhr1.onload = function() {
   		if (xhr1.status === 200) {
     		Data1 = JSON.parse(xhr1.responseText);
@@ -28,7 +28,7 @@ window.onload = function(){
 	
 	let Data2;
 	var xhr2 = new XMLHttpRequest();
-	xhr2.open('PUT', 'http://localhost:8080/EMS2/EMSDirectorsDashboardServlet',true);
+	xhr2.open('PUT', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet',true);
 	xhr2.onload = function() {
   		if (xhr2.status === 200) {
     		Data2 = JSON.parse(xhr2.responseText);
@@ -36,6 +36,21 @@ window.onload = function(){
   		}
 	}
 	xhr2.send(JSON.stringify({Token:"Hii"}));	
+	
+	let proCount = 0;
+	var xhr3 = new XMLHttpRequest();
+	xhr3.open("PUT","http://localhost:8080/EMS/EMSDispatchItemsListServlet", true);
+	xhr3.onload = () => {
+		if(xhr3.status == 200)
+		{
+			proCount = JSON.parse(xhr3.responseText);
+			console.log(proCount);
+			document.getElementById("projectCount").innerText = proCount;
+		}
+	}
+	xhr3.send(JSON.stringify({Token:"proCount"}));
+	
+	
 }
 function appendLiveProjects(data){
 	
@@ -78,7 +93,7 @@ function appendLiveProjects(data){
 var userId;
 function getUserId(){
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'http://localhost:8080/EMS2/EMSDirectorsDashboardServlet',true);
+	xhr.open('POST', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet',true);
 	xhr.onload = function() {
   		if (xhr.status == 200) {
     		userId = JSON.parse(xhr.responseText);
@@ -96,7 +111,7 @@ function getUserId(){
 function getListSideBar(userId){
 	var gradeData;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', `http://localhost:8080/EMS2/ShowManagementAccess?change=2&userId=${userId}`,true);
+	xhr.open('GET', `http://localhost:8080/EMS/ShowManagementAccess?change=2&userId=${userId}`,true);
     		xhr.setRequestHeader('Content-type', 'application/json');
     		xhr.onload = function() {
     	  		if (xhr.status == 200) {

@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'http://localhost:8080/EMS2/EMSDirectorsDashboardServlet', true);
+	xhr.open('POST', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet', true);
 	xhr.onload = function() {
 		if (xhr.status == 200) {
 			var userId = JSON.parse(xhr.responseText);
-			console.log("-------->" + userId)
 			getListSideBar(userId);
 		}
 	}
@@ -16,7 +15,7 @@ function getListSideBar(userId){
 	
 	var gradeData;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', `http://localhost:8080/EMS2/ShowManagementAccess?change=2&userId=${userId}`,true);
+	xhr.open('GET', `http://localhost:8080/EMS/ShowManagementAccess?change=2&userId=${userId}`,true);
     		xhr.setRequestHeader('Content-type', 'application/json');
     		xhr.onload = function() {
     	  		if (xhr.status == 200) {
@@ -26,22 +25,6 @@ function getListSideBar(userId){
     	  				document.getElementById('accessmanagement-target-id').style.display='block';
     	  				console.log(gradeData.accessManagement)
     	  			}
-    	    		//if(gradeData.addClient==1 || gradeData.showClient==1){
-    	    		//	document.getElementById('client-target-id').style.display='block';
-    	    		//}if(gradeData.addProject==1 || gradeData.showProject==1 || gradeData.addOffer==1 || gradeData.quotationPerOffers==1 || gradeData.finalQuotation==1){
-    	    		//	document.getElementById('project-target-id').style.display='block';
-    	    		//}
-    	    		//if(gradeData.generateIndent==1 || gradeData.indentList==1 || gradeData.approvalePending==1){
-    	    		//	document.getElementById('indent-target-id').style.display='block';
-    	    		//}if(gradeData.generatePo==1 || gradeData.poList==1){
-    	    		//	document.getElementById('purchase-target-id').style.display='block';
-    	    		//}
-    	    		//if(gradeData.generateGrn==1 || gradeData.grnList==1){
-    	    		//	document.getElementById('grn-target-id').style.display='block';
-    	    		//}
-    	    		//if(gradeData.addStock==1 || gradeData.stockList==1){
-    	    		//	document.getElementById('stock-target-id').style.display='block';
-    	    		//}
     	    		if(gradeData.addClient==1){
     	  				document.getElementById('addclient-target-id').style.display='block';
     	  			}if(gradeData.addProject==1){

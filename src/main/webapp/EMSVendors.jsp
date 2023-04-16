@@ -135,9 +135,9 @@
 										<option value="grade">Grade</option>
 										<option value="size">Size</option>
 										<option value="ItemName">Item Name</option>
-										<option value="quantity">Quantaty</option>
+										<option value="quantity">Quantity</option>
 										<option value="unit">Units</option>
-										<option value="waight">Waight</option>
+										<option value="waight">Weight</option>
 										<option value="delivaryDate">Delivery Date</option>
 									</select>
 

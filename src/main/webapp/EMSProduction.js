@@ -1,7 +1,7 @@
 window.onload = function getProjects(){
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSProductionServlet',true);
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSProductionServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {

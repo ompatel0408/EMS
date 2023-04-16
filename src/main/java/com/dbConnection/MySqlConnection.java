@@ -1,13 +1,9 @@
 package com.dbConnection;
 
 
-import java.util.Properties;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.DriverManager;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class MySqlConnection {
 

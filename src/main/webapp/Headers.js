@@ -1,7 +1,7 @@
 function getNotification() {
 	var data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSDirectorsDashboardServlet', true);
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet', true);
 	xhr.onload = function() {
 		if (xhr.status === 200) {
 			data = JSON.parse(xhr.responseText);
@@ -15,20 +15,20 @@ function deleteNotification(vendorName){
 	console.log("vendor Name :"+vendorName)
 	var data1;
 	var xhr = new XMLHttpRequest();
-	xhr.open('DELETE', 'http://localhost:8080/EMS2/EMSDirectorsDashboardServlet', true);
+	xhr.open('DELETE', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet', true);
 	xhr.onload = function() {
 		if (xhr.status === 200) {
 			data1 = JSON.parse(xhr.responseText);
 			window.location.href = "EMSDirectorsDashboard.jsp";
 		}
 	}
-	xhr.send(JSON.stringify({name:vendorName}));
+	xhr.send(JSON.stringify({name:vendorName,Token1:"Hello"}));
 }
 
 function getNotificationForPayment(){
 	var data1;
 	var xhr1 = new XMLHttpRequest();
-	xhr1.open('PUT', 'http://localhost:8080/EMS2/EMSDirectorsDashboardServlet', true);
+	xhr1.open('PUT', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet', true);
 	xhr1.onload = function() {
 		if (xhr1.status === 200) {
 			data1 = JSON.parse(xhr1.responseText);
@@ -82,7 +82,7 @@ function deleteNotification1(projectId){
 	console.log("Project Id :"+projectId)
 	var data1;
 	var xhr = new XMLHttpRequest();
-	xhr.open('DELETE', 'http://localhost:8080/EMS2/EMSDirectorsDashboardServlet', true);
+	xhr.open('DELETE', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet', true);
 	xhr.onload = function() {
 		if (xhr.status === 200) {
 			data1 = JSON.parse(xhr.responseText);

@@ -135,17 +135,18 @@ public class EMSVendorsDao {
 		public EMSPurchaseBean getPoDet(String projectName) {
 			try {
 				Connection con = MySqlConnection.getInstance();
+				EMSPurchaseBean podet  = null;
 				PreparedStatement pstmt = con.prepareStatement(
-						"select ponumber,indentid,currentdate from postpurchase join indent using(indentid) where projectid=?");
+						"select ponumber,indentid,currentdate from postpurchase join indent using(indentid)  where projectid=?");
 				pstmt.setString(1, projectName);
 				ResultSet rs = pstmt.executeQuery();
 				while (rs.next()) {
-					EMSPurchaseBean podet = new EMSPurchaseBean();
+					podet = new EMSPurchaseBean();
 					podet.setPONumber(rs.getString("ponumber"));
 					podet.setIndentId(rs.getInt("indentid"));
 					podet.setCurrentDate(rs.getString("currentdate"));
-					return podet;
 				}
+				return podet;
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -153,13 +154,14 @@ public class EMSVendorsDao {
 			return null;
 		}
 
-		public ArrayList<EMSPurchaseBean> getPOVendorDet(String vendorName) {
+		public ArrayList<EMSPurchaseBean> getPOVendorDet(String vendorName,String project) {
 			ArrayList<EMSPurchaseBean> vendors = new ArrayList<EMSPurchaseBean>();
 			try {
 				Connection con = MySqlConnection.getInstance();
 				PreparedStatement pstmt = con.prepareStatement(
-						"select productdescription,size,quantity,units,rateperkg,discount,rateperkg*quantity netAmuount,sgst,cgst,round((totalAmount*(sgst+cgst))/(100),2) taxableValue,totalAmount,PaymentTerms from postpurchase where vendorname=?");
+						"select productdescription,size,quantity,units,rateperkg,discount,rateperkg*quantity netAmuount,sgst,cgst,round((totalAmount*(sgst+cgst))/(100),2) taxableValue,totalAmount,PaymentTerms from postpurchase join indent using(indentid) where vendorname=? and projectid=?");
 				pstmt.setString(1, vendorName);
+				pstmt.setString(2, project);
 				ResultSet rs = pstmt.executeQuery();
 
 				while (rs.next()) {

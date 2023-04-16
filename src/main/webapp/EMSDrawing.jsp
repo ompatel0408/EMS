@@ -161,7 +161,7 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 	window.onload = function getProject1(){
 		let Data;
 		var xhr = new XMLHttpRequest();
-		xhr.open('GET', 'http://localhost:8080/EMS2/EMSDrawingServlet',true);
+		xhr.open('GET', 'http://localhost:8080/EMS/EMSDrawingServlet',true);
 		xhr.onload = function() {
 	  		if (xhr.status === 200) {
 	    		Data = JSON.parse(xhr.responseText);
@@ -189,7 +189,7 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 	function getOffers() {
 			let Data;
 			var xhr = new XMLHttpRequest();
-			xhr.open('PUT', 'http://localhost:8080/EMS2/EMSDrawingServlet',true);
+			xhr.open('PUT', 'http://localhost:8080/EMS/EMSDrawingServlet',true);
 			xhr.onreadystatechange = function() {
 		  		if (xhr.status === 200) {
 		    		Data = JSON.parse(xhr.responseText);

@@ -17,7 +17,7 @@ public class PrintPo extends HttpServlet {
 		System.out.println(request.getParameter("project"));
 		request.setAttribute("vendorDet", EMSVendorsDao.getInstance().getVendor(request.getParameter("vendor")));
 		request.setAttribute("poDet", EMSVendorsDao.getInstance().getPoDet(request.getParameter("project")));
-		request.setAttribute("povendorDet", EMSVendorsDao.getInstance().getPOVendorDet(request.getParameter("vendor")));
+		request.setAttribute("povendorDet", EMSVendorsDao.getInstance().getPOVendorDet(request.getParameter("vendor"),request.getParameter("project")));
 		request.getRequestDispatcher("PoPrint.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

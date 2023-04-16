@@ -106,11 +106,11 @@ document.getElementById("add-size").addEventListener("click", () => {
 });
 function Demo() {
 	// create a new XMLHttpRequest object
-	console.log('Reached!!!!')
+	
 	let id = document.getElementById('size-id1').value
 	const xhr = new XMLHttpRequest();
 	
-	xhr.open("POST", "http://localhost:8080/EMS2/GetGradeListServlet",true);
+	xhr.open("POST", "http://localhost:8080/EMS/GetGradeListServlet",true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	
 	xhr.onload = function() {

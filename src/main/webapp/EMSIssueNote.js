@@ -179,7 +179,7 @@ function XhrRequestForSendData(event)
 	event.preventDefault();
 	
 	var xhr = new XMLHttpRequest;
-	xhr.open('POST','http://localhost:8080/EMS2/EMSIssueNoteServlet',true);
+	xhr.open('POST','http://localhost:8080/EMS/EMSIssueNoteServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	// handle the response
 	xhr.onreadystatechange = function() {
@@ -197,7 +197,7 @@ function XhrRequestForSendData(event)
 window.onload = function getProjects() {
 	let dataText;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSIssueNoteServlet', true);
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSIssueNoteServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -229,7 +229,7 @@ document.getElementById("ProjectId1").addEventListener("change", () => {
 	console.log("in blur of catagory ");
 	var categoryData;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://localhost:8080/EMS2/EMSIssueNoteServlet', true);
+	xhr.open('GET', 'http://localhost:8080/EMS/EMSIssueNoteServlet', true);
 	xhr.onload = function() {
 		if (xhr.status === 200) {
 			categoryData = xhr.responseText;
@@ -257,7 +257,7 @@ document.getElementById("categoryId").addEventListener("change", () => {
 	console.log("in blur of grade ");
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSIssueNoteServlet', true);
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSIssueNoteServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -286,7 +286,7 @@ document.getElementById("gradeId").addEventListener("change", () => {
 	console.log("in blur of grade ");
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSIssueNoteServlet', true);
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSIssueNoteServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -315,7 +315,7 @@ document.getElementById('sizeId').addEventListener('change',()=>{
 	console.log("for quanity");
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS2/EMSIssueNoteServlet', true);
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSIssueNoteServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {

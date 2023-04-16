@@ -264,6 +264,20 @@
 								<p>list Vendor</p>
 						</a></li>
 					</ul></li>
+					<li class="nav-item"><a href="#" class="nav-link"> <i
+						class="nav-icon fas fa-file"></i>
+						<p>
+							Dispatch<i class="fas fa-angle-left right"></i>
+						</p>
+				</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item" id="projectstatus-target-id"
+							style=""><a href="EMSDispatchItems.jsp"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Dispatch Item</p>
+						</a></li>
+
+					</ul></li>
 					<li class="nav-item"><a href="#" class="nav-link"> <!-- <i class="nav-icon fas fa-edit"></i> -->
 						<i class="nav-icon far fa-plus-square"></i>
 						<p>
