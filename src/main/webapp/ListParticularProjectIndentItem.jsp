@@ -52,10 +52,10 @@
 															<th style="width: 20%">Quantity</th>
 														</tr>
 													</thead>
+													<tbody id="myTable">
 													<%
 													for (int i = 0; i < lists.size(); i++) {
 													%>
-													<tbody id="myTable">
 														<tr>
 															<td><%=srno++%></td>
 															<td><a><%=lists.get(i).getCatagory()%></a> <br></td>
@@ -64,11 +64,9 @@
 															<td><a><%=lists.get(i).getUOM()%></a> <br></td>
 															<td><a><%=lists.get(i).getQuantity()%></a> <br></td>
 														</tr>
-													</tbody>
 													<%
 													}
 													%>
-													</tr>
 													</tbody>
 												</table>
 												<!-- <table>-->
@@ -114,8 +112,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	</section>
 	</div>
 	<script src="assets/dist/js/models.js"></script>
 	<script src="assets/plugins/jquery/jquery.min.js"></script>

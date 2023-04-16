@@ -13,7 +13,9 @@ function submitForm(){
 		vendorName: document.getElementById('vendorName').value,
 		email: document.getElementById('email').value,
 		address: document.getElementById('address').value,
-		mobile: document.getElementById('mobile').value
+		mobile: document.getElementById('mobile').value,
+		mobile1: document.getElementById('mobile1').value,
+		email1: document.getElementById('email1').value
 	}
 	data.push(json)
 	search.push(json)

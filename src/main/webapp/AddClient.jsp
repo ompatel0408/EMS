@@ -40,7 +40,7 @@
 									<div class="form-group">
 										<label for="exampleInputPassword1">Client Name</label> <input
 											type="text" class="form-control" id="exampleInputPassword1"
-											placeholder="Enter Client Name" name="clientName" pattern="[A-Za-z]{1,50}" required="required">
+											placeholder="Enter Client Name" name="clientName" pattern="[A-Za-z_]{1,50}"  required="required">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">GST</label> <input
@@ -48,14 +48,24 @@
 											placeholder="Enter GST" name="gst" pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$" required="required">
 									</div>
 									<div class="form-group">
-										<label for="exampleInputPassword1">Phone</label> <input
+										<label for="exampleInputPassword1">Phone 1</label> <input
 											type="number" class="form-control" id="exampleInputPassword1"
-											placeholder="Enter Phone Number" name="phone" pattern="[0-9]{10}" required="required">
+											placeholder="Enter Phone Number 1" name="phone" pattern="[0-9]{10}" required="required">
 									</div>
 									<div class="form-group">
-										<label for="exampleInputPassword1">Email</label> <input
+										<label for="exampleInputPassword1">Phone 2</label> <input
+											type="number" class="form-control" id="exampleInputPassword1"
+											placeholder="Enter Phone Number 2" name="phone1" value="0" pattern="[0-9]{10}">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Email 1</label> <input
 											type="text" class="form-control" id="exampleInputPassword1"
-											placeholder="Password" name="email">
+											placeholder="Enter email 1" name="email" required>
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Email 2</label> <input
+											type="text" class="form-control" id="exampleInputPassword1"
+											placeholder="Enter email 2" value=" " name="email1">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">PAN No</label> <input

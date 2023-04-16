@@ -80,7 +80,6 @@ int srNo = 1;
 														<%
 														}
 														%>
-														</tr>
 													</tbody>
 												</table>
 												<!-- <table>-->

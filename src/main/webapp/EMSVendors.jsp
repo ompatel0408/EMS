@@ -45,8 +45,20 @@
 							</div>
 							<div class="col-sm-3">
 								<div class="form-group">
+									<label>Email(optional)</label> <input type="email" class="form-control"
+										id="email1" placeholder="Enter Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$">
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="form-group">
 									<label>Phone Number</label> <input type="number" id="mobile"
 										class="form-control" placeholder="Enter Mob-Number" pattern="[0-9]{10}" required="required">
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="form-group">
+									<label>Phone Number(optional)</label> <input type="number" id="mobile1"
+										class="form-control" placeholder="Enter Mob-Number" pattern="[0-9]{10}">
 								</div>
 							</div>
 							<div class="col-md-6">

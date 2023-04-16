@@ -109,6 +109,8 @@ public class ClientServlet extends HttpServlet {
 			String  email = request.getParameter("email");
 			String pan = request.getParameter("pan");
 			String address = request.getParameter("address");
+			String email1 = request.getParameter("email1");
+			String phone1 = request.getParameter("phone1");
 			
 			ClientBean clientBean = new ClientBean();
 			clientBean.setAddress(address);
@@ -117,6 +119,8 @@ public class ClientServlet extends HttpServlet {
 			clientBean.setGstNo(gst);
 			clientBean.setPhoneNumber(Long.parseLong(phone));
 			clientBean.setPanNo(pan);
+			clientBean.setPhoneNumber1(Long.parseLong(phone1));
+			clientBean.setEmail1(email1);
 			ClientDao clientDao = ClientDao.getInstance();
 			HttpSession session = request.getSession();
 			if(clientDao.addClient(clientBean)) {

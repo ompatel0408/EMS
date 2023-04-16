@@ -3,6 +3,7 @@ package com.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -29,10 +30,6 @@ public class ProjectServlet extends HttpServlet {
 		}
 		return instance;
 	}
-	
-	Date d = new Date();
-	DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
-	String today = df.format(d);
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -76,7 +73,7 @@ public class ProjectServlet extends HttpServlet {
 			ProjectBean projectbean= new ProjectBean();
 			
 			projectbean.setClientPoId(clientPoId);
-			projectbean.setPoDate(today);
+			projectbean.setPoDate(LocalDate.now().toString());
 			projectbean.setAdvancePayPercent(advancePayPercent);
 			projectbean.setAfterPayPercent(afterPayPercent);
 			projectbean.setFinalDeliveryDate(finalDeliveryDate);

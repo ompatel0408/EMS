@@ -114,8 +114,8 @@
                                 <div class="form-group">
                                     <label>Quantity</label>
                                     <span id="quant"></span>
-                                    <input type="number" class="form-control" id="Quantity"
-                                        placeholder="Enter Quantaty" required disabled>
+                                    <input type="text" class="form-control" id="Quantity"
+                                        placeholder="Enter Quantaty" required disabled pattern="[0-9]{10}">
                                 </div>
                                 
                                 <div class="form-group">

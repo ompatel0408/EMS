@@ -46,6 +46,10 @@ public class EMSVendorServices {
 		//VendorDao id = VendorDao.getInstance();
 		for (Map<String, Object> item : data) {
 			EMSVendorsBean Qb = new EMSVendorsBean();
+			String email1 = (String) item.get("email1");
+			Qb.setEmail1(email1);
+			String mobile1 = (String) item.get("mobile");
+			Qb.setMobile1(mobile1);
 			String vendorName = (String) item.get("vendorName");
 			Qb.setVendorName(vendorName);
 			String email = (String) item.get("email");

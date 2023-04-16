@@ -51,7 +51,7 @@ public class EMSDispatchDao {
 	public ArrayList<String> getOfferFromDba(String client) 
 	{
 		ClientDao cd = ClientDao.getInstance();
-		String selectQuery = "SELECT OfferCode FROM offer where ClientId = "+cd.getClientIdFormDatabase(client);
+		String selectQuery = "select itemcode from items join clients using(clientid) where ClientId = "+cd.getClientIdFormDatabase(client);
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<String> ar = new ArrayList<String>();
 		if (conn != null) 

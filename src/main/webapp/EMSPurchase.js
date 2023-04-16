@@ -234,6 +234,13 @@ function updateField(editId) {
 	document.getElementById('grade-id').value = js1[0].grade;
 	document.getElementById('size-id').value = js1[0].size;
 	
+	totalAmountAppended-=parseFloat(js1[0].TotalAmount)
+    percent=(totalAmountAppended*100)/givenQuote
+    console.log(percent)
+    progressBar.style.width = percent + '%';
+    progressBar.setAttribute('aria-valuenow', percent);
+    change()
+	
 }
 function calculateAmount() {
 	document.getElementById('amount-id').value = parseFloat(document.getElementById('rate-id').value) * parseFloat(document.getElementById('orderQuan-id').value);

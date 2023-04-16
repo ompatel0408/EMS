@@ -798,7 +798,7 @@ table, tbody {
 				
 			</tr>
 			<%
-			totalAmtBeforeTax += (c.getQuantity() * Double.parseDouble(c.getNetAmount()));
+			totalAmtBeforeTax += (c.getQuantity() * Double.parseDouble(c.getRatePerKg()));
 			grandTotal+=c.getTotalAmount();
 			payment=c.getPaymentTerms();
 			%>

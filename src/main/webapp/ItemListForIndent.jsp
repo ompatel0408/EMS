@@ -67,10 +67,10 @@
 															<th style="width: 17%"></th>
 														</tr>
 													</thead>
+													<tbody id="myTable">
 													<%
 													for (int i = 0; i < items.size(); i++) {
 													%>
-													<tbody id="myTable">
 														<tr>
 															<td><%=srno++%></td>
 															<td><a><%=items.get(i).getItemCode()%></a> <br></td>
@@ -80,11 +80,9 @@
 																href="ListIndentServlet?token=3&projectid=${projectId}&itemname=<%=items.get(i).getItemName()%>"><button
 																		class="btn btn-primary">Show Indent</button></a></td>
 														</tr>
-													</tbody>
 													<%
 													}
 													%>
-													</tr>
 													</tbody>
 												</table>
 												<!-- <table>-->

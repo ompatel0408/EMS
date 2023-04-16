@@ -9,7 +9,10 @@ public class ClientBean {
 	private String email;
 	private String panNo;
 	private String address;
+	private long phoneNumber1;
+	private String email1;
 	
+
 	public ClientBean() {}
 	
 	public ClientBean(int clientId, String clientName) {
@@ -17,6 +20,24 @@ public class ClientBean {
 		this.clientName = clientName;
 	}
 
+	
+	public long getPhoneNumber1() {
+		return phoneNumber1;
+	}
+
+	public void setPhoneNumber1(long phoneNumber1) {
+		this.phoneNumber1 = phoneNumber1;
+	}
+
+	public String getEmail1() {
+		return email1;
+	}
+
+	public void setEmail1(String email1) {
+		this.email1 = email1;
+	}
+	
+	
 	public int getClientId() {
 		return clientId;
 	}

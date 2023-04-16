@@ -26,13 +26,15 @@ public class ClientDao {
 		
 		try {
 			Connection con = MySqlConnection.getInstance();
-			PreparedStatement pstmt = con.prepareStatement("insert into clients(clientname,gstno,phonenumber,email,panno,address) values(?,?,?,?,?,?)");
+			PreparedStatement pstmt = con.prepareStatement("insert into clients(clientname,gstno,phonenumber,email,panno,address,PhoneNumber2,Email2) values(?,?,?,?,?,?,?,?)");
 			pstmt.setString(1,clientBean.getClientName());
 			pstmt.setString(2, clientBean.getGstNo());
 			pstmt.setLong(3, clientBean.getPhoneNumber());
 			pstmt.setString(4, clientBean.getEmail());
 			pstmt.setString(5, clientBean.getPanNo());
 			pstmt.setString(6, clientBean.getAddress());
+			pstmt.setLong(7, clientBean.getPhoneNumber1());
+			pstmt.setString(8, clientBean.getEmail1());
 			pstmt.executeUpdate();
 			return true;
 		}

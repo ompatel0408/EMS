@@ -27,7 +27,7 @@ public class EMSDirectorsDashboardDao {
 	public ArrayList<EMSDirectorsDashboardBean> getDataOfLiveProjects(){
 		
 		
-		String selectQuery = "select ClientName,p.projectId,pr.workdonepercentage from clients c join projects p ON  c.ClientId = p.ClientId join production pr on pr.projectId=p.projectId";
+		String selectQuery = "select ClientName,p.projectId,pr.workdonepercentage,p.POdate from clients c join projects p ON  c.ClientId = p.ClientId join production pr on pr.projectId=p.projectId";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<EMSDirectorsDashboardBean> ar = new  ArrayList<EMSDirectorsDashboardBean>();
 		EMSDirectorsDashboardBean EDDB = null;
@@ -38,7 +38,7 @@ public class EMSDirectorsDashboardDao {
 				ResultSet rs=stmt.executeQuery(selectQuery);
 				
 				while(rs.next()) {
-					EDDB = new EMSDirectorsDashboardBean(rs.getString(1), rs.getString(2),rs.getInt(3));
+					EDDB = new EMSDirectorsDashboardBean(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4));
 					ar.add(EDDB);
 				}
 				return ar;

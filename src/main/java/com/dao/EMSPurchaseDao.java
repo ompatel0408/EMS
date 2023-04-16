@@ -225,7 +225,7 @@ public ArrayList<EMSPurchaseBean> getAllPurchaseOrderByUsingProjectId(String pro
 	{
 		try {
 			Connection con = MySqlConnection.getInstance();
-			PreparedStatement pstmt = con.prepareStatement("select QuotationAmount from quotations join projects using (QuotationId) where projectid=?");
+			PreparedStatement pstmt = con.prepareStatement("select sum(TotalPricePerItem) QuotationAmount from items i join quotationperitem qp on i.itemcode = qp.offercode join projects using(clientid) where projectid=?");
 			pstmt.setString(1, projct);
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next())

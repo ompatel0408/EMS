@@ -26,7 +26,7 @@ public class EMSVendorsDao {
 		
 		public boolean addVendor(ArrayList<EMSVendorsBean> vendor) {
 
-			String insertQuery = "INSERT INTO vendors(vendorName,email,address,phonenumber) VALUES(?,?,?,?)";
+			String insertQuery = "INSERT INTO vendors(vendorName,email,address,phonenumber,PhoneNumber1,Email1) VALUES(?,?,?,?,?,?)";
 
 			Connection con = MySqlConnection.getInstance();
 
@@ -38,15 +38,15 @@ public class EMSVendorsDao {
 					pstmt.setString(2, qb.getEmail());
 					pstmt.setString(3, qb.getAddress());
 					pstmt.setString(4, qb.getMobile());
+					pstmt.setString(5, qb.getMobile1());
+					pstmt.setString(6, qb.getEmail1());
 					pstmt.addBatch();
 				}
 				int[] result = pstmt.executeBatch();
-				System.out.println("Result -------->" + result);
 				return true;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
 			return false;
 		}
 		
@@ -159,7 +159,7 @@ public class EMSVendorsDao {
 			try {
 				Connection con = MySqlConnection.getInstance();
 				PreparedStatement pstmt = con.prepareStatement(
-						"select productdescription,size,quantity,units,rateperkg,discount,rateperkg*quantity netAmuount,sgst,cgst,round((totalAmount*(sgst+cgst))/(100),2) taxableValue,totalAmount,PaymentTerms from postpurchase join indent using(indentid) where vendorname=? and projectid=?");
+						"select productdescription,size,i.quantity,units,rateperkg,discount,rateperkg*(i.quantity) netAmuount,sgst,cgst,round((totalAmount*(sgst+cgst))/(100),2) taxableValue,totalAmount,PaymentTerms from postpurchase join indent i using(indentid) where vendorname=? and projectid=?");
 				pstmt.setString(1, vendorName);
 				pstmt.setString(2, project);
 				ResultSet rs = pstmt.executeQuery();
