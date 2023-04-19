@@ -68,7 +68,7 @@ public class EMSGRNServlet extends HttpServlet {
 			vendorName = request.getParameter("VendorName");
 			HttpSession session = request.getSession();
 			if(EGB != null) {
-				if(EMSGRNDao.getInstance().addGRN(new EMSGRNBean(vendorName, request.getParameter("ReceivedDate"),EGB.getPath1().trim(),EGB.getPath2().trim()))) {
+				if(EMSGRNDao.getInstance().addGRN(new EMSGRNBean(vendorName, request.getParameter("ReceivedDate"),EGB.getPath1().trim(),EGB.getPath2().trim(),request.getParameter("InvoiceNumber")))) {
 					System.out.println("GRN added successfully!");
 					if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new GRN from vendor ".concat(vendorName).concat(" has been reached At gate!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","GRN"))) {
 						System.out.println("purchase insert Logs Inserted!");

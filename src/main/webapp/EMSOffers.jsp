@@ -50,11 +50,16 @@
 									class="form-control" id="Quantity" required placeholder="Enter Quantity"
 									>
 							</div>
-							<!-- <div class="form-group">
-								<label for="">Delivery Date</label> <input type="date"
-									class="form-control" id="DelivaryDate"
-									placeholder="Enter Delivery Date">
-							</div> -->
+							 <div class="form-group">
+								<label for="">Date</label> <input type="date"
+									class="form-control" id="AddDate"
+									placeholder="Enter Add Date">
+							</div> 
+							<div class="form-group">
+								<label>Address</label>
+								<textarea class="form-control" rows="3" placeholder="Enter..."
+									id="address" style="height: 50px;"></textarea>
+							</div>
 
 							<!-- /.form-group -->
 						</div>

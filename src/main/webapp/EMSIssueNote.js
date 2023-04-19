@@ -135,7 +135,8 @@ function deleteItem(deleteId) {
 document.getElementById("deleteClicked").addEventListener("click", () => {
 	data.splice(((deleteValue.substring(6)) - 1), 1);
 	appendFunc();
-	$('#modal-projectDelete').modal('hide');
+	//$('#modal-projectDelete').modal('hide');
+	document.getElementById("modal-projectDelete").click();
 });
 
 let editValue;
@@ -170,7 +171,7 @@ function updateField(event) {
 	console.log(data)
 	appendFunc();
 	$('#modal-editItem').modal('hide');
-	XhrRequestForSendData()
+	XhrRequestForSendData(event)
 }
 
 function XhrRequestForSendData(event)

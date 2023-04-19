@@ -7,6 +7,9 @@ public class EMSGRNBean {
 	private String path1;
 	private String path2;
 	private int GRNID;
+	private  String invoiceNumber;
+	
+	
 	
 	public EMSGRNBean() {}
 	
@@ -23,11 +26,20 @@ public class EMSGRNBean {
 		this.path2 = path2;
 	}	
 	
-	public EMSGRNBean(String vendorName, String receiveDate,String path1,String path2) {
+	public EMSGRNBean(String vendorName, String receiveDate,String path1,String path2,String invoiceNumber) {
 		this.VendorName = vendorName;
 		this.ReceiveDate = receiveDate;
 		this.path1 = path1;
 		this.path2 = path2;
+		this.invoiceNumber = invoiceNumber;
+	}	
+	
+	public String getInvoiceNumber() {
+		return invoiceNumber;
+	}
+
+	public void setInvoiceNumber(String invoiceNumber) {
+		this.invoiceNumber = invoiceNumber;
 	}	
 	public int getGRNID() {
 		return GRNID;

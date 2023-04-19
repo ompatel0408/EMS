@@ -24,7 +24,7 @@ public class EMSGRNDao {
 	
 	public boolean addGRN(EMSGRNBean EGB) {
 		
-		String insertQuery = "INSERT INTO GRN(VENDORNAME,ReceiveDate,PATH1,PATH2) VALUES(?,?,?,?)";
+		String insertQuery = "INSERT INTO GRN(VENDORNAME,ReceiveDate,PATH1,PATH2,InvoiceNumber) VALUES(?,?,?,?,?)";
 		Connection conn = MySqlConnection.getInstance();
 		
 		if(conn != null) {
@@ -36,6 +36,7 @@ public class EMSGRNDao {
 				stmt.setString(2, EGB.getReceiveDate());
 				stmt.setString(3, EGB.getPath1());
 				stmt.setString(4, EGB.getPath2());
+				stmt.setString(5, EGB.getInvoiceNumber());
 				stmt.executeUpdate();
 				return true;
 				

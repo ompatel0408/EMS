@@ -37,7 +37,6 @@
 									
 								</select>
 							</div>
-
 							<div class="form-group">
 								<label>Tag No</label> <input type="text" class="form-control"
 									id="TagNo" placeholder="Enter Tag No" required disabled>

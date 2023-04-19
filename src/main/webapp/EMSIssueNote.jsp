@@ -110,12 +110,11 @@
                             </div>
                             
                             <div class="col-md-6">
-                      
                                 <div class="form-group">
                                     <label>Quantity</label>
                                     <span id="quant"></span>
-                                    <input type="text" class="form-control" id="Quantity"
-                                        placeholder="Enter Quantaty" required disabled pattern="[0-9]{10}">
+                                    <input type="number" class="form-control" id="Quantity"
+                                        placeholder="Enter Quantaty" required disabled>
                                 </div>
                                 
                                 <div class="form-group">

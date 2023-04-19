@@ -98,12 +98,11 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 								</div>
 							</div>
 							<div class="col-md-6">
-<!-- 								<div class="form-group">
-
-									<label>Vendor name</label> <input type="text" name="VendorName"
-										class="form-control" id="quantaty-id"
-										placeholder="Enter Vendor name">
-								</div> -->
+ 								<div class="form-group">
+									<label>Invoice Number</label> <input type="text" name="InvoiceNumber"
+										class="form-control" id="invoice-id"
+										placeholder="Enter Invoice Number">
+								</div> 
 								<div class="form-group">
 									<label>Vendor Name</label> <select class="form-control"
 										 id="quantaty-id" name="VendorName" required="required">

@@ -28,9 +28,7 @@ public class EMSVendorServices {
 			e.printStackTrace();
 		}
 
-		
 		String jsonData = sb.toString();
-		System.out.println(jsonData);
 
 		// Create a Gson object
 		Gson gson = new Gson();
@@ -38,28 +36,11 @@ public class EMSVendorServices {
 		// Define a TypeToken for the List of objects
 		Type type = new TypeToken<List<Map<String, Object>>>() {
 		}.getType();
-//		System.out.println(type);
-
 		// Convert the JSON array to a List of Maps
 		List<Map<String, Object>> data = gson.fromJson(jsonData, type);
-		System.out.println(data);
-		//VendorDao id = VendorDao.getInstance();
 		for (Map<String, Object> item : data) {
-			EMSVendorsBean Qb = new EMSVendorsBean();
-			String email1 = (String) item.get("email1");
-			Qb.setEmail1(email1);
-			String mobile1 = (String) item.get("mobile");
-			Qb.setMobile1(mobile1);
-			String vendorName = (String) item.get("vendorName");
-			Qb.setVendorName(vendorName);
-			String email = (String) item.get("email");
-			Qb.setEmail(email);
-			String address = (String) item.get("address");
-			Qb.setAddress(address);
-			String mobile = (String) item.get("mobile");
-			Qb.setMobile(mobile);
+			EMSVendorsBean Qb = new EMSVendorsBean(item.get("vendorName").toString(), item.get("address").toString(), item.get("email").toString(), item.get("mobile").toString(), item.get("email1").toString(), item.get("mobile1").toString(), item.get("gst").toString(), item.get("panNumber").toString(), item.get("bankName").toString(), item.get("ACNumber").toString(), item.get("IFSC").toString(),item.get("Remarks").toString());
 			AQb.add(Qb);
-			System.out.println(Qb);
 		}
 		return AQb;
 	}

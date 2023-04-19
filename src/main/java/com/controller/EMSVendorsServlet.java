@@ -43,12 +43,11 @@ public class EMSVendorsServlet extends HttpServlet {
 				for(EMSVendorsBean EVB:ibean) {
 					if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new vendor ".concat(EVB.getVendorName()).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","VENDOR"))) {
 						init();
-						System.out.println(" VENDOR insert Logs Inserted!");
+						System.out.println("VENDOR insert Logs Inserted!");
 					}else {
 						System.out.println("VENDOR insert Logs not inserted!");
 					}
 				}
-				
 			}else {
 				System.out.println("vendor not added successfully!");
 			}

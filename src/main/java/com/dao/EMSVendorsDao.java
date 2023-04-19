@@ -26,8 +26,8 @@ public class EMSVendorsDao {
 		
 		public boolean addVendor(ArrayList<EMSVendorsBean> vendor) {
 
-			String insertQuery = "INSERT INTO vendors(vendorName,email,address,phonenumber,PhoneNumber1,Email1) VALUES(?,?,?,?,?,?)";
-
+			String insertQuery = "INSERT INTO vendors(vendorName,email,address,phonenumber,PhoneNumber1,Email1,GST,PanNumber,BankName,ACNumber,IFSC,Remarks) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+			
 			Connection con = MySqlConnection.getInstance();
 
 			try {
@@ -40,6 +40,12 @@ public class EMSVendorsDao {
 					pstmt.setString(4, qb.getMobile());
 					pstmt.setString(5, qb.getMobile1());
 					pstmt.setString(6, qb.getEmail1());
+					pstmt.setString(7, qb.getGst());
+					pstmt.setString(8, qb.getPanNumber());
+					pstmt.setString(9, qb.getBankName());
+					pstmt.setString(10, qb.getACNumber());
+					pstmt.setString(11, qb.getIFSC());
+					pstmt.setString(12, qb.getRemarks());
 					pstmt.addBatch();
 				}
 				int[] result = pstmt.executeBatch();

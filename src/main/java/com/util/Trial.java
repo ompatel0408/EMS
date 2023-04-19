@@ -20,6 +20,7 @@ public class Trial implements Job{
 	public void execute(JobExecutionContext context) throws JobExecutionException {
         // Your logic here
 		SendMail.mailTokenEveryDay();
+		SendMail.sendMailForError();
     }
 	
 	public static void DailyMailService() {
@@ -33,7 +34,7 @@ public class Trial implements Job{
 			Trigger trigger = newTrigger()
 			    .withIdentity("myTrigger", "group1")
 			    .startAt(startDate)
-			    .withSchedule(simpleSchedule().withIntervalInHours(24).repeatForever())
+			    .withSchedule(simpleSchedule().withIntervalInMinutes(2).repeatForever())
 			    .build(); 
 
 			// Schedule the job with the trigger

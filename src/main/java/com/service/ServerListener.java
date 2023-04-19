@@ -8,7 +8,6 @@ import jakarta.servlet.ServletContextListener;
 
 public class ServerListener implements ServletContextListener {
 
-
     public ServerListener() {
 
         // TODO Auto-generated constructor stub
@@ -17,14 +16,13 @@ public class ServerListener implements ServletContextListener {
 	
 	public void contextInitialized(ServletContextEvent event) {
 		System.out.println("Listener Started");
-//		Trial.DailyMailService();
+		Trial.DailyMailService();
 	}
 	
 	
 	public void contextDestroyed(ServletContextEvent event) {
 		System.out.println("Listener Destroyed");
-//		Trial.stopDailyMailService();
-		
+		Trial.stopDailyMailService();
 	}
 	
 	

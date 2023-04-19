@@ -167,6 +167,28 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="modal-projectDelete">
+			<div class="modal-dialog">
+				<div class="modal-content bg-danger">
+					<div class="modal-header">
+						<h4 class="modal-title">Delete Item</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true"></span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>Are you sure you want to delete this Item?</p>
+					</div>
+					<div class="modal-footer justify-content-between">
+						<button type="button" class="btn btn-outline-light"
+							data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-outline-light"
+							id="deleteClicked" data-dismiss="modal">Delete Item</button>
+					</div>
+				</div>
+			</div>
+		</div>
 </body>
 <script type="text/javascript" src="Indent.js"></script>
 <script src="assets/dist/js/models.js"></script>

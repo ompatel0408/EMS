@@ -33,7 +33,7 @@ public class SendMail {
 		String to = email;
 
 		// Sender's email ID needs to be mentioned
-		final String from = "royalclubjan@gmail.com";
+		final String from = "emssoftwaremail@gmail.com";
 
 		// Assuming you are sending email from through gmails smtp
 		String host = "smtp.gmail.com";
@@ -52,7 +52,7 @@ public class SendMail {
 
 			protected PasswordAuthentication getPasswordAuthentication() {
 
-				return new PasswordAuthentication(from, "efwzsnwttkfumekf");
+				return new PasswordAuthentication(from, "echieucljdcezgck");
 
 			}
 
@@ -109,7 +109,7 @@ public class SendMail {
 		String to = email;
 
 		// Sender's email ID needs to be mentioned
-		final String from = "royalclubjan@gmail.com";
+		final String from = "emssoftwaremail@gmail.com";
 
 		// Assuming you are sending email from through gmails smtp
 		String host = "smtp.gmail.com";
@@ -128,7 +128,7 @@ public class SendMail {
 
 			protected PasswordAuthentication getPasswordAuthentication() {
 
-				return new PasswordAuthentication(from, "efwzsnwttkfumekf");
+				return new PasswordAuthentication(from, "echieucljdcezgck");
 
 			}
 
@@ -167,7 +167,7 @@ public class SendMail {
 		String to = vendorMail;
 
 		// Sender's email ID needs to be mentioned
-		final String from = "royalclubjan@gmail.com";
+		final String from = "emssoftwaremail@gmail.com";
 
 		// Assuming you are sending email from through gmails smtp
 		String host = "smtp.gmail.com";
@@ -186,7 +186,7 @@ public class SendMail {
 
 			protected PasswordAuthentication getPasswordAuthentication() {
 
-				return new PasswordAuthentication(from, "efwzsnwttkfumekf");
+				return new PasswordAuthentication(from, "echieucljdcezgck");
 
 			}
 
@@ -234,9 +234,84 @@ public class SendMail {
 		return false;
 	}
 	
+	public static boolean sendMailForError() {
+
+		// Recipient's email ID needs to be mentioned.
+		String to = "RoyalClubJanAdvJava@gmail.com";
+
+		// Sender's email ID needs to be mentioned
+		final String from = "emssoftwaremail@gmail.com";
+
+		// Assuming you are sending email from through gmails smtp
+		String host = "smtp.gmail.com";
+
+		// Get system properties
+		Properties properties = System.getProperties();
+
+		// Setup mail server
+		properties.put("mail.smtp.host", host);
+		properties.put("mail.smtp.port", "465");
+		properties.put("mail.smtp.ssl.enable", "true");
+		properties.put("mail.smtp.auth", "true");
+
+		
+		Session session = Session.getInstance(properties, new Authenticator() {
+
+			protected PasswordAuthentication getPasswordAuthentication() {
+
+				return new PasswordAuthentication(from, "echieucljdcezgck");
+
+			}
+
+		});
+
+		// Used to debug SMTP issues
+		session.setDebug(true);
+
+		try {
+			// Create a default MimeMessage object.
+			MimeMessage message = new MimeMessage(session);
+
+			// Set From: header field of the header.
+			message.setFrom(new InternetAddress(from));
+
+			// Set To: header field of the header.
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+			// Set Subject: header field
+			message.setSubject("Errors Log of EMS Projects PVT LTD.");
+
+			MimeBodyPart attachmentPart = new MimeBodyPart();
+
+			// Set the data source for the attachment
+			DataSource source = new FileDataSource("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/error.log");
+			attachmentPart.setDataHandler(new DataHandler(source));
+			attachmentPart.setFileName("error.log");
+
+			// Create a multipart message to combine text and attachment
+			Multipart multipart = new MimeMultipart();
+			multipart.addBodyPart(attachmentPart);
+
+			// Add the multipart message to the main message
+			message.setContent(multipart);
+			
+			System.out.println("sending...");
+			// Send message
+			Transport.send(message);
+			System.out.println("Sent message successfully....");
+			
+			return true;
+		} catch (MessagingException m) {
+			m.printStackTrace();
+		}
+		return false;
+	}
+	
+	
 	
 	public static void main(String[] args) {
-		SendMail.mailTokenEveryDay();
+//		SendMail.mailTokenEveryDay();
+//		SendMail.sendMailForError();
 	}
 	
 	

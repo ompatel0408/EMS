@@ -3,9 +3,10 @@ package com.bean;
 public class EMSOffersBean {
 	
 	private int clientId,quantity,quotationId;
-	private String offerName,remarks,offerCode,TotalPrice,drawingId,clientName;
+	private String offerName,remarks,offerCode,TotalPrice,drawingId,clientName,Date,Addess;
 	
-	public EMSOffersBean(String clientName,int clientId, int quantity, int quotationId, String offerName, String remarks, String offerCode, String totalPrice, String drawingId) {
+
+	public EMSOffersBean(String clientName,int clientId, int quantity, int quotationId, String offerName, String remarks, String offerCode, String totalPrice, String drawingId,String date,String address) {
 		this.clientName = clientName;
 		this.clientId = clientId;
 		this.quantity = quantity;
@@ -15,6 +16,8 @@ public class EMSOffersBean {
 		this.offerCode = offerCode;
 		this.TotalPrice = totalPrice;
 		this.drawingId = drawingId;
+		this.Date = date;
+		this.Addess = address;
 	}
 	
 	public EMSOffersBean(int clientId, int quantity, int quotationId, String offerName, String remarks, String offerCode, String totalPrice, String drawingId) {
@@ -27,6 +30,23 @@ public class EMSOffersBean {
 		this.TotalPrice = totalPrice;
 		this.drawingId = drawingId;
 	}
+	
+	public String getDate() {
+		return Date;
+	}
+
+	public void setDate(String date) {
+		this.Date = date;
+	}
+
+	public String getAddess() {
+		return Addess;
+	}
+
+	public void setAddess(String addess) {
+		this.Addess = addess;
+	}
+	
 	
 	public String getClientName() {
 		return clientName;

@@ -56,6 +56,7 @@ public class EMSOffersServices{
 			
 			
 			// Loop through each object in the list and extract the fields
+			
 			for (Map<String, Object> item : data) {
 				clientId = Integer.valueOf(item.get("ClientId").toString());
 				
@@ -68,7 +69,7 @@ public class EMSOffersServices{
 						isUpdate = true;
 					}
 				}
-				EMSOffersBean Qb =  new EMSOffersBean(ClientDao.getInstance().getClientNameFormDatabase(clientId),clientId, Integer.parseInt(item.get("quantity").toString()), QuotationDao.getQuotationIdFromDataBase(clientId).getQuotationId(), item.get("ItemName").toString(),item.get("remark").toString(),EMSOffersServices.generateOfferCode(request), item.get("TotalPrice").toString(), EMSOffersServices.generateDrawingId(clientId));
+				EMSOffersBean Qb =  new EMSOffersBean(ClientDao.getInstance().getClientNameFormDatabase(clientId),clientId, Integer.parseInt(item.get("quantity").toString()), QuotationDao.getQuotationIdFromDataBase(clientId).getQuotationId(), item.get("ItemName").toString(),item.get("remark").toString(),EMSOffersServices.generateOfferCode(request), item.get("TotalPrice").toString(), EMSOffersServices.generateDrawingId(clientId),item.get("AddDate").toString(),item.get("Address").toString());
 				AQb.add(Qb);
 				System.out.println(Qb);
 			}

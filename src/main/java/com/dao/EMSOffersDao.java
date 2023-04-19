@@ -24,36 +24,9 @@ public class EMSOffersDao {
 	}
 
 	
-	
-	
-//	public ArrayList<EMSOffersBean> getAllOffer() {
-//		ArrayList<EMSOffersBean> offers = new ArrayList<EMSOffersBean>();
-//		try {
-//			Connection con = MySqlConnection.getInstance();
-//			PreparedStatement pstmt = con.prepareStatement("select * from offer");
-//			ResultSet rs = pstmt.executeQuery();
-//			
-//			while(rs.next()) {
-//				EMSOffersBean offer = new EMSOffersBean();
-////				offer.setDeliveryDate(rs.getString("deliverydate"));
-////				offer.setItemName(rs.getString("itemname"));
-//				offer.setQuantity(rs.getInt("quantity"));
-//				offer.setRemarks(rs.getString("remarks"));
-//				offer.setClientId(rs.getInt("CLIENTID"));
-//				offers.add(offer);
-//			}
-//			return offers;
-//			
-//		}
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}
-	
 	public boolean addOffer(ArrayList<EMSOffersBean> indent) {
 		
-		String insertQuery = "insert into offer(ClientId,OfferCode,OfferName,TotalPrice,Quantity,QuotationId,DrawingId,Remarks) values (?,?,?,?,?,?,?,?)";
+		String insertQuery = "insert into offer(ClientId,OfferCode,OfferName,TotalPrice,Quantity,QuotationId,DrawingId,Remarks,addDate,address) values (?,?,?,?,?,?,?,?,?,?)";
 		
 		Connection con = MySqlConnection.getInstance();		
 		try {
@@ -67,10 +40,11 @@ public class EMSOffersDao {
 				pstmt.setInt(6,qb.getQuotationId());
 				pstmt.setString(7,qb.getDrawingId());
 				pstmt.setString(8,qb.getRemarks());
+				pstmt.setString(9, qb.getDate());
+				pstmt.setString(10, qb.getAddess());
 				pstmt.addBatch();
 			}
 			int[] result = pstmt.executeBatch();
-			System.out.println("Result -------->"+result);
 			return true;
 		}catch(SQLException e) {
 			e.printStackTrace();

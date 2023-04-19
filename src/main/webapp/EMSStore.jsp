@@ -25,7 +25,6 @@
 						</button>
 					</div>
 				</div>
-
 				<div class="card-body">
 					<form onsubmit="submitForm(event)">
 						<div class="row">
@@ -117,79 +116,7 @@
 				<!-- /.card-body -->
 			</div>
 		</div>
-		<div class="modal fade" id="modal-editItem">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Project Details</h4>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close" id="enableItemName">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="col-m-5">
-						<div class="form-group p-3">
-							<label>Select </label>
-							<form onsubmit="updateField(event)">
-								<p id="select-error"></p>
-								<select
-									class="form-control select2 select2-hidden-accessible my-3"
-									style="width: 100%;" data-select2-id="1" id="input-form"
-									name="project">
-									<br>
-									<option selected="selected" data-select2-id="3">Select
-										option you want to update..</option>
-									<option value="category">Category</option>
-									<option value="grade">Grade</option>
-									<option value="size">Size</option>
-									<option value="quantity">Quantity</option>
-								</select>
-
-								<div class="form-group" id="hide-text" style="display: none;">
-									<label for="placeholderChange" id="lableName" class="mt-2"></label>
-									<input type="text" class="form-control" id="placeholderChange"
-										placeholder="Enter" required>
-								</div>
-								<!-- text input -->
-								<div class="form-group" id="category-id-model"
-									style="display: none;">
-									<label>Category</label> <select id="category-id-select"
-										class="form-control" name="project" required>
-										<option value="select" selected>Select category</option>
-										<option value="ms">MS</option>
-										<option value="ss">SS</option>
-									</select>
-								</div>
-								<div class="form-group" id="grade-id-model"
-									style="display: none;">
-									<label>Grade</label> <select id="grade-id-select"
-										class="form-control" required>
-										<option value="select">Select Grade</option>
-										<option value="aaa">aaa</option>
-										<option value="bb">bbb</option>
-										<option value="cc">ccc</option>
-									</select>
-								</div>
-								<div class="form-group" id="size-id-model"
-									style="display: none;">
-									<label>Size</label> <select type="text" id="size-id-select"
-										class="form-control" required>
-										<option value="select">Select size</option>
-										<option value="aa">AAA</option>
-										<option value="bb">BBB</option>
-										<option value="cc">CCC</option>
-									</select>
-								</div>
-								<button type="submit" class="btn btn-primary mt-2 disabled"
-									id="input-update" data-dismiss="modal">Save changes</button>
-							</form>
-						</div>
-					</div>
-					<!-- /.modal-project show -->
-				</div>
-			</div>
-			<!-- /.modal-edit items -->
-		</div>
+		
 		<div class="modal fade" id="modal-projectDelete">
 			<div class="modal-dialog">
 				<div class="modal-content bg-danger">

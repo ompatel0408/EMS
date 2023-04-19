@@ -9,10 +9,52 @@ document.getElementById('ProjectId1').addEventListener('change', () => {
 	document.getElementById('remark-id').disabled = false;
 	document.querySelector('#add-indent').classList.remove('disabled');
 });
+
 function Demo(tt) {
 	EditId = parseInt(tt.slice(4));
 	console.log(EditId)
 }
+
+var deleteValue = "";
+function deleteItem(deleteId) {
+	alert("asdfsadf")
+	deleteValue = deleteId;
+}
+document.getElementById("deleteClicked").addEventListener("click", () => {
+	data.splice(((deleteValue.substring(6)) - 1), 1);
+	document.getElementById("MyTable11").innerHTML = "";
+	var table = document.getElementById("MyTable11");
+	for (var i = 0; i < data.length; i++) {
+		var newRow = document.createElement("tr");
+		newRow.innerHTML = `
+		<td id="${i + 1}">${i + 1}</td>
+		<td><a id="projectApp${i + 1}"></a> <br></td>
+		<td><a id="categoryApp${i + 1}"></a> <br></td>
+		<td><a id="gradeApp${i + 1}"></a> <br></td>
+		<td><a id="sizeApp${i + 1}"></a> <br></td>
+		<td><a id="itemApp${i + 1}"></a> <br></td>
+		<td><a id="qtyApp${i + 1}"></a> <br></td>
+		<td><a id="remarkApp${i + 1}"></a> <br></td>
+		<td><a id="DelivaryDate${i + 1}"></a> <br></td>
+		 <td class="project-actions text-right">
+
+<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-projectDelete" id="Delete${i + 1}" onclick="deleteItem(this.id)">
+<i class="fas fa-trash"></i>
+</button>
+</td>`;
+		table.appendChild(newRow);
+		document.getElementById(`projectApp${i + 1}`).innerHTML = data[i].ProjectId;
+		document.getElementById(`categoryApp${i + 1}`).innerHTML = data[i].category;
+		document.getElementById(`gradeApp${i + 1}`).innerHTML = data[i].grade;
+		document.getElementById(`sizeApp${i + 1}`).innerHTML = data[i].size;
+		document.getElementById(`itemApp${i + 1}`).innerHTML = data[i].item;
+		document.getElementById(`qtyApp${i + 1}`).innerHTML = data[i].quantity;
+		document.getElementById(`remarkApp${i + 1}`).innerHTML = data[i].remark;
+	}
+	$('#modal-projectDelete').modal('hide');
+});
+
+/*
 function deleteItem() {
 	data.splice((EditId - 1), 1);
 	var parent = document.getElementById('MyTable11')
@@ -28,6 +70,7 @@ function deleteItem() {
 	}
 	console.log(data)
 }
+*/
 function updateField() {
 	var fieldToChange = document.getElementById('input-form').value;
 	var newValue = document.getElementById('placeholderChange').value;
@@ -219,7 +262,6 @@ function submitForm(event) {
 	var table = document.getElementById("MyTable11");
 	for (var i = 0; i < data.length; i++) {
 		var newRow = document.createElement("tr");
-		alert("iN")
 		newRow.innerHTML = `
 		<td id="${i + 1}">${i + 1}</td>
 		<td><a id="projectApp${i + 1}"></a> <br></td>
@@ -231,10 +273,8 @@ function submitForm(event) {
 		<td><a id="remarkApp${i + 1}"></a> <br></td>
 		<td><a id="DelivaryDate${i + 1}"></a> <br></td>
 		 <td class="project-actions text-right">
-<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-editItem" onclick="Demo(this.id)" id="Edit${i + 1}">
-<i class="fas fa-pencil-alt"></i>
-</button>
-<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-itemDelete" id="Delete${i + 1}">
+
+<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-projectDelete" id="Delete${i + 1}" onclick="deleteItem(this.id)">
 <i class="fas fa-trash"></i>
 </button>
 </td>`;
@@ -256,5 +296,9 @@ window.addEventListener("beforeunload", function (event) {
 
 
 
-
+/*
+<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-editItem" onclick="Demo(this.id)" id="Edit${i + 1}">
+<i class="fas fa-pencil-alt"></i>
+</button>
+ */
 

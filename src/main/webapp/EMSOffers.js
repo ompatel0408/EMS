@@ -22,6 +22,8 @@ function submitForm() {
 		remark: document.getElementById('Remarks').value,
 		quantity: document.getElementById('Quantity').value,
 		TotalPrice:0,
+		AddDate:document.getElementById('AddDate').value,
+		Address:document.getElementById('address').value
 	}
 	data.push(json);
 	console.log(json)
@@ -92,8 +94,7 @@ function appendFunc()
 }
 
 function XHRRequestForOffer(){
-	console.log("------------>")
-	console.log(data)
+	
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'http://localhost:8080/EMS/EMSOffersServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');

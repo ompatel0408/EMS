@@ -40,7 +40,7 @@
 							<div class="col-sm-3">
 								<div class="form-group">
 									<label>Email</label> <input type="email" class="form-control"
-										id="email" placeholder="Enter Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$" required="required">>
+										id="email" placeholder="Enter Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$" required="required">
 								</div>
 							</div>
 							<div class="col-sm-3">
@@ -55,7 +55,7 @@
 										class="form-control" placeholder="Enter Mob-Number" pattern="[0-9]{10}" required="required">
 								</div>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Phone Number(optional)</label> <input type="number" id="mobile1"
 										class="form-control" placeholder="Enter Mob-Number" pattern="[0-9]{10}">
@@ -65,6 +65,44 @@
 								<div class="form-group">
 									<label>Address</label> <input type="text" class="form-control"
 										id="address" placeholder="Enter Address">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>GST</label> <input type="text" class="form-control" 
+										id="gst" placeholder="Enter GST">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>PAN Number</label> <input type="text" class="form-control" 
+										id="pannumber" placeholder="Enter Pan Number">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Bank Name</label> <input type="text" class="form-control" 
+										id="bankName" placeholder="Enter Bank Name">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Account Number</label> <input type="text" class="form-control" 
+										id="acNumber" placeholder="Enter Account Number">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>IFSC Code</label> <input type="text" class="form-control" 
+										id="ifsc" placeholder="Enter IFSC Code">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="float-left">Remark</label>
+									<textarea class="form-control" rows="3"
+										placeholder="Enter Remark..." name="Remarks"
+										id="Remarks" style="height: 40px;" maxlength="5000"></textarea>
 								</div>
 							</div>
 						</div>
@@ -113,7 +151,11 @@
 								<th style="width: 15%">Vendor Name</th>
 								<th style="width: 10%">Email</th>
 								<th style="width: 10%">Address</th>
-								<th style="width: 12%">Mobile</th>
+								<th style="width: 10%">Mobile</th>
+								<th style="width: 10%">GST</th>
+								<th style="width: 10%">PAN</th>
+								<th style="width: 10%">Ac.No</th>
+								<th style="width: 10%">IFSC</th>
 							</tr>
 						</thead>
 						<tbody id="MyTable10"></tbody>
@@ -121,61 +163,7 @@
 				</div>
 				<!-- /.card-body -->
 			</div>
-			<div class="modal fade" id="modal-editItem">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title">Project Details</h4>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close" id="enableItemName">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="col-m-5">
-							<div class="form-group p-3">
-								<label>Select </label>
-								<p id="select-error"></p>
-								<form onsubmit="event.preventDefault();updateField()">
-									<select
-										class="form-control select2 select2-hidden-accessible my-3"
-										style="width: 100%;" data-select2-id="1" tabindex="-1"
-										aria-hidden="true" id="input-form" required="required">
-										<br>
-										<option selected="selected" data-select2-id="3">Select
-											option you want to update..</option>
-										<option value="category">Category</option>
-										<option value="grade">Grade</option>
-										<option value="size">Size</option>
-										<option value="ItemName">Item Name</option>
-										<option value="quantity">Quantity</option>
-										<option value="unit">Units</option>
-										<option value="waight">Weight</option>
-										<option value="delivaryDate">Delivery Date</option>
-									</select>
-
-									<div class="form-group" id="hide-text" style="display: none;">
-										<label for="placeholderChange" id="lableName" class="mt-2"></label>
-										<input type="text" class="form-control" id="placeholderChange"
-											placeholder="Enter" required="required">
-									</div>
-									<div class="form-group" id="hide-date" style="display: none;">
-										<label for="" id="lableName1">Delivery Date</label> <input
-											type="date" class="form-control" id="placeholderChange1"
-											placeholder="Enter Delivery Date" required="required">
-									</div>
-									<!-- text input -->
-									
-									<button type="submit" class="btn btn-primary mt-2 disabled"
-										id="input-update">Save changes</button>
-								</form>
-							</div>
-						</div>
-						<!-- /.modal-project show -->
-					</div>
-				</div>
-				<!-- /.modal-edit items -->
-			</div>
-			<div class="modal fade" id="modal-stockDelete">
+			<div class="modal fade" id="modal-projectDelete">
 				<div class="modal-dialog">
 					<div class="modal-content bg-danger">
 						<div class="modal-header">
@@ -192,7 +180,7 @@
 							<button type="button" class="btn btn-outline-light"
 								data-dismiss="modal">Close</button>
 							<button type="button" class="btn btn-outline-light"
-								id="deleteClicked">Delete Item</button>
+								id="deleteClicked">Delete Vendor</button>
 						</div>
 					</div>
 				</div>
