@@ -310,7 +310,7 @@ public class SendMail {
 	
 	
 	public static void main(String[] args) {
-//		SendMail.mailTokenEveryDay();
+		SendMail.mailTokenEveryDay();
 //		SendMail.sendMailForError();
 	}
 	

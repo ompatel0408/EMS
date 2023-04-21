@@ -34,7 +34,7 @@ public class Trial implements Job{
 			Trigger trigger = newTrigger()
 			    .withIdentity("myTrigger", "group1")
 			    .startAt(startDate)
-			    .withSchedule(simpleSchedule().withIntervalInMinutes(2).repeatForever())
+			    .withSchedule(simpleSchedule().withIntervalInHours(24).repeatForever())
 			    .build(); 
 
 			// Schedule the job with the trigger

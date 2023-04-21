@@ -47,7 +47,7 @@ public class UserDao {
 				PreparedStatement stmt = conn.prepareStatement("insert into user(name,email,phonenumber,departmentname,role) values (?,?,?,?,?)");
 				stmt.setString(1, ub.getUserName());
 				stmt.setString(2, ub.getEmail());
-				stmt.setFloat(3, ub.getPhNum());
+				stmt.setLong(3, ub.getPhNum());
 				stmt.setString(4, ub.getDepartmentName());
 				stmt.setInt(5, ub.getRole());
 				int data = stmt.executeUpdate();
