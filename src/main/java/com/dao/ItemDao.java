@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import com.bean.ClientBean;
 import com.bean.ItemBean;
+import com.bean.SubItemBean;
 import com.dbConnection.MySqlConnection;
 
 public class ItemDao {
@@ -25,31 +26,46 @@ public class ItemDao {
 	
 	public static boolean addItems(ArrayList<ItemBean> Aqb) {
 		
+		//String insertQuery = "INSERT INTO ITEMS(CLIENTID,ITEMCODE,ITEMNAME,Quantity,QuotationId,TagNo,DeliveryDate,Remarks) VALUES(?,?,?,?,?,?,?,?)";
+		
 		String insertQuery = "INSERT INTO ITEMS(CLIENTID,ITEMCODE,ITEMNAME,Quantity,QuotationId,TagNo,DeliveryDate,Remarks) VALUES(?,?,?,?,?,?,?,?)";
-		
+		 
 		Connection conn = MySqlConnection.getInstance();
-		
-		
+		 
+
 		try {
+			ArrayList<SubItemBean> asib=new ArrayList<SubItemBean>();
 			PreparedStatement stmt = conn.prepareStatement(insertQuery);
-			
+		 
 			for(ItemBean qb:Aqb) {
-				stmt.setInt(1, qb.getClientId());
-				stmt.setString(2, qb.getItemCode());
-				stmt.setString(3, qb.getItemName());
-				stmt.setInt(4, qb.getQuantity());
-				stmt.setInt(5, qb.getQuotationId());
-				stmt.setString(6, qb.getTagNo());			
-				stmt.setString(7, qb.getDate());
-				stmt.setString(8, qb.getRemarks());
-				stmt.addBatch();
+				 stmt.setInt(1, qb.getClientId());
+				 stmt.setString(2, qb.getItemCode());
+				 stmt.setString(3, qb.getItemName());
+				 stmt.setInt(4, qb.getQuantity());
+				 for(int i=1;i<=qb.getQuantity();i++)
+				 {
+					 SubItemBean sib=new SubItemBean();
+					 sib.setItemcode(qb.getItemCode());
+					 sib.setSubitemcode((qb.getTagNo()+i));
+					 asib.add(sib);
+				 }
+				 stmt.setInt(5, qb.getQuotationId());
+				 stmt.setString(6, qb.getTagNo()); 
+				 stmt.setString(7, qb.getDate());
+				 stmt.setString(8, qb.getRemarks());
+				 stmt.addBatch();
 			}
 			int[] result = stmt.executeBatch();
-			return true;
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
+			for(int i=0;i<asib.size();i++)
+			{
+				System.out.println(asib.get(i));
+			}
+				insertToSubItems(asib);
+				return true;
+		 }catch(SQLException e) {
+			 e.printStackTrace();
+		 }
+		 
 		return false;
 	}
 	public static ItemBean getItemId() {
@@ -333,6 +349,31 @@ public class ItemDao {
 		}
 		return null;
 	}
+		 
+	private static boolean insertToSubItems(ArrayList<SubItemBean> Aqb) {
+		
+		String insertQuery = "INSERT INTO subITEMS(itemcode,subitemcode) VALUES(?,?)";
+		 
+		Connection conn = MySqlConnection.getInstance();
+		 
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(insertQuery);
+		 
+			for (SubItemBean qb : Aqb) {
+				 stmt.setString(1, qb.getItemcode());
+				 stmt.setString(2, qb.getSubitemcode());
+				 stmt.addBatch();
+			}
+		
+				int[] result = stmt.executeBatch();
+				return true;
+		 }
+		 catch(SQLException e) {
+			 e.printStackTrace();
+		 }
+		 	return false;
+	}	
 	
 }
 

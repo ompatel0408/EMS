@@ -1,4 +1,3 @@
-
 var data = [];
 var search = [];
 var percent;
@@ -365,4 +364,3 @@ window.addEventListener("beforeunload", function (event) {
   document.cookie = "myCookie2=".concat(JSON.stringify(data));
   event.returnValue = "Are you sure you want to leave this page?"
 });
-

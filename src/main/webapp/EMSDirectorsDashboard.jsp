@@ -122,12 +122,12 @@ button {
 								<div class="inner">
 									<h3>65</h3>
 
-									<p>Unique Visitors</p>
+									<p>Projects in Loss</p>
 								</div>
 								<div class="icon">
 									<i class="ion ion-pie-graph"></i>
 								</div>
-								<a href="#" class="small-box-footer">More info <i
+								<a href="ProjectInLossServlet" class="small-box-footer">More info <i
 									class="fas fa-arrow-circle-right"></i></a>
 							</div>
 						</div>

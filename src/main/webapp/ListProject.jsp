@@ -1,12 +1,9 @@
 <%@page import="com.bean.ProjectBean"%>
 <%@page import="java.util.ArrayList"%>
-
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Date"%>
-
-<!DOCTYPE html>
+<!DOCTYPEhtml>
 <html lang="en">
-
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +15,6 @@
 	href="assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet"
 	href="assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
 </head>
 <%
 ArrayList<ProjectBean> projects = (ArrayList<ProjectBean>) request.getAttribute("projects");
@@ -29,13 +25,9 @@ int srNo = 1;
 %>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
-
 		<!-- Preloader -->
-
 		<jsp:include page="Header.jsp"></jsp:include>
 		<jsp:include page="LeftSideBar.jsp"></jsp:include>
-
-
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<section class="content">
@@ -43,7 +35,6 @@ int srNo = 1;
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
-
 								<div class="card-header">
 									<h3 class="card-title mt-2">
 										<b>Projects</b>
@@ -67,12 +58,10 @@ int srNo = 1;
 														</tr>
 													</thead>
 													<tbody>
-
 														<%
 														for (ProjectBean p : projects) {
 														%>
 														<tr>
-
 															<td><%=srNo++%></td>
 															<td><%=p.getClientName()%></td>
 															<td><%=p.getProjectId()%></td>
@@ -80,8 +69,10 @@ int srNo = 1;
 																<div class="progress progress-sm">
 																	<div class="progress-bar bg-green" role="progressbar"
 																		aria-valuenow="77" aria-valuemin="0"
-																		aria-valuemax="100" style="width: 0%"></div>
-																</div> <small> 0% Complete </small>
+																		aria-valuemax="100"
+																		style="width: <%=p.getProgress()%>%"></div>
+																</div>
+																<small><%=p.getProgress()%>% Complete </small>
 															</td>
 															<td class="project-actions text-right">
 																<button type="button" class="btn btn-info btn-sm"
@@ -98,7 +89,6 @@ int srNo = 1;
 																					data-dismiss="modal" aria-label="Close">
 																					<span aria-hidden="true">&times;</span>
 																				</button>
-
 																				<input type="hidden" name="update" value="notupdate">
 																			</div>
 																			<%
@@ -112,7 +102,6 @@ int srNo = 1;
 																					<label for="exampleInputEmail1">PO Date</label>
 																					<p><%=p.getPoDate()%></p>
 																				</div>
-
 																				<div class="form-group">
 																					<div class="form-group">
 																						<label for="exampleInputEmail1">Advance
@@ -130,7 +119,6 @@ int srNo = 1;
 																				<%
 																				}
 																				%>
-
 																			</div>
 																			<%}%>
 																		</div>
@@ -140,7 +128,7 @@ int srNo = 1;
 																<button type="button" class="btn btn-success btn-sm"
 																	data-toggle="modal"
 																	data-target="#modal-projectEdit<%=p.getProjectId()%>">
-																	<i class="fas fa-pencil-alt"></i> Edit
+																	<i class="fas fa-pencil-alt"></i>Edit
 																</button>
 																<div class="modal fade"
 																	id="modal-projectEdit<%=p.getProjectId()%>">
@@ -153,14 +141,11 @@ int srNo = 1;
 																					<span aria-hidden="true">&times;</span>
 																				</button>
 																			</div>
-
 																			<div class="col-m-5">
 																				<div class="form-group p-3">
-
 																					<label>Select </label>
 																					<p id="select-error<%=p.getProjectId()%>"></p>
 																					<form action="ProjectServlet">
-
 																						<select
 																							class="form-control select2 select2-hidden-accessible"
 																							name="changeField" style="width: 100%;"
@@ -185,9 +170,8 @@ int srNo = 1;
 																								id="placeholderChange<%=p.getProjectId()%>">
 																						</div>
 																						<input type="hidden" name="projectId"
-																							value="<%=p.getProjectId()%>"> <input
+																							value="<%=p.getProjectId()%>"><input
 																							type="hidden" name="update" value="update">
-
 																						<button type="submit"
 																							class="btn btn-primary mt-2 disabled"
 																							id="input-update<%=p.getProjectId()%>">Save
@@ -195,16 +179,14 @@ int srNo = 1;
 																					</form>
 																				</div>
 																			</div>
-
 																			<!-- /.modal-project show -->
 																		</div>
 																	</div>
 																</div>
-
 																<button type="button" class="btn btn-danger btn-sm"
 																	data-toggle="modal"
 																	data-target="#modal-projectDelete<%=p.getProjectId()%>">
-																	<i class="fas fa-trash"></i> Delete
+																	<i class="fas fa-trash"></i>Delete
 																</button>
 																<div class="modal fade"
 																	id="modal-projectDelete<%=p.getProjectId()%>">
@@ -225,7 +207,7 @@ int srNo = 1;
 																					data-dismiss="modal">Close</button>
 																				<form action="ProjectServlet" method="get">
 																					<input type="hidden" name="projectId"
-																						value=<%=p.getProjectId()%>> <input
+																						value=<%=p.getProjectId()%>><input
 																						type="hidden" name="update" value="notupdate">
 																					<input type="hidden" name="view" value="notview">
 																					<button type="submit" class="btn btn-outline-light">Delete
@@ -236,17 +218,11 @@ int srNo = 1;
 																	</div>
 																</div>
 															</td>
-
-
 															<!-- Project Edit model -->
-
-
-
 														</tr>
 														<%
 														}
 														%>
-														</tr>
 													</tbody>
 												</table>
 												<!-- <table>-->
@@ -271,7 +247,6 @@ int srNo = 1;
 		</div>
 		<!-- content-wrapper -->
 	</div>
-
 	<div class="modal fade" id="modal-addProject">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -283,35 +258,31 @@ int srNo = 1;
 					</button>
 				</div>
 				<form action="ProjectServlet" method="POST">
-
 					<div class="modal-body">
 						<div class="form-group">
-							<label for="exampleInputPassword1">Quotation Id</label> <input
+							<label for="exampleInputPassword1">Quotation Id</label><input
 								type="text" class="form-control" name="clientPoId"
 								id="exampleInputPassword" required
 								placeholder="Enter Quotation Id" value="" readonly />
 						</div>
-
 						<div class="form-group">
-							<label for="exampleInputPassword1">Advance Pay Percent</label> <input
-								type="number" class="form-control" name="advancePayPercent" onkeyup="Calculate()"
-								required id="exampleInputPassword1"
+							<label for="exampleInputPassword1">Advance Pay Percent</label><input
+								type="number" class="form-control" name="advancePayPercent"
+								onkeyup="Calculate()" required id="exampleInputPassword1"
 								placeholder="Advance Pay Percent" />
 						</div>
 						<div class="form-group">
-							<label for="exampleInputPassword1">After Pay Percent</label> <input
+							<label for="exampleInputPassword1">After Pay Percent</label><input
 								type="number" class="form-control" required readonly
 								name="afterPayPercent" id="exampleInputPassword2"
 								placeholder="After Pay Percent" />
 						</div>
-
 						<div class="form-group">
-							<label for="exampleInputPassword3">Client Id</label> <input
+							<label for="exampleInputPassword3">Client Id</label><input
 								type="number" class="form-control" required name="clientId"
 								id="exampleInputPassword3" placeholder="Enter Client Id"
 								value="" readonly />
 						</div>
-
 					</div>
 					<div class="modal-footer justify-content-between">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -323,51 +294,47 @@ int srNo = 1;
 		</div>
 		<!-- /.modal-add project -->
 	</div>
-	</section>
 	<footer class="main-footer">
-		<strong>Copyright &copy; 2023 <a href="#">EMS Project
+		<strong>Copyright &copy;2023 <a href="#">EMS Project
 				Private Limited</a>.
-		</strong> All rights reserved.
+		</strong>All rights reserved.
 	</footer>
-
 	<!-- Control Sidebar -->
 	<aside class="control-sidebar control-sidebar-dark">
 		<!-- Control sidebar content goes here -->
 	</aside>
 	<!-- /.control-sidebar -->
-	</div>
 	<script>
-		const dropDown=(projectId)=>{
+ const dropDown=(projectId)=>{
+ console.log(projectId)
+ let value = document.getElementById("input-form"+projectId).value;
+ console.log(value);
+ 
+if (value == "Select option you want to update..") {
+ document.getElementById("input-form"+projectId).style.borderColor = "red";
+ document.getElementById("select-error"+projectId).innerText = "Please, Select any one optoins.";
+ document.getElementById("select-error"+projectId).style.color = "red";
+ document.getElementById("hide-text"+projectId).style.display = "none";
+ document.querySelector("#input-update"+projectId).classList.add("disabled");
+ }
+ else {
+ document.querySelector("#input-update"+projectId).classList.remove("disabled");
+ document.getElementById("hide-text"+projectId).style.display = "block";
+ document.getElementById("lableName"+projectId).innerHTML = document.getElementById("input-form"+projectId).value;
+ document.getElementById("placeholderChange"+projectId).setAttribute("placeholder", "Enter " + value);
+ document.getElementById("input-form"+projectId).style.borderColor = "blue";
+ document.getElementById("select-error"+projectId).innerText = "";
+ document.getElementById("select-error"+projectId).style.color = "red";
+ }
+ 
+}
+ 
+function Calculate(){
+ document.getElementById('exampleInputPassword2').value = (100 - (parseInt(document.getElementById('exampleInputPassword1').value)));
+ }
+ 
 
-			console.log(projectId)
-            let value = document.getElementById("input-form"+projectId).value;
-            console.log(value);
-            
-            if (value == "Select option you want to update..") {
-                document.getElementById("input-form"+projectId).style.borderColor = "red";
-                document.getElementById("select-error"+projectId).innerText = "Please, Select any one optoins.";
-                document.getElementById("select-error"+projectId).style.color = "red";
-                document.getElementById("hide-text"+projectId).style.display = "none";
-                document.querySelector("#input-update"+projectId).classList.add("disabled");
-            }
-            else {
-                document.querySelector("#input-update"+projectId).classList.remove("disabled");
-                document.getElementById("hide-text"+projectId).style.display = "block";
-                document.getElementById("lableName"+projectId).innerHTML = document.getElementById("input-form"+projectId).value;
-                document.getElementById("placeholderChange"+projectId).setAttribute("placeholder", "Enter " + value);
-                document.getElementById("input-form"+projectId).style.borderColor = "blue";
-                document.getElementById("select-error"+projectId).innerText = "";
-                document.getElementById("select-error"+projectId).style.color = "red";
-            }
-        
-		}
-		
-		function Calculate(){
-			document.getElementById('exampleInputPassword2').value = (100 - (parseInt(document.getElementById('exampleInputPassword1').value)));
-		}
-		
-		
-    </script>
+</script>
 	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 	<script src="assets/plugins/jquery/jquery.min.js"></script>
 	<script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -379,18 +346,18 @@ int srNo = 1;
 	<script src="assets/plugins/moment/moment.min.js"></script>
 	<script src="./custom/custom.js"></script>
 	<script type="text/javascript">
-		window.onload = function(){
-			if(localStorage.getItem("Token") == "true"){
-				$('#modal-addProject').modal('show');
-				localStorage.setItem("Token",'false')
-				
-				document.getElementsByName('clientPoId')[0].value = localStorage.getItem("QuotationId")
-				document.getElementsByName('clientId')[0].value = localStorage.getItem("clientId");
-			}else{
-				document.getElementById('AddProjectBTN').disabled = true;
-			}
-		}
-	</script>
+ window.onload = function(){
+ if(localStorage.getItem("Token") == "true"){
+ $('#modal-addProject').modal('show');
+ localStorage.setItem("Token",'false')
+ 
+document.getElementsByName('clientPoId')[0].value = localStorage.getItem("QuotationId")
+ document.getElementsByName('clientId')[0].value = localStorage.getItem("clientId");
+ }else{
+ document.getElementById('AddProjectBTN').disabled = true;
+ }
+ }
+ </script>
 	<script src="assets/dist/js/models.js"></script>
 	<script src="assets/plugins/jquery/jquery.min.js"></script>
 	<script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -412,7 +379,7 @@ int srNo = 1;
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="assets/dist/js/demo.js"></script>
-	<!-- DataTables  & Plugins -->
+	<!-- DataTables & Plugins -->
 	<script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script
 		src="assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -432,19 +399,17 @@ int srNo = 1;
 	<script
 		src="assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 	<script>
-                $(document).ready(function () {
-                  $("#example1").DataTable({
-                    "responsive": true, "lengthChange": false, "autoWidth": false,
-                    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-                  }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                })
-              </script>
+ $(document).ready(function () {
+ $("#example1").DataTable({
+ "responsive": true, "lengthChange": false, "autoWidth": false,
+ "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+ }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+ })
+ </script>
 	<script>
-                function changeStatus(userId, currentStatus) {
-                  location.href = "ChangeStudentStatus?userId=" + userId + "&currentStatus=" + currentStatus;
-                }
-              </script>
-
+ function changeStatus(userId, currentStatus) {
+ location.href = "ChangeStudentStatus?userId=" + userId + "&currentStatus=" + currentStatus;
+ }
+ </script>
 </body>
-
 </html>

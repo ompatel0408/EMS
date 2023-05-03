@@ -332,5 +332,115 @@
 		<servlet-name>EMSSendMailWithAttechedFileServlet</servlet-name>
 		<url-pattern>/EMSSendMailWithAttechedFileServlet</url-pattern>
 	</servlet-mapping>
-
+	<servlet>
+		<servlet-name>EMSGRNApprovalPending</servlet-name>
+		<servlet-class>com.controller.EMSGRNApprovalPending</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EMSGRNApprovalPending</servlet-name>
+		<url-pattern>/EMSGRNApprovalPending</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSGetpassinwordServlet</servlet-name>
+		<servlet-class>com.controller.EMSGetpassinwordServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EMSGetpassinwordServlet</servlet-name>
+		<url-pattern>/EMSGetpassinwordServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSGetpassOutwordServlet</servlet-name>
+		<servlet-class>com.controller.EMSGetpassOutwordServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EMSGetpassOutwordServlet</servlet-name>
+		<url-pattern>/EMSGetpassOutwordServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSGetpassListServlet</servlet-name>
+		<servlet-class>com.controller.EMSGetpassListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EMSGetpassListServlet</servlet-name>
+		<url-pattern>/EMSGetpassListServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSAddMachineServlet</servlet-name>
+		<servlet-class>com.controller.EMSAddMachineServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EMSAddMachineServlet</servlet-name>
+		<url-pattern>/EMSAddMachineServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSAddMachineListServlet</servlet-name>
+		<servlet-class>com.controller.EMSAddMachineListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EMSAddMachineListServlet</servlet-name>
+		<url-pattern>/EMSAddMachineListServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSAddMachineInMntServlet</servlet-name>
+		<servlet-class>com.controller.EMSAddMachineInMntServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EMSAddMachineInMntServlet</servlet-name>
+		<url-pattern>/EMSAddMachineInMntServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EMSPerMachineMntServlet</servlet-name>
+		<servlet-class>com.controller.EMSPerMachineMntServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSPerMachineMntServlet</servlet-name>
+		<url-pattern>/EMSPerMachineMntServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>EMSReceiveMachineFromMnt</servlet-name>
+		<servlet-class>com.controller.EMSReceiveMachineFromMntServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSReceiveMachineFromMnt</servlet-name>
+		<url-pattern>/EMSReceiveMachineFromMnt</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>DownloadServlet</servlet-name>
+		<servlet-class>com.controller.DownloadServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DownloadServlet</servlet-name>
+		<url-pattern>/DownloadServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ProductionPhaseServlet</servlet-name>
+		<servlet-class>com.controller.ProductionPhaseServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ProductionPhaseServlet</servlet-name>
+		<url-pattern>/ProductionPhaseServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ProjectInLossServlet</servlet-name>
+		<servlet-class>com.controller.ProjectInLossServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ProjectInLossServlet</servlet-name>
+		<url-pattern>/ProjectInLossServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>DailyProgressReportServlet</servlet-name>
+		<servlet-class>com.controller.DailyProgressReportServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DailyProgressReportServlet</servlet-name>
+		<url-pattern>/DailyProgressReportServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

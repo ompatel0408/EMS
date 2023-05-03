@@ -54,7 +54,6 @@ int srNo = 1;
 															<th style="width: 2%">Sr.No</th>
 															<th style="width: 17%">Client Name</th>
 															<th style="width: 17%">Project Id</th>
-															<th>Project Progress</th>
 															<th style="width: 20%"></th>
 														</tr>
 													</thead>
@@ -66,13 +65,6 @@ int srNo = 1;
 															<td><%=srNo++%></td>
 															<td><%=p.getClientName()%></td>
 															<td><%=p.getProjectId()%></td>
-															<td class="project_progress">
-																<div class="progress progress-sm">
-																	<div class="progress-bar bg-green" role="progressbar"
-																		aria-valuenow="77" aria-valuemin="0"
-																		aria-valuemax="100" style="width: 77%"></div>
-																</div> <small> 77% Complete </small>
-															</td>
 															<td><a
 																href="ListIndentServlet?token=2&projectid=<%=p.getProjectId()%>&itemcode=0"><button
 																		class="btn btn-primary">Show All Items</button></a></td>

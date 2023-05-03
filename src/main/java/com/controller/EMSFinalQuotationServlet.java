@@ -16,7 +16,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.service.ExceptionHandler;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

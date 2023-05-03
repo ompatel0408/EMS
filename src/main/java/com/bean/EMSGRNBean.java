@@ -8,10 +8,26 @@ public class EMSGRNBean {
 	private String path2;
 	private int GRNID;
 	private  String invoiceNumber;
+	private String projectId;
+	private String itemCode;
+	private String categoryName;
+	private String gradeName;
+	private String size;
+	private int quantity;
+	private String units;
 	
-	
-	
+
 	public EMSGRNBean() {}
+	
+	public EMSGRNBean(String projectId, String itemCode, String categoryName, String gradeName, String size,int quantity, String units) {
+		this.projectId = projectId;
+		this.itemCode = itemCode;
+		this.categoryName = categoryName;
+		this.gradeName = gradeName;
+		this.size = size;
+		this.quantity = quantity;
+		this.units = units;
+	}
 	
 	public EMSGRNBean(String vendorName, String receiveDate) {
 		this.VendorName = vendorName;
@@ -33,6 +49,64 @@ public class EMSGRNBean {
 		this.path2 = path2;
 		this.invoiceNumber = invoiceNumber;
 	}	
+	
+	public String getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
+
+	public String getItemCode() {
+		return itemCode;
+	}
+
+	public void setItemCode(String itemCode) {
+		this.itemCode = itemCode;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public String getGradeName() {
+		return gradeName;
+	}
+
+	public void setGradeName(String gradeName) {
+		this.gradeName = gradeName;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getUnits() {
+		return units;
+	}
+
+	public void setUnits(String units) {
+		this.units = units;
+	}
+
+	
 	
 	public String getInvoiceNumber() {
 		return invoiceNumber;

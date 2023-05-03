@@ -26,9 +26,9 @@ import jakarta.servlet.http.HttpSession;
 
 @MultipartConfig(
 		 fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
-		  maxFileSize = 1024 * 1024 * 10,      // 10 MB
-		  maxRequestSize = 1024 * 1024 * 100   // 100 MB
-		)
+		 maxFileSize = 1024 * 1024 * 10,      // 10 MB
+		 maxRequestSize = 1024 * 1024 * 100   // 100 MB
+	)
 public class EMSDrawingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static EMSDrawingServlet instance = null;
@@ -48,7 +48,7 @@ public class EMSDrawingServlet extends HttpServlet {
 		// TODO Auto-generated method stub
     
 		try {
-			
+			System.out.println("inPOst");
 	    	Gson gson = new Gson();
 	    	String json = gson.toJson(ItemDao.getInstance().getProjects());
 	    	response.setContentType("application/json");
@@ -68,7 +68,7 @@ public class EMSDrawingServlet extends HttpServlet {
 		try{
 
 			
-			EMSDrawingBean EGB =  EMSDrawingServices.uploadPic(request);
+			EMSDrawingBean EGB =  EMSDrawingServices.uploadPic(request,request.getParameter("offerId"),request.getParameter("projectId"),request.getParameter("SubItem"));
 			if(EGB != null) {
 				HttpSession session = request.getSession();
 				
@@ -109,10 +109,23 @@ public class EMSDrawingServlet extends HttpServlet {
     	   
     	    Gson gson = new Gson();
     	    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
-        	String json = gson.toJson(EMSDrawingDao.getInstance().getOfferNameFromDatabase(jsonObject.get("ProjectId").getAsString()));
-        	response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
+    	    if(jsonObject.get("token").getAsString().equals("offer"))
+    	    {    	    	
+    	    	String json = gson.toJson(EMSDrawingDao.getInstance().getOfferNameFromDatabase(jsonObject.get("ProjectId").getAsString()));
+    	    	response.setContentType("application/json");
+    	    	response.setCharacterEncoding("UTF-8");
+    	    	response.getWriter().write(json);
+    	    }
+    	    else if(jsonObject.get("token").getAsString().equals("subItem"))
+    	    {
+    	    	System.out.println("456");
+    	    	String json = gson.toJson(EMSDrawingDao.getInstance().getsubItemFromDatabase(jsonObject.get("itemcode").getAsString()));
+    	    	System.out.println(json);
+    	    	response.setContentType("application/json");
+    	    	response.setCharacterEncoding("UTF-8");
+    	    	response.getWriter().write(json);
+    	    	
+    	    }
     	}catch(Exception e) {
     		ExceptionHandler.handleException(request, response, e);
     	}

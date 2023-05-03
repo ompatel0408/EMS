@@ -11,19 +11,6 @@ function getNotification() {
 	xhr.send(JSON.stringify({ Token: "Notify" }));
 }
 
-function deleteNotification(vendorName){
-	console.log("vendor Name :"+vendorName)
-	var data1;
-	var xhr = new XMLHttpRequest();
-	xhr.open('DELETE', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet', true);
-	xhr.onload = function() {
-		if (xhr.status === 200) {
-			data1 = JSON.parse(xhr.responseText);
-			window.location.href = "EMSDirectorsDashboard.jsp";
-		}
-	}
-	xhr.send(JSON.stringify({name:vendorName,Token1:"Hello"}));
-}
 
 function getNotificationForPayment(){
 	var data1;
@@ -56,10 +43,9 @@ function appendNotifications(data) {
 	}
 }
 
-
-
 function appendNotifications1(data) {
 	
+	console.log(data)
 	document.getElementById("Notification1").innerHTML = "";
 	var table = document.getElementById("Notification1");
 	table.innerHTML = `<span class='dropdown-item dropdown-header'>${data.length} Notifications</span>`;
@@ -77,10 +63,9 @@ function appendNotifications1(data) {
 	}
 }
 
-
-function deleteNotification1(projectId){
-	console.log("Project Id :"+projectId)
-	var data1;
+function deleteNotification(vendorName){
+	console.log("vendor Name :"+vendorName)
+	let data1;
 	var xhr = new XMLHttpRequest();
 	xhr.open('DELETE', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet', true);
 	xhr.onload = function() {
@@ -89,6 +74,22 @@ function deleteNotification1(projectId){
 			window.location.href = "EMSDirectorsDashboard.jsp";
 		}
 	}
-	xhr.send(JSON.stringify({name:projectId,Token:"Hello"}));
+	xhr.send(JSON.stringify({name:vendorName,Token:"Hello"}));
+}
+
+
+function deleteNotification1(projectId){
+	console.log("Project Id :"+projectId)
+	var data2;
+	var xhr = new XMLHttpRequest();
+	xhr.open('DELETE', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet', true);
+	xhr.onload = function() {
+		if (xhr.status === 200) {
+			data2 = JSON.parse(xhr.responseText);
+			console.log(data2)
+			window.location.href = "EMSDirectorsDashboard.jsp";
+		}
+	}
+	xhr.send(JSON.stringify({name:projectId,Token:"Hello1"}));
 }
 

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import com.bean.EMSDrawingBean;
 import com.bean.EMSGRNBean;
+import com.bean.SubItemBean;
 import com.dbConnection.MySqlConnection;
 
 public class EMSDrawingDao {
@@ -155,12 +156,12 @@ public class EMSDrawingDao {
 		return false;
 	}
 	
-	public ArrayList<EMSDrawingBean> getAllData(){
+	public ArrayList<SubItemBean> getAllData(){
 		
-		String selectQuery = "SELECT D.*,P.projectId,O.offerCode FROM drawing D JOIN Prepurchase P on D.DrawingId = P.DrawingId JOIN OFFER O ON P.DrawingId = O.DrawingId";
+		String selectQuery = "select projectid,itemcode,subitemcode from clients join projects using(clientid) join items using(clientid) join subitems using(itemcode)";
 		Connection conn =MySqlConnection.getInstance();
-		ArrayList<EMSDrawingBean> a = new ArrayList<EMSDrawingBean>();
-		EMSDrawingBean EGB = null;
+		ArrayList<SubItemBean> a = new ArrayList<SubItemBean>();
+		SubItemBean EGB = null;
 		if(conn != null) {
 			
 			try {
@@ -169,7 +170,7 @@ public class EMSDrawingDao {
 				ResultSet rs = stmt.executeQuery(selectQuery);
 				
 				while(rs.next()) {
-					EGB = new EMSDrawingBean(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+					EGB = new SubItemBean(rs.getString(1), rs.getString(2), rs.getString(3));
 					a.add(EGB);
 				}
 				return a;
@@ -183,6 +184,60 @@ public class EMSDrawingDao {
 			System.out.println("Connection is not establised!");
 		}
 		return null;
+	}
+	
+	public ArrayList<SubItemBean> getsubItemFromDatabase(String asString) {
+		String selectQuery = " select subitemcode from subitems where itemcode=?";
+		Connection conn = MySqlConnection.getInstance();
+		ArrayList<SubItemBean> arr = new ArrayList<SubItemBean>();
+		if(conn != null) {
+			
+			try {
+				
+				PreparedStatement stmt = conn.prepareStatement(selectQuery);
+				stmt.setString(1,asString);
+				ResultSet rs=stmt.executeQuery();
+				
+				while(rs.next()) {
+					SubItemBean sib=new SubItemBean();
+					sib.setSubitemcode(rs.getString(1));
+					arr.add(sib);
+				}
+				return arr;
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		
+		return null;
+	}
+	public void addToDrawingHistory(String project, String offer, String subItem, String clientDrawing, String emsDrawing) {
+		String insertQuery = "INSERT INTO Drawinghistory(projectid,itemcode,subitemcode,clientdrawing,emsdrawing) Values(?,?,?,?,?)";
+		Connection conn = MySqlConnection.getInstance();
+		
+		if(conn != null) {
+			
+			try {
+				
+				PreparedStatement stmt = conn.prepareStatement(insertQuery);
+				stmt.setString(1,project);
+				stmt.setString(2, offer);
+				stmt.setString(3, subItem);
+				stmt.setString(4, clientDrawing);
+				stmt.setString(5, emsDrawing);
+				stmt.executeUpdate();
+			}catch(SQLException e) {
+//				ErrorHandler.class();
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		
+		
 	}
 	
 	

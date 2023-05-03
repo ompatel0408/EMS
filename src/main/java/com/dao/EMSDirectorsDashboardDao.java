@@ -140,7 +140,8 @@ public ArrayList<QuotationBean> getAllNotificationsForPayment() {
 				ResultSet rs = stmt.executeQuery(selectQuery);
 				
 				while(rs.next()) {
-					arr.add(new QuotationBean(rs.getString(1),Double.parseDouble(rs.getString(2)),Double.parseDouble(rs.getString(3))));
+					System.out.println(rs.getString(1));
+					arr.add(new QuotationBean(rs.getString(1),Double.parseDouble(rs.getString(2)),Double.parseDouble(rs.getString(4))));
 				}
 				return arr;
 			}catch(SQLException e) {

@@ -38,9 +38,14 @@
 							</div>
 							<div class="form-group">
 								<label for="item-id">Project</label> <select id="projectId"
-									class="form-control" required>
+									class="form-control" required onchange="getPrice()">
 								</select>
 							</div>
+							<div class="form-group">
+								<label for="item-id">Transportation Price</label>
+								<input type="text" id="transportId" name="transport">
+							</div>
+							
 							<div
 								class="d-flex justify-content-center align-items-center mt-auto ">
 								<button type="button" class="btn btn-primary w-50" id="print"
@@ -76,9 +81,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- <select id="vendorList">
-		<option value="Select Vendor">Select Vendor</option>
-	</select> -->
 </body>
 <script type="text/javascript" src="VendorProjectListPO.js"></script>
 <script src="assets/dist/js/models.js"></script>

@@ -294,7 +294,6 @@ function submitForm() {
 	console.log(js1)
 	js1[0].TotalAmount = document.getElementById('Totalamount-id').value;
 	js1[0].vendorName = document.getElementById('vendor-id').value;
-	//appendFunc()
 	
 	var json =
 	{

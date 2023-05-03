@@ -187,12 +187,12 @@ public class EMSVendorsDao {
 					vendors.add(vendor);
 				}
 				return vendors;
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			return null;
 		}
+		
 		
 		public String getVendorMailFromDatabase(String vendorName) {
 			
@@ -222,5 +222,67 @@ public class EMSVendorsDao {
 			return null;
 		}
 		
+		public int getVendorIdfromDba(String name)
+		{
+			Connection conn = MySqlConnection.getInstance();
+			String query = "select vendorId from vendors where vendorname = ?";
+			
+			try {
+				PreparedStatement stmt = conn.prepareStatement(query);
+				stmt.setString(1, name);
+				ResultSet rs = stmt.executeQuery();
+				
+				if(rs.next())
+				{
+					return rs.getInt(1);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return -1;
+		}
+		
+		public String getVendorNamefromDba(int id)
+		{
+			Connection conn = MySqlConnection.getInstance();
+			String query = "select vendorName from vendors where vendorId = ?";
+			
+			try {
+				PreparedStatement stmt = conn.prepareStatement(query);
+				stmt.setInt(1, id);
+				ResultSet rs = stmt.executeQuery();
+				
+				if(rs.next())
+				{
+					return rs.getString(1);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+		public Boolean updatePrice(String projectId, String vendor, String price) {
+			try {
+				System.out.println("GetId");
+				Connection con = MySqlConnection.getInstance();
+				PreparedStatement pstmt = con.prepareStatement("update postpurchase join indent using(indentid) set TranspotationPrice = "+Double.parseDouble(price)+" where projectId = ? and vendorname=?");
+				System.out.println(pstmt.getResultSet());
+				System.out.println(price);
+				System.out.println(projectId);
+				System.out.println(vendor);
+				pstmt.setString(1, projectId);
+				pstmt.setString(2, vendor);
+				pstmt.executeUpdate();
+				return true;
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			return false;			
+		}
 		
 	}

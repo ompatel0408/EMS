@@ -69,6 +69,15 @@ public class ProjectBean {
 	String projectId, clientPoId, poDate, finalDeliveryDate, clientName; // Client Name belongs to Client table in
 																			// database
 	Integer advancePayPercent, afterPayPercent, clientId;
+	Float progress;
+
+	public Float getProgress() {
+		return progress;
+	}
+
+	public void setProgress(Float progress) {
+		this.progress = progress;
+	}
 
 	public String getProjectId() {
 		return projectId;

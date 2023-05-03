@@ -55,6 +55,26 @@ var projectsSelect = document.getElementById("projectId");
 	}
 }
 
+
+function getPrice()
+{
+	console.log("Yeah")
+	let Data;
+	var xhr = new XMLHttpRequest();
+	xhr.open('PUT', 'http://localhost:8080/EMS/PrintPo',true);
+	xhr.setRequestHeader('Content-type', 'application/json');
+	xhr.onload = function() {
+  		if (xhr.status === 200) {
+    		Data = JSON.parse(xhr.responseText);
+    		console.log(Data)
+    		document.getElementById('transportId').value=Data
+  		}
+	}
+	xhr.send(JSON.stringify({Token:"transportPrice",project:document.getElementById('projectId').value,vendor:document.getElementById('vendorList').value}));	
+}
+
+
+
 function setVendorValue(){
 	document.getElementById('vendorName').value = document.getElementById('vendorList').value;
 }
@@ -63,5 +83,6 @@ function setVendorValue(){
 document.getElementById('print').addEventListener('click',()=>{
 	var vendorSelect = document.getElementById("vendorList").value;
 	var projectsSelect = document.getElementById("projectId").value;
-	window.location.href='PrintPo?vendor='+vendorSelect+'&project='+projectsSelect
+	var transport = document.getElementById("transportId").value;
+	window.location.href='PrintPo?vendor='+vendorSelect+'&project='+projectsSelect+'&transport='+transport
 })

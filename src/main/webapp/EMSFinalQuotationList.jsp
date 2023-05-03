@@ -2,19 +2,15 @@
 <%@page import="com.bean.ItemBean"%>
 <%@page import="jakarta.mail.FetchProfile.Item"%>
 <%@page import="java.util.ArrayList"%>
-
-
-<!DOCTYPE html>
+<!DOCTYPEhtml>
 <html lang="en">
-
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EMS</title>
+<title>Quotations</title>
 <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EMS</title>
 <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
 <!-- DataTables -->
 <link rel="stylesheet"
@@ -23,21 +19,18 @@
 	href="assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet"
 	href="assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
 </head>
 <%
 ArrayList<EMSFinalQuotationBean> quotations = (ArrayList<EMSFinalQuotationBean>) request.getAttribute("quotations");
+ArrayList<EMSFinalQuotationBean> historyQuotations = (ArrayList<EMSFinalQuotationBean>) request
+		.getAttribute("historyQuotations");
 int srNo = 1;
 %>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
-
 		<!-- Preloader -->
-
 		<jsp:include page="Header.jsp"></jsp:include>
 		<jsp:include page="LeftSideBar.jsp"></jsp:include>
-
-
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<section class="content">
@@ -58,7 +51,6 @@ int srNo = 1;
 												<table id="example1"
 													class="table table-bordered table-striped dataTable dtr-inline"
 													aria-describedby="example1_info">
-
 													<thead>
 														<tr>
 															<th style="width: 2%">Sr.No</th>
@@ -71,12 +63,10 @@ int srNo = 1;
 														</tr>
 													</thead>
 													<tbody>
-
 														<%
 														for (EMSFinalQuotationBean qb : quotations) {
 														%>
 														<tr>
-
 															<td><%=srNo++%></td>
 															<td><%=qb.getClientName()%></td>
 															<td><%=qb.getQuotationDate()%></td>
@@ -128,7 +118,6 @@ int srNo = 1;
 																				<%
 																				}
 																				%>
-
 																			</div>
 																			<%
 																			}
@@ -153,13 +142,12 @@ int srNo = 1;
 																					<span aria-hidden="true">&times;</span>
 																				</button>
 																			</div>
-
 																			<div class="col-m-5 p-2">
 																				<label>Select </label>
 																				<p id="select-error<%=qb.getQuotationId()%>"></p>
 																				<form action="EMSFinalQuotationListServlet">
 																					<input type="hidden" name="ClientName"
-																						value="<%=qb.getClientName()%>"> <select
+																						value="<%=qb.getClientName()%>"><select
 																						class="form-control select2 select2-hidden-accessible"
 																						name="changeField" style="width: 100%;"
 																						data-select2-id="1" tabindex="-1"
@@ -168,7 +156,6 @@ int srNo = 1;
 																						onchange="dropDown('<%=qb.getQuotationId()%>')">
 																						<option selected="selected" data-select2-id="3">
 																							Select option you want to update..</option>
-
 																						<option>QuotationDate</option>
 																						<option>FinalDelivaryDate</option>
 																					</select>
@@ -177,12 +164,12 @@ int srNo = 1;
 																						style="display: none;">
 																						<label for="placeholderChange"
 																							id="lableName<%=qb.getQuotationId()%>s"
-																							class="mt-2"></label> <input type="text"
+																							class="mt-2"></label><input type="date"
 																							class="form-control" name="newData"
 																							id="placeholderChange<%=qb.getQuotationId()%>">
 																					</div>
 																					<input type="hidden" name="quotationId"
-																						value="<%=qb.getQuotationId()%>"> <input
+																						value="<%=qb.getQuotationId()%>"><input
 																						type="hidden" name="update" value="update">
 																					<button type="submit"
 																						class="btn btn-primary mt-2 disabled"
@@ -194,7 +181,6 @@ int srNo = 1;
 																		<!-- /.modal-project show -->
 																	</div>
 																</div>
-
 																<button type="button" class="btn btn-danger btn-sm"
 																	data-toggle="modal"
 																	data-target="#modal-projectDelete<%=qb.getQuotationId()%>">
@@ -221,7 +207,7 @@ int srNo = 1;
 																				<form action="EMSFinalQuotationListServlet"
 																					method="get">
 																					<input type="hidden" name="quotationId"
-																						value=<%=qb.getQuotationId()%>> <input
+																						value=<%=qb.getQuotationId()%>><input
 																						type="hidden" name="update" value="notupdate">
 																					<button type="submit" class="btn btn-outline-light">Delete
 																						Quotation</button>
@@ -231,17 +217,11 @@ int srNo = 1;
 																	</div>
 																</div>
 															</td>
-
-
 															<!-- Project Edit model -->
-
-
-
 														</tr>
 														<%
 														}
 														%>
-														</tr>
 													</tbody>
 												</table>
 												<!-- <table>-->
@@ -255,6 +235,58 @@ int srNo = 1;
 								<!-- /.card-body -->
 							</div>
 							<!-- card -->
+							<!-- card of second table -->
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title mt-2">
+										<b>Quotation History</b>
+									</h3>
+								</div>
+								<div class="card-body">
+									<div id="example2_wrapper"
+										class="dataTables_wrapper dt-bootstrap4">
+										<div class="row">
+											<div class="col-sm-12">
+												<table id="example2"
+													class="table table-bordered table-striped dataTable dtr-inline"
+													aria-describedby="example2_info">
+													<thead>
+														<tr>
+															<th style="width: 2%">Sr.No</th>
+															<th style="width: 17%">Client Name</th>
+															<th style="width: 17%">Quotation Date</th>
+															<th style="width: 17%">Quotation Amount</th>
+															<th style="width: 17%">Quantity</th>
+															<th style="width: 17%">Final Delivery Date</th>
+														</tr>
+													</thead>
+													<tbody>
+														<%
+														for (EMSFinalQuotationBean qb : historyQuotations) {
+														%>
+														<tr>
+															<td><%=srNo++%></td>
+															<td><%=qb.getClientName()%></td>
+															<td><%=qb.getQuotationDate()%></td>
+															<td><%=qb.getQuotationAmount()%></td>
+															<td><%=qb.getQuantity()%></td>
+															<td><%=qb.getFinalDelivaryDate()%></td>
+														</tr>
+														<%
+														}
+														%>
+													</tbody>
+												</table>
+												<!-- <table>-->
+											</div>
+											<!-- col-sm-12 -->
+										</div>
+										<!-- row -->
+									</div>
+									<!-- example1_wrapper -->
+								</div>
+								<!-- /.card-body -->
+							</div>
 						</div>
 						<!-- col-12 -->
 					</div>
@@ -266,6 +298,7 @@ int srNo = 1;
 		</div>
 		<!-- content-wrapper -->
 	</div>
+	<!-- Quotation History Table list -->
 	<script src="assets/dist/js/models.js"></script>
 	<script src="assets/plugins/jquery/jquery.min.js"></script>
 	<script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -287,7 +320,7 @@ int srNo = 1;
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="assets/dist/js/demo.js"></script>
-	<!-- DataTables  & Plugins -->
+	<!-- DataTables & Plugins -->
 	<script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script
 		src="assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -322,6 +355,20 @@ int srNo = 1;
 				})
 	</script>
 	<script>
+		$(document).ready(
+				function() {
+					$("#example2").DataTable(
+							{
+								"responsive" : true,
+								"lengthChange" : false,
+								"autoWidth" : false,
+								"buttons" : [ "copy", "csv", "excel", "pdf",
+										"print", "colvis" ]
+							}).buttons().container().appendTo(
+							'#example2_wrapper .col-md-6:eq(0)');
+				})
+	</script>
+	<script>
 		function changeStatus(userId, currentStatus) {
 			location.href = "ChangeStudentStatus?userId=" + userId
 					+ "&currentStatus=" + currentStatus;
@@ -334,7 +381,6 @@ int srNo = 1;
 			console.log(projectId.toString());
 			newId = projectId.toString();
 			console.log(newId);
-
 			let value = document.getElementById("input-form" + newId).value;
 			console.log(value);
 			if (value == "Select option you want to update..") {
@@ -356,10 +402,7 @@ int srNo = 1;
 				document.getElementById("select-error" + newId).innerText = "";
 				document.getElementById("select-error" + newId).style.color = "red";
 			}
-
 		}
 	</script>
-
 </body>
-
 </html>

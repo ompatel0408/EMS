@@ -7,6 +7,7 @@ import com.bean.EMSDirectorsDashboardBean;
 import com.dao.EMSDirectorsDashboardDao;
 import com.dao.EMSFinalQuotationDao;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.service.ExceptionHandler;
@@ -122,15 +123,20 @@ public class EMSDirectorsDashboardServlet extends HttpServlet {
 	   
 	    Gson gson = new Gson();
 	    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
-	    if((jsonObject.get("Token") != null) && (jsonObject.get("Token").toString().equals("Hello"))) {
+	    
+	    JsonElement Token = jsonObject.get("Token");
+	    System.out.println("Token  :"+Token);
+	    if((Token != null) && (Token.toString().equals("Hello1"))) {
+	    	System.out.println("Helllllllllloooooo!!!!!!");
 		    EMSDirectorsDashboardDao.getInstacne().updateisPaidForPayment(jsonObject.get("name").getAsString());
 		    String json = gson.toJson("Hii");
 		    response.setContentType("application/json");
 		    response.setCharacterEncoding("UTF-8");
 		    response.getWriter().write(json);
-	    }else {
+	    }
+	    if(Token.toString().equals("Hello")) {
 		    EMSDirectorsDashboardDao.getInstacne().updateisPaid(jsonObject.get("name").getAsString());
-		    String json = gson.toJson("Hii");
+		    String json = gson.toJson("Hii1");
 		    response.setContentType("application/json");
 		    response.setCharacterEncoding("UTF-8");
 		    response.getWriter().write(json);

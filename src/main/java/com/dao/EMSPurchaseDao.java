@@ -268,6 +268,24 @@ public ArrayList<EMSPurchaseBean> getAllPurchaseOrderByUsingProjectId(String pro
 		return null;
 		
 	}
+	public Double getTotalPrice(String project, String vendor) {
+		
+		try {
+			Connection con = MySqlConnection.getInstance();
+			PreparedStatement pstmt = con.prepareStatement("select distinct TranspotationPrice from postpurchase join indent using(indentid) where projectId=? and vendorname=?");
+			pstmt.setString(1, project);
+			pstmt.setString(2, vendor);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next())
+			{
+				return (rs.getDouble(1));
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return 0.0;
+	}
 	
 	
 }

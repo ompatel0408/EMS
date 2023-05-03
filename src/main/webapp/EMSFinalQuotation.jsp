@@ -123,26 +123,6 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-8 mt-2">
-								<div class="form-group d-flex justify-content-between">
-									<div class="custom-control custom-radio">
-										<input type="radio" checked="checked" name="gst" id="GST1"
-											class="custom-control-input" value="SGST/CGST"> <label
-											class="custom-control-label" for="GST1">SGST/CGST</label>
-									</div>
-									<div class="custom-control custom-radio">
-										<input type="radio" name="gst" id="GST2"
-											class="custom-control-input" value="IGST"> <label
-											class="custom-control-label" for="GST2">IGST</label>
-									</div>
-									<div class="custom-control custom-radio">
-										<input type="radio" name="gst" id="GST3"
-											class="custom-control-input" value="UTGST"> <label
-											class="custom-control-label" for="GST3">UTGST</label>
-									</div>
-								</div>
-							</div>
-
 							<div
 								class="col-md-12 d-flex justify-content-center align-items-center mt-2">
 								<button type="submit" class="btn btn-danger">

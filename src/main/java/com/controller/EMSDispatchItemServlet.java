@@ -49,7 +49,7 @@ public class EMSDispatchItemServlet extends HttpServlet {
 
 		    // access a property of the JSON object
 		    EMSDispatchDao edd = EMSDispatchDao.getInstance();
-
+		    
 		   	String json = gson.toJson(edd.getOfferFromDba(jsonObject.get("token").getAsString()));
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
