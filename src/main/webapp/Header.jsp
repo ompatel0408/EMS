@@ -78,18 +78,24 @@
 					class="badge badge-danger navbar-badge" onclick="getNotification()"
 					id="UpperId"></span>
 			</a>
-				<div class="dropdown-menu dropdown-menu-right"
+				<div class="dropdown-menu dropdown-menu-right text-center mx-auto"
 					style="left: inherit; right: 0px; width: 800px;" id="Notification">
-				</div></li>
+					<div class="spinner-border" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</div>
 			<li class="nav-item dropdown"><a class="nav-link"
 				data-toggle="dropdown" href="#"> <i style="color:green;"
 					class="far fa-bell" onclick="getNotificationForPayment()"></i> <span
 					class="badge badge-danger navbar-badge" onclick="getNotificationForPayment()"
 					id="UpperId"></span>
 			</a>
-				<div class="dropdown-menu dropdown-menu-right"
+				<div class="dropdown-menu dropdown-menu-right text-center mx-auto"
 					style="left: inherit; right: 0px; width: 800px;" id="Notification1">
-				</div></li>
+					<div class="spinner-border" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</div>
 			<li class="nav-item"><a class="nav-link"
 				data-widget="fullscreen" href="#" role="button"> <i
 					class="fas fa-expand-arrows-alt"></i>

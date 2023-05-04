@@ -129,6 +129,11 @@
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Drawing List</p>
 						</a></li>
+						<li class="nav-item" id="drawingRevision-id"
+							style="display: none;"><a href="DrawingRevision.jsp"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Drawing Revision List</p>
+						</a></li>
 					</ul></li>
 					<li class="nav-item"><a href="#" class="nav-link"> <i
 						class="nav-icon fas fa-columns   "></i>
@@ -138,12 +143,12 @@
 				</a>
 					<ul class="nav nav-treeview">
 
-						<li class="nav-item" id="projectstatus-target-id"><a
+						<li class="nav-item" id="dprList-id" style="display: none;"><a
 							href="DailyProgressReportServlet" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>DPR List</p>
 						</a></li>
-						<li class="nav-item" id="projectstatus-target-id"><a
+						<li class="nav-item" id="dpr-id" style="display: none;"><a
 							href="DailyProgressReport.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Daily Process Report</p>
@@ -186,7 +191,7 @@
 								class="far fa-circle nav-icon"></i>
 								<p>P.O List</p>
 						</a></li>
-						<li class="nav-item"><a href="VendorProjectListPO.jsp"
+						<li class="nav-item"><a href="VendorProjectListPO.jsp" id="poPrint-id" style="display: none;"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>P.O List Print</p>
 						</a></li>
@@ -208,13 +213,13 @@
 								class="far fa-circle nav-icon"></i>
 								<p>GRN List</p>
 						</a></li>
-						<li class="nav-item" id="generategrn-target-id"><a
+						<li class="nav-item" id="grnApprovelPen-id" style="display: none;"><a
 							href="GRNApprovalPending.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>GRN Approval Pending</p>
 						</a></li>
 						
-						<li class="nav-item" id="generategrn-target-id"><a
+						<li class="nav-item" id="grnPeningOrder-id" style="display: none;"><a
 							href="EMSGRNPendingList.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>GRN Pending Orders List</p>
@@ -261,18 +266,18 @@
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Stock List</p>
 						</a></li>
-						<li class="nav-item" id="stocklist-target-id"
-							style="display: block;"><a href="EMSGatepassOutword.jsp"
+						<li class="nav-item" id="gatePassOut-id"
+							style="display: none;"><a href="EMSGatepassOutword.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Gatepass Outword</p>
 						</a></li>
-						<li class="nav-item" id="stocklist-target-id"
-							style="display: block;"><a href="EMSGatepassinword.jsp"
+						<li class="nav-item" id="gatePassIn-id"
+							style="display: none;"><a href="EMSGatepassinword.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Gatepass Inword</p>
 						</a></li>
-						<li class="nav-item" id="stocklist-target-id"
-							style="display: block;"><a href="EMSGetpassListServlet"
+						<li class="nav-item" id="gatePassList-id"
+							style="display: none;"><a href="EMSGetpassListServlet"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Getepass List</p>
 						</a></li>
@@ -284,13 +289,13 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item" id="projectstatus-target-id"
-							style="display: block;"><a href="ProductionPhase.jsp"
+						<li class="nav-item" id="phase-id"
+							style="display: none;"><a href="ProductionPhase.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Project Status</p>
 						</a></li>
-						<li class="nav-item" id="projectstatus-target-id"
-							style="display: block;"><a href="PhaseUpdate.jsp"
+						<li class="nav-item" id="phaseUpdate-id"
+							style="display: none;"><a href="PhaseUpdate.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Phase Update</p>
 						</a></li>
@@ -321,22 +326,22 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item" id="generategrn-target-id"
-							style="display: block;"><a href="EMSAddMachine.jsp"
+						<li class="nav-item" id="addMachine-id"
+							style="display: none;"><a href="EMSAddMachine.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Add Machine</p>
 						</a></li>
-						<li class="nav-item" id="generategrn-target-id"
-							style="display: block;"><a href="EMSAddMachineListServlet"
+						<li class="nav-item" id="showMachine-id"
+							style="display: none;"><a href="EMSAddMachineListServlet"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Show Machines</p>
 						</a></li>
-						<li class="nav-item" id="generategrn-target-id"
-							style="display: block;"><a href="EMSAddMachineInMnt.jsp"
+						<li class="nav-item" id="giveMntMcn-id"
+							style="display: none;"><a href="EMSAddMachineInMnt.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Give for Maintenance</p>
 						</a></li>
-						<li class="nav-item" id="grnlist-target-id"><a
+						<li class="nav-item" id="getMntMcn-id"><a
 							href="EMSReceiveFromMnt.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Receive from Maintenance</p>
@@ -349,7 +354,7 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item" id="projectstatus-target-id" style=""><a
+						<li class="nav-item" id="dispatchItem-id" style="display: none;"><a
 							href="EMSDispatchItems.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Dispatch Item</p>

@@ -272,7 +272,7 @@ public ArrayList<EMSPurchaseBean> getAllPurchaseOrderByUsingProjectId(String pro
 		
 		try {
 			Connection con = MySqlConnection.getInstance();
-			PreparedStatement pstmt = con.prepareStatement("select distinct TranspotationPrice from postpurchase join indent using(indentid) where projectId=? and vendorname=?");
+			PreparedStatement pstmt = con.prepareStatement("select distinct TransportationPrice from postpurchase join indent using(indentid) where projectId=? and vendorname=?");
 			pstmt.setString(1, project);
 			pstmt.setString(2, vendor);
 			ResultSet rs = pstmt.executeQuery();

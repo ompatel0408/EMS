@@ -1,12 +1,14 @@
-<%@page
-	import="java.util.ArrayList,com.bean.ProjectBean,com.bean.ItemBean"%>
+<%@page import="com.bean.SubItemBean"%>
+<%@page import="com.bean.EMSDrawingBean"%>
+<%@page import="com.dao.EMSDrawingDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<meta charset="UTF-8">
+<title>Insert title here</title>
 <link rel="stylesheet"
 	href="assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet"
@@ -14,23 +16,14 @@
 <link rel="stylesheet"
 	href="assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
-<style>
-#myModal {
-	padding-top: 0px;
-	margin-top: 0;
-	overflow: hidden;
-	height: 1100px;
-}
-</style>
-
-<body class="hold-transition sidebar-mini">
-	<%
-	ArrayList<ProjectBean> projects = (ArrayList<ProjectBean>) request.getAttribute("projects");
-	ArrayList<String> items = (ArrayList<String>) request.getAttribute("items");
+<body class="hold-transition sidebar-mini layout-fixed">
+<%
+	ArrayList<EMSDrawingBean> clients = (ArrayList<EMSDrawingBean>) request.getAttribute("drawings");
+	int revision=0;
 	%>
-	<jsp:include page="Header.jsp"></jsp:include>
-	<jsp:include page="LeftSideBar.jsp"></jsp:include>
 	<div class="wrapper">
+		<jsp:include page="Header.jsp"></jsp:include>
+		<jsp:include page="LeftSideBar.jsp"></jsp:include>
 		<div class="content-wrapper">
 			<section class="content">
 				<div class="container-fluid">
@@ -40,7 +33,7 @@
 
 								<div class="card-header">
 									<h3 class="card-title mt-2">
-										<b>Projects </b>
+										<b>Drawing List</b>
 									</h3>
 								</div>
 								<div class="card-body">
@@ -53,60 +46,23 @@
 													aria-describedby="example1_info">
 													<thead>
 														<tr>
-															<th style="width: 2%">Sr.No</th>
-															<th style="width: 17%">Project Id</th>
-															<th style="width: 17%">After Pay</th>
-															<th style="width: 20%">Before Pay</th>
-															<th style="width: 20%"></th>
+															<th style="width: 15%">Revision Number</th>
+															<th style="width: 30%">Clients Drawing</th>
+															<th style="width: 30%">EMS Drawing</th>
 														</tr>
 													</thead>
-													<tbody>
-
-														<%
-														int temp = 0;
-														for (ProjectBean p : projects) {
-														%>
+													<tbody id="myTable">
+														<%for (EMSDrawingBean EGB : clients) {%>
 														<tr>
-															<td><%=++temp%></td>
-															<td><a><%=p.getProjectId()%></a> <br></td>
-															<td><a><%=p.getAfterPayPercent()%> </a> <br></td>
-															<td><a><%=p.getAdvancePayPercent()%></a> <br></td>
-															<td class="project-actions text-right">
-																<button type="button" class="btn btn-info btn-sm"
-																	data-toggle="modal"
-																	data-target="#modal-projectDetails${clientId }">View
-																	Items</button>
-																<button type="button" class="btn btn-success btn-sm"
-																	data-toggle="modal" data-target="">
-																	<i class="fas fa-pencil-alt"></i> View General Status
-																</button> <!-- Modal View Code -->
-																<div class="modal fade"
-																	id="modal-projectDetails${clientId }">
-																	<div class="modal-dialog">
-																		<div class="modal-content">
-																			<div class="modal-header">
-																				<h4 class="modal-title">Items</h4>
-																			</div>
-																			<div class="modal-body">
-																				<%
-																				for (int i = 0; i < items.size(); i++) {
-																				%>
-																				<div class="form-group">
-																					<p class=""><%=items.get(i)%></p>
-																				</div>
-																				<%
-																				}
-																				%>
-																			</div>
-																		</div>
-																		<!-- /.modal-project show -->
-																	</div>
-																</div> <!-- Modal View End -->
-															</td>
-															<%
-															}
-															%>
+															<td id="GRNId"><%=++revision%></td>
+															<td><a href="DownloadServlet?fileName=<%=EGB.getClientDrawing()%>"><button type="button" class="btn btn-info btn-sm">
+																	Client Drawing
+																</button></a> <br></td>
+															<td><a href="DownloadServlet?fileName=<%=EGB.getEMSDrawing()%>"><button type="button" class="btn btn-info btn-sm">
+																	EMS Drawing
+																</button></a> <br></td>
 														</tr>
+														<%}%>
 													</tbody>
 												</table>
 												<!-- <table>-->
@@ -131,7 +87,7 @@
 		</div>
 		<!-- content-wrapper -->
 	</div>
-	<!-- jQuery -->
+	<!-- wrapper -->
 	<script src="assets/dist/js/models.js"></script>
 	<script src="assets/plugins/jquery/jquery.min.js"></script>
 	<script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -194,5 +150,4 @@
 		}
 	</script>
 </body>
-
 </html>

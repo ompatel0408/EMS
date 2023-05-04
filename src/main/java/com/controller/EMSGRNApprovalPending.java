@@ -85,6 +85,11 @@ public class EMSGRNApprovalPending extends HttpServlet {
 		    response.setContentType("application/json");
 		    response.setCharacterEncoding("UTF-8");
 		    response.getWriter().write(json);
+	    }else {
+	    	String json = gson.toJson(EMSGRNDao.getInstance().getAllPurchaseDetails(jsonObject.get("projectId").getAsString()));
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("UTF-8");
+		    response.getWriter().write(json);
 	    }
 		
 		

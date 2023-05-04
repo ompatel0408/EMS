@@ -50,6 +50,22 @@ public class AccessDao
 				access.setShowLogs(rs.getInt("logs"));
 				access.setShowOrder(rs.getInt("orders"));
 				access.setAddGraph(rs.getInt("graph"));
+				access.setDpr(rs.getInt("dpr"));  
+				 access.setDprList(rs.getInt("dprList"));
+				 access.setDrawingRevision(rs.getInt("drawingRevision"));
+				 access.setPhase(rs.getInt("phase"));
+				 access.setPhaseUpdate(rs.getInt("phaseUpdate"));
+				 access.setAddMachine(rs.getInt("addMachine"));
+				 access.setShowMachine(rs.getInt("showMachine"));
+				 access.setListOrder(rs.getInt("giveMntMachine"));
+				 access.setReceiveMntMachine(rs.getInt("receiveMntMachine"));
+				 access.setListMntMachine(rs.getInt("listMntMachine"));
+				 access.setGateOutWrd(rs.getInt("gateOutWrd"));
+				 access.setGateInWrd(rs.getInt("gateInWrd"));
+				 access.setGateList(rs.getInt("gateList"));
+				 access.setPoPrint(rs.getInt("poPrint"));
+				 access.setApprovelPending(rs.getInt("approvelPending"));
+				 access.setApprovelPenList(rs.getInt("approvelPenList"));
 				return access;
 			}
 		
@@ -70,6 +86,9 @@ public class AccessDao
 			}
 			PreparedStatement pstmt = con.prepareStatement("update access set "+field.toUpperCase()+" = "+status+" where userId = ?");
 			pstmt.setInt(1, userId);
+			System.out.println("access = "+field);
+			System.out.println("status = "+status);
+			System.out.println("usesr = "+userId);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

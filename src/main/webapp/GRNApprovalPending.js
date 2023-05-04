@@ -3,6 +3,7 @@ var EditId;
 let editValue = "";
 var myMap = new Map();
 var myArray = []
+var isReceived = false;
 
 function getProjects() {
 document.querySelector('#add_Quatation').classList.remove('disabled');	
@@ -42,23 +43,25 @@ function appendProjects(projects) {
 	}
 }
 
-
 function getAllPurchaseDetails()
 {
 	
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSGRNApprovalPending', true);
-	xhr.setRequestHeader('Content-type', 'application/json');
-	xhr.onload = function() {
+		xhr.open('PUT', 'http://localhost:8080/EMS/EMSGRNApprovalPending', true);
+		xhr.setRequestHeader('Content-type', 'application/json');
+		xhr.onload = function() {
 		if (xhr.status === 200) {
 			Data = JSON.parse(xhr.responseText);
 			console.log(Data)
 			appendJsonData(Data)
-			
 		}
 	}
-	xhr.send(JSON.stringify({projectId:document.getElementById('projectId').value,Token:'AllDetails'}));
+	if(localStorage.getItem("isReceived") == true){
+		xhr.send(JSON.stringify({projectId:document.getElementById('projectId').value,Token:'AllDetailsFromGRNApproval'}));
+	}else{
+		xhr.send(JSON.stringify({projectId:document.getElementById('projectId').value,Token:'AllDetails'}));	
+	}
 }
 
 
@@ -238,7 +241,7 @@ function submitFormToServlet()
 
 	// specify the servlet URL and HTTP method
 	xhr.open('POST', 'http://localhost:8080/EMS/EMSGRNApprovalPending', true);
-
+	
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
 
@@ -248,6 +251,7 @@ function submitFormToServlet()
 			var response = xhr.responseText;
 			console.log(response);
 			window.location.href = "EMSDirectorsDashboard.jsp"
+			localStorage.setItem("isReceived",true);
 		}
 	}
 	// send the request

@@ -26,30 +26,50 @@ public class EMSGRNApprovalPendingDao {
 	public boolean addGRNApprovalPending(ArrayList<EMSGRNPendingBean> AEGPB) {
 		
 		String insertQuery = "INSERT INTO GRNAPPROVALPENDING(PROJECTID,MaterialCategory,CategoryId,gradeId,sizeId,Units,Quantity,RemainingQuantity) VALUES(?,?,?,?,?,?,?,?)";
+		String updateQuery = "UPDATE GRNAPPROVALPENDING SET Quantity = ? , RemainingQuantity = ? WHERE PROJECTID = ? AND CategoryId = ? AND gradeId = ? AND sizeId = ?";
 		Connection conn = MySqlConnection.getInstance();
 		
 		if(conn != null) {
+			PreparedStatement stmt  = null;
 			
 			try {
-				
-				PreparedStatement stmt = conn.prepareStatement(insertQuery);
-				
-				for(EMSGRNPendingBean EGPB:AEGPB) {
-					stmt.setString(1, EGPB.getProjectId());
-					stmt.setString(2, EGPB.getMaterialCategory());
-					stmt.setInt(3, EGPB.getCategory());
-					stmt.setInt(4, EGPB.getGrade());
-					stmt.setInt(5, EGPB.getSize());
-					stmt.setString(6, EGPB.getUnits());
-					stmt.setInt(7, EGPB.getQuantity());
-					int remQuantity = EMSGRNApprovalPendingDao.getInstance().getRemainingQuantity(EGPB.getProjectId(), EGPB.getCategoryName().concat(" ").concat(EGPB.getGradeName()), EGPB.getSizeName()) - EGPB.getQuantity();
-					if(remQuantity == 0) {
-						EMSGRNApprovalPendingDao.getInstance().updateRecievedItems(EGPB.getProjectId(),EGPB.getCategoryName().concat(" ").concat(EGPB.getGradeName()),EGPB.getSizeName());
+				if(isPresentAllElements(AEGPB.get(0))) {
+					
+					stmt = conn.prepareStatement(updateQuery);
+					for(EMSGRNPendingBean EGPB:AEGPB) {
+						stmt.setInt(1,EGPB.getQuantity());
+						int remQuantity = EMSGRNApprovalPendingDao.getInstance().getRemainingQuantity(EGPB.getProjectId(), EGPB.getCategoryName().concat(" ").concat(EGPB.getGradeName()), EGPB.getSizeName()) - EGPB.getQuantity();
+						if(remQuantity == 0) {
+							EMSGRNApprovalPendingDao.getInstance().updateRecievedItems(EGPB.getProjectId(),EGPB.getCategoryName().concat(" ").concat(EGPB.getGradeName()),EGPB.getSizeName());
+						}
+						stmt.setInt(2,remQuantity);
+						stmt.setString(3,EGPB.getProjectId());
+						stmt.setInt(4,EGPB.getCategory());
+						stmt.setInt(5,EGPB.getGrade());
+						stmt.setInt(6,EGPB.getSize());
+						stmt.addBatch();
 					}
-					stmt.setInt(8, remQuantity);
-					stmt.addBatch();
+					stmt.executeBatch();
+				}else {
+					
+					stmt = conn.prepareStatement(insertQuery);
+					for(EMSGRNPendingBean EGPB:AEGPB) {
+						stmt.setString(1, EGPB.getProjectId());
+						stmt.setString(2, EGPB.getMaterialCategory());
+						stmt.setInt(3, EGPB.getCategory());
+						stmt.setInt(4, EGPB.getGrade());
+						stmt.setInt(5, EGPB.getSize());
+						stmt.setString(6, EGPB.getUnits());
+						stmt.setInt(7, EGPB.getQuantity());
+						int remQuantity = EMSGRNApprovalPendingDao.getInstance().getRemainingQuantity(EGPB.getProjectId(), EGPB.getCategoryName().concat(" ").concat(EGPB.getGradeName()), EGPB.getSizeName()) - EGPB.getQuantity();
+						if(remQuantity == 0) {
+							EMSGRNApprovalPendingDao.getInstance().updateRecievedItems(EGPB.getProjectId(),EGPB.getCategoryName().concat(" ").concat(EGPB.getGradeName()),EGPB.getSizeName());
+						}
+						stmt.setInt(8, remQuantity);
+						stmt.addBatch();
+					}
+					stmt.executeBatch();
 				}
-				stmt.executeBatch();
 				return true;
 			} catch(SQLException E) {
 				E.printStackTrace();
@@ -61,9 +81,9 @@ public class EMSGRNApprovalPendingDao {
 		return false;
 	}
 	
-	public boolean isPresentAllElements(ArrayList<EMSGRNPendingBean> AEGPB) {
+	public boolean isPresentAllElements(EMSGRNPendingBean EGPB) {
 		
-		String selectQuery = "SELECT count(*) from postpurchase WHERE (ProductDescription,Size) IN ";
+		String selectQuery = "SELECT count(*) from postpurchase WHERE ProductDescription = ? AND Size = ?";
 		
 		Connection conn  = MySqlConnection.getInstance();
 		
@@ -71,17 +91,16 @@ public class EMSGRNApprovalPendingDao {
 			
 			try {
 				PreparedStatement stmt = conn.prepareStatement(selectQuery);
-				for() {
-					stmt.setString(1, );
-					stmt.setString(2, );
-				}
+				stmt.setString(1,EGPB.getCategoryName().concat(" ").concat(EGPB.getGradeName()));
+				stmt.setString(2, EGPB.getSizeName());
 				ResultSet rs = stmt.executeQuery();
 				
 				if(rs.next()) {
-					if(rs.getInt(1) == 0) {
+					if(rs.getInt(1) != 0) {
 						return true;
 					}
 				}
+				
 			}catch(SQLException E) {
 				E.printStackTrace();
 			}

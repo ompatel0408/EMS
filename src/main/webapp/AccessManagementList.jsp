@@ -299,7 +299,7 @@ int srNo=1;
                                 </td>
                                 <td>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="checkbox" <%=access.getIssueNoteList()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getAddOrder() %>,'IssueNoteList')" value="" id="defaultCheck1">
+                                        <input class="form-check-input" type="checkbox" <%=access.getIssueNoteList()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getIssueNoteList() %>,'IssueNoteList')" value="" id="defaultCheck1">
                                     </div>
                                 </td>
                             </tr> 
@@ -420,6 +420,202 @@ int srNo=1;
                                     </div>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>31</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Daily Project Report</label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getDpr()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getDpr() %>,'dpr')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>32</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Daily Project Report List
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getDprList()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getDprList() %>,'dprList')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>33</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Drawing Revision
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getDrawingRevision()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getDrawingRevision() %>,'drawingRevision')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>34</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Show Phases
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getPhase()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getPhase() %>,'phase')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>35</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Update Phases
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getPhaseUpdate()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getPhaseUpdate() %>,'phaseUpdate')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>36</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Add Machines
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getAddMachine()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getAddMachine() %>,'addMachine')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>37</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Show Machines
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getShowMachine()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getShowMachine() %>,'showMachine')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>38</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Give Machine in Maintenance
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getGiveMntMachine()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getGiveMntMachine() %>,'giveMntMachine')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>39</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Receive Machine from Maintenance
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getReceiveMntMachine()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getReceiveMntMachine() %>,'receiveMntMachine')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>40</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Machine Maintenance History
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getListMntMachine()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getListMntMachine() %>,'listMntMachine')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>41</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        GatePass Outward
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getGateOutWrd()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getGateOutWrd() %>,'gateOutWrd')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>42</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        GatePass Inward
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getGateInWrd()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getGateInWrd() %>,'gateInWrd')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>43</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        GatePass List
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getGateList()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getGateList() %>,'gateList')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>44</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        PO Print
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getPoPrint()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getPoPrint() %>,'poPrint')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>45</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Approval Pending
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getApprovelPending()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getApprovelPending() %>,'approvelPending')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>

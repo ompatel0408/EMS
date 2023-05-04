@@ -16,18 +16,18 @@ function appendInputs(value) {
 	}
 }
 window.onload = function getProject1(){
-	alert("Hiiii!!!!!")
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://localhost:8080/EMS/EMSDrawingServlet', true);
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSProductionServlet',true);
+	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
-		if (xhr.status === 200) {
-			Data = JSON.parse(xhr.responseText);
-			console.log(Data)
-			appendProjects(Data)
-		}
+  		if (xhr.status === 200) {
+    		Data = JSON.parse(xhr.responseText);
+    		appendProjects(Data)
+  		}
 	}
-	xhr.send();
+  	var data = { token:"Projects" }
+	xhr.send(JSON.stringify(data));
 }
 function appendProjects(Data){
 	

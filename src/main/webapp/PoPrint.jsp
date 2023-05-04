@@ -104,6 +104,8 @@ table, tbody {
 	double totalAmtBeforeTax = 0;
 	String payment="";
 	double grandTotal=0;
+	double transport=0.0;
+	double totalNetAmt=0.0;
 	%>
 	<table style="border-collapse: collapse; margin-left: 6.31pt"
 		cellspacing="0">
@@ -218,7 +220,7 @@ table, tbody {
 					style="width: 112pt; border-top-style: solid; border-top-width: 1pt; border-left-style: solid; border-left-width: 1pt">
 					<p class="s2"
 						style="padding-left: 1pt; text-indent: 0pt; line-height: 10pt; text-align: left;">Order
-						Date :- 26/12/2022</p>
+						Date :- <%=pbean.getCurrentDate() %></p>
 				</td>
 				<td
 					style="width: 29pt; border-top-style: solid; border-top-width: 1pt">
@@ -296,12 +298,12 @@ table, tbody {
 						<br>
 					</p>
 				</td>
-				<td
+				 <td
 					style="width: 141pt; border-left-style: solid; border-left-width: 1pt; border-bottom-style: solid; border-bottom-width: 1pt"
 					colspan="2">
 					<p class="s2"
 						style="padding-top: 1pt; padding-left: 1pt; text-indent: 0pt; line-height: 9pt; text-align: left;">
-						Material Indent Date :- 24/12/2022</p>
+						Material Indent Date :- </p>
 				</td>
 				<td
 					style="width: 32pt; border-bottom-style: solid; border-bottom-width: 1pt">
@@ -800,7 +802,9 @@ table, tbody {
 			<%
 			totalAmtBeforeTax += (c.getQuantity() * Double.parseDouble(c.getRatePerKg()));
 			grandTotal+=c.getTotalAmount();
+			transport=c.getTransportPrice();
 			payment=c.getPaymentTerms();
+			totalNetAmt+=Double.parseDouble(c.getNetAmount())-Double.parseDouble(c.getDiscount());
 			%>
 			<%
 			}
@@ -930,7 +934,7 @@ table, tbody {
 				<td
 					style="width: 50pt; border-top-style: solid; border-top-width: 1pt; border-left-style: solid; border-left-width: 1pt; border-bottom-style: solid; border-bottom-width: 1pt; border-right-style: solid; border-right-width: 2pt">
 					<p class="s3"
-						style="text-indent: 0pt; line-height: 9pt; text-align: right;">0.00</p>
+						style="text-indent: 0pt; line-height: 9pt; text-align: right;"><%=transport%></p>
 				</td>
 			</tr>
 			<tr style="height: 11pt">
@@ -1064,7 +1068,7 @@ table, tbody {
 				<td
 					style="width: 50pt; border-top-style: solid; border-top-width: 1pt; border-left-style: solid; border-left-width: 1pt; border-bottom-style: solid; border-bottom-width: 1pt; border-right-style: solid; border-right-width: 2pt">
 					<p class="s2"
-						style="text-indent: 0pt; line-height: 9pt; text-align: right;">0.00</p>
+						style="text-indent: 0pt; line-height: 9pt; text-align: right;"><%=totalNetAmt %></p>
 				</td>
 			</tr>
 			<tr style="height: 11pt">
@@ -1260,7 +1264,7 @@ table, tbody {
 				<td
 					style="width: 50pt; border-top-style: solid; border-top-width: 1pt; border-left-style: solid; border-left-width: 1pt; border-bottom-style: solid; border-bottom-width: 1pt; border-right-style: solid; border-right-width: 2pt">
 					<p class="s2"
-						style="text-indent: 0pt; line-height: 9pt; text-align: right;"><%=grandTotal %></p>
+						style="text-indent: 0pt; line-height: 9pt; text-align: right;"><%=grandTotal+transport %></p>
 				</td>
 			</tr>
 			<tr style="height: 11pt">

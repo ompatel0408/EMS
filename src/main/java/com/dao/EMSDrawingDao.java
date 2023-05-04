@@ -240,5 +240,64 @@ public class EMSDrawingDao {
 		
 	}
 	
+public ArrayList<EMSDrawingBean> getDrawingHistory(String projectId, String itemCode, String subItemCode) {
+		
+		String selectQuery = " select clientDrawing,emsDrawing from drawingHistory where projectid=? and itemcode=? and subitemcode=?";
+		Connection conn = MySqlConnection.getInstance();
+		ArrayList<EMSDrawingBean> arr = new ArrayList<EMSDrawingBean>();
+		if(conn != null) {
+			
+			try {
+				
+				PreparedStatement stmt = conn.prepareStatement(selectQuery);
+				stmt.setString(1,projectId);
+				stmt.setString(2,itemCode);
+				stmt.setString(3,subItemCode);
+				ResultSet rs=stmt.executeQuery();
+				
+				while(rs.next()) {
+					EMSDrawingBean sib=new EMSDrawingBean();
+					sib.setClientDrawing(rs.getString(1));
+					sib.setEMSDrawing(rs.getString(2));
+					arr.add(sib);
+				}
+				return arr;
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		
+		return null;
+	}
+
+
+public int getCount(String project, String offer, String subItem) {
+	String selectQuery = " select count(*) from drawingHistory where projectid=? and itemcode=? and subitemcode=?";
+	Connection conn = MySqlConnection.getInstance();
+	if(conn != null) {
+		
+		try {
+			
+			PreparedStatement stmt = conn.prepareStatement(selectQuery);
+			stmt.setString(1,project);
+			stmt.setString(2,offer);
+			stmt.setString(3,subItem);
+			ResultSet rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+				return rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}else {
+		System.out.println("Connection is not establised!");
+	}
+	return 0;
+}
+	
 	
 }

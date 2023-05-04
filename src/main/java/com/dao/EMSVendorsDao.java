@@ -165,7 +165,7 @@ public class EMSVendorsDao {
 			try {
 				Connection con = MySqlConnection.getInstance();
 				PreparedStatement pstmt = con.prepareStatement(
-						"select productdescription,size,i.quantity,units,rateperkg,discount,rateperkg*(i.quantity) netAmuount,sgst,cgst,round((totalAmount*(sgst+cgst))/(100),2) taxableValue,totalAmount,PaymentTerms from postpurchase join indent i using(indentid) where vendorname=? and projectid=?");
+						"select productdescription,size,i.quantity,units,rateperkg,discount,rateperkg*(i.quantity) netAmuount,sgst,cgst,round((totalAmount*(sgst+cgst))/(100),2) taxableValue,totalAmount,PaymentTerms,transportationprice from postpurchase join indent i using(indentid) where vendorname=? and projectid=?");
 				pstmt.setString(1, vendorName);
 				pstmt.setString(2, project);
 				ResultSet rs = pstmt.executeQuery();
@@ -184,6 +184,7 @@ public class EMSVendorsDao {
 					vendor.setTaxableValue(rs.getDouble(10));
 					vendor.setTotalAmount(rs.getDouble(11));
 					vendor.setPaymentTerms(rs.getString(12));
+					vendor.setTransportPrice(rs.getDouble(13));
 					vendors.add(vendor);
 				}
 				return vendors;
@@ -265,24 +266,23 @@ public class EMSVendorsDao {
 			
 			return null;
 		}
-		public Boolean updatePrice(String projectId, String vendor, String price) {
+		public Boolean updatePrice(String vendor, String projectId, String price) {
 			try {
 				System.out.println("GetId");
 				Connection con = MySqlConnection.getInstance();
-				PreparedStatement pstmt = con.prepareStatement("update postpurchase join indent using(indentid) set TranspotationPrice = "+Double.parseDouble(price)+" where projectId = ? and vendorname=?");
-				System.out.println(pstmt.getResultSet());
-				System.out.println(price);
-				System.out.println(projectId);
-				System.out.println(vendor);
-				pstmt.setString(1, projectId);
-				pstmt.setString(2, vendor);
-				pstmt.executeUpdate();
+				PreparedStatement pstmt = con.prepareStatement("update postpurchase join indent using(indentid) set transportationPrice =?where projectId=? and vendorname=?");
+				pstmt.setString(1, price);
+				pstmt.setString(2, projectId);
+				pstmt.setString(3, vendor);
+				int count=pstmt.executeUpdate();
+				System.out.println(count);
 				return true;
 			}
 			catch (Exception e) {
 				e.printStackTrace();
 			}
-			return false;			
+			return true;
+			
 		}
 		
 	}

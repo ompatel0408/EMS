@@ -29,6 +29,16 @@ public class EMSPurchaseBean {
 	private String paymentTerms;
 	private double taxableValue;
 	private double totalAmount;
+private double transportPrice;
+	
+
+	public double getTransportPrice() {
+		return transportPrice;
+	}
+
+	public void setTransportPrice(double transportPrice) {
+		this.transportPrice = transportPrice;
+	}
 	
 
 	public EMSPurchaseBean(String projectId,String category,int quantity,String uom,String remarks,String itemName,String grade,String size) {

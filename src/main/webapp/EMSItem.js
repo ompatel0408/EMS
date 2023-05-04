@@ -16,8 +16,7 @@ var response;
 var myMap = new Map();
 var myArray = []
 function submitForm() {
-	
-	console.log("******************")
+
 	console.log(data)
 	console.log(EditId)
 	var js1 = data.filter(x=>x.count == EditId)
@@ -61,7 +60,7 @@ function appendMap(){
                   <button type="button" class="btn btn-success btn-sm" onclick = "updateField(this.id)" id="Edit${myArray[i]}">
                         <i class="fas fa-pencil-alt"></i>
                   </button>
-                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-itemDelete" onclick="deleteItem(this.id)" id="Delete${myArray[i]}">
+                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-itemDelete" onclick="deleteItem(this.id)" id="Delete${myArray[i]} onchange= "enableUpdate()"">
                         <i class="fas fa-trash"></i>
                   </button>
               </td>
@@ -241,9 +240,6 @@ function updateField(editId) {
 	document.getElementById('DelivaryDate').value = js1[0].delivaryDate,
 	document.getElementById('Remarks').value = js1[0].remarks;
 	document.getElementById('offerCode').value = js1[0].offerCode;
-		
-	
-
 }
 
 function appendFunc() {
@@ -275,6 +271,10 @@ function appendFunc() {
 	if (document.getElementById('MyTable3').hasChildNodes != null) {
 		document.querySelector('#ProcessId').classList.remove('disabled');
 	}
+}
+
+function enableUpdate(){
+	
 }
 
 window.addEventListener("beforeunload", function (event) {
