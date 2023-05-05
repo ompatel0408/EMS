@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.bean.EMSGRNBean;
+import com.bean.EMSGRNPendingBean;
 import com.dbConnection.MySqlConnection;
 
 public class EMSGRNDao {
@@ -116,7 +117,6 @@ public class EMSGRNDao {
 				PreparedStatement stmt = conn.prepareStatement(selectQuery);
 				stmt.setString(1, projectId);
 				ResultSet rs = stmt.executeQuery();
-
 				while (rs.next()) {
 					String[] a = rs.getString(3).split(" ");
 					arr.add(new EMSGRNBean(rs.getString(1), rs.getString(2), a[0], a[1], rs.getString(4), rs.getInt(5),
@@ -132,7 +132,32 @@ public class EMSGRNDao {
 		return null;
 	}
 	
-	public ArrayList
-	
+	public ArrayList<EMSGRNPendingBean> getAllDetails(String projectId){
+		
+		String selectQuery = "";
+		
+		Connection conn = MySqlConnection.getInstance();
+		
+		ArrayList<EMSGRNPendingBean> arr = new ArrayList<EMSGRNPendingBean>();
+		if (conn != null) {
 
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement(selectQuery);
+				stmt.setString(1, projectId);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					
+//					arr.add();
+				}
+				return arr;
+			} catch (SQLException E) {
+				E.printStackTrace();
+			}
+		} else {
+			System.out.println("Connection is not establised!");
+		}
+		
+		return null;
+	}
 }

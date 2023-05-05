@@ -274,5 +274,26 @@ public class ProjectDao {
 		return null;
 	}
 	
+	public void updateItemsWithProjectId(String projectId) {
+		String updateQuery = "UPDATE items SET projectId = ? WHERE projectId = 'notassigned'";
+		Connection conn = MySqlConnection.getInstance();
+		
+		if(conn != null) {
+			
+			try {
+				
+				PreparedStatement stmt = conn.prepareStatement(updateQuery);
+				stmt.setString(1, projectId);
+				stmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("Connection is not establised!");
+		}
+		
+	}
+	
+	
 
 }

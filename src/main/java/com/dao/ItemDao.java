@@ -143,8 +143,8 @@ public class ItemDao {
 	
 	
 	public ArrayList<ItemBean> getItemListForIndent(String projectId){
-	
-		String selectQuery = "select ItemName,itemcode,quantity from projects P JOIN Items I ON P.quotationId = I.QuotationId WHERE ProjectId = ?";
+		
+		String selectQuery = "select ItemName,itemcode,quantity from Items WHERE ProjectId = ?";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<ItemBean> a = new ArrayList<ItemBean>();	
 		
@@ -174,7 +174,7 @@ public class ItemDao {
 
 	public ArrayList<String> getItemNames(String projectId) {
 		
-		String selectQuery = "select ItemName from Items I JOIN projects P ON I.quotationId = p.QuotationId WHERE ProjectId = ?";
+		String selectQuery = "select ItemName from Items WHERE ProjectId = ?";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<String> a = new ArrayList<String>();	
 		

@@ -22,7 +22,7 @@ public class ExceptionHandler {
 		 	System.out.print("Exception reached!");
 		 
 	        // Log the exception (optional)
-		 	try (PrintWriter writer = new PrintWriter(new FileWriter("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/error.log",true))) {
+		 	try (PrintWriter writer = new PrintWriter(new FileWriter("C:\\Users\\Admin\\eclipse-workspace\\EMS\\error.log",true))) {
 		        e.printStackTrace(writer);
 		    } catch (IOException ioEx) {
 		        ioEx.printStackTrace();

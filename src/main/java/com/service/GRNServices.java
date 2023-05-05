@@ -26,8 +26,8 @@ public class GRNServices {
 
 			System.out.println("File 1"+fileName1);
 	        
-	        File file = new File("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/GRNImages/".concat(fileName));
-	        File file1 = new File("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/GRNImages/".concat(fileName1));
+	        File file = new File("C:\\Users\\Admin\\eclipse-workspace\\EMS\\src\\main\\webapp\\GRNImages\\".concat(fileName));
+	        File file1 = new File("C:\\Users\\Admin\\eclipse-workspace\\EMS\\src\\main\\webapp\\GRNImages\\".concat(fileName1));
 	        
 	        FileOutputStream outputStream = new FileOutputStream(file);
 

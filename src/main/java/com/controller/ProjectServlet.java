@@ -81,6 +81,7 @@ public class ProjectServlet extends HttpServlet {
 			clientName = ProjectDao.getInstance().getClientName(clientId);
 			ProjectServices ps = new ProjectServices();
 			projectId = ps.projectGenerate(clientName);
+			ProjectDao.getInstance().updateItemsWithProjectId(projectId);
 			projectbean.setProjectId(projectId);
 			
 			HttpSession session = request.getSession();

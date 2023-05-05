@@ -186,4 +186,29 @@ public class CatagoryGradeSizeDao {
 		}
 		return 0;
 	}
+	public int getGivenQuantity(String category, String grade, String size, String itemName) {
+		String query = "select sum(quantity) from offer join quotationperitem using(offercode) join emscatagory using(catagoryid) join catagorygrade using(gradeid) join catagorygradesize using(sizeid) where quotationperitem.catagoryid = ? and grade=? and size=? and offername=?";
+		int count=0;
+		try {
+			Connection con = MySqlConnection.getInstance();
+
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setString(1, category);
+			pstmt.setString(2, grade);
+			pstmt.setString(3, size);
+			pstmt.setString(4, itemName);
+			ResultSet rs = pstmt.executeQuery();
+			System.out.println(pstmt.toString());
+
+			while (rs.next()) {
+				// System.out.println(rs.getInt("QUANTITY"));
+				System.out.println(rs.getString(1));
+				count = rs.getInt(1);
+			}
+			return count;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+}
 }

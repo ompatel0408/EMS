@@ -91,7 +91,7 @@
 								<div class="form-group">
 									<label>Item Name</label>
 									<select id="itemName"
-										class="form-control" required>
+										class="form-control" onchange="getGivenQuantity()" required>
 										<option value="Select Orders">Select Orders</option>
 									</select>
 								</div>
@@ -100,6 +100,7 @@
 										id="Quantity" placeholder="Enter Quantity"
 										onclick="getCount()">
 								</div>
+								<div id="givenQuantity"></div>
 								<!-- /.form-group -->
 							</div>
 							<!-- /.col -->

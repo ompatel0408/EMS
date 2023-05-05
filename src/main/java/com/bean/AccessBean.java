@@ -6,7 +6,15 @@ public class AccessBean {
 			grnList, addDrawing, drawingList, addClient, issueNoteList, addGeneralStore, addVendor, projectStatus,
 			vendorList, generateIssueNote, showQuotationPerOffer, addOrder, showFinalQuotation, orderList, addNewStock,
 			stockList, dpr, dprList, drawingRevision, phase, phaseUpdate, addMachine, showMachine, giveMntMachine, receiveMntMachine,
-			listMntMachine, gateOutWrd, gateInWrd, gateList, poPrint, approvelPending,approvelPenList;
+			listMntMachine, gateOutWrd, gateInWrd, gateList, poPrint, approvelPending,approvelPenList,dispatch;
+
+	public int getDispatch() {
+		return dispatch;
+	}
+
+	public void setDispatch(int dispatch) {
+		this.dispatch = dispatch;
+	}
 
 	public int getDpr() {
 		return dpr;

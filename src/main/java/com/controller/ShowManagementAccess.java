@@ -28,7 +28,7 @@ public class ShowManagementAccess extends HttpServlet {
 				System.out.println("in if");
 				doPut(request,response);
 			}else if(change==0) {
-				AccessDao accessDao = new AccessDao();
+				AccessDao accessDao = new AccessDao();   
 				AccessBean access = accessDao.getAllAccess(userId);
 				request.setAttribute("access", access);
 				request.getRequestDispatcher("AccessManagementList.jsp").forward(request, response);

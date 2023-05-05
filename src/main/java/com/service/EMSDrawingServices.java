@@ -133,10 +133,10 @@ public class EMSDrawingServices {
 			File file1=null;
 			File file2=null;
 			File file3=null;		
-				file = new File("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/DrawingImages/Clients/".concat(project).concat("").concat(offer).concat("").concat(subItem));
-				file1 = new File("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/DrawingImages/Projects/".concat(project).concat("").concat(offer).concat("").concat(subItem));
-				file2= new File("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/DrawingImages/Clients/".concat(project).concat("").concat(offer).concat("").concat(subItem).concat(Integer.toString(count)));
-				file3= new File("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/DrawingImages/Projects/".concat(project).concat("").concat(offer).concat("").concat(subItem).concat(Integer.toString(count)));
+				file = new File("C:\\Users\\Admin\\eclipse-workspace\\EMS\\src\\main\\webapp\\DrawingImages\\Clients\\".concat(project).concat("").concat(offer).concat("").concat(subItem));
+				file1 = new File("C:\\Users\\Admin\\eclipse-workspace\\EMS\\src\\main\\webapp\\DrawingImages\\Projects\\".concat(project).concat("").concat(offer).concat("").concat(subItem));
+				file2= new File("C:\\Users\\Admin\\eclipse-workspace\\EMS\\src\\main\\webapp\\DrawingImages\\Clients\\".concat(project).concat("").concat(offer).concat("").concat(subItem).concat(Integer.toString(count)));
+				file3= new File("C:\\Users\\Admin\\eclipse-workspace\\EMS\\src\\main\\webapp\\DrawingImages\\Projects\\".concat(project).concat("").concat(offer).concat("").concat(subItem).concat(Integer.toString(count)));
 				if(count==0)
 				{					
 					edd.getInstance().addToDrawingHistory(project,offer,subItem,"Clients/".concat(project).concat("").concat(offer).concat("").concat(subItem),"Projects/".concat(project).concat("").concat(offer).concat("").concat(subItem));
@@ -187,14 +187,14 @@ public class EMSDrawingServices {
 			
 			String fileName = filePart.getSubmittedFileName();
 			
-	        File file = new File("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/EMSPOFiles/".concat(fileName));
+	        File file = new File("C:\\Users\\Admin\\eclipse-workspace\\EMS\\src\\main\\webapp\\EMSPOFiles\\".concat(fileName));
 	        
 	        FileOutputStream outputStream = new FileOutputStream(file);
     
 	        IOUtils.copy(filePart.getInputStream(), outputStream);
 	        
 	        EMSGRNBean EGB = new EMSGRNBean();
-	        EGB.setPath1("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/EMSPOFiles/".concat(fileName));
+	        EGB.setPath1("C:\\Users\\Admin\\eclipse-workspace\\EMS\\src\\main\\webapp\\EMSPOFiles\\".concat(fileName));
 	        
 	        return EGB;
 		} catch (Exception e) {

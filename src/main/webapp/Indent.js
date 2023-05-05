@@ -294,6 +294,24 @@ window.addEventListener("beforeunload", function (event) {
   event.returnValue = "Are you sure you want to leave this page?"
 });
 
+function getGivenQuantity(){
+	console.log("AAiye")
+	var xhr1 = new XMLHttpRequest();
+	xhr1.open('PUT', 'http://localhost:8080/EMS/IndentServlet',true);
+	xhr1.setRequestHeader('Content-type', 'application/json');
+	xhr1.onload = function() {
+		if (xhr1.status === 200) {
+		let countSize = JSON.parse(xhr1.responseText);
+		console.log("total count size : " + countSize);
+		document.getElementById('givenQuantity').innerHTML="Available Stock in Store is :"+parseInt(countSize)
+		document.getElementById('givenQuantity').style.color="red"
+		}
+	}
+	var data = {category: document.getElementById('category-id').value,
+				grade: document.getElementById('grade-id').value,
+				size: document.getElementById('size-id').value,token:"givenQuantity",itemName: document.getElementById('itemName').value}
+	xhr1.send(JSON.stringify(data));
+}
 
 
 /*

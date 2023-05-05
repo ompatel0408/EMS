@@ -34,8 +34,11 @@ public class MySqlConnection {
 			try
 			{
 	//			3) load driver class
+				
 				Class.forName(DRIVERCLASS);
+				
 	//			4) Pass crediantials to driverManagers getconnetions method
+				
 				con=DriverManager.getConnection(URLNAME,USERNAME,PASSWD);
 				
 	//			5) chack that raferance variable has some object or not

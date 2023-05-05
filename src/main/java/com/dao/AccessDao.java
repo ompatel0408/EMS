@@ -58,14 +58,16 @@ public class AccessDao
 				 access.setAddMachine(rs.getInt("addMachine"));
 				 access.setShowMachine(rs.getInt("showMachine"));
 				 access.setListOrder(rs.getInt("giveMntMachine"));
+				 access.setGiveMntMachine(rs.getInt("giveMntMachine"));;
 				 access.setReceiveMntMachine(rs.getInt("receiveMntMachine"));
-				 access.setListMntMachine(rs.getInt("listMntMachine"));
+				 //access.setListMntMachine(rs.getInt("listMntMachine"));
 				 access.setGateOutWrd(rs.getInt("gateOutWrd"));
 				 access.setGateInWrd(rs.getInt("gateInWrd"));
 				 access.setGateList(rs.getInt("gateList"));
 				 access.setPoPrint(rs.getInt("poPrint"));
 				 access.setApprovelPending(rs.getInt("approvelPending"));
 				 access.setApprovelPenList(rs.getInt("approvelPenList"));
+				 access.setDispatch(rs.getInt("dispatch"));
 				return access;
 			}
 		

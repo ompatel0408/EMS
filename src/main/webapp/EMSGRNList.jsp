@@ -74,14 +74,14 @@
 																				</div>
 																				<div class="modal-body">
 																					<div class="form-group">
-																						<label for="">GRN picture</label> <br> <img
-																							src="GRNImages/<%=EGB.getPath1()%>" alt="path1"
-																							class="h-100 w-100">
+																						<label for="">GRN picture</label> <br> <embed
+																							src="GRNImages/<%=EGB.getPath1()%>" type="application/pdf"
+																							 width="100%" height="600px">
 																					</div>
 																					<div class="form-group">
-																						<label for="">GRN picture</label> <br> <img
-																							src="GRNImages/<%=EGB.getPath2()%>" alt="path2"
-																							class="h-100 w-100">
+																						<label for="">GRN picture</label> <br> <embed
+																							src="GRNImages/<%=EGB.getPath2()%>" type="application/pdf"
+																							 width="100%" height="600px">
 																					</div>
 																				</div>
 																				<div class="modal-footer justify-content-between">

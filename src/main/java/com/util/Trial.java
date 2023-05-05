@@ -20,12 +20,12 @@ public class Trial implements Job{
 	public void execute(JobExecutionContext context) throws JobExecutionException {
         // Your logic here
 		SendMail.mailTokenEveryDay();
-		SendMail.sendMailForError();
+//		SendMail.sendMailForError();
     }
 	
 	public static void DailyMailService() {
 		
-		Date startDate = DateBuilder.todayAt(00, 01, 30);
+		Date startDate = DateBuilder.todayAt(00,30, 00);
 		 job = newJob(Trial.class)
 			    .withIdentity("myJob", "group1")
 			    .build();

@@ -3,7 +3,6 @@ var EditId;
 let editValue = "";
 var myMap = new Map();
 var myArray = []
-var isReceived = false;
 
 function getProjects() {
 document.querySelector('#add_Quatation').classList.remove('disabled');	

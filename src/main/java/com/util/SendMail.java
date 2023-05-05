@@ -284,7 +284,7 @@ public class SendMail {
 			MimeBodyPart attachmentPart = new MimeBodyPart();
 
 			// Set the data source for the attachment
-			DataSource source = new FileDataSource("/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/error.log");
+			DataSource source = new FileDataSource("C:\\Users\\Admin\\eclipse-workspace\\EMS\\error.log");
 			attachmentPart.setDataHandler(new DataHandler(source));
 			attachmentPart.setFileName("error.log");
 

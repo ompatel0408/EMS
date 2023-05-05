@@ -16,7 +16,7 @@ public class DownloadServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    // specify the path of the file to be downloaded
 		System.out.println(request.getParameter("fileName"));
-	    String filePath = "/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/DrawingImages/"+request.getParameter("fileName");
+	    String filePath = "C:\\Users\\Admin\\eclipse-workspace\\EMS\\src\\main\\webapp\\DrawingImages\\"+request.getParameter("fileName");
 	    System.out.println(filePath);
 	    // create a File object to represent the file
 	    File file = new File(filePath);

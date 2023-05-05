@@ -143,6 +143,20 @@ public class IndentServlet extends HttpServlet {
 			    response.setCharacterEncoding("UTF-8");
 			    response.getWriter().write(json);
 		    }
+		    else if(jsonObject.get("token").getAsString().equals("givenQuantity")) {
+		    	String category = jsonObject.get("category").getAsString();
+		    	String grade = jsonObject.get("grade").getAsString();
+		    	String size = jsonObject.get("size").getAsString();
+		    	String itemName = jsonObject.get("itemName").getAsString();
+			
+			    CatagoryGradeSizeDao cddao = CatagoryGradeSizeDao.getInstance();
+				int cgl = cddao.getGivenQuantity(category,grade,size,itemName);
+				System.out.println("givenCount="+cgl);
+				String json = gson.toJson(cgl);
+			    response.setContentType("application/json");
+			    response.setCharacterEncoding("UTF-8");
+			    response.getWriter().write(json);
+		    }
 		}catch(Exception e) {
 			ExceptionHandler.handleException(request,response, e);
 		}

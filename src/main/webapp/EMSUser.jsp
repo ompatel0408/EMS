@@ -63,6 +63,7 @@
 										<option value="0">Select Department</option>
 										<option value="Mechanical">Mechanical</option>
 										<option value="Electrical">Electrical</option>
+										<option value="Administrative">Administrative</option>
 									</select> <br>
 									<p style="color : red;";><%=dpErr == null ? "" : dpErr %></p>
 								</div>
@@ -71,9 +72,12 @@
 								<div class="form-group">
 									<label>Role</label> <select name="role" class="form-control" required>
 										<option value="0">Select Role</option>
-										<option value="1">Sub Admin</option>
-										<option value="2">Purchase</option>
-										<option value="3">Store</option>
+										<option value="1">Admin</option>
+										<option value="2">Sub Admin</option>
+										<option value="3">Purchase</option>
+										<option value="4">Store</option>
+										<option value="5">GRN</option>
+										<option value="6">Production</option>
 									</select>
 									<p style="color : red;";><%=roleErr == null ? "" : roleErr %></p>
 								</div>

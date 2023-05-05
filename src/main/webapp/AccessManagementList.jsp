@@ -10,7 +10,7 @@
 </head>
 <%
 AccessBean access = (AccessBean) request.getAttribute("access");
-
+System.out.println("User is : " + access.getUserId());
 int srNo=1;
 %>
 
@@ -351,7 +351,7 @@ int srNo=1;
                                 </td>
                                 <td>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="checkbox" <%=access.getVendorList()==1?"checked":"" %> onclick="changeStatus(<%=access.getVendorList() %>,<%=access.getProjectStatus() %>,'ListVendor')" value="" id="defaultCheck1">
+                                        <input class="form-check-input" type="checkbox" <%=access.getVendorList()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getVendorList()%>,'ListVendor')" value="" id="defaultCheck1">
                                     </div>
                                 </td>
                             </tr> 
@@ -368,7 +368,7 @@ int srNo=1;
                                     </div>
                                 </td>
                             </tr> 
-                            <tr>
+                             <tr>
                                 <td>27</td>
                                 <td>
                                     <label class="form-check-label" for="defaultCheck1">
@@ -411,7 +411,7 @@ int srNo=1;
                                 <td>30</td>
                                 <td>
                                     <label class="form-check-label" for="defaultCheck1">
-                                        Show Order On Database
+                                        Show Orders
                                     </label>
                                 </td>
                                 <td>
@@ -536,7 +536,7 @@ int srNo=1;
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+                            <%-- <tr>
                                 <td>40</td>
                                 <td>
                                     <label class="form-check-label" for="defaultCheck1">
@@ -548,7 +548,7 @@ int srNo=1;
                                         <input class="form-check-input" type="checkbox" <%=access.getListMntMachine()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getListMntMachine() %>,'listMntMachine')" value="" id="defaultCheck1">
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> --%>
                             <tr>
                                 <td>41</td>
                                 <td>
@@ -616,6 +616,33 @@ int srNo=1;
                                 </td>
                             </tr>
                             
+                            <tr>
+                                <td>45</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Approval Pending List
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getApprovelPenList()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getApprovelPenList() %>,'approvelPenList')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                             <tr>
+                                <td>46</td>
+                                <td>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                      	Dispatch
+                                    </label>
+                                </td>
+                                <td>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" <%=access.getDispatch()==1?"checked":"" %> onclick="changeStatus(<%=access.getUserId() %>,<%=access.getDispatch() %>,'dispatch')" value="" id="defaultCheck1">
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
