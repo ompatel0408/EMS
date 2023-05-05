@@ -46,50 +46,51 @@ CREATE TABLE `access` (
   `poPrint` int DEFAULT NULL,
   `approvelPending` int DEFAULT NULL,
   `approvelPenList` int DEFAULT NULL,
+  `dispatch` int DEFAULT NULL,
   KEY `USERID` (`USERID`),
   CONSTRAINT `access_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `CatagoryGrade` (
+CREATE TABLE `catagorygrade` (
   `gradeId` int NOT NULL AUTO_INCREMENT,
   `CatagoryId` int NOT NULL,
-  `grade` varchar(30) DEFAULT NULL,
+  `grade` varchar(130) DEFAULT NULL,
   PRIMARY KEY (`gradeId`),
   KEY `CatagoryId` (`CatagoryId`),
-  CONSTRAINT `catagorygrade_ibfk_1` FOREIGN KEY (`CatagoryId`) REFERENCES `EMSCatagory` (`CatagoryId`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `catagorygrade_ibfk_1` FOREIGN KEY (`CatagoryId`) REFERENCES `emscatagory` (`CatagoryId`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `CatagoryGradeSize` (
+CREATE TABLE `catagorygradesize` (
   `sizeId` int NOT NULL AUTO_INCREMENT,
   `gradeId` int NOT NULL,
-  `SIZE` varchar(60) DEFAULT NULL,
+  `SIZE` varchar(160) DEFAULT NULL,
   PRIMARY KEY (`sizeId`),
   KEY `gradeId` (`gradeId`),
-  CONSTRAINT `catagorygradesize_ibfk_1` FOREIGN KEY (`gradeId`) REFERENCES `CatagoryGrade` (`gradeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `catagorygradesize_ibfk_1` FOREIGN KEY (`gradeId`) REFERENCES `catagorygrade` (`gradeId`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `CLIENTS` (
+CREATE TABLE `clients` (
   `clientid` int NOT NULL AUTO_INCREMENT,
-  `CLIENTNAME` varchar(60) NOT NULL,
+  `CLIENTNAME` varchar(260) NOT NULL,
   `GSTNO` varchar(20) NOT NULL,
   `PhoneNumber` bigint NOT NULL,
-  `Email` varchar(40) NOT NULL,
+  `Email` varchar(60) NOT NULL,
   `PanNO` varchar(15) NOT NULL,
-  `ADDRESS` varchar(150) NOT NULL,
+  `ADDRESS` varchar(550) NOT NULL,
   `Phonenumber2` bigint DEFAULT NULL,
-  `email2` varchar(40) DEFAULT NULL,
+  `email2` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`clientid`),
   UNIQUE KEY `CLIENTNAME_UNIQUE` (`CLIENTNAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `dispatch` (
   `DispatchId` int NOT NULL AUTO_INCREMENT,
-  `ITEMCODE` varchar(100) NOT NULL,
+  `ITEMCODE` varchar(400) NOT NULL,
   `DISPATCHDATE` varchar(50) NOT NULL,
-  `DESTINATIONADDRESS` varchar(300) NOT NULL,
+  `DESTINATIONADDRESS` varchar(500) NOT NULL,
   `VEHICLENUMBER` varchar(50) NOT NULL,
-  `TRAVELCOMPANY` varchar(50) NOT NULL,
-  `TRAVELCOMPANYOWNER` varchar(70) NOT NULL,
+  `TRAVELCOMPANY` varchar(150) NOT NULL,
+  `TRAVELCOMPANYOWNER` varchar(100) NOT NULL,
   `CHECKEDBY` varchar(100) NOT NULL,
   `clientId` int NOT NULL,
   PRIMARY KEY (`DispatchId`),
@@ -100,29 +101,29 @@ CREATE TABLE `dispatch` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `dpr` (
-  `projectid` varchar(50) DEFAULT NULL,
-  `itemname` varchar(50) DEFAULT NULL,
-  `subitemname` varchar(30) DEFAULT NULL,
-  `category` varchar(30) DEFAULT NULL,
-  `grade` varchar(30) DEFAULT NULL,
-  `size` varchar(30) DEFAULT NULL,
+  `projectid` varchar(250) DEFAULT NULL,
+  `itemname` varchar(200) DEFAULT NULL,
+  `subitemname` varchar(200) DEFAULT NULL,
+  `category` varchar(130) DEFAULT NULL,
+  `grade` varchar(130) DEFAULT NULL,
+  `size` varchar(130) DEFAULT NULL,
   `quantity` int DEFAULT NULL,
   `uom` varchar(30) DEFAULT NULL,
   `date` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `DRAWING` (
-  `DrawingId` varchar(30) NOT NULL,
-  `ClientDrawing` varchar(50) NOT NULL,
-  `EMSDrawing` varchar(50) NOT NULL,
+CREATE TABLE `drawing` (
+  `DrawingId` varchar(130) NOT NULL,
+  `ClientDrawing` varchar(150) NOT NULL,
+  `EMSDrawing` varchar(150) NOT NULL,
   PRIMARY KEY (`DrawingId`),
-  CONSTRAINT `drawing_ibfk_1` FOREIGN KEY (`DrawingId`) REFERENCES `PREPURCHASE` (`DrawingId`)
+  CONSTRAINT `drawing_ibfk_1` FOREIGN KEY (`DrawingId`) REFERENCES `prepurchase` (`DrawingId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `drawinghistory` (
-  `projectid` varchar(50) NOT NULL,
-  `itemcode` varchar(50) NOT NULL,
-  `subitemcode` varchar(30) NOT NULL,
+  `projectid` varchar(250) NOT NULL,
+  `itemcode` varchar(250) NOT NULL,
+  `subitemcode` varchar(230) NOT NULL,
   `clientdrawing` varchar(300) NOT NULL,
   `emsdrawing` varchar(300) NOT NULL,
   KEY `projectid_idx` (`projectid`),
@@ -131,19 +132,19 @@ CREATE TABLE `drawinghistory` (
   CONSTRAINT `projectid` FOREIGN KEY (`projectid`) REFERENCES `projects` (`ProjectId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `EMSCatagory` (
+CREATE TABLE `emscatagory` (
   `CatagoryId` int NOT NULL AUTO_INCREMENT,
-  `Catagory` varchar(50) NOT NULL,
+  `Catagory` varchar(150) NOT NULL,
   PRIMARY KEY (`CatagoryId`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `gatepassinword` (
   `IGETPASSID` int NOT NULL AUTO_INCREMENT,
   `ISSUEVENDORID` int NOT NULL,
-  `ITEMRECIEVEDATE` varchar(50) NOT NULL,
-  `VEHICLENUMBER` varchar(100) NOT NULL,
+  `ITEMRECIEVEDATE` varchar(30) NOT NULL,
+  `VEHICLENUMBER` varchar(40) NOT NULL,
   `REMARK` varchar(5000) NOT NULL,
-  `MATERIALMACHINENAME` varchar(100) NOT NULL,
+  `MATERIALMACHINENAME` varchar(200) NOT NULL,
   `receivedQty` int NOT NULL,
   PRIMARY KEY (`IGETPASSID`),
   KEY `ISSUEVENDORID` (`ISSUEVENDORID`),
@@ -152,35 +153,35 @@ CREATE TABLE `gatepassinword` (
 
 CREATE TABLE `gatepassoutword` (
   `GETEPASSID` int NOT NULL AUTO_INCREMENT,
-  `MATERIALMACHINENAME` varchar(100) NOT NULL,
-  `SIZE` varchar(50) DEFAULT NULL,
-  `QUNTITY` varchar(50) NOT NULL,
-  `ISSUEDATE` varchar(50) NOT NULL,
+  `MATERIALMACHINENAME` varchar(200) NOT NULL,
+  `SIZE` varchar(150) DEFAULT NULL,
+  `QUNTITY` varchar(150) NOT NULL,
+  `ISSUEDATE` varchar(30) NOT NULL,
   `ISSUEVENDORID` int NOT NULL,
   `VENDORADDRESS` varchar(1000) NOT NULL,
   `REMARK` varchar(5000) NOT NULL,
   `WILLRECIEVE` tinyint(1) NOT NULL,
   `RECIEVED` tinyint(1) NOT NULL DEFAULT '0',
-  `VEHICLENUMBER` varchar(100) NOT NULL,
+  `VEHICLENUMBER` varchar(30) NOT NULL,
   PRIMARY KEY (`GETEPASSID`),
   UNIQUE KEY `MATERIALMACHINENAME` (`MATERIALMACHINENAME`),
   KEY `ISSUEVENDORID` (`ISSUEVENDORID`),
   CONSTRAINT `gatepassoutword_ibfk_1` FOREIGN KEY (`ISSUEVENDORID`) REFERENCES `vendors` (`VENDORID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `GRN` (
+CREATE TABLE `grn` (
   `GRNID` int NOT NULL AUTO_INCREMENT,
-  `VENDORNAME` varchar(40) NOT NULL,
-  `ReceiveDate` varchar(15) NOT NULL,
-  `PATH1` varchar(120) NOT NULL,
-  `PATH2` varchar(120) NOT NULL,
+  `VENDORNAME` varchar(140) NOT NULL,
+  `ReceiveDate` varchar(20) NOT NULL,
+  `PATH1` varchar(220) NOT NULL,
+  `PATH2` varchar(220) NOT NULL,
   `InvoiceNumber` varchar(100) NOT NULL,
   PRIMARY KEY (`GRNID`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `GRNAPPROVALPENDING` (
-  `PROJECTID` varchar(100) NOT NULL,
-  `MaterialCategory` varchar(100) NOT NULL,
+CREATE TABLE `grnapprovalpending` (
+  `PROJECTID` varchar(250) NOT NULL,
+  `MaterialCategory` varchar(200) NOT NULL,
   `CategoryId` int NOT NULL,
   `gradeId` int NOT NULL,
   `sizeId` int NOT NULL,
@@ -191,35 +192,35 @@ CREATE TABLE `GRNAPPROVALPENDING` (
   KEY `CategoryId` (`CategoryId`),
   KEY `gradeId` (`gradeId`),
   KEY `sizeId` (`sizeId`),
-  CONSTRAINT `grnapprovalpending_ibfk_2` FOREIGN KEY (`PROJECTID`) REFERENCES `PROJECTS` (`ProjectId`),
-  CONSTRAINT `grnapprovalpending_ibfk_3` FOREIGN KEY (`CategoryId`) REFERENCES `EMSCatagory` (`CatagoryId`),
-  CONSTRAINT `grnapprovalpending_ibfk_4` FOREIGN KEY (`gradeId`) REFERENCES `CatagoryGrade` (`gradeId`),
-  CONSTRAINT `grnapprovalpending_ibfk_5` FOREIGN KEY (`sizeId`) REFERENCES `CatagoryGradeSize` (`sizeId`)
+  CONSTRAINT `grnapprovalpending_ibfk_2` FOREIGN KEY (`PROJECTID`) REFERENCES `projects` (`ProjectId`),
+  CONSTRAINT `grnapprovalpending_ibfk_3` FOREIGN KEY (`CategoryId`) REFERENCES `emscatagory` (`CatagoryId`),
+  CONSTRAINT `grnapprovalpending_ibfk_4` FOREIGN KEY (`gradeId`) REFERENCES `catagorygrade` (`gradeId`),
+  CONSTRAINT `grnapprovalpending_ibfk_5` FOREIGN KEY (`sizeId`) REFERENCES `catagorygradesize` (`sizeId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `INDENT` (
+CREATE TABLE `indent` (
   `INDENTID` int NOT NULL AUTO_INCREMENT,
-  `PROJECTID` varchar(30) NOT NULL,
-  `ITEMCATAGORY` varchar(20) NOT NULL,
+  `PROJECTID` varchar(250) NOT NULL,
+  `ITEMCATAGORY` varchar(120) NOT NULL,
   `Quantity` int NOT NULL,
   `UOM` varchar(15) NOT NULL,
-  `REMARKS` varchar(250) DEFAULT NULL,
-  `ITEMNAME` varchar(50) NOT NULL,
+  `REMARKS` varchar(5000) DEFAULT NULL,
+  `ITEMNAME` varchar(150) NOT NULL,
   `GradeId` int NOT NULL,
   `SIZEId` int NOT NULL,
   `isPurchased` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`INDENTID`),
   KEY `PROJECTID` (`PROJECTID`),
-  CONSTRAINT `indent_ibfk_1` FOREIGN KEY (`PROJECTID`) REFERENCES `Projects` (`ProjectId`)
+  CONSTRAINT `indent_ibfk_1` FOREIGN KEY (`PROJECTID`) REFERENCES `projects` (`ProjectId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `issue` (
-  `PID` varchar(20) NOT NULL,
+  `PID` varchar(250) NOT NULL,
   `IssueDate` date NOT NULL,
   `Quantity` int NOT NULL,
-  `PersonName` varchar(20) NOT NULL,
-  `ContractorName` varchar(20) NOT NULL,
-  `Remark` varchar(150) DEFAULT NULL,
+  `PersonName` varchar(120) NOT NULL,
+  `ContractorName` varchar(120) NOT NULL,
+  `Remark` varchar(5000) DEFAULT NULL,
   `CatagoryId` int NOT NULL,
   `gradeId` int NOT NULL,
   `sizeId` int NOT NULL,
@@ -236,33 +237,33 @@ CREATE TABLE `issue` (
   CONSTRAINT `issue_ibfk_3` FOREIGN KEY (`sizeId`) REFERENCES `catagorygradesize` (`sizeId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `ITEMS` (
+CREATE TABLE `items` (
   `CLIENTID` int NOT NULL,
-  `ITEMCODE` varchar(30) NOT NULL,
-  `ITEMNAME` varchar(30) DEFAULT NULL,
+  `ITEMCODE` varchar(310) NOT NULL,
+  `ITEMNAME` varchar(310) DEFAULT NULL,
   `QUANTITY` int NOT NULL,
   `QuotationId` int DEFAULT NULL,
-  `TagNo` varchar(50) NOT NULL,
+  `TagNo` varchar(150) NOT NULL,
   `DeliveryDate` varchar(15) NOT NULL,
-  `Remarks` varchar(200) NOT NULL,
+  `Remarks` varchar(5000) NOT NULL,
   UNIQUE KEY `ITEMCODE` (`ITEMCODE`),
   KEY `QuotationId` (`QuotationId`),
   KEY `CLIENTID` (`CLIENTID`),
-  CONSTRAINT `items_ibfk_6` FOREIGN KEY (`QuotationId`) REFERENCES `QUOTATIONS` (`QuotationId`),
-  CONSTRAINT `items_ibfk_7` FOREIGN KEY (`CLIENTID`) REFERENCES `Clients` (`clientid`)
+  CONSTRAINT `items_ibfk_6` FOREIGN KEY (`QuotationId`) REFERENCES `quotations` (`QuotationId`),
+  CONSTRAINT `items_ibfk_7` FOREIGN KEY (`CLIENTID`) REFERENCES `clients` (`clientid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `LOGS` (
+CREATE TABLE `logs` (
   `LogId` int NOT NULL AUTO_INCREMENT,
-  `DepartmentName` varchar(30) NOT NULL,
-  `LOGS` varchar(200) NOT NULL,
+  `DepartmentName` varchar(130) NOT NULL,
+  `LOGS` varchar(1000) NOT NULL,
   `CurrentTime` varchar(50) NOT NULL,
   `USERID` int NOT NULL,
-  `Category` varchar(15) NOT NULL,
+  `Category` varchar(150) NOT NULL,
   PRIMARY KEY (`LogId`),
   KEY `USERID` (`USERID`),
-  CONSTRAINT `logs_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`)
-) ENGINE=InnoDB AUTO_INCREMENT=545 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `logs_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`)
+) ENGINE=InnoDB AUTO_INCREMENT=568 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `machines` (
   `machineId` int NOT NULL AUTO_INCREMENT,
@@ -283,7 +284,7 @@ CREATE TABLE `maintenance` (
   `COMPANYNAME` varchar(100) NOT NULL,
   `GIVENDATE` varchar(30) NOT NULL,
   `DUEDATE` varchar(30) NOT NULL,
-  `INVOICE` varchar(500) NOT NULL,
+  `INVOICE` varchar(200) NOT NULL,
   `REMARK` varchar(5000) NOT NULL,
   `receivedDate` varchar(30) DEFAULT NULL,
   `mntPrice` bigint DEFAULT '0',
@@ -292,38 +293,38 @@ CREATE TABLE `maintenance` (
   CONSTRAINT `maintenance_ibfk_1` FOREIGN KEY (`MACHINEID`) REFERENCES `machines` (`machineId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `OFFER` (
+CREATE TABLE `offer` (
   `ClientId` int NOT NULL,
-  `OfferCode` varchar(30) NOT NULL,
-  `offerName` varchar(80) NOT NULL,
+  `OfferCode` varchar(230) NOT NULL,
+  `offerName` varchar(280) NOT NULL,
   `TotalPrice` varchar(25) NOT NULL,
   `Quantity` int NOT NULL,
   `QuotationId` int DEFAULT NULL,
-  `DrawingId` varchar(30) DEFAULT NULL,
-  `REMARKS` varchar(250) DEFAULT NULL,
+  `DrawingId` varchar(130) DEFAULT NULL,
+  `REMARKS` varchar(5000) DEFAULT NULL,
   `Status` varchar(10) DEFAULT 'FALSE',
   `addDate` varchar(15) NOT NULL,
-  `address` varchar(200) NOT NULL,
+  `address` varchar(300) NOT NULL,
   PRIMARY KEY (`OfferCode`),
   KEY `ClientId` (`ClientId`),
   KEY `QuotationId` (`QuotationId`),
   KEY `DrawingId` (`DrawingId`),
-  CONSTRAINT `offer_ibfk_1` FOREIGN KEY (`ClientId`) REFERENCES `Clients` (`clientid`),
-  CONSTRAINT `offer_ibfk_4` FOREIGN KEY (`QuotationId`) REFERENCES `Quotations` (`QuotationId`),
-  CONSTRAINT `offer_ibfk_5` FOREIGN KEY (`DrawingId`) REFERENCES `PrePurchase` (`DrawingId`)
+  CONSTRAINT `offer_ibfk_1` FOREIGN KEY (`ClientId`) REFERENCES `clients` (`clientid`),
+  CONSTRAINT `offer_ibfk_4` FOREIGN KEY (`QuotationId`) REFERENCES `quotations` (`QuotationId`),
+  CONSTRAINT `offer_ibfk_5` FOREIGN KEY (`DrawingId`) REFERENCES `prepurchase` (`DrawingId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `phase` (
-  `projectid` varchar(50) DEFAULT NULL,
-  `itemcode` varchar(50) DEFAULT NULL,
-  `PhaseName` varchar(30) DEFAULT NULL,
-  `started` varchar(30) DEFAULT 'no'
+  `projectid` varchar(250) DEFAULT NULL,
+  `itemcode` varchar(150) DEFAULT NULL,
+  `PhaseName` varchar(130) DEFAULT NULL,
+  `started` varchar(10) DEFAULT 'no'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `postpurchase` (
   `INDENTID` int NOT NULL,
-  `ProductDescription` varchar(60) NOT NULL,
-  `Size` varchar(35) NOT NULL,
+  `ProductDescription` varchar(160) NOT NULL,
+  `Size` varchar(135) NOT NULL,
   `Quantity` int NOT NULL,
   `UNITS` varchar(15) NOT NULL,
   `RatePerKg` varchar(20) NOT NULL,
@@ -332,49 +333,49 @@ CREATE TABLE `postpurchase` (
   `SGST` varchar(10) NOT NULL,
   `CGST` varchar(10) NOT NULL,
   `CurrentDate` varchar(20) NOT NULL,
-  `PONumber` varchar(30) NOT NULL,
-  `VendorName` varchar(30) NOT NULL,
+  `PONumber` varchar(130) NOT NULL,
+  `VendorName` varchar(230) NOT NULL,
   `POID` int NOT NULL AUTO_INCREMENT,
-  `PaymentTerms` varchar(30) DEFAULT NULL,
+  `PaymentTerms` varchar(3000) DEFAULT NULL,
   `isPaid` varchar(10) NOT NULL DEFAULT 'FALSE',
   `transportationprice` float NOT NULL DEFAULT '0',
   `isReceived` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`POID`),
   KEY `INDENTID` (`INDENTID`),
-  CONSTRAINT `postpurchase_ibfk_1` FOREIGN KEY (`INDENTID`) REFERENCES `INDENT` (`INDENTID`)
+  CONSTRAINT `postpurchase_ibfk_1` FOREIGN KEY (`INDENTID`) REFERENCES `indent` (`INDENTID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `Prepurchase` (
-  `PROJECTID` varchar(20) DEFAULT NULL,
-  `DrawingId` varchar(30) NOT NULL,
+CREATE TABLE `prepurchase` (
+  `PROJECTID` varchar(250) DEFAULT NULL,
+  `DrawingId` varchar(230) NOT NULL,
   `ClientId` int NOT NULL,
   PRIMARY KEY (`DrawingId`),
   KEY `projectId` (`PROJECTID`),
   KEY `ClientId` (`ClientId`),
-  CONSTRAINT `prepurchase_ibfk_1` FOREIGN KEY (`PROJECTID`) REFERENCES `PROJECTS` (`ProjectId`),
-  CONSTRAINT `prepurchase_ibfk_2` FOREIGN KEY (`ClientId`) REFERENCES `Clients` (`clientid`)
+  CONSTRAINT `prepurchase_ibfk_1` FOREIGN KEY (`PROJECTID`) REFERENCES `projects` (`ProjectId`),
+  CONSTRAINT `prepurchase_ibfk_2` FOREIGN KEY (`ClientId`) REFERENCES `clients` (`clientid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `production` (
-  `ProjectId` varchar(20) NOT NULL,
-  `Remarks` varchar(50) NOT NULL,
+  `ProjectId` varchar(250) NOT NULL,
+  `Remarks` varchar(5000) NOT NULL,
   `WorkDonePercentage` int NOT NULL,
-  `qualityCheck` varchar(30) NOT NULL,
+  `qualityCheck` varchar(20) NOT NULL,
   KEY `PID` (`ProjectId`),
   CONSTRAINT `production_ibfk_1` FOREIGN KEY (`ProjectId`) REFERENCES `projects` (`ProjectId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `ProfitInQuotationPerItem` (
-  `OfferCode` varchar(30) DEFAULT NULL,
+CREATE TABLE `profitinquotationperitem` (
+  `OfferCode` varchar(230) DEFAULT NULL,
   `TotalAmountWithoutProfit` varchar(30) NOT NULL,
   `TotalAmountWithProfit` varchar(30) NOT NULL,
   UNIQUE KEY `ItemCode` (`OfferCode`),
-  CONSTRAINT `profitinquotationperitem_ibfk_1` FOREIGN KEY (`OfferCode`) REFERENCES `QuotationPerItem` (`offerCode`)
+  CONSTRAINT `profitinquotationperitem_ibfk_1` FOREIGN KEY (`OfferCode`) REFERENCES `quotationperitem` (`offerCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `PROJECTS` (
-  `ProjectId` varchar(20) NOT NULL,
-  `QuotationId` varchar(20) NOT NULL,
+CREATE TABLE `projects` (
+  `ProjectId` varchar(250) NOT NULL,
+  `QuotationId` varchar(250) NOT NULL,
   `PODATE` varchar(20) NOT NULL,
   `AdvancePayPercent` int NOT NULL,
   `AfterPayPercent` int NOT NULL,
@@ -384,23 +385,23 @@ CREATE TABLE `PROJECTS` (
   `Progress` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`ProjectId`),
   KEY `Client_Id` (`ClientId`),
-  CONSTRAINT `projects_ibfk_1` FOREIGN KEY (`ClientId`) REFERENCES `Clients` (`clientid`)
+  CONSTRAINT `projects_ibfk_1` FOREIGN KEY (`ClientId`) REFERENCES `clients` (`clientid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `QUOTATIONHISTORY` (
+CREATE TABLE `quotationhistory` (
   `QuotationId` int NOT NULL,
   `ClientId` int NOT NULL,
   `QuotationDate` varchar(15) NOT NULL,
   `QuotationAmount` varchar(30) NOT NULL,
-  `FinalDelivaryDate` varchar(15) DEFAULT NULL,
+  `FinalDelivaryDate` varchar(20) DEFAULT NULL,
   `Quantity` int DEFAULT NULL,
   `DiscountPercentage` varchar(15) DEFAULT NULL,
   `DiscountAmount` varchar(30) DEFAULT NULL,
-  `REMARKS` varchar(250) DEFAULT NULL
+  `REMARKS` varchar(5000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `quotationperitem` (
-  `offerCode` varchar(30) NOT NULL,
+  `offerCode` varchar(230) NOT NULL,
   `CatagoryId` int NOT NULL,
   `QuotationPerItemQuantity` int NOT NULL,
   `Weights` varchar(25) NOT NULL,
@@ -414,13 +415,13 @@ CREATE TABLE `quotationperitem` (
   KEY `offerCode` (`offerCode`),
   KEY `sizeId` (`sizeId`),
   KEY `GradeId` (`GradeId`),
-  CONSTRAINT `quotationperitem_ibfk_3` FOREIGN KEY (`CatagoryId`) REFERENCES `EMSCatagory` (`CatagoryId`),
-  CONSTRAINT `quotationperitem_ibfk_4` FOREIGN KEY (`offerCode`) REFERENCES `OFFER` (`OfferCode`),
-  CONSTRAINT `quotationperitem_ibfk_5` FOREIGN KEY (`sizeId`) REFERENCES `catagoryGradeSize` (`sizeId`),
-  CONSTRAINT `quotationperitem_ibfk_6` FOREIGN KEY (`GradeId`) REFERENCES `catagoryGrade` (`gradeId`)
+  CONSTRAINT `quotationperitem_ibfk_3` FOREIGN KEY (`CatagoryId`) REFERENCES `emscatagory` (`CatagoryId`),
+  CONSTRAINT `quotationperitem_ibfk_4` FOREIGN KEY (`offerCode`) REFERENCES `offer` (`OfferCode`),
+  CONSTRAINT `quotationperitem_ibfk_5` FOREIGN KEY (`sizeId`) REFERENCES `catagorygradesize` (`sizeId`),
+  CONSTRAINT `quotationperitem_ibfk_6` FOREIGN KEY (`GradeId`) REFERENCES `catagorygrade` (`gradeId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `Quotations` (
+CREATE TABLE `quotations` (
   `QuotationId` int NOT NULL AUTO_INCREMENT,
   `ClientId` int NOT NULL,
   `QuotationDate` varchar(15) NOT NULL,
@@ -431,7 +432,7 @@ CREATE TABLE `Quotations` (
   `DiscountAmount` varchar(30) DEFAULT NULL,
   `Remarks` varchar(5000) DEFAULT NULL,
   PRIMARY KEY (`QuotationId`)
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `store` (
   `StoreId` int NOT NULL AUTO_INCREMENT,
@@ -443,36 +444,36 @@ CREATE TABLE `store` (
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `subitems` (
-  `itemcode` varchar(30) NOT NULL,
-  `subitemcode` varchar(100) NOT NULL,
-  `phase` varchar(45) NOT NULL DEFAULT 'NotStarted',
+  `itemcode` varchar(230) NOT NULL,
+  `subitemcode` varchar(230) NOT NULL,
+  `phase` varchar(100) NOT NULL DEFAULT 'NotStarted',
   KEY `itemcode` (`itemcode`),
   CONSTRAINT `subitems_ibfk_1` FOREIGN KEY (`itemcode`) REFERENCES `items` (`ITEMCODE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `USER` (
+CREATE TABLE `user` (
   `USERID` int NOT NULL AUTO_INCREMENT,
-  `NAME` varchar(20) NOT NULL,
-  `EMAIL` varchar(40) NOT NULL,
+  `NAME` varchar(100) NOT NULL,
+  `EMAIL` varchar(60) NOT NULL,
   `Password` varchar(500) DEFAULT NULL,
   `PHONENUMBER` bigint NOT NULL,
-  `DEPARTMENTNAME` varchar(15) NOT NULL,
+  `DEPARTMENTNAME` varchar(25) NOT NULL,
   `ROLE` int NOT NULL,
   `secretKey` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`USERID`),
   UNIQUE KEY `EMAIL` (`EMAIL`),
   UNIQUE KEY `PHONENUMBER` (`PHONENUMBER`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `VENDORS` (
+CREATE TABLE `vendors` (
   `VENDORID` int NOT NULL AUTO_INCREMENT,
-  `VENDORNAME` varchar(30) NOT NULL,
-  `ADDRESS` varchar(50) NOT NULL,
-  `Email` varchar(40) NOT NULL,
+  `VENDORNAME` varchar(130) NOT NULL,
+  `ADDRESS` varchar(250) NOT NULL,
+  `Email` varchar(60) NOT NULL,
   `PhoneNumber` bigint NOT NULL,
   `PhoneNumber1` bigint DEFAULT NULL,
-  `Email1` varchar(40) DEFAULT NULL,
-  `GST` varchar(10) NOT NULL,
+  `Email1` varchar(60) DEFAULT NULL,
+  `GST` varchar(30) NOT NULL,
   `PANNUMBER` varchar(20) NOT NULL,
   `BankName` varchar(100) NOT NULL,
   `ACNumber` varchar(60) NOT NULL,
@@ -481,4 +482,5 @@ CREATE TABLE `VENDORS` (
   PRIMARY KEY (`VENDORID`),
   UNIQUE KEY `Email` (`Email`),
   UNIQUE KEY `PhoneNumber` (`PhoneNumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
