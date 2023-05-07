@@ -25,7 +25,7 @@ public class Trial implements Job{
 	
 	public static void DailyMailService() {
 		
-		Date startDate = DateBuilder.todayAt(00,30, 00);
+		Date startDate = DateBuilder.todayAt(4,00, 00);
 		 job = newJob(Trial.class)
 			    .withIdentity("myJob", "group1")
 			    .build();

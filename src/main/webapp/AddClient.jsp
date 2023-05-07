@@ -55,7 +55,7 @@
 									<div class="form-group">
 										<label for="exampleInputPassword1">Phone 2(optional)</label> <input
 											type="number" class="form-control" id="exampleInputPassword1"
-											placeholder="Enter Phone Number 2" name="phone1" value="0" pattern="[0-9]{10}">
+											placeholder="Enter Phone Number 2" name="phone1" pattern="[0-9]{10}">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Email 1</label> <input
@@ -65,7 +65,7 @@
 									<div class="form-group">
 										<label for="exampleInputPassword1">Email 2(optional)</label> <input
 											type="text" class="form-control" id="exampleInputPassword1"
-											placeholder="Enter email 2" value=" " name="email1">
+											placeholder="Enter email 2" name="email1">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">PAN No</label> <input

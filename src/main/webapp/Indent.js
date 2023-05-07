@@ -54,23 +54,6 @@ document.getElementById("deleteClicked").addEventListener("click", () => {
 	$('#modal-projectDelete').modal('hide');
 });
 
-/*
-function deleteItem() {
-	data.splice((EditId - 1), 1);
-	var parent = document.getElementById('MyTable11')
-	var child = parent.querySelector('tr')
-	parent.removeChild(child);
-	for (var i = 0; i < data.length; i++) {
-		document.getElementById(`ItemName${i + 1}`).innerHTML = data[i].ItemName;
-		document.getElementById(`PricePerUnit${i + 1}`).innerHTML = data[i].pricePerUnit;
-		document.getElementById(`TagNo${i + 1}`).innerHTML = data[i].tagNo;
-		document.getElementById(`Quantity${i + 1}`).innerHTML = data[i].quantity;
-		document.getElementById(`DelivaryDate${i + 1}`).innerHTML = data[i].delivaryDate;
-		document.getElementById(`TotalPrice${i + 1}`).innerHTML = data[i].TotalPrice;
-	}
-	console.log(data)
-}
-*/
 function updateField() {
 	var fieldToChange = document.getElementById('input-form').value;
 	var newValue = document.getElementById('placeholderChange').value;
@@ -96,6 +79,7 @@ function updateField() {
 		document.getElementById(`TotalPrice${i + 1}`).innerHTML = data[i].TotalPrice;
 	}
 }
+
 function getGrade(){
 	console.log("gg");
 	let gradeData;
@@ -104,7 +88,7 @@ function getGrade(){
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
-		gradeData = JSON.parse(xhr.responseText);
+			gradeData = JSON.parse(xhr.responseText);
 			appendGrade(gradeData);
 		}
 	}
@@ -112,6 +96,7 @@ function getGrade(){
 	xhr.send(JSON.stringify(data));
 }
 function getItemNames(){
+	let gradeData;
 	var xhr = new XMLHttpRequest();
 	xhr.open('PUT', 'http://localhost:8080/EMS/IndentServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');

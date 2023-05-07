@@ -119,8 +119,18 @@ public class ClientServlet extends HttpServlet {
 			clientBean.setGstNo(gst);
 			clientBean.setPhoneNumber(Long.parseLong(phone));
 			clientBean.setPanNo(pan);
-			clientBean.setPhoneNumber1(Long.parseLong(phone1));
-			clientBean.setEmail1(email1);
+			System.out.println("Phone Number 1 :"+phone1);
+			if(phone1 == null || phone1 == "") {
+				clientBean.setPhoneNumber1(0);	
+			}else {
+				clientBean.setPhoneNumber1(Long.parseLong(phone1));
+			}
+			if(email1 != null) {
+				clientBean.setEmail1(email1);
+			}else {
+				clientBean.setEmail1(null);
+			}
+			
 			ClientDao clientDao = ClientDao.getInstance();
 			HttpSession session = request.getSession();
 			if(clientDao.addClient(clientBean)) {
