@@ -34,7 +34,7 @@
 								<!-- text input -->
 								<div class="form-group">
 									<label>Vendor Name</label> <input type="text" id="vendorName"
-										class="form-control" placeholder="Enter VendorName" pattern="[A-Za-z]{1,50}" required="required">
+										class="form-control" placeholder="Enter VendorName" pattern="[A-Za-z ]{1,50}" required="required">
 								</div>
 							</div>
 							<div class="col-sm-3">
@@ -45,8 +45,8 @@
 							</div>
 							<div class="col-sm-3">
 								<div class="form-group">
-									<label>Email(optional)</label> <input type="email" class="form-control"
-										id="email1" placeholder="Enter Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$">
+									<label>Email(optional)</label> <input type="text" class="form-control"
+										id="email1" placeholder="Enter Email" value="none">
 								</div>
 							</div>
 							<div class="col-sm-3">
@@ -58,7 +58,7 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Phone Number(optional)</label> <input type="number" id="mobile1"
-										class="form-control" placeholder="Enter Mob-Number" pattern="[0-9]{10}">
+										class="form-control" value="0" placeholder="Enter Mob-Number" pattern="[0-9]{10}">
 								</div>
 							</div>
 							<div class="col-md-6">

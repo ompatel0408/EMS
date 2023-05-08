@@ -29,7 +29,7 @@ public class EMSPurchaseBean {
 	private String paymentTerms;
 	private double taxableValue;
 	private double totalAmount;
-private double transportPrice;
+	private double transportPrice;
 	
 
 	public double getTransportPrice() {
@@ -41,7 +41,7 @@ private double transportPrice;
 	}
 	
 
-	public EMSPurchaseBean(String projectId,String category,int quantity,String uom,String remarks,String itemName,String grade,String size) {
+	public EMSPurchaseBean(String projectId,String category,int quantity,String uom,String remarks,String itemName,String grade,String size,int indentId) {
 		this.Size = size;
 		this.quantity = quantity;
 		this.Uom = uom;
@@ -50,6 +50,7 @@ private double transportPrice;
 		this.grade = grade;
 		this.remarks = remarks;
 		this.itemName = itemName;
+		this.IndentId = indentId;
 	}
 
 	public EMSPurchaseBean() {}

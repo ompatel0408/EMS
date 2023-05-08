@@ -44,7 +44,7 @@ public class EMSGRNPendingServices {
 
 		// Loop through each object in the list and extract the fields
 		for (Map<String, Object> item : data) {
-			EMSGRNPendingBean EGPB = new EMSGRNPendingBean(item.get("MaterialCategory").toString(), item.get("projectId").toString(),QuotationPerItemDao.getInstance().getCategoryIdFromDatabase(item.get("Category").toString()),QuotationPerItemDao.getInstance().getgradeIdFromDatabase(item.get("Grade").toString()),QuotationPerItemDao.getInstance().getsizeIdFromDatabase(item.get("size").toString()), item.get("units").toString(), Integer.parseInt(item.get("Quantity").toString()),item.get("Category").toString(),item.get("Grade").toString(),item.get("size").toString());	
+			EMSGRNPendingBean EGPB = new EMSGRNPendingBean(item.get("MaterialCategory").toString(), item.get("projectId").toString(),QuotationPerItemDao.getInstance().getCategoryIdFromDatabase(item.get("Category").toString()),QuotationPerItemDao.getInstance().getgradeIdFromDatabase(item.get("Grade").toString()),QuotationPerItemDao.getInstance().getsizeIdFromDatabase(item.get("size").toString()), item.get("units").toString(), Integer.parseInt(item.get("Quantity").toString()),Integer.parseInt(item.get("originalQuantity").toString()),item.get("Category").toString(),item.get("Grade").toString(),item.get("size").toString());	
 			APB.add(EGPB);
 		}
 		return APB;

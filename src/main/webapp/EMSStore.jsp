@@ -48,7 +48,7 @@
 							<div class="col-sm-4">
 								<div class="form-group">
 									<label>Size</label> <select type="text" id="size-id"
-										class="form-control" required>
+										class="form-control" onchange="getQuant()" required>
 										<option >Select size</option>
 									</select>
 								</div>
@@ -56,7 +56,7 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Quantity</label> <input type="text" class="form-control"
-										id="quantaty-id" placeholder="Quantity" required>
+										id="quantaty-id" placeholder="Quantity"  disabled required>
 								</div>
 							</div>
 							<div

@@ -165,7 +165,7 @@ public class EMSVendorsDao {
 			try {
 				Connection con = MySqlConnection.getInstance();
 				PreparedStatement pstmt = con.prepareStatement(
-						"select productdescription,size,i.quantity,units,rateperkg,discount,rateperkg*(i.quantity) netAmuount,sgst,cgst,round((totalAmount*(sgst+cgst))/(100),2) taxableValue,totalAmount,PaymentTerms,transportationprice from postpurchase join indent i using(indentid) where vendorname=? and projectid=?");
+						"select productdescription,size,p.quantity,units,rateperkg,discount,rateperkg*(p.quantity) netAmuount,sgst,cgst,round((totalAmount*(sgst+cgst))/(100),2) taxableValue,totalAmount,PaymentTerms,transportationprice from postpurchase p join indent i using(indentid) where vendorname=? and projectid=?");
 				pstmt.setString(1, vendorName);
 				pstmt.setString(2, project);
 				ResultSet rs = pstmt.executeQuery();

@@ -130,7 +130,7 @@
 					<ul class="nav nav-treeview">
 
 						<li class="nav-item" id="dprList-id" style="display: none;"><a
-							href="DailyProgressReportServlet" class="nav-link"> <i
+							href="DailyProgressReportServlet?delete=notdelete" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>DPR List</p>
 						</a></li>

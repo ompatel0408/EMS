@@ -87,6 +87,7 @@
                             <div class="form-group">
                                     <label>Grade</label>
                                     <input type="text" class="form-control" id="grade-id" placeholder="Grade" required disabled>
+                                    <input type="hidden" class="form-control" id="indentId">
                             </div>
                             </div>
                             <div class="col-sm-3">

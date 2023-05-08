@@ -167,3 +167,20 @@ function appendSize(dataCategory) {
 		projectsSelect.appendChild(createdAt);
 	}
 }
+
+function getQuant(){
+	
+	let Data;
+	var xhr = new XMLHttpRequest();
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSStoreServlet', true);
+	xhr.setRequestHeader('Content-type', 'application/json');
+	xhr.onload = function() {
+		if (xhr.status === 200) {
+			Data = JSON.parse(xhr.responseText);
+			console.log(Data);
+			document.getElementById('quantaty-id').value=Data
+		}
+	}
+	var data1 = { token: 'quantity', category: document.getElementById("category-id").value, grade: document.getElementById("grade-id").value,size:document.getElementById('size-id').value }
+	xhr.send(JSON.stringify(data1));
+}

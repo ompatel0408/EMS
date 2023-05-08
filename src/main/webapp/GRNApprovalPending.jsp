@@ -56,6 +56,8 @@
 								<div class="form-group">
 									<label>Category</label> <input type="text" class="form-control"
 										id="category-id" placeholder="Enter Category" disabled>
+										<input type="hidden" class="form-control"
+										id="quantity1" disabled>
 								</div>
 							</div>
 							<div class="col-sm-3">
@@ -73,8 +75,8 @@
 										id="size-id" placeholder="Enter Size" disabled>
 								</div>
 								<div class="form-group">
-									<label>Quantity</label> <input type="text" class="form-control"
-										id="Quantity" placeholder="Enter Quantaty" disabled>
+									<label>Quantity</label> <input type="number" class="form-control"
+										id="Quantity" placeholder="Enter Quantaty"  disabled>
 								</div>
 							</div>
 							<!-- /.col -->
@@ -127,10 +129,8 @@
 						<thead>
 							<tr>
 								<th style="width: 2%">Sr.No</th>
-								<th style="width: 15%">ProjectID</th>
-								<th style="width: 15%">ItemName</th>
-								<th style="width: 15%">Category</th>
-								<th style="width: 15%">Grade</th>
+								<th style="width: 20%">Category</th>
+								<th style="width: 20%">Grade</th>
 								<th style="width: 12%">Size</th>
 								<th style="width: 10%">Quantity</th>
 								<th style="width: 10%">Units</th>

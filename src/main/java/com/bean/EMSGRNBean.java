@@ -19,15 +19,14 @@ public class EMSGRNBean {
 
 	public EMSGRNBean() {}
 	
-	public EMSGRNBean(String projectId, String itemCode, String categoryName, String gradeName, String size,int quantity, String units) {
-		this.projectId = projectId;
-		this.itemCode = itemCode;
+	public EMSGRNBean(String categoryName, String gradeName, String size,int quantity, String units) {
 		this.categoryName = categoryName;
 		this.gradeName = gradeName;
 		this.size = size;
 		this.quantity = quantity;
 		this.units = units;
 	}
+	
 	
 	public EMSGRNBean(String vendorName, String receiveDate) {
 		this.VendorName = vendorName;

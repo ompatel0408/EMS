@@ -232,7 +232,7 @@
 															<td><%=EGPB.getSizeName()%></td>
 															<td><%=EGPB.getUnits()%></td>
 															<td><%=EGPB.getQuantity()%></td>
-															<td><%=EGPB.getRemamingQuantity()%></td>
+															<td><%=EGPB.getOriginalQuantity()%></td>
 															<!-- Project Edit model -->
 														</tr>
 														<%}%>

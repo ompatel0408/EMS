@@ -26,7 +26,7 @@ public class EMSDrawingDao {
 	
 	public ArrayList<String> getOfferNameFromDatabase(String projectId) {
 		
-		String selectQuery = "select ItemCode from items I JOIN Projects P ON I.QuotationId = P.QuotationId WHERE projectId = ?";
+		String selectQuery = "select ItemCode from items WHERE projectId = ?";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<String> arr = new ArrayList<String>();
 		if(conn != null) {
@@ -158,7 +158,7 @@ public class EMSDrawingDao {
 	
 	public ArrayList<SubItemBean> getAllData(){
 		
-		String selectQuery = "select projectid,itemcode,subitemcode from clients join projects using(clientid) join items using(clientid) join subitems using(itemcode)";
+		String selectQuery = "select items.projectid,itemcode,subitemcode from clients join projects using(clientid) join items using(clientid) join subitems using(itemcode)";
 		Connection conn =MySqlConnection.getInstance();
 		ArrayList<SubItemBean> a = new ArrayList<SubItemBean>();
 		SubItemBean EGB = null;

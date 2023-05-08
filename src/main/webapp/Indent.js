@@ -280,7 +280,7 @@ window.addEventListener("beforeunload", function (event) {
 });
 
 function getGivenQuantity(){
-	console.log("AAiye")
+	
 	var xhr1 = new XMLHttpRequest();
 	xhr1.open('PUT', 'http://localhost:8080/EMS/IndentServlet',true);
 	xhr1.setRequestHeader('Content-type', 'application/json');
@@ -288,7 +288,7 @@ function getGivenQuantity(){
 		if (xhr1.status === 200) {
 		let countSize = JSON.parse(xhr1.responseText);
 		console.log("total count size : " + countSize);
-		document.getElementById('givenQuantity').innerHTML="Available Stock in Store is :"+parseInt(countSize)
+		document.getElementById('givenQuantity').innerHTML="Your need to request for "+parseInt(countSize)+" quantity to store."
 		document.getElementById('givenQuantity').style.color="red"
 		}
 	}

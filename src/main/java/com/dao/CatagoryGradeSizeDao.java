@@ -187,7 +187,7 @@ public class CatagoryGradeSizeDao {
 		return 0;
 	}
 	public int getGivenQuantity(String category, String grade, String size, String itemName) {
-		String query = "select sum(quantity) from offer join quotationperitem using(offercode) join emscatagory using(catagoryid) join catagorygrade using(gradeid) join catagorygradesize using(sizeid) where quotationperitem.catagoryid = ? and grade=? and size=? and offername=?";
+		String query = "select sum(QuotationPerItemQuantity) from offer join quotationperitem using(offercode) join emscatagory using(catagoryid) join catagorygrade using(gradeid) join catagorygradesize using(sizeid) where quotationperitem.catagoryid = ? and grade=? and size=? and offername=?";
 		int count=0;
 		try {
 			Connection con = MySqlConnection.getInstance();

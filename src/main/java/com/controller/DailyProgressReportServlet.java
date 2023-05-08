@@ -44,18 +44,9 @@ public class DailyProgressReportServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-
-			String delete = request.getParameter("delete");
-			if (delete.equals("delete")) {
-				DailyProgressReportDao dprDao = null;
-				String itemId = request.getParameter("itemId");
-				String subItemId = request.getParameter("subItemId");
-				String editedColumn = request.getParameter("phase");
-				String projectId = request.getParameter("projectId");
-				dprDao.getInstance().updatePhase(projectId, subItemId, editedColumn,itemId);
-				
-				
-			} else {
+			System.out.println("For DPR");
+			if(request.getParameter("delete")==null)
+			{
 				ArrayList<DailyProgressReportBean> ibean = new ArrayList<DailyProgressReportBean>();
 				ibean = DailyProgressReportServices.fetchDataFromXHRRequest(request.getReader(), request);
 
@@ -63,12 +54,22 @@ public class DailyProgressReportServlet extends HttpServlet {
 				DailyProgressReportDao dprDao = DailyProgressReportDao.getInstance();
 				if (dprDao.addDPR(ibean)) {
 					System.out.println("Indent Added!");
-
 				} else {
 					System.out.println("Indent not Added!");
 				}
+				doGet(request, response);
+			}
+			else if (request.getParameter("delete").equals("delete")) {
+				DailyProgressReportDao dprDao = null;
+				String itemId = request.getParameter("itemId");
+				String subItemId = request.getParameter("subItemId");
+				String editedColumn = request.getParameter("phase");
+				String projectId = request.getParameter("projectId");
+				dprDao.getInstance().updatePhase(projectId, subItemId, editedColumn,itemId);
+				response.sendRedirect("EMSDirectorsDashboard.jsp");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			ExceptionHandler.handleException(request, response, e);
 		}
 	}

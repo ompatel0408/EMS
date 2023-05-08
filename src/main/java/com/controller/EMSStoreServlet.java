@@ -119,6 +119,18 @@ public class EMSStoreServlet extends HttpServlet {
 				response.setCharacterEncoding("UTF-8");
 				response.getWriter().write(json);		
 			}
+			else if(jsonType.equals("quantity"))
+			{
+				String ctgry = jsonObject.getAsJsonObject().get("category").toString().replace("\"", "");
+				String grd = jsonObject.getAsJsonObject().get("grade").toString().replace("\"", "");
+				String size = jsonObject.getAsJsonObject().get("size").toString().replace("\"", "");
+				
+				String json = gson.toJson(sd.getQuantFromDatabase(ctgry, grd,size));
+				
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(json);	
+			}
 		}catch(Exception e) {
 			ExceptionHandler.handleException(request, response, e);
 		}

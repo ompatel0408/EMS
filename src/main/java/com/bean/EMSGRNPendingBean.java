@@ -14,10 +14,12 @@ public class EMSGRNPendingBean {
 	private String units;
 	private int quantity;
 	private int remamingQuantity;
+	private int originalQuantity;
+	
 	
 	public EMSGRNPendingBean() {}
 	
-	public EMSGRNPendingBean(String materialCategory, String projectId, int category, int grade,int size,String units, int quantity,String categoryName,String gradeName,String sizeName) {
+	public EMSGRNPendingBean(String materialCategory, String projectId, int category, int grade,int size,String units, int quantity,int originalQuantity,String categoryName,String gradeName,String sizeName) {
 		this.materialCategory = materialCategory;
 		this.projectId = projectId;
 		this.category = category;
@@ -25,12 +27,13 @@ public class EMSGRNPendingBean {
 		this.size = size;
 		this.units = units;
 		this.quantity = quantity;
+		this.originalQuantity = originalQuantity;
 		this.categoryName = categoryName;
 		this.gradeName = gradeName;
 		this.sizeName = sizeName;
 	}
 	
-	public EMSGRNPendingBean(String materialCategory, String projectId, String  categoryName,String gradeName,String sizeName,String units, int quantity,int remamingQuantity) {
+	public EMSGRNPendingBean(String materialCategory, String projectId, String  categoryName,String gradeName,String sizeName,String units, int quantity,int originalQuantity) {
 		this.materialCategory = materialCategory;
 		this.projectId = projectId;
 		this.categoryName = categoryName;
@@ -38,17 +41,17 @@ public class EMSGRNPendingBean {
 		this.sizeName = sizeName;
 		this.units = units;
 		this.quantity = quantity;
-		this.remamingQuantity = remamingQuantity;
+		this.originalQuantity = originalQuantity;
 	}
 	
-	public int getRemamingQuantity() {
-		return remamingQuantity;
+	public int getOriginalQuantity() {
+		return originalQuantity;
 	}
 
-	public void setRemamingQuantity(int remamingQuantity) {
-		this.remamingQuantity = remamingQuantity;
+	public void setOriginalQuantity(int originalQuantity) {
+		this.originalQuantity = originalQuantity;
 	}
-	
+
 	public String getCategoryName() {
 		return categoryName;
 	}

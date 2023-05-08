@@ -183,7 +183,7 @@ public class EMSPurchaseDao {
 	
 public ArrayList<EMSPurchaseBean> getAllPurchaseOrderByUsingProjectId(String projectId) {
 		
-		String selectQuery = "select PROJECTID,catagory,Quantity,UOM,REMARKS,ITEMNAME,grade,size from indent i join emscatagory ec on i.itemcatagory=ec.catagoryid join catagorygrade using(gradeid) join catagorygradesize using(sizeid) WHERE PROJECTID = ? AND isPurchased = 0";
+		String selectQuery = "select PROJECTID,catagory,Quantity,UOM,REMARKS,ITEMNAME,grade,size,indentId from indent i join emscatagory ec on i.itemcatagory=ec.catagoryid join catagorygrade using(gradeid) join catagorygradesize using(sizeid) WHERE PROJECTID = ? AND isPurchased = 0";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<EMSPurchaseBean> arr = new ArrayList<EMSPurchaseBean>();
 		if(conn != null) {
@@ -193,7 +193,7 @@ public ArrayList<EMSPurchaseBean> getAllPurchaseOrderByUsingProjectId(String pro
 				stmt.setString(1, projectId);
 				ResultSet rs =stmt.executeQuery();
 				while(rs.next()) {
-					arr.add(new EMSPurchaseBean(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7), rs.getString(8)));
+					arr.add(new EMSPurchaseBean(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7), rs.getString(8),rs.getInt(9)));
 				}
 				return arr;
 			}catch(SQLException E) {
@@ -225,12 +225,12 @@ public ArrayList<EMSPurchaseBean> getAllPurchaseOrderByUsingProjectId(String pro
 	{
 		try {
 			Connection con = MySqlConnection.getInstance();
-			PreparedStatement pstmt = con.prepareStatement("select sum(TotalPricePerItem) QuotationAmount from items i join quotationperitem qp on i.itemcode = qp.offercode join projects using(clientid) where projectid=?");
+			PreparedStatement pstmt = con.prepareStatement("select sum(TotalPricePerItem) from quotationperitem qo join items i on i.itemcode = qo.offercode where projectid=?");
 			pstmt.setString(1, projct);
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next())
 			{
-				return (rs.getDouble("QuotationAmount"));
+				return (rs.getDouble(1));
 			}
 		}
 		catch(Exception e) {

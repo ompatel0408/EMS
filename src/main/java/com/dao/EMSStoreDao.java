@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import com.bean.EMSStoreBean;
 import com.dbConnection.MySqlConnection;
+import com.google.gson.JsonElement;
 
 public class EMSStoreDao {
 
@@ -115,7 +116,7 @@ Connection conn = MySqlConnection.getInstance();
 
 	public ArrayList<String> getCategory() {
 
-		String selectQuery = "select catagory from emscatagory";
+		String selectQuery = "select catagory from grnapprovalpending grn join emscatagory es on es.catagoryid=grn.categoryid";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<String> a = new ArrayList<String>();
 
@@ -139,7 +140,7 @@ Connection conn = MySqlConnection.getInstance();
 	}
 
 	public ArrayList<String> getGradeFromDatabase(String category) {
-		String selectQuery = "SELECT grade FROM EMSCatagory INNER JOIN catagoryGrade ON EMSCatagory.catagoryId = catagoryGrade.catagoryId WHERE Catagory = ?";
+		String selectQuery = "select grade from grnapprovalpending grn join emscatagory es on es.catagoryid=grn.categoryid join catagorygrade using(gradeid) WHERE Catagory = ?";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<String> ar = new ArrayList<String>();
 		if (conn != null) {
@@ -165,7 +166,7 @@ Connection conn = MySqlConnection.getInstance();
 
 	public ArrayList<String> getSizeFromDatabase(String category, String grade) {
 
-		String selectQuery = "SELECT SIZE FROM EMSCatagory EC JOIN catagoryGrade CG ON EC.catagoryId = CG.catagoryId JOIN catagoryGradeSize CGS ON CG.GRADEid = CGS.GRADEid where catagory = ? and grade = ?";
+		String selectQuery = " select size from grnapprovalpending grn join emscatagory es on es.catagoryid=grn.categoryid join catagorygrade using(gradeid) join catagorygradesize using(sizeid) where catagory = ? and grade = ?";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<String> ar = new ArrayList<String>();
 		if (conn != null) {
@@ -301,6 +302,36 @@ Connection conn = MySqlConnection.getInstance();
 			System.out.println("Connection is not establised!");
 		}
 		return null;
+	}
+
+
+	public int getQuantFromDatabase(String ctgry, String grd, String size) {
+		
+		String selectQuery = "select quantity from grnapprovalpending grn join emscatagory es on es.catagoryid=grn.categoryid join catagorygrade using(gradeid) join catagorygradesize using(sizeid) WHERE Catagory = ? and grade=? and size=? ";
+		Connection conn = MySqlConnection.getInstance();
+
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement(selectQuery);
+				stmt.setString(1, ctgry);
+				stmt.setString(2, grd);
+				stmt.setString(3, size);
+				ResultSet rs = stmt.executeQuery();
+				int rows = 0;
+				if (rs.next()) {
+					rows = rs.getInt(1);
+				}
+				return rows;
+
+			} catch (SQLException E) {
+				E.printStackTrace();
+			}
+		} else {
+			System.out.println("Connection is not establised!");
+		}
+		return 0;
 	}
 
 }

@@ -60,7 +60,7 @@ public class PurchaseServices {
 				ProjectDao.getInstance().setLoss(item.get("ProjectId").toString());
 				isPresent = true;
 			}
-			EMSPurchaseBean EPB = new EMSPurchaseBean(item.get("ProjectId").toString(),item.get("category").toString().concat(" ").concat(item.get("grade").toString()), item.get("size").toString(), Integer.parseInt(item.get("orderQuan").toString()), item.get("unit").toString(), item.get("rate").toString(), item.get("discountAmount").toString(), item.get("TotalAmount").toString(), Double.parseDouble(item.get("GST").toString())/2, Double.parseDouble(item.get("GST").toString())/2, EMSPurchaseDao.getInstance().getIndentId(item.get("ProjectId").toString()), LocalDate.now().toString(), PurchaseServices.generatePOId(), item.get("vendorName").toString(),String.valueOf(LocalDate.now().plus(Period.ofDays(Integer.parseInt(item.get("PaymentTerms").toString())))));
+			EMSPurchaseBean EPB = new EMSPurchaseBean(item.get("ProjectId").toString(),item.get("category").toString().concat(" ").concat(item.get("grade").toString()), item.get("size").toString(), Integer.parseInt(item.get("orderQuan").toString()), item.get("unit").toString(), item.get("rate").toString(), item.get("discountAmount").toString(), item.get("TotalAmount").toString(), Double.parseDouble(item.get("GST").toString())/2, Double.parseDouble(item.get("GST").toString())/2, Integer.parseInt(item.get("indentId").toString()), LocalDate.now().toString(), PurchaseServices.generatePOId(), item.get("vendorName").toString(),String.valueOf(LocalDate.now().plus(Period.ofDays(Integer.parseInt(item.get("PaymentTerms").toString())))));
 			APB.add(EPB);
 		}
 		count = 0;

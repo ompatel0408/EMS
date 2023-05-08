@@ -146,7 +146,8 @@ function appendJsonData(response) {
 			TotalAmount: 0,
 			vendorName: "_",
 			count: ++counter,
-			quantity: response[i].quantity
+			quantity: response[i].quantity,
+			IndentId:response[i].IndentId
 		}
 		data.push(json)
 		console.log(data)
@@ -233,6 +234,7 @@ function updateField(editId) {
 	document.getElementById('category-id').value = js1[0].category,
 	document.getElementById('grade-id').value = js1[0].grade;
 	document.getElementById('size-id').value = js1[0].size;
+	document.getElementById('indentId').value = js1[0].IndentId;
 	
 	totalAmountAppended-=parseFloat(js1[0].TotalAmount)
     percent=(totalAmountAppended*100)/givenQuote
@@ -309,7 +311,8 @@ function submitForm() {
 		TotalAmount: document.getElementById('Totalamount-id').value,
 		GST: gst,
 		PaymentTerms:document.getElementById('PaymentTermsId').value,
-		loss:Loss
+		loss:Loss,
+		indentId:document.getElementById('indentId').value,
 	}
 
 	submitData.push(json)

@@ -44,7 +44,7 @@ function appendProjects(projects) {
 
 function getAllPurchaseDetails()
 {
-	
+		
 	let Data;
 	var xhr = new XMLHttpRequest();
 		xhr.open('PUT', 'http://localhost:8080/EMS/EMSGRNApprovalPending', true);
@@ -56,8 +56,10 @@ function getAllPurchaseDetails()
 			appendJsonData(Data)
 		}
 	}
-	if(localStorage.getItem("isReceived") == true){
+	if(localStorage.getItem("isReceived") == 'true'){
+		localStorage.setItem("isReceived",false)	
 		xhr.send(JSON.stringify({projectId:document.getElementById('projectId').value,Token:'AllDetailsFromGRNApproval'}));
+		
 	}else{
 		xhr.send(JSON.stringify({projectId:document.getElementById('projectId').value,Token:'AllDetails'}));	
 	}
@@ -70,11 +72,10 @@ function appendJsonData(response) {
 	for (let i = 0; i < response.length; i++) {
 
 		var json = {
-			projectId:response[i].projectId,
-			ItemCode:response[i].itemCode,
 			Category:response[i].categoryName,
 			Grade:response[i].gradeName,
 			size:response[i].size,
+			originalQuantity:response[i].quantity,
 			Quantity:response[i].quantity,
 			units:response[i].units,
 			count: ++counter,
@@ -100,12 +101,10 @@ function appendFunc() {
 		myArray.push(i+1);
 		newRow.innerHTML = `
                               <td id="${i + 1}">${i + 1}</td>
-                              <td><a id="project1-${i + 1}">${data[i].projectId}</a> <br></td>
-                              <td><a id="item1-${i + 1}"> ${data[i].ItemCode} </a> <br></td>
                               <td><a id="category1-${i + 1}"> ${data[i].Category} </a> <br></td>
                               <td><a id="grade1-${i + 1}"> ${data[i].Grade} </a> <br></td>
                               <td><a id="size1-${i + 1}"> ${data[i].size} </a> <br></td>
-                              <td><a id="quantity1-${i + 1}"> ${data[i].Quantity} </a> <br></td>
+                              <td><a id="quantity1-${i + 1}"> ${data[i].originalQuantity} </a> <br></td>
                               <td><a id="units1-${i + 1}"> ${data[i].units} </a> <br></td>                       
                               <td class="project-actions text-right">
                                <button type="button" class="btn btn-success btn-sm" onclick = "updateField(this.id)" id="Edit${i + 1}">
@@ -132,14 +131,16 @@ function updateField(editId) {
 	document.getElementById('category-id').value = js1[0].Category;
 	document.getElementById('grade-id').value = js1[0].Grade,
 	document.getElementById('size-id').value = js1[0].size;
-	document.getElementById('Quantity').value = js1[0].Quantity;
+	document.getElementById('Quantity').value = js1[0].originalQuantity;
 	document.getElementById('unit-id').value = js1[0].units;
+	document.getElementById('quantity1').value = js1[0].Quantity
+	qty = js1[0].originalQuantity;
 }
 
 
 
 var submitData = []
-
+var qty = 0;
 function submitForm() {
 	
 	console.log("Edit Id :"+EditId)
@@ -158,9 +159,10 @@ function submitForm() {
 			Grade:document.getElementById('grade-id').value,
 			size:document.getElementById('size-id').value,
 			Quantity:document.getElementById('Quantity').value,
+			originalQuantity: JSON.stringify(parseInt(document.getElementById('quantity1').value)  - parseInt(document.getElementById('Quantity').value)),
 			units:document.getElementById('unit-id').value
 	}
-
+	
 	submitData.push(json)
 	console.log(submitData)
 	appendMap();
@@ -185,8 +187,6 @@ function appendMap(){
 		var newRow = document.createElement("tr");
 		newRow.setAttribute('id', `tr${myArray[i]}`);
 		newRow.innerHTML = `<td id="${myArray[i]}">${myArray[i]}</td>
-                              <td><a id="project1-${myArray[i]}">${myMap.get(myArray[i]).projectId}</a> <br></td>
-                              <td><a id="item1-${myArray[i]}"> ${myMap.get(myArray[i]).ItemCode} </a> <br></td>
                               <td><a id="category1-${myArray[i]}">${myMap.get(myArray[i]).Category}</a> <br></td>
                               <td><a id="grade1-${myArray[i]}"> ${myMap.get(myArray[i]).Grade} </a> <br></td>
                               <td><a id="size1-${myArray[i]}"> ${myMap.get(myArray[i]).size} </a> <br></td>
@@ -255,7 +255,23 @@ function submitFormToServlet()
 	}
 	// send the request
 	xhr.send(JSON.stringify(submitData));
-
 }
 
-
+document.getElementById('Quantity').addEventListener('keydown',(event)=>{
+	console.log('quanityt' + qty)
+	if (parseInt(event.key) >= 0 && parseInt(event.key) <= 9) { // Check if the key pressed is a number
+    const newQuantity = parseInt(document.getElementById('Quantity').value + event.key);
+    
+    if (newQuantity > qty) {
+      event.preventDefault();
+      document.getElementById('Quantity').style.borderWidth='1px'
+      document.getElementById('Quantity').style.borderColor='red'
+      document.getElementById('Quantity').style.borderStyle='solid'
+    }
+    else if (newQuantity <= qty){
+		document.getElementById('Quantity').style.borderWidth='1px'
+      document.getElementById('Quantity').style.borderColor='grey'
+      document.getElementById('Quantity').style.borderStyle='solid'
+	}
+  }
+})

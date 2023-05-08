@@ -131,14 +131,14 @@ public static DailyProgressReportDao instance = null;
 
 	private void updateProjectStatus(String projectId,String itemCode) {
 		// TODO Auto-generated method stub
-		String getTotal= "select count(subitemcode)*(select count(phasename) from phase where projectid=?) from subitems where itemcode = ?";
+		String getTotal= "select sum(quantity)*(select count(phasename) from phase where projectid=?) from items where projectId = ?";
 		String updateQuery = "UPDATE projects SET progress = progress + ? WHERE projectId = ?";
 		
 		try {
 			Connection con = MySqlConnection.getInstance();
 			PreparedStatement pstmt = con.prepareStatement(getTotal);
 			pstmt.setString(1, projectId);
-			pstmt.setString(2, itemCode);
+			pstmt.setString(2, projectId);
 			ResultSet rs = pstmt.executeQuery();
 			float total=0;
 			while(rs.next()) {

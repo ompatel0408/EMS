@@ -50,6 +50,7 @@ public class ProductionPhaseServlet extends HttpServlet {
 			phaseNames.add(phaseName);
 		}
 		EMSProductionDao.getInstance().addPhase(projectId,itemCode,phaseNames);
+		response.sendRedirect("EMSDirectorsDashboard.jsp");
 	}
 
 }

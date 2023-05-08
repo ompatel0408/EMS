@@ -105,7 +105,7 @@ public class EMSGRNDao {
 
 	public ArrayList<EMSGRNBean> getAllPurchaseDetails(String projectId) {
 
-		String selectQuery = " select I.ProjectId,I.ItemName,P.ProductDescription,P.Size,P.Quantity,P.UNITS FROM Indent I JOIN POSTPURCHASE P ON I.INDENTID = P.INDENTID WHERE ProjectId = ? AND isReceived = 0";
+		String selectQuery = "select P.ProductDescription,P.Size,sum(P.Quantity) Quantity,P.UNITS FROM Indent I JOIN POSTPURCHASE P ON I.INDENTID = P.INDENTID  WHERE ProjectId = ? AND isReceived = 0 group by p.productDescription,p.size,P.units";
 		
 		Connection conn = MySqlConnection.getInstance();
 		
@@ -118,9 +118,35 @@ public class EMSGRNDao {
 				stmt.setString(1, projectId);
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
-					String[] a = rs.getString(3).split(" ");
-					arr.add(new EMSGRNBean(rs.getString(1), rs.getString(2), a[0], a[1], rs.getString(4), rs.getInt(5),
-							rs.getString(6)));
+					String[] a = rs.getString(1).split(" ");
+					arr.add(new EMSGRNBean(a[0], a[1], rs.getString(2), rs.getInt(3),rs.getString(4)));
+				}
+				return arr;
+			} catch (SQLException E) {
+				E.printStackTrace();
+			}
+		} else {
+			System.out.println("Connection is not establised!");
+		}
+		return null;
+	}
+	
+	public ArrayList<EMSGRNBean> getAllDrtailsFromGRNApprovalPending(String projectId) {
+
+		String selectQuery = "select catagory,grade,size,RemainingQuantity,units from grnapprovalpending GAP JOIN EMScatagory E ON E.CatagoryId = GAP.categoryId join catagoryGrade using(gradeId) join catagoryGradeSize using(SizeId) WHERE ProjectId = ? AND isReceived = 0";
+		
+		Connection conn = MySqlConnection.getInstance();
+		
+		ArrayList<EMSGRNBean> arr = new ArrayList<EMSGRNBean>();
+		if (conn != null) {
+
+			try {
+
+				PreparedStatement stmt = conn.prepareStatement(selectQuery);
+				stmt.setString(1, projectId);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					arr.add(new EMSGRNBean(rs.getString(1),rs.getString(2), rs.getString(3), rs.getInt(4),rs.getString(5)));
 				}
 				return arr;
 			} catch (SQLException E) {

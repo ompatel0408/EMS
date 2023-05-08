@@ -15,6 +15,7 @@ var servletData = []
 var response;
 var myMap = new Map();
 var myArray = []
+var noEdit=true
 function submitForm() {
 
 	console.log(data)
@@ -212,7 +213,10 @@ function deleteItem(deleteId) {
 	
 }
 document.getElementById("deleteClicked").addEventListener("click", () => {
-	var deleteId1 = parseInt(deleteValue.substring(6));
+	if(noEdit==true)
+	{
+		console.log("AAiye")
+		var deleteId1 = parseInt(deleteValue.substring(6));
 	console.log(deleteId1)
 	console.log(data)
 	
@@ -222,7 +226,25 @@ document.getElementById("deleteClicked").addEventListener("click", () => {
 	
 	data = data.filter(x=>x.count !== deleteId1)
 	myArray = myArray.filter(x=>x !== deleteId1)
+	}
+	else{
+		showToast("Now you cannot Delete The Item Once you started Editing")
+	}
 });
+
+function showToast(content = "Unknown error") { //You can change the default value
+  // Get the snackbar DIV
+  var x = document.getElementById("snackbar");
+  
+  //Change the text (not mandatory, but I think you might be willing to do it)
+  x.innerHTML = content;
+
+  // Add the "show" class to DIV
+  x.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 6000);
+}
 
 let editValue = "";
 

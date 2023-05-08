@@ -1,18 +1,21 @@
 window.onload = function getProject1() {
 	let Data;
-	var xhr = newXMLHttpRequest();
-	xhr.open('GET', 'http://localhost:9002/EMSMyMain/EMSDrawingServlet', true);
+	var xhr = new XMLHttpRequest();
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSProductionServlet',true);
+	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
-		if (xhr.status === 200) {
-			Data = JSON.parse(xhr.responseText);
-			console.log(Data)
-			appendProjects(Data)
-		}
+  		if (xhr.status === 200) {
+    		Data = JSON.parse(xhr.responseText);
+    		appendProjects(Data)
+  		}
 	}
-	xhr.send();
+  	var data = { token:"Projects" }
+	xhr.send(JSON.stringify(data));
+	
+	
 	let categoryData;
-	var xhr1 = newXMLHttpRequest();
-	xhr1.open('GET', 'http://localhost:9002/EMSMyMain/EMSQuotationPerItemServlet', true);
+	var xhr1 = new XMLHttpRequest();
+	xhr1.open('GET', 'http://localhost:8080/EMS/EMSQuotationPerItemServlet', true);
 	xhr1.onload = function() {
 		if (xhr1.status === 200) {
 			categoryData = JSON.parse(xhr1.responseText);
@@ -25,7 +28,7 @@ function appendProjects(Data) {
 	var ClientsSelect = document.getElementById("projectId");
 	console.log(ClientsSelect)
 	ClientsSelect.innerHTML = `<option value="select Projects"selected>Select Projects</option>`;
-	for (leti = 0; i < Data.length; i++) {
+	for (let i = 0; i < Data.length; i++) {
 		let createdAt = document.createElement("option");
 		createdAt.value = Data[i];
 		createdAt.innerHTML = Data[i];
@@ -34,8 +37,8 @@ function appendProjects(Data) {
 }
 function getOffers() {
 	let Data;
-	var xhr = newXMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:9002/EMSMyMain/EMSDrawingServlet', true);
+	var xhr = new XMLHttpRequest();
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSDrawingServlet', true);
 	xhr.onreadystatechange = function() {
 		if (xhr.status === 200) {
 			Data = JSON.parse(xhr.responseText);
@@ -49,7 +52,7 @@ function appendOffer(Clients) {
 	var ClientsSelect = document.getElementById("ItemCode");
 	console.log(ClientsSelect)
 	ClientsSelect.innerHTML = `<option value="select offers"selected>Select Items</option>`;
-	for (leti = 0; i < Clients.length; i++) {
+	for (let i = 0; i < Clients.length; i++) {
 		let createdAt = document.createElement("option");
 		createdAt.value = Clients[i];
 		createdAt.innerHTML = Clients[i];
@@ -58,8 +61,8 @@ function appendOffer(Clients) {
 }
 function getSubItems() {
 	let Data;
-	var xhr = newXMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:9002/EMSMyMain/EMSDrawingServlet', true);
+	var xhr = new XMLHttpRequest();
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSDrawingServlet', true);
 	xhr.onload = function() {
 		if (xhr.status === 200) {
 			Data = JSON.parse(xhr.responseText);
@@ -73,7 +76,7 @@ function appendSubItems(Clients) {
 	var ClientsSelect = document.getElementById("subItemId");
 	console.log(ClientsSelect)
 	ClientsSelect.innerHTML = `<option value="select offers"selected>Select Sub Items</option>`;
-	for (leti = 0; i < Clients.length; i++) {
+	for (let i = 0; i < Clients.length; i++) {
 		let createdAt = document.createElement("option");
 		createdAt.value = Clients[i].subitemcode;
 		createdAt.innerHTML = Clients[i].subitemcode;
@@ -86,7 +89,7 @@ function appendCategory(categoryData) {
 	var categorySelect = document.getElementById("categoryId");
 	console.log(categorySelect)
 	categorySelect.innerHTML = `<option value="select" selected>Select catagory</option>`;
-	for (leti = 0; i < categoryData.length; i++) {
+	for (let i = 0; i < categoryData.length; i++) {
 		let createdAt = document.createElement("option");
 		createdAt.value = categoryData[i];
 		createdAt.innerHTML = categoryData[i];
@@ -95,8 +98,8 @@ function appendCategory(categoryData) {
 }
 document.getElementById("categoryId").addEventListener("change", () => {
 	let gradeData;
-	var xhr = newXMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:9002/EMSMyMain/EMSQuotationPerItemServlet', true);
+	var xhr = new XMLHttpRequest();
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSQuotationPerItemServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -112,7 +115,7 @@ function appendGrade(gradeData) {
 	var gradeSelect = document.getElementById("gradeId");
 	console.log(gradeSelect)
 	gradeSelect.innerHTML = `<option value="select" selected>Select Grade</option>`;
-	for (leti = 0; i < gradeData.length; i++) {
+	for (let i = 0; i < gradeData.length; i++) {
 		let createdAt = document.createElement("option");
 		createdAt.value = gradeData[i];
 		createdAt.innerHTML = gradeData[i];
@@ -121,8 +124,8 @@ function appendGrade(gradeData) {
 }
 document.getElementById("gradeId").addEventListener("change", () => {
 	let sizeData;
-	var xhr = newXMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:9002/EMSMyMain/EMSQuotationPerItemServlet', true);
+	var xhr = new XMLHttpRequest();
+	xhr.open('PUT', 'http://localhost:8080/EMS/EMSQuotationPerItemServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -140,19 +143,19 @@ function appendSize(sizeData) {
 	var sizeSelect = document.getElementById("sizeId");
 	console.log(sizeSelect)
 	sizeSelect.innerHTML = `<option value="select" selected>Select size</option>`;
-	for (leti = 0; i < sizeData.length; i++) {
+	for (let i = 0; i < sizeData.length; i++) {
 		let createdAt = document.createElement("option");
 		createdAt.value = sizeData[i];
 		createdAt.innerHTML = sizeData[i];
 		sizeSelect.appendChild(createdAt);
 	}
 }
-vardata = [];
+var data = [];
 function submitForm() {
 	if (document.getElementById('MyTable').hasChildNodes) {
 		document.querySelector('#processTo').classList.remove('disabled')
 	}
-	varjson =
+	var json =
 	{
 		project: document.getElementById('projectId').value,
 		item: document.getElementById('ItemCode').value,
@@ -171,7 +174,7 @@ function submitForm() {
 function appendFunc() {
 	document.getElementById("MyTable").innerHTML = "";
 	var table = document.getElementById("MyTable");
-	for (vari = 0; i < data.length; i++) {
+	for (var i = 0; i < data.length; i++) {
 		var newRow = document.createElement("tr");
 		newRow.innerHTML =
 			`<td id="${i + 1}">${i + 1}</td>
@@ -203,8 +206,8 @@ document.getElementById("deleteClicked").addEventListener("click", () => {
 });
 function submitForm1() {
 	console.log(data)
-	var xhr = newXMLHttpRequest();
-	xhr.open('POST', 'http://localhost:9002/EMSMyMain/DailyProgressReportServlet', true);
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'http://localhost:8080/EMS/DailyProgressReportServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onreadystatechange = function() {
 		if (xhr.status == 200) {
