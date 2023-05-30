@@ -128,18 +128,17 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-
-						<li class="nav-item" id="dprList-id" style="display: none;"><a
-							href="DailyProgressReportServlet?delete=notdelete" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>DPR List</p>
-						</a></li>
+						
 						<li class="nav-item" id="dpr-id" style="display: none;"><a
 							href="DailyProgressReport.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
 								<p>Daily Process Report</p>
 						</a></li>
-
+						<li class="nav-item" id="dprList-id" style="display: none;"><a
+							href="DailyProgressReportServlet?delete=notdelete" class="nav-link"> <i
+								class="far fa-circle nav-icon"></i>
+								<p>DPR List</p>
+						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
 						class="nav-icon fas fa-edit"></i>
@@ -306,6 +305,25 @@
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
+						class="nav-icon fas fa-edit"></i>
+						<p>
+							Persons <i class="fas fa-angle-left right"></i>
+						</p>
+				</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item" id="addvendor-target-id"
+							style="display: block;"><a href="EMSAddPersons.jsp"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Add Persons</p>
+						</a></li>
+						<li class="nav-item" id="vendorlist-target-id"
+							style="display: block;"><a
+							href="EMSAddPersonServlet"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>list Persons</p>
+						</a></li>
+					</ul></li>
+				<li class="nav-item"><a href="#" class="nav-link"> <i
 						class="nav-icon fas fa-copy"></i>
 						<p>
 							Machines <i class="fas fa-angle-left right"></i>
@@ -367,7 +385,7 @@
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
-						<li class="nav-item"><a href="EMSLogin.jsp" class="nav-link">
+						<li class="nav-item"><a href="EMSLogoutServlet" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Logout</p>
 						</a></li>

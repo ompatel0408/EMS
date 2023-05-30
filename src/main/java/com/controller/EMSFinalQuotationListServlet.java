@@ -58,7 +58,7 @@ public class EMSFinalQuotationListServlet extends HttpServlet {
 				String changeField = request.getParameter("changeField");
 				String newData = request.getParameter("newData");
 				EMSFinalQuotationDao EMSFinalQuotationDao = new EMSFinalQuotationDao();
-				if(EMSFinalQuotationDao.updateQuotation(newData, changeField, quotationId)) {
+				if(EMSFinalQuotationDao.updateQuotation(newData, changeField, quotationId,request,response)) {
 						if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A Final Quotation information of ".concat(request.getParameter("ClientName")).concat( " has been updated successfully!"),Integer.parseInt(session.getAttribute("userId").toString()),"UPDATED","FINALQUOTATION"))) {
 							System.out.println("clients update Logs Inserted!");
 						}else {
@@ -76,7 +76,7 @@ public class EMSFinalQuotationListServlet extends HttpServlet {
 			try {
 				int quotationId = Integer.parseInt(req.getParameter("quotationId"));
 				EMSFinalQuotationDao EMSFinalQuotationDao = new EMSFinalQuotationDao();
-				EMSFinalQuotationDao.deleteQuotation(quotationId);
+				EMSFinalQuotationDao.deleteQuotation(quotationId,req,resp);
 			}catch(Exception e) {
 				ExceptionHandler.handleException(req, resp, e);
 			}

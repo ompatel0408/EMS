@@ -51,7 +51,6 @@
 															<th style="width: 17%">Grade</th>
 															<th style="width: 17%">Size</th>
 															<th style="width: 17%">Quantity</th>
-															<th style="width: 17%"></th>
 														</tr>
 													</thead>
 													<tbody id="">
@@ -64,22 +63,10 @@
 															<td><%=s.getGrade()%><br></td>
 															<td><%=s.getSize()%><br></td>
 															<td><%=s.getQuantity()%><br></td>
-															<td class="project-actions text-right">
-																<button type="button" class="btn btn-primary btn-sm"
-																	data-toggle="modal" data-target="#modal-projectDetails">
-																	<i class="fas fa-folder"></i>
-																</button>
-																<button type="button" class="btn btn-danger btn-sm"
-																	data-toggle="modal" data-target="#modal-stockDelete"
-																	id="Delete1">
-																	<i class="fas fa-trash"></i>
-																</button>
-															</td>
 														</tr>
 														<%
 														}
 														%>
-														</tr>
 													</tbody>
 												</table>
 												<!-- <table>-->
@@ -103,32 +90,6 @@
 			<!-- content -->
 		</div>
 		<!-- content-wrapper -->
-	</div>
-
-
-
-	<div class="modal fade" id="modal-stockDelete">
-		<div class="modal-dialog">
-			<div class="modal-content bg-danger">
-				<div class="modal-header">
-					<h4 class="modal-title">Delete Stock</h4>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true"></span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p>Are you sure you want to delete this Stock?</p>
-				</div>
-				<div class="modal-footer justify-content-between">
-					<button type="button" class="btn btn-outline-light"
-						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-outline-light"
-						id="deleteClicked">Delete Project</button>
-				</div>
-			</div>
-		</div>
-	</div>
 	</div>
 	<script src="assets/dist/js/models.js"></script>
 	<script src="assets/plugins/jquery/jquery.min.js"></script>

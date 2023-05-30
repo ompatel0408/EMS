@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 import com.bean.EMSGRNPendingBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class EMSGRNApprovalPendingDao {
 	
@@ -23,7 +27,7 @@ public class EMSGRNApprovalPendingDao {
 		return instance;
 	}
 	
-	public boolean addGRNApprovalPending(ArrayList<EMSGRNPendingBean> AEGPB) {
+	public boolean addGRNApprovalPending(ArrayList<EMSGRNPendingBean> AEGPB,HttpServletRequest request,HttpServletResponse response) {
 		
 		String insertQuery = "INSERT INTO GRNAPPROVALPENDING(PROJECTID,MaterialCategory,CategoryId,gradeId,sizeId,Units,Quantity,RemainingQuantity) VALUES(?,?,?,?,?,?,?,?)";
 		String updateQuery = "UPDATE GRNAPPROVALPENDING SET Quantity = quantity + ? , RemainingQuantity = ? WHERE PROJECTID = ? AND CategoryId = ? AND gradeId = ? AND sizeId = ?";
@@ -70,8 +74,14 @@ public class EMSGRNApprovalPendingDao {
 					stmt.executeBatch();
 				}
 				return true;
-			} catch(SQLException E) {
-				E.printStackTrace();
+			} catch(SQLException e) {
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 		} else {
 			System.out.println("Connection is not establised!");

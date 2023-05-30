@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import com.bean.EMSOffersBean;
 import com.bean.QuotationPerItemBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class QuotationPerItemDao {
 	
@@ -242,7 +246,7 @@ public class QuotationPerItemDao {
 }
 	
 	
-	public boolean addQuotationPerItem(ArrayList<QuotationPerItemBean> AQPIB) {
+	public boolean addQuotationPerItem(ArrayList<QuotationPerItemBean> AQPIB,HttpServletRequest request,HttpServletResponse response) {
 		
 		String insertQuery = "INSERT INTO quotationPerItem VALUES(?,?,?,?,?,?,?,?,?,?)";
 		
@@ -296,7 +300,7 @@ public class QuotationPerItemDao {
 		return null;
 	}
 	
-	public boolean addProfitForQuotationPerItem(ArrayList<QuotationPerItemBean> ar) {
+	public boolean addProfitForQuotationPerItem(ArrayList<QuotationPerItemBean> ar,HttpServletRequest request,HttpServletResponse response) {
 		Connection conn = MySqlConnection.getInstance();
 		if (QuotationPerItemDao.getInstance().getAllItemCode().contains(ar.get(0).getItemId())) {
 			String updateQuery = "UPDATE ProfitInQuotationPerItem SET TotalAmountWithoutProfit = ?,TotalAmountWithProfit = ? WHERE offerCode = ?";
@@ -346,7 +350,7 @@ public class QuotationPerItemDao {
 		return false;
 	}
 	
-	public boolean updateTotalPrice(ArrayList<QuotationPerItemBean> QAIB) {
+	public boolean updateTotalPrice(ArrayList<QuotationPerItemBean> QAIB,HttpServletRequest request,HttpServletResponse response) {
 		
 		String updateQuery = "UPDATE OFFER SET TotalPrice = ? WHERE offerCode =?";
 		Connection  conn = MySqlConnection.getInstance();
@@ -366,7 +370,13 @@ public class QuotationPerItemDao {
 				stmt.clearBatch();
 				return true;
 			}catch(SQLException e) {
-				e.printStackTrace();
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 		}else {
 			System.out.println("Connection is not establised!");

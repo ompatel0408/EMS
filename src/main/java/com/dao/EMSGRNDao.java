@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import com.bean.EMSGRNBean;
 import com.bean.EMSGRNPendingBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class EMSGRNDao {
 
@@ -23,7 +27,7 @@ public class EMSGRNDao {
 		return instance;
 	}
 
-	public boolean addGRN(EMSGRNBean EGB) {
+	public boolean addGRN(EMSGRNBean EGB,HttpServletRequest request,HttpServletResponse response) {
 
 		String insertQuery = "INSERT INTO GRN(VENDORNAME,ReceiveDate,PATH1,PATH2,InvoiceNumber) VALUES(?,?,?,?,?)";
 		Connection conn = MySqlConnection.getInstance();
@@ -41,8 +45,14 @@ public class EMSGRNDao {
 				stmt.executeUpdate();
 				return true;
 
-			} catch (SQLException E) {
-				E.printStackTrace();
+			} catch (SQLException e) {
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 		} else {
 			System.out.println("Connection is not establised!");
@@ -64,8 +74,7 @@ public class EMSGRNDao {
 				ResultSet rs = stmt.executeQuery(selectQuery);
 
 				while (rs.next()) {
-					EGB = new EMSGRNBean(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
-							rs.getString(5));
+					EGB = new EMSGRNBean(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5));
 					a.add(EGB);
 				}
 				return a;
@@ -80,7 +89,7 @@ public class EMSGRNDao {
 		return null;
 	}
 
-	public boolean deleteGRN(int grnId) {
+	public boolean deleteGRN(int grnId,HttpServletRequest request,HttpServletResponse response) {
 
 		String deleteQuery = "DELETE FROM GRN WHERE GRNID = ?";
 		Connection conn = MySqlConnection.getInstance();
@@ -94,8 +103,14 @@ public class EMSGRNDao {
 				stmt.executeUpdate();
 				return true;
 
-			} catch (SQLException E) {
-				E.printStackTrace();
+			} catch (SQLException e) {
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 		} else {
 			System.out.println("Connection is not establised!");

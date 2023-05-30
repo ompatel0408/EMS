@@ -33,17 +33,17 @@
 								<div class="form-group">
 									<label>Vehicle Number</label> <input type="text"
 										class="form-control" id="vehicleNoId"
-										placeholder="Vehicle Number" name="vehicleNo">
+										placeholder="Vehicle Number" name="vehicleNo" pattern="[A-Za-z0-9_\- ]{1,50}"  required="required">
 								</div>
 								<div class="form-group">
 									<label>Travel Company</label> <input type="text"
 										class="form-control" id="travelCom"
-										name="travelCom" placeholder="Travel Company Name">
+										name="travelCom" placeholder="Travel Company Name" pattern="[A-Za-z0-9_ ]{1,260}"  required="required">
 								</div>
 								<div class="form-group">
 									<label>Checked By</label> <input type="text"
 										class="form-control" id="checkBy"
-										name="checkBy" placeholder="Quantity">
+										name="checkBy" placeholder="Checked person" pattern="[A-Za-z_ ]{1,260}"  required="required">
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -55,14 +55,14 @@
 								<div class="form-group">
 									<label>Travel Company Owner</label> <input type="text"
 										class="form-control" id="travelComOwnr"
-										name="travelComOwnr" placeholder="Travel Company Owner">
+										name="travelComOwnr" placeholder="Travel Company Owner" pattern="[A-Za-z_ ]{1,260}"  required="required">
 								</div>
 								<div class="form-group">
 									<label class="float-left">Destination Address</label>
 									<textarea class="form-control" rows="3"
 										placeholder="Destination Address..." name="destAddress"
 										id="destAddress" style="height: 125px;" 
-										maxlength="350"></textarea>
+										maxlength="350" required="required"></textarea>
 								</div>
 							</div>
 							<div

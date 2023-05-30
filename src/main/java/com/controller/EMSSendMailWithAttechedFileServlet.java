@@ -32,15 +32,10 @@ public class EMSSendMailWithAttechedFileServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		if(SendMail.sendPurchaseOrder(EMSDrawingServices.uploadFileWithFile(request).getPath1(),EMSVendorsDao.getInstance().getVendorMailFromDatabase(request.getParameter("vendorName")))) {
+		if(SendMail.sendPurchaseOrder(EMSDrawingServices.uploadFileWithFile(request).getPath1(),EMSVendorsDao.getInstance().getVendorMailFromDatabase(request.getParameter("vendorName")),request,response)) {
 			System.out.println("Mail is sent successfully!");
 			response.sendRedirect("EMSDirectorsDashboard.jsp");
 		}else {

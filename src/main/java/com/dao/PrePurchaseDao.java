@@ -6,6 +6,10 @@ import java.sql.SQLException;
 
 import com.bean.PrePurchaseBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class PrePurchaseDao {
 	
@@ -35,7 +39,7 @@ public class PrePurchaseDao {
 		return false;
 		
 	}
-	public boolean addPrePurchaseInOffers(PrePurchaseBean Pb) {
+	public boolean addPrePurchaseInOffers(PrePurchaseBean Pb,HttpServletRequest request,HttpServletResponse response) {
 		
 		String insertQuery = "INSERT INTO PrePurchase(DrawingId,ClientId) VALUES(?,?)";
 		Connection conn = MySqlConnection.getInstance();
@@ -45,8 +49,14 @@ public class PrePurchaseDao {
 			stmt.setInt(2, Pb.getClientId());
 			stmt.executeUpdate();
 			return true;
-		}catch(SQLException E) {
-			E.printStackTrace();
+		}catch(SQLException e) {
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 		return false;
 		

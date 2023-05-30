@@ -215,13 +215,13 @@ public class EMSDrawingServlet extends HttpServlet {
 		try{
 
 			
-			EMSDrawingBean EGB =  EMSDrawingServices.uploadPic(request,request.getParameter("offerId"),request.getParameter("projectId"),request.getParameter("SubItem"));
+			EMSDrawingBean EGB =  EMSDrawingServices.uploadPic(request,request.getParameter("offerId"),request.getParameter("projectId"),request.getParameter("SubItem"),response);
 			if(EGB != null) {
 				HttpSession session = request.getSession();
 				
 				String drawingId = EMSDrawingServices.getActualDrawingId(request.getParameter("offerId"), EMSDrawingDao.getInstance().getDrawingIdFromdatabase(request.getParameter("projectId")));
 				
-				if(EMSDrawingDao.getInstance().addDrawingDetails(drawingId,EGB)) {
+				if(EMSDrawingDao.getInstance().addDrawingDetails(drawingId,EGB,request,response)) {
 					System.out.println("Inserted Successfully!");
 					
 					if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new drawing of ".concat(request.getParameter("offerId")).concat(" has been added in ").concat(request.getParameter("projectId")),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","DRAWING"))) {

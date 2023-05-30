@@ -47,18 +47,18 @@
 							</div>
 							<div class="form-group">
 								<label>Quantity</label> <input type="number"
-									class="form-control" id="Quantity" required placeholder="Enter Quantity"
+									class="form-control" id="Quantity" required placeholder="Enter Quantity" pattern="[0-9]"  required="required"
 									>
 							</div>
 							 <div class="form-group">
 								<label for="">Date</label> <input type="date"
 									class="form-control" id="AddDate"
-									placeholder="Enter Add Date">
+									placeholder="Enter Add Date" required="required">
 							</div> 
 							<div class="form-group">
 								<label>Address</label>
 								<textarea class="form-control" rows="3" placeholder="Enter..."
-									id="address" style="height: 50px;"></textarea>
+									id="address" style="height: 50px;" required="required"></textarea>
 							</div>
 
 							<!-- /.form-group -->
@@ -68,13 +68,13 @@
 							<div class="form-group">
 								<label>Offer name</label> <input type="text"
 									class="form-control" id="ItemName"
-									placeholder="Enter Offer name" required>
+									placeholder="Enter Offer name" pattern="[A-Za-z0-9_ ]{1,260}"  required="required">
 							</div>
 							<!-- /.form-group -->
 							<div class="form-group">
 								<label>Remark</label>
 								<textarea class="form-control" rows="3" placeholder="Enter..."
-									id="Remarks" style="height: 125px;"></textarea>
+									id="Remarks" style="height: 125px;" required="required"></textarea>
 							</div>
 							<div class="form-group mt-5 d-flex justify-content-around">
 								<button type="submit" id="AddItemBtn"

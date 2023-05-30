@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import com.bean.DailyProgressReportBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class DailyProgressReportDao {
 public static DailyProgressReportDao instance = null;
@@ -20,7 +24,7 @@ public static DailyProgressReportDao instance = null;
 	}
 	
 	
-	public boolean addDPR(ArrayList<DailyProgressReportBean> indent) {
+	public boolean addDPR(ArrayList<DailyProgressReportBean> indent,HttpServletRequest request,HttpServletResponse response) {
 
 		String insertQuery = "INSERT INTO dpr(PROJECTID,ITEMname,subitemname,category,grade,size,quantity,uom,date) VALUES(?,?,?,?,?,?,?,?,?)";
 
@@ -45,7 +49,12 @@ public static DailyProgressReportDao instance = null;
 			System.out.println("Result -------->" + result);
 			return true;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
 		}
 
 		return false;
@@ -110,7 +119,7 @@ public static DailyProgressReportDao instance = null;
 	}
 
 
-	public void updatePhase(String projectId, String subItemId,String editedColumn,String itemCode) {
+	public void updatePhase(String projectId, String subItemId,String editedColumn,String itemCode,HttpServletRequest request,HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		String updateQuery = "UPDATE subItems SET phase = ? WHERE itemCode = ? and subItemCode = ?";
 		
@@ -124,7 +133,13 @@ public static DailyProgressReportDao instance = null;
 			updateProjectStatus(projectId,itemCode);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 	}
 

@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
 import com.bean.CatagoryGradeSizeBean;
-import com.bean.ClientBean;
-import com.bean.ProjectBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class CatagoryGradeSizeDao {
 	private static CatagoryGradeSizeDao instance = null;
@@ -47,7 +47,7 @@ public class CatagoryGradeSizeDao {
 		return catagories;
 	}
 
-	public boolean addCatagory(CatagoryGradeSizeBean cBean) {
+	public boolean addCatagory(CatagoryGradeSizeBean cBean,HttpServletRequest request,HttpServletResponse response) {
 		try {
 			Connection con = MySqlConnection.getInstance();
 			PreparedStatement pstmt = con.prepareStatement("insert into emscatagory(catagory) values (?)");
@@ -55,12 +55,17 @@ public class CatagoryGradeSizeDao {
 			pstmt.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		return false;
 	}
 
-	public boolean addGrade(String selectedId, String gradeName) {
+	public boolean addGrade(String selectedId, String gradeName,HttpServletRequest request,HttpServletResponse response) {
 		String updateQuery = "insert into catagorygrade(Grade,catagoryid) values (?,?)";
 		try {
 			Connection con = MySqlConnection.getInstance();
@@ -75,7 +80,7 @@ public class CatagoryGradeSizeDao {
 		return false;
 	}
 
-	public boolean addSize(String CatagoryId, String GradeName, String size) {
+	public boolean addSize(String CatagoryId, String GradeName, String size,HttpServletRequest request,HttpServletResponse response) {
 		int id = 0;
 		try {
 			Connection con = MySqlConnection.getInstance();
@@ -91,7 +96,13 @@ public class CatagoryGradeSizeDao {
 				return true;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 		return false;
 	}

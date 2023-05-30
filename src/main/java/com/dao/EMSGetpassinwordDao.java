@@ -9,6 +9,10 @@ import java.util.HashSet;
 
 import com.bean.EMSGetpassinwordBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class EMSGetpassinwordDao 
 {
@@ -26,14 +30,13 @@ public class EMSGetpassinwordDao
 	public HashSet<String> getVendorsFromDba()
 	{
 		Connection conn = MySqlConnection.getInstance();
-		EMSVendorsDao evd = EMSVendorsDao.getInstance();
 		HashSet<String> vendor = new HashSet<String>();
 		try {
-			PreparedStatement stmt = conn.prepareStatement("Select ISSUEVENDORID from gatepassoutword");
+			PreparedStatement stmt = conn.prepareStatement("Select ISSUEPERSON from gatepassoutword");
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next())
 			{
-				vendor.add(evd.getVendorNamefromDba(rs.getInt(1)));
+				vendor.add(PersonsDao.getInstance().getPersonsFromDatabase(rs.getInt(1)));
 			}
 			return vendor;
 		
@@ -46,10 +49,11 @@ public class EMSGetpassinwordDao
 	public ArrayList<String> getItemsVendorwiseFromDba(String vendor)
 	{
 		Connection conn = MySqlConnection.getInstance();
-		EMSVendorsDao evd = EMSVendorsDao.getInstance();
+
 		try {
-			PreparedStatement stmt = conn.prepareStatement("Select MATERIALMACHINENAME from gatepassoutword where ISSUEVENDORID = ? and RECIEVED = '0'");
-			stmt.setInt(1, evd.getVendorIdfromDba(vendor));
+			
+			PreparedStatement stmt = conn.prepareStatement("Select MATERIALMACHINENAME from gatepassoutword where ISSUEPERSON = ? and RECIEVED = '0'");
+			stmt.setInt(1, PersonsDao.getInstance().getPersonIsFromDatabase(vendor));
 			ArrayList<String> str = new ArrayList<String>();
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -62,24 +66,29 @@ public class EMSGetpassinwordDao
 		return null;
 	}
 	
-	public boolean isnertItems(EMSGetpassinwordBean item)
+	public boolean isnertItems(EMSGetpassinwordBean item,HttpServletRequest request,HttpServletResponse response)
 	{
 		Connection conn = MySqlConnection.getInstance();
-		EMSVendorsDao evd = EMSVendorsDao.getInstance();
 		EMSGetpassOutwordDao egod = EMSGetpassOutwordDao.getInstance();
 		try {
-			PreparedStatement stmt = conn.prepareStatement("Insert into gatepassinword(ISSUEVENDORID,ITEMRECIEVEDATE,VEHICLENUMBER,REMARK,MATERIALMACHINENAME,receivedQty) values (?,?,?,?,?,?)");
-			stmt.setInt(1, evd.getVendorIdfromDba(item.getVendor()));
+			PreparedStatement stmt = conn.prepareStatement("Insert into gatepassinword(ISSUEPERSONID,ITEMRECIEVEDATE,VEHICLENUMBER,REMARK,MATERIALMACHINENAME,receivedQty) values (?,?,?,?,?,?)");
+			stmt.setInt(1,PersonsDao.getInstance().getPersonIsFromDatabase(item.getVendor()));
 			stmt.setString(2, item.getReceiveDate());
 			stmt.setString(3, item.getVehicleNo());
 			stmt.setString(4, item.getRemark());
 			stmt.setString(5, item.getItemName());
 			stmt.setInt(6, item.getQty());
 			stmt.executeUpdate();
-			egod.updateInValues(evd.getVendorIdfromDba(item.getVendor()), item.getItemName());
+			egod.updateInValues(PersonsDao.getInstance().getPersonIsFromDatabase(item.getVendor()), item.getItemName());
 			return true;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 		return false;
 	}
@@ -87,7 +96,6 @@ public class EMSGetpassinwordDao
 	public ArrayList<EMSGetpassinwordBean> getItems()
 	{
 		Connection conn = MySqlConnection.getInstance();
-		EMSVendorsDao evd = EMSVendorsDao.getInstance();
 
 		ArrayList<EMSGetpassinwordBean> al = new ArrayList<EMSGetpassinwordBean>();
 		try {
@@ -95,7 +103,7 @@ public class EMSGetpassinwordDao
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next())
 			{
-				EMSGetpassinwordBean eb = new EMSGetpassinwordBean(evd.getVendorNamefromDba(rs.getInt("ISSUEVENDORID")), rs.getString("MATERIALMACHINENAME"), rs.getInt("receivedQty"), rs.getString("VEHICLENUMBER"), rs.getString("ITEMRECIEVEDATE"), rs.getString("REMARK"));
+				EMSGetpassinwordBean eb = new EMSGetpassinwordBean(PersonsDao.getInstance().getPersonsFromDatabase(rs.getInt(2)), rs.getString("MATERIALMACHINENAME"), rs.getInt("receivedQty"), rs.getString("VEHICLENUMBER"), rs.getString("ITEMRECIEVEDATE"), rs.getString("REMARK"));
 				al.add(eb);
 			}
 			return al;

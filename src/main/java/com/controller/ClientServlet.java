@@ -83,7 +83,7 @@ public class ClientServlet extends HttpServlet {
 			
 			HttpSession session = req.getSession();
 			
-			if(cd.deleteClient(clientId)) {
+			if(cd.deleteClient(clientId,req,resp)) {
 				
 				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A client record of ".concat(map.get(clientId)).concat(" has been deleted successfully!"),Integer.parseInt(session.getAttribute("userId").toString()),"DELETED","CLIENTS"))) {
 				
@@ -110,6 +110,7 @@ public class ClientServlet extends HttpServlet {
 			String pan = request.getParameter("pan");
 			String address = request.getParameter("address");
 			String email1 = request.getParameter("email1");
+			System.out.println("----------------------"+email1);
 			String phone1 = request.getParameter("phone1");
 			
 			ClientBean clientBean = new ClientBean();
@@ -125,15 +126,15 @@ public class ClientServlet extends HttpServlet {
 			}else {
 				clientBean.setPhoneNumber1(Long.parseLong(phone1));
 			}
-			if(email1 != null) {
+			if(email1.contains("@")) {
 				clientBean.setEmail1(email1);
 			}else {
-				clientBean.setEmail1(null);
+				clientBean.setEmail1("0");
 			}
 			
 			ClientDao clientDao = ClientDao.getInstance();
 			HttpSession session = request.getSession();
-			if(clientDao.addClient(clientBean)) {
+			if(clientDao.addClient(clientBean,request,response)) {
 				if(session.getAttribute("userId") != null) {
 					if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new client ".concat(clientName).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","CLIENTS"))) {
 						init();
@@ -159,7 +160,7 @@ public class ClientServlet extends HttpServlet {
 			
 			ClientDao cd = ClientDao.getInstance();
 			HttpSession session = request.getSession();
-			if(cd.updateClient(clientId,editedColumn,newValue)) {
+			if(cd.updateClient(clientId,editedColumn,newValue,request,response)) {
 		
 				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A client information of ".concat(map.get(clientId)).concat( " has been updated successfully!"),Integer.parseInt(session.getAttribute("userId").toString()),"UPDATED","CLIENTS"))) {
 					System.out.println("clients update Logs Inserted!");

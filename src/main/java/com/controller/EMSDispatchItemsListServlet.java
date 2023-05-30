@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.bean.EMSDispatchBean;
 import com.dao.EMSDispatchDao;
 import com.google.gson.Gson;
+import com.service.ExceptionHandler;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,10 +20,14 @@ public class EMSDispatchItemsListServlet extends HttpServlet
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		try {
 		EMSDispatchDao edd = EMSDispatchDao.getInstance();
 		ArrayList<EMSDispatchBean> aledb = edd.getProjectFromDba();
 		request.setAttribute("data", aledb);
 		request.getRequestDispatcher("EMSDispatchItemsList.jsp").forward(request, response);
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
 	}
 	
 	@Override
@@ -39,7 +45,7 @@ public class EMSDispatchItemsListServlet extends HttpServlet
 			response.getWriter().write(json);
 		 
 		} catch (Exception e) {
-			e.printStackTrace();
+			ExceptionHandler.handleException(request, response, e);
 		}
 	}
 }

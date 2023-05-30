@@ -35,19 +35,19 @@
 								</div>
 								<div class="form-group">
 									<label>Received Date</label> <input type="date" class="form-control" required="required"
-										name="rcvDate" id="rcvDate" placeholder="Enter Company Name">
+										name="rcvDate" id="rcvDate" >
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Model number</label> <select id="modelId" name="modelId"
-										class="form-control" required>  
+										class="form-control" pattern="[A-Za-z_]{1,100}"  required="required" required>  
 										<option value="select Model no"selected>Select Model Number</option>
 									</select>
 								</div>
 								<div class="form-group">
 									<label for="">Maintenance Price</label> <input type="number" name="mntPrice"
-										class="form-control" id="mntPrice" placeholder="Enter Price" name="mntPrice" required="required">
+										class="form-control" id="mntPrice" placeholder="Enter Price" name="mntPrice" pattern="[0-9]"  required="required">
 								</div>
 								<input type="hidden" id="offerCode">
 								<div class="form-group mt-5 d-flex justify-content-around">

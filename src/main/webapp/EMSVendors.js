@@ -116,6 +116,7 @@ function XHRRequestForVendor(){
 		if (xhr.status == 200) {
 			var response = xhr.responseText;
 			console.log(response);
+			window.location.href = "EMSVendorsServlet?vendorId=0&update=notupdate"
 		}
 	}
 	// send the request

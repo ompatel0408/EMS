@@ -4,7 +4,7 @@ public class EMSDirectorsDashboardBean {
 	
 	private String clientName;
 	private String projectName;
-	private int  workDonePercentage;
+	private float  progress;
 	private String vendorName;
 	private String PaymentTerms;
 	private String sumTotalAmount;
@@ -12,10 +12,10 @@ public class EMSDirectorsDashboardBean {
 	
 	public EMSDirectorsDashboardBean() {}
 	
-	public EMSDirectorsDashboardBean(String clientName, String projectName,int  workDonePercentage,String startDate) {
+	public EMSDirectorsDashboardBean(String clientName, String projectName,float progress,String startDate) {
 		this.clientName = clientName;
 		this.projectName = projectName;
-		this.workDonePercentage = workDonePercentage;
+		this.progress = progress;
 		this.startDate = startDate;
 	}
 	
@@ -56,15 +56,14 @@ public class EMSDirectorsDashboardBean {
 		this.PaymentTerms = paymentTerms;
 	}
 
-	public int getWorkDonePercentage() {
-		return workDonePercentage;
+	public float getProgress() {
+		return progress;
 	}
 
-
-	public void setWorkDonePercentage(int workDonePercentage) {
-		this.workDonePercentage = workDonePercentage;
+	public void setProgress(float progress) {
+		this.progress = progress;
 	}
-	
+
 	public String getClientName() {
 		return clientName;
 	}

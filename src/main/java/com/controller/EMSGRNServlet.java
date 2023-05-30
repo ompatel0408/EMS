@@ -68,7 +68,7 @@ public class EMSGRNServlet extends HttpServlet {
 			vendorName = request.getParameter("VendorName");
 			HttpSession session = request.getSession();
 			if(EGB != null) {
-				if(EMSGRNDao.getInstance().addGRN(new EMSGRNBean(vendorName, request.getParameter("ReceivedDate"),EGB.getPath1().trim(),EGB.getPath2().trim(),request.getParameter("InvoiceNumber")))) {
+				if(EMSGRNDao.getInstance().addGRN(new EMSGRNBean(vendorName, request.getParameter("ReceivedDate"),EGB.getPath1().trim(),EGB.getPath2().trim(),request.getParameter("InvoiceNumber")),request,response)) {
 					System.out.println("GRN added successfully!");
 					if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new GRN from vendor ".concat(vendorName).concat(" has been reached At gate!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","GRN"))) {
 						System.out.println("purchase insert Logs Inserted!");
@@ -100,7 +100,7 @@ public class EMSGRNServlet extends HttpServlet {
 		    JsonObject jsonObject = gson.fromJson(requestBody, JsonObject.class);
 			
 			HttpSession session = request.getSession();
-			if(EMSGRNDao.getInstance().deleteGRN(Integer.parseInt(jsonObject.get("grnId").getAsString()))) {
+			if(EMSGRNDao.getInstance().deleteGRN(Integer.parseInt(jsonObject.get("grnId").getAsString()),request,response)) {
 			
 				System.out.println("Deleted successfully!");
 				

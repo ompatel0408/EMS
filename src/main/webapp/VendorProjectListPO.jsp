@@ -29,11 +29,12 @@
 			</div>
 			<div class="card-body">
 				<div class="row">
+				<form action="EMSSendMailWithAttechedFileServlet" method="post"
+						enctype="multipart/form-data">
 					<div class="col-md-6">
-						<form>
 							<div class="form-group">
-								<label for="item-id">Vendors</label> <select id="vendorList"
-									class="form-control" required>
+								<label for="item-id">Vendors</label> <select id="vendorList" name="vendorName"
+									class="form-control"  required>
 								</select>
 							</div>
 							<div class="form-group">
@@ -43,7 +44,7 @@
 							</div>
 							<div class="form-group">
 								<label for="item-id">Transportation Price</label>
-								<input type="text" id="transportId" name="transport">
+								<input type="text" id="transportId" pattern="[0-9]{1,15}"  required="required" name="transport">
 							</div>
 							
 							<div
@@ -53,11 +54,9 @@
 									<strong>+ Print PO </strong>
 								</button>
 							</div>
-						</form>
 					</div>
 					<div class="col-sm-6">
-						<form action="EMSSendMailWithAttechedFileServlet" method="post"
-						enctype="multipart/form-data">
+						
 							<div class="card-header">
 								<h3 class="card-title">Upload The PDF for sending mail</h3>
 							</div>
@@ -70,13 +69,13 @@
 							</div>
 							<input type="hidden" name="vendorName" id="vendorName">
 							<div
-								class="d-flex justify-content-center align-items-center mt-auto ">
+								class="d-flex justify-content-center align-items-center mt-auto">
 								<button type="submit" class="btn btn-danger w-50" id="print">
 									<strong>+ Send PO Through Mail</strong>
 								</button>
 							</div>
-						</form>
 					</div>
+				</form>
 				</div>
 			</div>
 		</div>

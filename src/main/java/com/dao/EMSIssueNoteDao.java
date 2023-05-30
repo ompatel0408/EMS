@@ -9,6 +9,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import com.bean.EMSIssueNoteBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class EMSIssueNoteDao {
 	
@@ -376,7 +380,7 @@ Connection conn = MySqlConnection.getInstance();
 		}
 	}
 	
-	public boolean addItems(ArrayList<EMSIssueNoteBean> inb) {
+	public boolean addItems(ArrayList<EMSIssueNoteBean> inb,HttpServletRequest request,HttpServletResponse response) {
 		String insertQuery = "INSERT INTO issue (pid, issueDate,CatagoryId, gradeId, sizeId, quantity, remark, uom, Personname, contractorname) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
 		Connection conn = MySqlConnection.getInstance();
@@ -412,7 +416,13 @@ Connection conn = MySqlConnection.getInstance();
 				int[] result = stmt.executeBatch();
 				return true;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 		}
 		return false;

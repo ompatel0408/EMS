@@ -11,6 +11,10 @@ import com.bean.EMSAddMachineInMntBean;
 import com.bean.EMSPerMachineMntBean;
 import com.dbConnection.MySqlConnection;
 import com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class EMSAddMachineDao 
 {
@@ -25,7 +29,7 @@ public class EMSAddMachineDao
 		return instance;
 	}
 	
-	public boolean insertItemInDba(EMSAddMachineBean emb)
+	public boolean insertItemInDba(EMSAddMachineBean emb,HttpServletRequest request,HttpServletResponse response)
 	{
 		Connection conn = MySqlConnection.getInstance();
 		
@@ -42,7 +46,13 @@ public class EMSAddMachineDao
 			return true;
 		} catch (SQLException e) {
 
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 		return false;
 	}
@@ -188,7 +198,7 @@ public class EMSAddMachineDao
 		return null;
 	}
 	
-	public boolean addItemInMnt(EMSAddMachineInMntBean ab)
+	public boolean addItemInMnt(EMSAddMachineInMntBean ab,HttpServletRequest request,HttpServletResponse response)
 	{
 		Connection conn = MySqlConnection.getInstance();
 		try {
@@ -209,7 +219,13 @@ public class EMSAddMachineDao
 			return true;
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 		return false;
 	}
@@ -236,7 +252,7 @@ public class EMSAddMachineDao
 		return null;
 	}
 	
-	public boolean updateReceiveFromMnt(EMSAddMachineInMntBean bean)
+	public boolean updateReceiveFromMnt(EMSAddMachineInMntBean bean,HttpServletRequest request,HttpServletResponse response)
 	{
 		Connection conn  = MySqlConnection.getInstance();
 		try {
@@ -251,7 +267,13 @@ public class EMSAddMachineDao
 			stmt1.executeUpdate();
 			return true;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 		
 		return false;

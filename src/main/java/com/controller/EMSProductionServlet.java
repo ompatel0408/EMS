@@ -46,7 +46,7 @@ public class EMSProductionServlet extends HttpServlet {
 		     
 		     
 		     HttpSession session = request.getSession();
-		     if(ED.addDataToDatabase(new EMSProductionBean(projectId, remark, Integer.parseInt(workDonePer),qualityCheck))) {
+		     if(ED.addDataToDatabase(new EMSProductionBean(projectId, remark, Integer.parseInt(workDonePer),qualityCheck),request,response)) {
 		    	 
 		    	 System.out.println("inserted successfully!");
 		    	 

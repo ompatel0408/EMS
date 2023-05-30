@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import com.bean.ProjectBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class ProjectDao {
 
@@ -37,7 +41,7 @@ public class ProjectDao {
 		return null;
 	}
 
-	public boolean addProject(ProjectBean projectBean) {
+	public boolean addProject(ProjectBean projectBean,HttpServletRequest request,HttpServletResponse response) {
 		try {
 			Connection con = MySqlConnection.getInstance();
 			PreparedStatement pstmt = con.prepareStatement(
@@ -51,7 +55,13 @@ public class ProjectDao {
 			pstmt.executeUpdate();
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 		return false;
 	}
@@ -84,7 +94,7 @@ public class ProjectDao {
 		return null;
 	}
 
-	public void deleteProject(String projectId) {
+	public void deleteProject(String projectId,HttpServletRequest request,HttpServletResponse response) {
 		try {
 			Connection con = MySqlConnection.getInstance();
 			PreparedStatement pstmt = con.prepareStatement("delete from projects where projectid = ?");
@@ -92,21 +102,46 @@ public class ProjectDao {
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 	}
 
-	public void updateProject(String newData, String changeField, String projectId) {
+	public void updateProject(String newData, String changeField, String projectId,HttpServletRequest request,HttpServletResponse response) {
 		try {
 			Connection con = MySqlConnection.getInstance();
-			PreparedStatement pstmt = con
-					.prepareStatement("update projects set " + changeField + "= ? where projectid = ? ");
-			pstmt.setString(1, newData);
-			pstmt.setString(2, projectId);
-			pstmt.executeUpdate();
+			if(changeField.equals("advancepaypercent")) {
+				PreparedStatement pstmt = con
+						.prepareStatement("update projects set " + changeField + "= ? , AfterPayPercent = 100 - ? where projectid = ? ");
+
+				pstmt.setString(1, newData);
+				pstmt.setString(2, newData);
+				pstmt.setString(3, projectId);
+
+				pstmt.executeUpdate();
+			}else {
+				PreparedStatement pstmt = con
+						.prepareStatement("update projects set " + changeField + "= ? where projectid = ? ");
+				pstmt.setString(1, newData);
+				pstmt.setString(2, projectId);
+
+				pstmt.executeUpdate();
+			}
+			
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 	}
 
@@ -151,7 +186,7 @@ public class ProjectDao {
 		return 0;
 	}
 
-	public boolean updatePrPurchase(int clientId, String projectId) {
+	public boolean updatePrPurchase(int clientId, String projectId,HttpServletRequest request,HttpServletResponse response) {
 
 		String updateQuery = "UPDATE PrePurchase SET PROJECTID = ? WHERE ClientId = ?";
 		Connection conn = MySqlConnection.getInstance();
@@ -165,8 +200,14 @@ public class ProjectDao {
 				stmt.setInt(2, clientId);
 				stmt.executeUpdate();
 				return true;
-			} catch (SQLException E) {
-				E.printStackTrace();
+			} catch (SQLException e) {
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 		} else {
 			System.out.println("Connection is not establised!");
@@ -254,7 +295,7 @@ public class ProjectDao {
 		ArrayList<ProjectBean> projects = new ArrayList<ProjectBean>();
 		try {
 			Connection con =MySqlConnection.getInstance();
-			PreparedStatement pstmt = con.prepareStatement("select projectid,advancepaypercent,afterpaypercent,clientName from projects join clients using (clientId) where profitLoss = 0");
+			PreparedStatement pstmt = con.prepareStatement("select projectid,advancepaypercent,afterpaypercent,clientName from projects join clients using (clientId) where profitLoss = 1");
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -274,7 +315,7 @@ public class ProjectDao {
 		return null;
 	}
 	
-	public void updateItemsWithProjectId(String projectId) {
+	public void updateItemsWithProjectId(String projectId,HttpServletRequest request,HttpServletResponse response) {
 		String updateQuery = "UPDATE items SET projectId = ? WHERE projectId = 'notassigned'";
 		Connection conn = MySqlConnection.getInstance();
 		

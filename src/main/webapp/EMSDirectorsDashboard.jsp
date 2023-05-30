@@ -120,8 +120,7 @@ button {
 							<!-- small box -->
 							<div class="small-box bg-danger">
 								<div class="inner">
-									<h3>65</h3>
-
+									<h3>0</h3>
 									<p>Projects in Loss</p>
 								</div>
 								<div class="icon">
@@ -195,8 +194,8 @@ button {
 														<div class="progress progress-sm">
 															<div class="progress-bar bg-green" role="progressbar"
 																aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"
-																style="width:<%=EDDB.getWorkDonePercentage()%>%"></div>
-														</div> <small> <%=EDDB.getWorkDonePercentage()%>%
+																style="width:<%=EDDB.getProgress()%>%"></div>
+														</div> <small> <%=EDDB.getProgress()%>%
 															Complete
 													</small>
 													</td>

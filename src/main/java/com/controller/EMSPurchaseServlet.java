@@ -28,7 +28,7 @@ import jakarta.servlet.http.HttpSession;
 public class EMSPurchaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static EMSPurchaseServlet instance = null;
-	private static String category = "";
+	
 	
 	public static EMSPurchaseServlet getInstance() {
 		
@@ -67,9 +67,9 @@ public class EMSPurchaseServlet extends HttpServlet {
 			ArrayList<EMSPurchaseBean> AEPB = PurchaseServices.fetchDataFromXHRRequest(request.getReader(), request);
 			
 			HttpSession session = request.getSession();
-			if(EMSPurchaseDao.getInstance().addPurchase(AEPB)) {
+			if(EMSPurchaseDao.getInstance().addPurchase(AEPB,request,response)) {
 				System.out.println("Purchase Added successfully!");
-				if(IndentDao.getInstance().setIsPurchased(AEPB.get(0).getProjectName())) {
+				if(IndentDao.getInstance().setIsPurchased(AEPB.get(0).getProjectName(),request,response)) {
 					System.out.println("Updated successfully!");
 				}else {
 					System.out.println("not Updated");

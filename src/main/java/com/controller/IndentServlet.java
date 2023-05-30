@@ -63,7 +63,7 @@ public class IndentServlet extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 			IndentDao indentDao = IndentDao.getInstance();
-			if(indentDao.addIndent(ibean)) {
+			if(indentDao.addIndent(ibean,request,response)) {
 				System.out.println("Indent Added!");
 				
 				for(IndentBean IB:ibean) {

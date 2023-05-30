@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import com.bean.EMSPurchaseBean;
 import com.bean.EMSVendorsBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 public class EMSVendorsDao {
 	
 	
@@ -24,7 +28,7 @@ public class EMSVendorsDao {
 		}
 
 		
-		public boolean addVendor(ArrayList<EMSVendorsBean> vendor) {
+		public boolean addVendor(ArrayList<EMSVendorsBean> vendor,HttpServletRequest request,HttpServletResponse response) {
 
 			String insertQuery = "INSERT INTO vendors(vendorName,email,address,phonenumber,PhoneNumber1,Email1,GST,PanNumber,BankName,ACNumber,IFSC,Remarks) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 			
@@ -51,7 +55,13 @@ public class EMSVendorsDao {
 				int[] result = pstmt.executeBatch();
 				return true;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 			return false;
 		}
@@ -81,7 +91,7 @@ public class EMSVendorsDao {
 			return null;
 		}
 		
-		public boolean deleteVendor(int vendorId) {
+		public boolean deleteVendor(int vendorId,HttpServletRequest request,HttpServletResponse response) {
 			try {
 				Connection con = MySqlConnection.getInstance();
 				PreparedStatement pstmt = con.prepareStatement("delete from vendors where vendorid = ?");
@@ -91,7 +101,13 @@ public class EMSVendorsDao {
 				
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 			return false;
 			
@@ -99,7 +115,7 @@ public class EMSVendorsDao {
 		
 		
 		
-		public boolean updateVendor(String newData, String changeField, int vendorId) {
+		public boolean updateVendor(String newData, String changeField, int vendorId,HttpServletRequest request,HttpServletResponse response) {
 			try {
 				Connection con = MySqlConnection.getInstance();
 				PreparedStatement pstmt = con.prepareStatement("update vendors set " + changeField + "= ? where vendorid = ? ");
@@ -109,7 +125,13 @@ public class EMSVendorsDao {
 				return true;
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 			return false;
 		}
@@ -266,7 +288,7 @@ public class EMSVendorsDao {
 			
 			return null;
 		}
-		public Boolean updatePrice(String vendor, String projectId, String price) {
+		public Boolean updatePrice(String vendor, String projectId, String price,HttpServletRequest request,HttpServletResponse response) {
 			try {
 				System.out.println("GetId");
 				Connection con = MySqlConnection.getInstance();
@@ -279,7 +301,13 @@ public class EMSVendorsDao {
 				return true;
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 			return true;
 			

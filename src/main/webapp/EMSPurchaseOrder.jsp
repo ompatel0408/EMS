@@ -118,7 +118,7 @@
 								</div>
 								<!-- Modal View Code -->
 								<div class="modal fade"
-									id="modal-projectDetails<%=po.getPoId()%>">
+									id="modal-projectDetails<%=po.getPoId()%>"> 
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">

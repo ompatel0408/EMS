@@ -1,44 +1,29 @@
 package com.controller;
 
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import com.bean.DailyProgressReportBean;
-import com.bean.EMSLogsBean;
-import com.bean.IndentBean;
 import com.dao.DailyProgressReportDao;
 import com.dao.EMSDrawingDao;
-import com.dao.EMSLogsDao;
-import com.dao.IndentDao;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.service.DailyProgressReportServices;
 import com.service.ExceptionHandler;
-import com.service.IndentServices;
 
 public class DailyProgressReportServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		DailyProgressReportDao dprDao = null;
-		ArrayList<DailyProgressReportBean> dprs = dprDao.getInstance().getAllDpr();
-		request.setAttribute("dprs", dprs);
-
-		RequestDispatcher rd = request.getRequestDispatcher("DPRList.jsp");
-		rd.forward(request, response);
-
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write("Hello");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -50,22 +35,20 @@ public class DailyProgressReportServlet extends HttpServlet {
 				ArrayList<DailyProgressReportBean> ibean = new ArrayList<DailyProgressReportBean>();
 				ibean = DailyProgressReportServices.fetchDataFromXHRRequest(request.getReader(), request);
 
-				HttpSession session = request.getSession();
-				DailyProgressReportDao dprDao = DailyProgressReportDao.getInstance();
-				if (dprDao.addDPR(ibean)) {
-					System.out.println("Indent Added!");
+				if (DailyProgressReportDao.getInstance().addDPR(ibean,request,response)) {
+					System.out.println("DPR Added!");
 				} else {
-					System.out.println("Indent not Added!");
+					System.out.println("DPR not Added!");
 				}
+//				request.getRequestDispatcher("DPRList.jsp").forward(request, response);
 				doGet(request, response);
 			}
 			else if (request.getParameter("delete").equals("delete")) {
-				DailyProgressReportDao dprDao = null;
 				String itemId = request.getParameter("itemId");
 				String subItemId = request.getParameter("subItemId");
 				String editedColumn = request.getParameter("phase");
 				String projectId = request.getParameter("projectId");
-				dprDao.getInstance().updatePhase(projectId, subItemId, editedColumn,itemId);
+				DailyProgressReportDao.getInstance().updatePhase(projectId, subItemId, editedColumn,itemId,request,response);
 				response.sendRedirect("EMSDirectorsDashboard.jsp");
 			}
 		} catch (Exception e) {

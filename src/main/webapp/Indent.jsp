@@ -42,7 +42,7 @@
 							<div class="col-sm-3">
 								<!-- text input -->
 								<div class="form-group">
-									<label for="item-id">Project</label> <select type="text"
+									<label for="item-id">Project</label> <select 
 										id="ProjectId1" onchange="getItemNames()" class="form-control" required>
 										<option value="select" selected>Select Projects</option>
 										<%
@@ -82,7 +82,7 @@
 							<div class="col-sm-3">
 								<div class="form-group">
 									<label>Size</label>&nbsp;&nbsp;&nbsp;&nbsp;<span id="quantity"></span><select type="text" id="size-id" onchange="getCount()" 
-										class="form-control" placeholder="select size" required>
+										class="form-control"  required>
 										<option value="Select Size">Select Size</option>
 									</select>
 								</div>
@@ -97,7 +97,7 @@
 								</div>
 								<div class="form-group" id="quantity-id">
 									<label>Quantity</label> <input type="text" class="form-control"
-										id="Quantity" placeholder="Enter Quantity"
+										id="Quantity" placeholder="Enter Quantity" pattern="[0-9]{1,8}" required="required"
 										onclick="getCount()">
 								</div>
 								<div id="givenQuantity"></div>
@@ -108,7 +108,7 @@
 								<div class="form-group">
 									<label>Remark</label>
 									<textarea maxlength="100" class="form-control" rows="3"
-										placeholder="Enter..." style="height: 125px;" id="remark-id"></textarea>
+										placeholder="Enter..." style="height: 125px;" id="remark-id" required="required"></textarea>
 								</div>
 							</div>
 							<div class="col">

@@ -44,7 +44,7 @@
 								<!-- text input -->
 								<div class="form-group">
 									<label>Category</label> <select id="categoryId"
-										class="form-control" placeholder="select category"
+										class="form-control" 
 										onchange="getXHRRequestToQuotationPerItemGrade()" required
 										disabled>
 										<option value="select" selected>Select category</option>
@@ -54,7 +54,6 @@
 							<div class="col-sm-3">
 								<div class="form-group">
 									<label>Grade</label> <select id="gradeId" class="form-control"
-										placeholder="select Grade"
 										onchange="getXHRRequestToQuotationPerItemSize()" required
 										disabled>
 										<option value="">Select Grade</option>
@@ -64,25 +63,25 @@
 							<div class="col-sm-3">
 								<div class="form-group">
 									<label>Size</label> <select id="sizeId" class="form-control"
-										placeholder="select size" required disabled>
+										 required disabled>
 										<option value="">Select size</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Quantity</label> <input type="text" class="form-control"
-										id="Quantity" placeholder="Enter Quantity" disabled>
+									<label>Quantity</label> <input type="number" class="form-control"
+										id="Quantity" placeholder="Enter Quantity"  required="required" disabled>
 								</div>
 								<!-- /.form-group -->
 								<div class="form-group">
 									<label>Weight</label> <input type="text" class="form-control"
-										id="waight-id" placeholder="Enter Waight" disabled>
+										id="waight-id" placeholder="Enter Waight" pattern="[-+]?[0-9]*\.?[0-9]*"  required="required" disabled>
 								</div>
 								<div class="form-group">
 									<label>Profit Percentage</label> <input type="text"
 										class="form-control" id="profit-id"
-										placeholder="Enter Profit Percentage"
+										placeholder="Enter Profit Percentage" pattern="[0-9]{1,99}"  required="required"
 										onblur="DisablePercentage()" disabled>
 								</div>
 							</div>
@@ -90,11 +89,11 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Units</label> <input type="text" class="form-control"
-										id="unit-id" placeholder="Enter Units" disabled>
+										id="unit-id" placeholder="Enter Units" pattern="[A-Za-z._ ]{1,50}"  required="required" disabled>
 								</div>
 								<div class="form-group">
 									<label>Price</label> <input type="text" class="form-control"
-										id="price-id" placeholder="Enter Price" disabled>
+										id="price-id" placeholder="Enter Price" pattern="[-+]?[0-9]*\.?[0-9]*"  required="required" disabled>
 								</div>
 							</div>
 							<div class="col">
@@ -102,7 +101,7 @@
 									<div class="form-group mt-3 d-flex justify-content-around">
 										<button type="submit" id="add_Quatation"
 											class="btn btn-primary w-25 disabled">
-											<strong>+</strong> Add Quatation per offer
+											<strong>+</strong> Add Quotation per offer
 										</button>
 									</div>
 								</div>
@@ -190,7 +189,7 @@
 									</div>
 									<div class="form-group" id="hide-num" style="display: none;">
 										<label for="" id="lableName1">Value</label> <input
-											type="number" class="form-control" id="placeholderChange1"
+											type="text" class="form-control" id="placeholderChange1"
 											placeholder="Enter value">
 									</div>
 									<button type="submit" class="btn btn-primary mt-2 disabled"

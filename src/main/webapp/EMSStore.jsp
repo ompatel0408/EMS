@@ -47,7 +47,7 @@
 							</div>
 							<div class="col-sm-4">
 								<div class="form-group">
-									<label>Size</label> <select type="text" id="size-id"
+									<label>Size</label> <select  id="size-id"
 										class="form-control" onchange="getQuant()" required>
 										<option >Select size</option>
 									</select>
@@ -56,7 +56,7 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Quantity</label> <input type="text" class="form-control"
-										id="quantaty-id" placeholder="Quantity"  disabled required>
+										id="quantaty-id" placeholder="Quantity"  disabled pattern="[0-9]{1,6}"  required="required">
 								</div>
 							</div>
 							<div

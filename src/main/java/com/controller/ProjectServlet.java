@@ -20,7 +20,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 
+@SuppressWarnings("serial")
 public class ProjectServlet extends HttpServlet {
+	@SuppressWarnings("unused")
 	private static  long serialVersionUID = 1L;
 	private static ProjectServlet instance = null;
 	
@@ -44,9 +46,9 @@ public class ProjectServlet extends HttpServlet {
 			if(update.equals("update")) {
 				doPut(request, response);
 			}
-			else if(!(projectId.equals("0"))){
-				doDelete(request, response);
-			}
+//			else if(!(projectId.equals("0"))){
+////				doDelete(request, response);
+//			}
 			System.out.println("List");
 			
 			ArrayList<ProjectBean> projects = projectDao.getAllProject();
@@ -81,11 +83,11 @@ public class ProjectServlet extends HttpServlet {
 			clientName = ProjectDao.getInstance().getClientName(clientId);
 			ProjectServices ps = new ProjectServices();
 			projectId = ps.projectGenerate(clientName);
-			ProjectDao.getInstance().updateItemsWithProjectId(projectId);
+			ProjectDao.getInstance().updateItemsWithProjectId(projectId,request,response);
 			projectbean.setProjectId(projectId);
 			
 			HttpSession session = request.getSession();
-			if(ProjectDao.getInstance().addProject(projectbean)) {
+			if(ProjectDao.getInstance().addProject(projectbean,request,response)) {
 				System.out.println("Project Added successfully!");
 
 				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new project for client ".concat(clientName).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","PROJECTS"))) {
@@ -96,7 +98,7 @@ public class ProjectServlet extends HttpServlet {
 			}else {
 				System.out.println("Project not added!");
 			}
-			ProjectDao.getInstance().updatePrPurchase(clientId,projectId);
+			ProjectDao.getInstance().updatePrPurchase(clientId,projectId,request,response);
 			response.sendRedirect("ProjectServlet?projectId=0&update=notupdate");
 		}catch(Exception e) {
 			ExceptionHandler.handleException(request,response, e);
@@ -113,22 +115,22 @@ public class ProjectServlet extends HttpServlet {
 			String changeField = request.getParameter("changeField");
 			String newData = request.getParameter("newData");
 			ProjectDao projectDao = ProjectDao.getInstance();
-			projectDao.updateProject(newData, changeField, projectId);
+			projectDao.updateProject(newData, changeField, projectId,request,response);
 		}catch(Exception e) {
 			ExceptionHandler.handleException(request,response, e);
 		}
 	}
 	
-	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		try {
-			String projectId = req.getParameter("projectId");
-			ProjectDao projectDao = ProjectDao.getInstance();
-			projectDao.deleteProject(projectId);
-		}catch(Exception e) {
-			ExceptionHandler.handleException(req,resp, e);
-		}
-	}
+//	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		// TODO Auto-generated method stub
+//		
+//		try {
+//			String projectId = req.getParameter("projectId");
+//			ProjectDao projectDao = ProjectDao.getInstance();
+//			projectDao.deleteProject(projectId,req,resp);
+//		}catch(Exception e) {
+//			ExceptionHandler.handleException(req,resp, e);
+//		}
+//	}
 
 }

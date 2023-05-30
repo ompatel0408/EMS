@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import com.bean.EMSDirectorsDashboardBean;
 import com.bean.QuotationBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 
 public class EMSDirectorsDashboardDao {
@@ -27,7 +31,7 @@ public class EMSDirectorsDashboardDao {
 	public ArrayList<EMSDirectorsDashboardBean> getDataOfLiveProjects(){
 		
 		
-		String selectQuery = "select ClientName,p.projectId,pr.workdonepercentage,p.POdate from clients c join projects p ON  c.ClientId = p.ClientId join production pr on pr.projectId=p.projectId";
+		String selectQuery = "select CLIENTNAME,projectID,PROGRESS,PODATE from clients C Join projects P using(ClientId) WHERE PROGRESS < 100";
 		Connection conn = MySqlConnection.getInstance();
 		ArrayList<EMSDirectorsDashboardBean> ar = new  ArrayList<EMSDirectorsDashboardBean>();
 		EMSDirectorsDashboardBean EDDB = null;
@@ -104,7 +108,7 @@ public class EMSDirectorsDashboardDao {
 		return null;
 	}
 	
-	public boolean updateisPaid(String vendorName) {
+	public boolean updateisPaid(String vendorName,HttpServletRequest request,HttpServletResponse response) {
 		
 		String updateQuery = "UPDATE POSTPURCHASE SET isPaid = 'TRUE' WHERE VendorName = ?";
 		Connection conn = MySqlConnection.getInstance();
@@ -117,7 +121,13 @@ public class EMSDirectorsDashboardDao {
 				stmt.executeUpdate();
 				return true;
 			}catch(SQLException e) {
-				e.printStackTrace();
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 		}else {
 			System.out.println("Connection is not establised!");
@@ -154,7 +164,7 @@ public ArrayList<QuotationBean> getAllNotificationsForPayment() {
 		return null;
 	}
 	
-public boolean updateisPaidForPayment(String projectId) {
+public boolean updateisPaidForPayment(String projectId,HttpServletRequest request,HttpServletResponse response) {
 	
 	String updateQuery = "UPDATE PROJECTS SET isPaid = 1 WHERE projectId = ?";
 	Connection conn = MySqlConnection.getInstance();
@@ -167,7 +177,13 @@ public boolean updateisPaidForPayment(String projectId) {
 			stmt.executeUpdate();
 			return true;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 	}else {
 		System.out.println("Connection is not establised!");

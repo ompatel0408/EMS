@@ -1,3 +1,4 @@
+<%@page import="jakarta.servlet.http.Cookie"%>
 <%@page import="com.bean.EMSPurchaseBean"%>
 <%@page import="com.bean.EMSVendorsBean"%>
 <%@page import="com.dao.EMSVendorsDao,java.util.ArrayList"%>
@@ -107,6 +108,7 @@ table, tbody {
 	double transport=0.0;
 	double totalNetAmt=0.0;
 	%>
+	
 	<table style="border-collapse: collapse; margin-left: 6.31pt"
 		cellspacing="0">
 		<tbody>

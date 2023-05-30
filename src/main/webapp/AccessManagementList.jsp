@@ -676,7 +676,25 @@ int srNo=1;
 	<script src="assets/dist/js/adminlte.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
- 
+
+	<script type="text/javascript">
+		
+	window.addEventListener('scroll', function() {
+		  sessionStorage.setItem('scrollPosition', window.pageYOffset);
+		});
+
+	
+	window.addEventListener('load', function() {
+		  var scrollPosition = sessionStorage.getItem('scrollPosition');
+		  if (scrollPosition !== null) {
+		    window.scrollTo(0, scrollPosition);
+		    sessionStorage.removeItem('scrollPosition');
+		  }
+		});
+
+	
+	</script>
+
      </body>
     </html>
     

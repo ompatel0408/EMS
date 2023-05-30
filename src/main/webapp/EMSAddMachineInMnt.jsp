@@ -33,12 +33,12 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label>Company Name</label> <input type="text" class="form-control" required="required"
+									<label>Company Name</label> <input type="text" class="form-control" pattern="[A-Za-z0-9_ ]{1,260}"   required="required"
 										name="comName" id="comName" placeholder="Enter Company Name">
 								</div>
 								<div class="form-group">
 									<label>Invoice</label> <input type="text"
-										class="form-control" id="invoice" name="invoice" required="required"
+										class="form-control" id="invoice" name="invoice" pattern="[A-Za-z0-9]{1,260}"  required="required"
 										placeholder="Enter Invoice">
 								</div>
 								<div class="form-group">

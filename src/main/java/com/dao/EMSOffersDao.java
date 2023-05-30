@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import com.bean.EMSOffersBean;
 import com.bean.ItemBean;
 import com.dbConnection.*;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class EMSOffersDao {
 	private static EMSOffersDao instance = null;
@@ -24,7 +28,7 @@ public class EMSOffersDao {
 	}
 
 	
-	public boolean addOffer(ArrayList<EMSOffersBean> indent) {
+	public boolean addOffer(ArrayList<EMSOffersBean> indent,HttpServletRequest request,HttpServletResponse response) {
 		
 		String insertQuery = "insert into offer(ClientId,OfferCode,OfferName,TotalPrice,Quantity,QuotationId,DrawingId,Remarks,addDate,address) values (?,?,?,?,?,?,?,?,?,?)";
 		
@@ -47,7 +51,13 @@ public class EMSOffersDao {
 			int[] result = pstmt.executeBatch();
 			return true;
 		}catch(SQLException e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 		
 		return false;

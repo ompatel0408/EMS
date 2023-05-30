@@ -17,7 +17,7 @@ function Demo(tt) {
 
 var deleteValue = "";
 function deleteItem(deleteId) {
-	alert("asdfsadf")
+
 	deleteValue = deleteId;
 }
 document.getElementById("deleteClicked").addEventListener("click", () => {
@@ -299,9 +299,4 @@ function getGivenQuantity(){
 }
 
 
-/*
-<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-editItem" onclick="Demo(this.id)" id="Edit${i + 1}">
-<i class="fas fa-pencil-alt"></i>
-</button>
- */
 

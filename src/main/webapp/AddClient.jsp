@@ -40,7 +40,7 @@
 									<div class="form-group">
 										<label for="exampleInputPassword1">Client Name</label> <input
 											type="text" class="form-control" id="exampleInputPassword1"
-											placeholder="Enter Client Name" name="clientName" pattern="[A-Za-z_]{1,50}"  required="required">
+											placeholder="Enter Client Name" name="clientName" pattern="[A-Za-z_]{1,260}"  required="required">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">GST</label> <input
@@ -50,22 +50,22 @@
 									<div class="form-group">
 										<label for="exampleInputPassword1">Phone 1</label> <input
 											type="number" class="form-control" id="exampleInputPassword1"
-											placeholder="Enter Phone Number 1" name="phone" pattern="[0-9]{10}" required="required">
+											placeholder="Enter Phone Number 1" name="phone" pattern="[0-9]{10,11}" required="required">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Phone 2(optional)</label> <input
 											type="number" class="form-control" id="exampleInputPassword1"
-											placeholder="Enter Phone Number 2" name="phone1" pattern="[0-9]{10}">
+											placeholder="Enter Phone Number 2" name="phone1" pattern="[0-9]{10,11}">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Email 1</label> <input
 											type="text" class="form-control" id="exampleInputPassword1"
-											placeholder="Enter email 1" name="email" required>
+											placeholder="Enter email 1" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$" required>
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Email 2(optional)</label> <input
 											type="text" class="form-control" id="exampleInputPassword1"
-											placeholder="Enter email 2" name="email1">
+											placeholder="Enter email 2" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$" name="email1">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">PAN No</label> <input
@@ -75,7 +75,7 @@
 									<div class="form-group">
 										<label for="exampleInputPassword1">Address</label> <input
 											type="text" class="form-control" id="exampleInputPassword1"
-											placeholder="Enter Address" name="address">
+											placeholder="Enter Address" name="address" required="required">
 									</div>
 									<div class="modal-footer justify-content-between">
 										<button type="button" class="btn btn-default"
@@ -217,6 +217,10 @@
 														<p><%=clients.get(j).getEmail()%></p>
 													</div>
 													<div class="form-group">
+														<label for="exampleInputEmail1">Optional Email</label>
+														<p><%=clients.get(j).getEmail1().equals("0")?"Not Found":clients.get(j).getEmail1()%></p>
+													</div>
+													<div class="form-group">
 														<label for="exampleInputEmail1">GST NUMBER</label>
 														<p><%=clients.get(j).getGstNo()%></p>
 													</div>
@@ -225,14 +229,17 @@
 														<p><%=clients.get(j).getPanNo()%></p>
 													</div>
 													<div class="form-group">
-														<label for="exampleInputEmail1">ADDRESS</label>
-														<p><%=clients.get(j).getAddress()%></p>
+														<label for="exampleInputEmail1">Phone Number</label>
+														<p><%=clients.get(j).getPhoneNumber()%></p>
+													</div>
+													<div class="form-group">
+														<label for="exampleInputEmail1">Optional Phone Number</label>
+														<p><%=clients.get(j).getPhoneNumber1()==0?"Not Found":clients.get(j).getPhoneNumber1()%></p>
 													</div>
 													<%
 													}
 													}
 													%>
-													</form>
 												</div>
 											</div>
 											<!-- /.modal-project show -->

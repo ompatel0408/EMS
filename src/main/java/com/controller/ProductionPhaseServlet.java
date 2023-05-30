@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.dao.EMSProductionDao;
+import com.service.ExceptionHandler;
 
 /**
  * Servlet implementation class ProductionPhaseServlet
@@ -23,19 +24,8 @@ public class ProductionPhaseServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
 		String projectId = request.getParameter("projectId");
 		System.out.println(projectId);
 		String itemCode = request.getParameter("ItemCode");
@@ -49,8 +39,11 @@ public class ProductionPhaseServlet extends HttpServlet {
 			System.out.println(phaseName);
 			phaseNames.add(phaseName);
 		}
-		EMSProductionDao.getInstance().addPhase(projectId,itemCode,phaseNames);
+		EMSProductionDao.getInstance().addPhase(projectId,itemCode,phaseNames,request,response);
 		response.sendRedirect("EMSDirectorsDashboard.jsp");
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
 	}
 
 }

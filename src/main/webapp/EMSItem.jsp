@@ -91,7 +91,7 @@
 							 <div class="form-group">
 								<label>Quantity</label> <input type="number"
 									class="form-control" id="Quantity" placeholder="Enter Quantity"
-									required disabled>
+									pattern="[0-9]"  required="required" disabled>
 							</div> 
 							<div class="form-group">
 								<label for="">Delivery Date</label> <input type="date"
@@ -106,7 +106,7 @@
 							<div class="form-group">
 								<label>Order name</label> <input type="text"
 									class="form-control" id="ItemName"
-									placeholder="Enter Order name" required disabled>
+									placeholder="Enter Order name" pattern="[A-Za-z0-9_\- ]{1,100}"  required="required" disabled>
 							</div> 
 							<!-- /.form-group -->
 							<div class="form-group">
@@ -173,53 +173,6 @@
 		</div>
 		<!-- /.row -->
 	</div>
-	<!-- <div class="modal fade" id="modal-editItem">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Project Details</h4>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close" id="enableItemName">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="col-m-5">
-					<div class="form-group p-3">
-						<label>Select </label>
-						<p id="select-error"></p>
-						<form onsubmit="event.preventDefault();updateField()">
-							<select class="form-control select2 select2-hidden-accessible"
-								style="width: 100%;" data-select2-id="1" tabindex="-1"
-								aria-hidden="true" id="input-form">
-								<br>
-								<option selected="selected" data-select2-id="3">Select
-									option you want to update..</option>
-								<option value="ItemName">Item Name</option>
-								<option value="tagNo">Tag No</option>
-								<option value="quantity">Quantity</option>
-								<option value="delivaryDate">Delivery Date</option>
-							</select>
-
-							<div class="form-group" id="hide-text" style="display: none;">
-								<label for="placeholderChange" id="lableName" class="mt-2"></label>
-								<input type="text" class="form-control" id="placeholderChange"
-									placeholder="Enter">
-							</div>
-							<div class="form-group" id="hide-date" style="display: none;">
-								<label for="" id="lableName1">Delivery Date</label> <input type="date"
-									class="form-control" id="placeholderChange1"
-									placeholder="Enter Delivery Date">
-							</div>
-							<button type="submit" class="btn btn-primary mt-2 disabled"
-								id="input-update">Save changes</button>
-						</form>
-					</div>
-				</div>
-				/.modal-project show
-			</div>
-		</div>
-		/.modal-edit items
-	</div> -->
 	<div class="modal fade" id="modal-itemDelete">
 		<div class="modal-dialog">
 			<div class="modal-content bg-danger">

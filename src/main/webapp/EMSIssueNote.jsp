@@ -78,16 +78,16 @@
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label>ProjectID</label>
-                                      <select type="text" id="ProjectId1" 	class="form-control" required="required"></select>
+                                      <select id="ProjectId1" class="form-control" required="required"></select>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label>Category</label>
-                                    <select id="categoryId" class="form-control"
-                                         placeholder="select category" required disabled>
-                                        <!-- <option value="select" selected>Select category</option> -->
+                                    <select id="categoryId" class="form-control" required="required">
+                                        <!--  placeholder="select category" required disabled>--> 
+                                         <option value="select" selected>Select category</option> 
                                     </select>
                                 </div>
                             </div>
@@ -114,30 +114,30 @@
                                     <label>Quantity</label>
                                     <span id="quant"></span>
                                     <input type="number" class="form-control" id="Quantity"
-                                        placeholder="Enter Quantaty" required disabled>
+                                        placeholder="Enter Quantaty" pattern="[0-9]"  required="required"  disabled>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label>Remark </label>
                                     <textarea class="form-control" rows="3" placeholder="Enter..." id="remarkId" disabled
-                                        style="height: 125px;"></textarea>
+                                        style="height: 125px;" required="required"></textarea>
                                 </div>
                             </div>
                             <!-- /.col -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Units</label>
-                                    <input type="text" class="form-control"  id="unit-id" placeholder="Enter Units" required disabled>
+                                    <input type="text" class="form-control"  id="unit-id" placeholder="Enter Units" pattern="[A-Za-z]{1,30}"  required="required" disabled>
                                 </div>
                                 	<div class="form-group">
                                     <label>Issue Person</label>
                                     <input type="text" class="form-control" id="issue-per-id"
-                                        placeholder="Enter Issue Person" required disabled="">
+                                        placeholder="Enter Issue Person" pattern="[A-Za-z]{1,100}"  required="required" disabled="">
                                 </div>
                                 <div class="form-group">
                                     <label>Contractor </label>
                                     <input type="text" class="form-control" id="contracter-id"
-                                        placeholder="Enter Contracter" required  disabled="">
+                                        placeholder="Enter Contracter" pattern="[A-Za-z]{1,100}"  required="required"  disabled="">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -214,9 +214,9 @@
                                         option you want to update..</option>
                                     <option value="mtd">Material Description</option>
                                     <option value="remark">Remark</option>
-                                    <option value="contracter">Contracter</option>
+                                    <option value="contracter">Contractor</option>
                                     <option value="issueper">Issue Person</option>
-                                    <option value="quantity">Quantaty</option>
+                                    <option value="quantity">Quantity</option>
                                 </select>
                                 <div class="form-group" id="mtd" style="display: none;">
                                     <label>Material Description </label>
@@ -246,17 +246,17 @@
             <div class="modal-dialog">
                 <div class="modal-content bg-danger">
                     <div class="modal-header">
-                        <h4 class="modal-title">Delete Project</h4>
+                        <h4 class="modal-title">Delete issueNote</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"></span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to delete this project?</p>
+                        <p>Are you sure you want to delete this Issue Note?</p>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-outline-light" id="deleteClicked">Delete Project</button>
+                        <button type="button" class="btn btn-outline-light" id="deleteClicked">Delete issueNote</button>
                     </div>
                 </div>
             </div>

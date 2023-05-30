@@ -58,7 +58,7 @@ CREATE TABLE `catagorygrade` (
   PRIMARY KEY (`gradeId`),
   KEY `CatagoryId` (`CatagoryId`),
   CONSTRAINT `catagorygrade_ibfk_1` FOREIGN KEY (`CatagoryId`) REFERENCES `emscatagory` (`CatagoryId`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `catagorygradesize` (
   `sizeId` int NOT NULL AUTO_INCREMENT,
@@ -67,7 +67,7 @@ CREATE TABLE `catagorygradesize` (
   PRIMARY KEY (`sizeId`),
   KEY `gradeId` (`gradeId`),
   CONSTRAINT `catagorygradesize_ibfk_1` FOREIGN KEY (`gradeId`) REFERENCES `catagorygrade` (`gradeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `clients` (
   `clientid` int NOT NULL AUTO_INCREMENT,
@@ -81,7 +81,7 @@ CREATE TABLE `clients` (
   `email2` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`clientid`),
   UNIQUE KEY `CLIENTNAME_UNIQUE` (`CLIENTNAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `dispatch` (
   `DispatchId` int NOT NULL AUTO_INCREMENT,
@@ -136,7 +136,7 @@ CREATE TABLE `emscatagory` (
   `CatagoryId` int NOT NULL AUTO_INCREMENT,
   `Catagory` varchar(150) NOT NULL,
   PRIMARY KEY (`CatagoryId`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `gatepassinword` (
   `IGETPASSID` int NOT NULL AUTO_INCREMENT,
@@ -177,9 +177,9 @@ CREATE TABLE `grn` (
   `PATH2` varchar(220) NOT NULL,
   `InvoiceNumber` varchar(100) NOT NULL,
   PRIMARY KEY (`GRNID`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `grnapprovalpending` (
+CREATE TABLE `GRNAPPROVALPENDING` (
   `PROJECTID` varchar(250) NOT NULL,
   `MaterialCategory` varchar(200) NOT NULL,
   `CategoryId` int NOT NULL,
@@ -188,6 +188,7 @@ CREATE TABLE `grnapprovalpending` (
   `Units` varchar(50) NOT NULL,
   `Quantity` int NOT NULL,
   `RemainingQuantity` int DEFAULT NULL,
+  `isReceived` int NOT NULL DEFAULT '0',
   KEY `PROJECTID` (`PROJECTID`),
   KEY `CategoryId` (`CategoryId`),
   KEY `gradeId` (`gradeId`),
@@ -212,7 +213,7 @@ CREATE TABLE `indent` (
   PRIMARY KEY (`INDENTID`),
   KEY `PROJECTID` (`PROJECTID`),
   CONSTRAINT `indent_ibfk_1` FOREIGN KEY (`PROJECTID`) REFERENCES `projects` (`ProjectId`)
-) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `issue` (
   `PID` varchar(250) NOT NULL,
@@ -237,7 +238,7 @@ CREATE TABLE `issue` (
   CONSTRAINT `issue_ibfk_3` FOREIGN KEY (`sizeId`) REFERENCES `catagorygradesize` (`sizeId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `items` (
+CREATE TABLE `ITEMS` (
   `CLIENTID` int NOT NULL,
   `ITEMCODE` varchar(310) NOT NULL,
   `ITEMNAME` varchar(310) DEFAULT NULL,
@@ -246,6 +247,7 @@ CREATE TABLE `items` (
   `TagNo` varchar(150) NOT NULL,
   `DeliveryDate` varchar(15) NOT NULL,
   `Remarks` varchar(5000) NOT NULL,
+  `projectId` varchar(250) NOT NULL DEFAULT 'notassigned',
   UNIQUE KEY `ITEMCODE` (`ITEMCODE`),
   KEY `QuotationId` (`QuotationId`),
   KEY `CLIENTID` (`CLIENTID`),
@@ -263,7 +265,7 @@ CREATE TABLE `logs` (
   PRIMARY KEY (`LogId`),
   KEY `USERID` (`USERID`),
   CONSTRAINT `logs_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`)
-) ENGINE=InnoDB AUTO_INCREMENT=568 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=656 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `machines` (
   `machineId` int NOT NULL AUTO_INCREMENT,
@@ -343,7 +345,7 @@ CREATE TABLE `postpurchase` (
   PRIMARY KEY (`POID`),
   KEY `INDENTID` (`INDENTID`),
   CONSTRAINT `postpurchase_ibfk_1` FOREIGN KEY (`INDENTID`) REFERENCES `indent` (`INDENTID`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `prepurchase` (
   `PROJECTID` varchar(250) DEFAULT NULL,
@@ -432,7 +434,7 @@ CREATE TABLE `quotations` (
   `DiscountAmount` varchar(30) DEFAULT NULL,
   `Remarks` varchar(5000) DEFAULT NULL,
   PRIMARY KEY (`QuotationId`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `store` (
   `StoreId` int NOT NULL AUTO_INCREMENT,
@@ -463,7 +465,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`USERID`),
   UNIQUE KEY `EMAIL` (`EMAIL`),
   UNIQUE KEY `PHONENUMBER` (`PHONENUMBER`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `vendors` (
   `VENDORID` int NOT NULL AUTO_INCREMENT,
@@ -482,5 +484,4 @@ CREATE TABLE `vendors` (
   PRIMARY KEY (`VENDORID`),
   UNIQUE KEY `Email` (`Email`),
   UNIQUE KEY `PhoneNumber` (`PhoneNumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

@@ -8,6 +8,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import com.bean.EMSDispatchBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class EMSDispatchDao {
 	private static EMSDispatchDao instance = null;
@@ -21,7 +25,7 @@ public class EMSDispatchDao {
 		return instance;
 	}
 
-	public boolean insertDispatchItems(EMSDispatchBean edb) {
+	public boolean insertDispatchItems(EMSDispatchBean edb,HttpServletRequest request,HttpServletResponse response) {
 		String insertQuery = "INSERT INTO Dispatch(CLIENTID,ITEMCODE,DISPATCHDATE,DESTINATIONADDRESS,VEHICLENUMBER,TRAVELCOMPANY,TRAVELCOMPANYOWNER,CHECKEDBY) VALUES(?,?,?,?,?,?,?,?)";
 		Connection conn = MySqlConnection.getInstance();
 		ClientDao cd = ClientDao.getInstance();
@@ -40,7 +44,13 @@ public class EMSDispatchDao {
 				stmt.executeUpdate();
 				return true;
 			} catch (SQLException E) {
-				E.printStackTrace();
+				try {
+					ExceptionHandler.handleException(request, response, E);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 		} else {
 			System.out.println("Connction is not establised!");

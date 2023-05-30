@@ -28,41 +28,41 @@
 								<div class="form-group">
 									<label>Machine Name</label>  <input type="text"
 										class="form-control" id="mName"
-										placeholder="Machine Name" name="mName">
+										placeholder="Machine Name" name="mName" pattern="[A-Za-z0-9_ ]{1,260}"  required="required">
 								</div>
 								<div class="form-group">
 									<label>Model Number</label> <input type="text"
 										class="form-control" id="vehicleNoId"
-										placeholder="Model Number" name="modelNo">
+										placeholder="Model Number" name="modelNo" pattern="[A-Za-z0-9\- ]{1,260}"  required="required">
 								</div>
 								<div class="form-group">
 									<label>Invoice</label> <input type="text"
 										class="form-control" id="invoice"
-										name="invoice" placeholder="Invoice">
+										name="invoice" placeholder="Invoice" pattern="[A-Za-z0-9]{1,260}"  required="required">
 								</div>
 								<div class="form-group">
 									<label>Purchase Date</label> <input type="date"
 										class="form-control" id="purchaseDate" 
-										name="purchaseDate" placeholder="Purchase Date">
+										name="purchaseDate" placeholder="Purchase Date" required="required">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Machine Company Name</label> <input type="text"
 										class="form-control" id="mcname"
-										name="mcname" placeholder="Machine Company Name">									</select> 
+										name="mcname" placeholder="Machine Company Name" pattern="[A-Za-z0-9_ ]{1,260}"  required="required">									 
 								</div>
 								<div class="form-group">
 									<label>Maintenance Due Date</label> <input type="date"
 										class="form-control" id="mntDueDate"
-										name="mntDueDate" placeholder="Maintenance Due Date">
+										name="mntDueDate" placeholder="Maintenance Due Date" required="required">
 								</div>
 								<div class="form-group">
 									<label class="float-left">Remark</label>
 									<textarea class="form-control" rows="3"
 										placeholder="Destination Address..." name="remark"
 										id="remark" style="height: 125px;" 
-										maxlength="350"></textarea>
+										maxlength="350" required="required"></textarea>
 								</div>
 							</div>
 							<div

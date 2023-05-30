@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 import com.bean.UserBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 
 public class UserDao {
@@ -38,7 +42,7 @@ public class UserDao {
 		return null;
 	}
 	
-	public int addUser(UserBean ub)
+	public int addUser(UserBean ub,HttpServletRequest request,HttpServletResponse response)
 	{
 		Connection conn = MySqlConnection.getInstance();
 		if(conn != null)
@@ -55,7 +59,13 @@ public class UserDao {
 			}
 			catch (SQLException e) 
 			{
-				e.printStackTrace();
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 		}
 		return 0;

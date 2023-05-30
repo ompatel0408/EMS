@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 import com.bean.EMSFinalQuotationBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class EMSFinalQuotationDao {
 
@@ -80,7 +84,7 @@ public class EMSFinalQuotationDao {
 		return false;
 	}
 
-	public boolean updateFinalQuotation(EMSFinalQuotationBean EFQB) {
+	public boolean updateFinalQuotation(EMSFinalQuotationBean EFQB,HttpServletRequest request,HttpServletResponse response) {
 
 		String updateQuery = "Update Quotations SET QuotationAmount = ? , FinalDelivaryDate = ? , Quantity = ? , DiscountPercentage = ? , DiscountAmount = ?, Remarks = ? WHERE clientId = ?";
 		Connection conn = MySqlConnection.getInstance();
@@ -97,8 +101,13 @@ public class EMSFinalQuotationDao {
 				stmt.setInt(7, EFQB.getClientId());
 				stmt.executeUpdate();
 				return true;
-			} catch (SQLException E) {
-				E.printStackTrace();
+			} catch (SQLException e) {
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
 
 			}
 		} else {
@@ -132,7 +141,7 @@ public class EMSFinalQuotationDao {
 		return null;
 	}
 
-	public boolean insertIntoQuotationHistory(EMSFinalQuotationBean EFQB) {
+	public boolean insertIntoQuotationHistory(EMSFinalQuotationBean EFQB,HttpServletRequest request,HttpServletResponse response) {
 
 		String insertQuery = "INSERT INTO QUOTATIONHISTORY VALUES(?,?,?,?,?,?,?,?,?)";
 		Connection conn = MySqlConnection.getInstance();
@@ -150,8 +159,14 @@ public class EMSFinalQuotationDao {
 				stmt.setString(9, EFQB.getRemarks());
 				stmt.executeUpdate();
 				return true;
-			} catch (SQLException E) {
-				E.printStackTrace();
+			} catch (SQLException e) {
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 		} else {
 			System.out.println("Connction is not establised!");
@@ -187,7 +202,7 @@ public class EMSFinalQuotationDao {
 		return null;
 	}
 
-	public void deleteQuotation(int quotationId) {
+	public void deleteQuotation(int quotationId,HttpServletRequest request,HttpServletResponse response) {
 		try {
 			Connection con = MySqlConnection.getInstance();
 			PreparedStatement pstmt = con.prepareStatement("delete from quotations where quotationid = ?");
@@ -195,22 +210,38 @@ public class EMSFinalQuotationDao {
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 	}
 
-	public boolean updateQuotation(String newData, String changeField, int quotationId) {
+	public boolean updateQuotation(String newData, String changeField, int quotationId,HttpServletRequest request,HttpServletResponse response) {
 		try {
 			Connection con = MySqlConnection.getInstance();
 			PreparedStatement pstmt = con
 					.prepareStatement("update quotations set " + changeField + "= ? where quotationid = ? ");
+			PreparedStatement pstmt1 = con
+					.prepareStatement("update quotationHistory set " + changeField + "= ? where QuotationId = ? ");
 			pstmt.setString(1, newData);
 			pstmt.setInt(2, quotationId);
+			pstmt1.setString(1, newData);
+			pstmt1.setInt(2, quotationId);
 			pstmt.executeUpdate();
+			pstmt1.executeUpdate();
 			return true;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
 		}
 		return false;
 	}

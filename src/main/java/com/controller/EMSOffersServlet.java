@@ -61,10 +61,10 @@ public class EMSOffersServlet extends HttpServlet {
 			ibean = EMSOffersServices.fetchDataFromXHRRequest(request.getReader(), request);
 			
 			for(EMSOffersBean EOB:ibean) {
-				PrePurchaseDao.getInstance().addPrePurchaseInOffers(new PrePurchaseBean(EOB.getDrawingId(),EOB.getClientId()));
+				PrePurchaseDao.getInstance().addPrePurchaseInOffers(new PrePurchaseBean(EOB.getDrawingId(),EOB.getClientId()),request,response);
 			}
 			HttpSession session = request.getSession();
-			if(EMSOffersDao.getInstance().addOffer(ibean)) {
+			if(EMSOffersDao.getInstance().addOffer(ibean,request,response)) {
 				System.out.println("Offers Inserted Successfully!");
 				for(EMSOffersBean EOB:ibean) {
 					if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new offer has been added in Client Name ".concat(EOB.getClientName()),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","OFFERS"))) {

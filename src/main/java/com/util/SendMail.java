@@ -3,11 +3,10 @@ package com.util;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Properties;
-
 import com.bean.EMSLoginBean;
 import com.dao.EMSLoginDao;
 import com.service.EMSLoginServices;
-
+import com.service.ExceptionHandler;
 import jakarta.mail.Authenticator;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
@@ -17,6 +16,8 @@ import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.internet.MimeMultipart;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.mail.internet.MimeBodyPart;
 import jakarta.activation.DataHandler;
 import jakarta.activation.DataSource;
@@ -52,7 +53,7 @@ public class SendMail {
 
 			protected PasswordAuthentication getPasswordAuthentication() {
 
-				return new PasswordAuthentication(from, "echieucljdcezgck");
+				return new PasswordAuthentication(from, "xjieweryhcgxsfcm");
 
 			}
 
@@ -94,7 +95,23 @@ public class SendMail {
 		for(EMSLoginBean ELB:EMSLoginDao.getInstance().getData()) {
 			EMSLoginBean Token  = EMSLoginServices.generateJWTToken(ELB.getEmail(),ELB.getRole());
 			ar.add(new EMSLoginBean(ELB.getEmail(),Token.getToken(), Token.getSecretKey()));
-			SendMail.sendPassword(ELB.getEmail(), ELB.getName(),Token.getToken());
+			
+			Thread T = new Thread() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					SendMail.sendPassword(ELB.getEmail(), ELB.getName(),Token.getToken());
+				}
+			};
+			T.start();
+			
+			try {
+				Thread.sleep(1000*30);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		if(EMSLoginDao.getInstance().updateDataToDatabase(ar)) {
 			System.out.println("Updated successfully!");
@@ -128,7 +145,7 @@ public class SendMail {
 
 			protected PasswordAuthentication getPasswordAuthentication() {
 
-				return new PasswordAuthentication(from, "echieucljdcezgck");
+				return new PasswordAuthentication(from, "xjieweryhcgxsfcm");
 
 			}
 
@@ -161,8 +178,8 @@ public class SendMail {
 		}
 	}
 	
-	public static boolean sendPurchaseOrder(String PATH,String vendorMail) {
-
+	public static boolean sendPurchaseOrder(String PATH,String vendorMail,HttpServletRequest request,HttpServletResponse response) {
+		try {
 		// Recipient's email ID needs to be mentioned.
 		String to = vendorMail;
 
@@ -186,7 +203,7 @@ public class SendMail {
 
 			protected PasswordAuthentication getPasswordAuthentication() {
 
-				return new PasswordAuthentication(from, "echieucljdcezgck");
+				return new PasswordAuthentication(from, "xjieweryhcgxsfcm");
 
 			}
 
@@ -231,6 +248,14 @@ public class SendMail {
 		} catch (MessagingException m) {
 			m.printStackTrace();
 		}
+		}catch(Exception e) {
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+		}
 		return false;
 	}
 	
@@ -259,7 +284,7 @@ public class SendMail {
 
 			protected PasswordAuthentication getPasswordAuthentication() {
 
-				return new PasswordAuthentication(from, "echieucljdcezgck");
+				return new PasswordAuthentication(from, "xjieweryhcgxsfcm");
 
 			}
 

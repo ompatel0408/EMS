@@ -29,10 +29,10 @@ public class EMSUsersSevlet extends HttpServlet
 			UserBean ubBean = new UserBean(role, phoneNum, name, email, departnemt);
 			UserDao ud = new UserDao();
 			AccessDao ad = new AccessDao();
-			int success = ud.addUser(ubBean);
+			int success = ud.addUser(ubBean,request,response);
 			int userId = ad.getUserIdFromDatabase(email);
 			if(success==1) {
-				ad.addAcess(userId);
+				ad.addAcess(userId,request,response);
 			}
 			request.getRequestDispatcher("EMSDirectorsDashboard.jsp").forward(request, response);
 		}catch(Exception e) {

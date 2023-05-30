@@ -27,8 +27,8 @@ public class EMSAddMachineInMntServlet extends HttpServlet {
 		String remark = request.getParameter("remark").trim();
 		
 		EMSAddMachineInMntBean bean = new EMSAddMachineInMntBean(machine, model, compnyName, dueDate, invoice, mntGvnDate, remark);
-		System.out.println("data  : " + EMSAddMachineDao.getInstance().addItemInMnt(bean));
-		response.sendRedirect("EMSDirectorsDashboard.jsp");
+		System.out.println("data  : " + EMSAddMachineDao.getInstance().addItemInMnt(bean,request,response));
+		response.sendRedirect("EMSAddMachineListServlet");
 	}
 
 	@Override

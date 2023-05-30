@@ -10,6 +10,10 @@ import com.bean.CatagoryGradeSizeBean;
 import com.bean.ClientBean;
 import com.bean.IndentBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class IndentDao {
 
@@ -72,7 +76,7 @@ public class IndentDao {
 		return 0;
 	}
 
-	public boolean addIndent(ArrayList<IndentBean> indent) {
+	public boolean addIndent(ArrayList<IndentBean> indent,HttpServletRequest request,HttpServletResponse response) {
 
 		String insertQuery = "INSERT INTO indent(PROJECTID,ITEMCATAGORY,QUANTITY,UOM,REMARKS,ITEMNAME,gradeId,sizeId) VALUES(?,?,?,?,?,?,?,?)";
 
@@ -96,7 +100,13 @@ public class IndentDao {
 			System.out.println("Result -------->" + result);
 			return true;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 
 		return false;
@@ -166,7 +176,7 @@ public class IndentDao {
 		return indents;
 	}
 	
-	public boolean setIsPurchased(String projectId) {
+	public boolean setIsPurchased(String projectId,HttpServletRequest request,HttpServletResponse response) {
 		System.out.println("Project Id :"+projectId);
 		System.out.println("<---------Hiiiiiiii-------->");
 		String updateQuery = "UPDATE Indent SET isPurchased = 1 WHERE projectId = ?";
@@ -180,7 +190,13 @@ public class IndentDao {
 				stmt.executeUpdate();
 				return true;
 			}catch(SQLException e) {
-				e.printStackTrace();
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 		}else {
 			System.out.println("Connection is not establised!");

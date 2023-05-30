@@ -48,12 +48,7 @@ public class ShowManagementAccess extends HttpServlet {
 		}
 		
 	}
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -65,7 +60,7 @@ public class ShowManagementAccess extends HttpServlet {
 			String field=req.getParameter("field");
 			AccessDao access = new AccessDao();
 			
-			access.changeStatus(userId,status,field);
+			access.changeStatus(userId,status,field,req,resp);
 			AccessBean accessBean = access.getAllAccess(userId);
 			req.setAttribute("access", accessBean);
 			req.getRequestDispatcher("AccessManagementList.jsp").forward(req, resp);

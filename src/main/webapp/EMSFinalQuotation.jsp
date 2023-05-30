@@ -34,7 +34,7 @@
 								<div class="form-group">
 									<label>Project</label> <select class="form-control"
 										onload="getClients1()" id="ClientId1"
-										onchange="getQuotation()">
+										onchange="getQuotation()" required="required">
 									</select>
 								</div>
 								<div class="form-group">
@@ -66,7 +66,7 @@
 									<label class="float-left">Remark</label>
 									<textarea class="form-control" rows="3"
 										placeholder="Enter Remark..." name="FinalQuotationRemarks"
-										id="FinalQuotationRemarks" style="height: 40px;" maxlength="150"></textarea>
+										id="FinalQuotationRemarks" style="height: 40px;" maxlength="150" required="required"></textarea>
 								</div>
 							</div>
 							<div class="col-md-2">
@@ -82,7 +82,7 @@
 									<label>Discount Amount</label> <input type="text"
 										class="form-control" id="discountAmount" name="discountAmount" 
 										onkeyup="calculateDiscountPercentage()" placeholder="0"
-										pattern="^\d+(\.\d+)?$">
+										pattern="^\d+(\.\d+)?$" required="required">
 								</div>
 							</div>
 							<div class="col-md-2">
@@ -98,7 +98,7 @@
 									<div class="custom-control custom-radio">
 										<input class="custom-control-input" type="radio"
 											id="customRadio1" onclick="clickOfRadioButton()" value="0.00"
-											name="customRadio" checked> <label for="customRadio1"
+											name="customRadio" checked > <label for="customRadio1"
 											class="custom-control-label">Nill(0.00%)</label>
 									</div>
 									<div class="custom-control custom-radio">
@@ -126,7 +126,7 @@
 							<div
 								class="col-md-12 d-flex justify-content-center align-items-center mt-2">
 								<button type="submit" class="btn btn-danger">
-									<strong>+ Process to Quatation </strong>
+									<strong>+ Process to Quotation </strong>
 								</button>
 							</div>
 						</div>

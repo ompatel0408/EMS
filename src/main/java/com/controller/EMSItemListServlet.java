@@ -82,7 +82,7 @@ public class EMSItemListServlet extends HttpServlet {
 				String changeField = request.getParameter("changeField");
 				String newData = request.getParameter("newData");
 				ItemDao itemDao = new ItemDao();
-				itemDao.updateItem(newData, changeField, itemCode);
+				itemDao.updateItem(newData, changeField, itemCode,request,response);
 		    }
 		}catch(Exception e) {
 			ExceptionHandler.handleException(request, response, e);
@@ -95,7 +95,7 @@ public class EMSItemListServlet extends HttpServlet {
 		try {
 			String itemCode = req.getParameter("itemCode");
 			ItemDao itemDao = new ItemDao();
-			itemDao.deleteItem(itemCode);
+			itemDao.deleteItem(itemCode,req,resp);
 		}catch(Exception e) {
 			ExceptionHandler.handleException(req, resp, e);
 		}

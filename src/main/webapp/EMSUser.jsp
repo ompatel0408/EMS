@@ -40,7 +40,7 @@
 								<!-- text input -->
 								<div class="form-group">
 									<label>User Name</label> <input type="text" name="userName"
-										class="form-control" placeholder="Enter Userame"> <br>
+										class="form-control" placeholder="Enter Userame" pattern="[A-Za-z_ ]{1,100}"  required="required"> <br>
 										<p style="color : red;";><%=nameErr == null ? "" : nameErr %></p>
 								</div>
 							</div>
@@ -53,7 +53,7 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Phone Number</label> <input type="number" name="mobile"
-										class="form-control" placeholder="Enter phone number" pattern="[0-9]{10}" required="required"> <br>
+										class="form-control" placeholder="Enter phone number" pattern="[0-9]{10,11}" required="required"> <br>
 										<p style="color : red;";><%=phoneErr == null ? "" : phoneErr %></p>
 								</div>
 							</div>

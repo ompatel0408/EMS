@@ -10,7 +10,7 @@ window.onload = () => {
 			appendVendors(Data)
 		}
 	}
-	xhr.send(JSON.stringify({ Token: "Vendors" }));
+	xhr.send(JSON.stringify({ Token: "Persons" }));
 }
 
 
@@ -18,7 +18,7 @@ function appendVendors(vendor)
 {
 	var vendorSelect = document.getElementById("vendorId");
 	console.log(vendorSelect)
-	vendorSelect.innerHTML = `<option value="select vendor"selected>Select Vendor</option>`;
+	vendorSelect.innerHTML = `<option value="select vendor"selected>Select persons</option>`;
 	for(let i=0; i<vendor.length; i++)
 	{
 		let createdAt = document.createElement("option");

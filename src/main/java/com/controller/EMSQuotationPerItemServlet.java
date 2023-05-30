@@ -74,7 +74,7 @@ public class EMSQuotationPerItemServlet extends HttpServlet {
 
 			ArrayList<QuotationPerItemBean> AQPIB = QuotationPerItemServices.fetchDataFromXHRRequestInQuotaionPerItem(request.getReader(),request);
 			HttpSession session = request.getSession();
-			if(QPd.addQuotationPerItem(AQPIB)) {
+			if(QPd.addQuotationPerItem(AQPIB,request,response)) {
 				System.out.println("QuotataionPerItem Added SuccessFully");
 				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new Quotation for Offer ".concat(AQPIB.get(0).getOfferName()).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","QUOTATIONPEROFFER"))) {
 					init();
@@ -111,7 +111,7 @@ public class EMSQuotationPerItemServlet extends HttpServlet {
 			}
 			
 			
-			if(QPd.addProfitForQuotationPerItem(ar)) {
+			if(QPd.addProfitForQuotationPerItem(ar,request,response)) {
 				System.out.println("Profit added successfully!");
 			}else {
 				System.out.println("Profit not added");
@@ -121,7 +121,7 @@ public class EMSQuotationPerItemServlet extends HttpServlet {
 				System.out.println("getTotalAmountWithProfit :"+QPIB.getTotalAmountWithProfit());
 			}		
 					
-			if(QPd.updateTotalPrice(ar)) {
+			if(QPd.updateTotalPrice(ar,request,response)) {
 				System.out.println("totalPrice added successfully!");
 			}else {
 

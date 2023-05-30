@@ -38,7 +38,7 @@
 		<filter-name>EMSLoginFilter</filter-name>
 		<url-pattern>/EMSLoginServlet</url-pattern>
 	</filter-mapping>
-
+	
 	<servlet>
 		<servlet-name>ClientServlet</servlet-name>
 		<servlet-class>com.controller.ClientServlet</servlet-class>
@@ -443,4 +443,15 @@
 		<servlet-name>DailyProgressReportServlet</servlet-name>
 		<url-pattern>/DailyProgressReportServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EMSAddPersonServlet</servlet-name>
+		<servlet-class>com.controller.EMSAddPersonServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>EMSAddPersonServlet</servlet-name>
+		<url-pattern>/EMSAddPersonServlet</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

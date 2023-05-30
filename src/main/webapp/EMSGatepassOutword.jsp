@@ -33,29 +33,29 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="item-id">Vendors</label> <select id="vendorId"
+									<label for="item-id">Persons</label> <select id="vendorId"
 										name="vendorId" class="form-control" required>
-										<option value="select" selected>Select Vendors</option>
+										<option value="select" selected>Select Person</option>
 									</select>
 								</div>
 								<div class="form-group">
 									<label>Quantity</label> <input type="number" class="form-control" name="qty"
-										id="Quantity" placeholder="Enter Quantity">
+										id="Quantity" placeholder="Enter Quantity" pattern="[0-9]"  required="required">
 								</div>
 								<!-- /.form-group -->
 								<div class="form-group">
 									<label>Issue Date</label> <input type="date"
-										class="form-control" name="idate" id="idate">
+										class="form-control" name="idate" id="idate" required="required">
 								</div>
 								<div class="form-group">
 									<label>Vehicle Number</label> <input type="text"
 										class="form-control" id="vehicleNo" name="vehicleNo"
-										placeholder="Enter Vehicle Number">
+										placeholder="Enter Vehicle Number" pattern="[A-Za-z0-9_\- ]{1,50}"  required="required">
 								</div>
 								<div class="form-group d-flex justify-content-around mt-5">
 									<label >Item will receive? : </label>
 									<div class="custom-control custom-radio">
-										<input type="radio" checked="checked" name="receive" id="yes" class="custom-control-input" value="1"> <label class="custom-control-label" for="yes" checked>Yes</label>
+										<input type="radio" checked="checked" name="receive" id="yes" class="custom-control-input" value="1" checked> <label class="custom-control-label" for="yes" >Yes</label>
 									</div>
 									<div class="custom-control custom-radio">
 										<input type="radio" name="receive" id="no" class="custom-control-input" value="0"> <label class="custom-control-label" for="no">No</label>
@@ -67,24 +67,24 @@
 								<div class="form-group">
 									<label>Material/machine Name</label> <input type="text"
 										class="form-control" name="mname" id="mname"
-										placeholder="Enter Material or machine Name">
+										placeholder="Enter Material or machine Name" pattern="[A-Za-z0-9_ ]{1,260}"  required="required">
 									<span class="text-danger">
 										<%=err == null ? "" : err%>
 									</span>
 								</div>
 								<div class="form-group">
-									<label>Size</label> <input type="text" class="form-control"
-										name="size" id="size-id" placeholder="Enter size">
+									<label>Size(Optional)</label> <input type="text" class="form-control"
+										name="size" id="size-id" placeholder="Enter size" pattern="[A-Za-z0-9 ]{1,100}" >
 								</div>
 								<div class="form-group">
 									<label>Address</label>
 									<textarea class="form-control" rows="3" placeholder="Enter Address" name="address"
-										id="address" style="height: 85px;"></textarea>
+										id="address" style="height: 85px;"   required="required"></textarea>
 								</div>
 								<div class="form-group">
 									<label>Remark</label>
 									<textarea class="form-control" rows="3" placeholder="Enter Remark" name="remark"
-										id="remark" style="height: 85px;"></textarea>
+										id="remark" style="height: 85px;" required="required"></textarea>
 								</div>
 							</div>
 							<div class="col">

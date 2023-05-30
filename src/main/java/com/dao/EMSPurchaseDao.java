@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 import com.bean.EMSPurchaseBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class EMSPurchaseDao {
 	
@@ -73,7 +77,7 @@ public class EMSPurchaseDao {
 		return 0;
 	}
 	
-	public boolean addPurchase(ArrayList<EMSPurchaseBean> AEPB) {
+	public boolean addPurchase(ArrayList<EMSPurchaseBean> AEPB,HttpServletRequest request,HttpServletResponse response) {
 		
 		String insertQuery = "INSERT INTO POSTPURCHASE(INDENTID,ProductDescription,Size,Quantity,UNITS,RatePerKg,discount,TotalAmount,SGST,CGST,CurrentDate,PONumber,VendorName,PaymentTerms) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		Connection conn = MySqlConnection.getInstance();
@@ -104,8 +108,14 @@ public class EMSPurchaseDao {
 				stmt.executeBatch();
 				return true;
 				
-			}catch(SQLException E) {
-				E.printStackTrace();
+			}catch(SQLException e) {
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 		}else {
 			System.out.println("Connction is not establised!");
@@ -207,7 +217,7 @@ public ArrayList<EMSPurchaseBean> getAllPurchaseOrderByUsingProjectId(String pro
 	}
 	
 	
-	public void deleteParticularPO(int poid) {
+	public void deleteParticularPO(int poid,HttpServletRequest request,HttpServletResponse response) {
 		try {
 			Connection con = MySqlConnection.getInstance();
 			PreparedStatement pstmt = con.prepareStatement("delete from postpurchase where poid = ?");
@@ -217,7 +227,12 @@ public ArrayList<EMSPurchaseBean> getAllPurchaseOrderByUsingProjectId(String pro
 			else System.out.println("Not deleted Error Che!");
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
 		}
 	}
 	

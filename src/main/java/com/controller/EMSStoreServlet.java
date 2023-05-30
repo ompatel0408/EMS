@@ -41,13 +41,16 @@ public class EMSStoreServlet extends HttpServlet {
 			ArrayList<EMSStoreBean> alsb = EMSStoreServices.fetchDataFromXHRRequestInStore(request.getReader(),request);
 			HttpSession session = request.getSession();
 	
-			if(std.addItems(alsb))
+			if(std.addItems(alsb,request,response))
 			{
 				System.out.println("Items added successfylly....");
 				
 				for(EMSStoreBean ESB:alsb) {
 					if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new size ".concat(ESB.getSize()).concat(" of grade ").concat(ESB.getGrade()).concat(" and category ").concat(ESB.getCategory()).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","GENERALSTORE"))) {
 						System.out.println("GENERALSTORE insert Logs Inserted!");
+						response.setContentType("application/json");
+						response.setCharacterEncoding("UTF-8");
+						response.getWriter().write("Hello");
 					}else {
 						System.out.println("GENERALSTORE insert Logs not inserted!");
 					}

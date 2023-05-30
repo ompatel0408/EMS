@@ -34,7 +34,7 @@
 								<!-- text input -->
 								<div class="form-group">
 									<label>Vendor Name</label> <input type="text" id="vendorName"
-										class="form-control" placeholder="Enter VendorName" pattern="[A-Za-z ]{1,50}" required="required">
+										class="form-control" placeholder="Enter VendorName" pattern="[A-Za-z_ ]{1,100}" required="required">
 								</div>
 							</div>
 							<div class="col-sm-3">
@@ -46,7 +46,7 @@
 							<div class="col-sm-3">
 								<div class="form-group">
 									<label>Email(optional)</label> <input type="text" class="form-control"
-										id="email1" placeholder="Enter Email" value="none">
+										id="email1" placeholder="Enter Email" value="none" >
 								</div>
 							</div>
 							<div class="col-sm-3">
@@ -64,19 +64,19 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Address</label> <input type="text" class="form-control"
-										id="address" placeholder="Enter Address">
+										id="address" placeholder="Enter Address" required="required">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>GST</label> <input type="text" class="form-control" 
-										id="gst" placeholder="Enter GST">
+										id="gst" placeholder="Enter GST" pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$" required="required">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>PAN Number</label> <input type="text" class="form-control" 
-										id="pannumber" placeholder="Enter Pan Number">
+										id="pannumber" placeholder="Enter Pan Number" pattern= "[A-Z]{5}[0-9]{4}[A-Z]{1}" required="required">
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -88,13 +88,13 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Account Number</label> <input type="text" class="form-control" 
-										id="acNumber" placeholder="Enter Account Number">
+										id="acNumber" placeholder="Enter Account Number" pattern="[0-9]{12}">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>IFSC Code</label> <input type="text" class="form-control" 
-										id="ifsc" placeholder="Enter IFSC Code">
+										id="ifsc" placeholder="Enter IFSC Code" pattern="[A-Z0-9]{1,15}" required="required">
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -102,7 +102,7 @@
 									<label class="float-left">Remark</label>
 									<textarea class="form-control" rows="3"
 										placeholder="Enter Remark..." name="Remarks"
-										id="Remarks" style="height: 40px;" maxlength="5000"></textarea>
+										id="Remarks" style="height: 40px;" maxlength="5000" required="required"></textarea>
 								</div>
 							</div>
 						</div>

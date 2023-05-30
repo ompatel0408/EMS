@@ -88,8 +88,8 @@ public class EMSFinalQuotationServlet extends HttpServlet {
 			String clientName = jsonObject.get("clientId").getAsString();
 			HttpSession session = request.getSession();
 			if(clientName != null) {
-				if(EQD.updateFinalQuotation(new EMSFinalQuotationBean(jsonObject.get("TotalAmount").getAsString(), jsonObject.get("finalDelivaryDate").getAsString(), Integer.parseInt(jsonObject.get("Quantity").getAsString()), jsonObject.get("discountPercentage").getAsString(), jsonObject.get("discountAmount").getAsString(),map.get(clientName),jsonObject.get("remark").getAsString()))) {
-					if(EMSFinalQuotationDao.getInstance().insertIntoQuotationHistory(EMSFinalQuotationDao.getInstance().getData(ClientDao.getInstance().getClientIdFormDatabase(clientName)))) {
+				if(EQD.updateFinalQuotation(new EMSFinalQuotationBean(jsonObject.get("TotalAmount").getAsString(), jsonObject.get("finalDelivaryDate").getAsString(), Integer.parseInt(jsonObject.get("Quantity").getAsString()), jsonObject.get("discountPercentage").getAsString(), jsonObject.get("discountAmount").getAsString(),map.get(clientName),jsonObject.get("remark").getAsString()),request,response)) {
+					if(EMSFinalQuotationDao.getInstance().insertIntoQuotationHistory(EMSFinalQuotationDao.getInstance().getData(ClientDao.getInstance().getClientIdFormDatabase(clientName)),request,response)) {
 						System.out.println("Insert");
 					}else {
 						System.out.println("Not insert");

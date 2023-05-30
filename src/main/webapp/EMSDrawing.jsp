@@ -83,12 +83,12 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 								<div class="form-group">
 									<label>Project</label> <select class="form-control"
 										onload="getProject1()" id="projectId" name="projectId"
-										onchange="getOffers()">
+										onchange="getOffers()" required="required">
 									</select>
 								</div>
 								<div class="form-group">
 									<label>SubItem</label> <select class="form-control"
-										id="SubItem" name="SubItem">
+										id="SubItem" name="SubItem" required="required">
 									</select>
 								</div>
 								<div class="card-header">

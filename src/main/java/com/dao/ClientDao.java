@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 import com.bean.ClientBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class ClientDao {
 	
@@ -22,7 +26,7 @@ public class ClientDao {
 	}
 
 	
-	public boolean addClient(ClientBean clientBean) {
+	public boolean addClient(ClientBean clientBean,HttpServletRequest request,HttpServletResponse response) {
 		
 		try {
 			Connection con = MySqlConnection.getInstance();
@@ -34,12 +38,18 @@ public class ClientDao {
 			pstmt.setString(5, clientBean.getPanNo());
 			pstmt.setString(6, clientBean.getAddress());
 			pstmt.setLong(7, clientBean.getPhoneNumber1());
+			System.out.println(clientBean.getEmail1());
 			pstmt.setString(8, clientBean.getEmail1());
 			pstmt.executeUpdate();
 			return true;
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
 		}
 		return false;
 	}
@@ -63,6 +73,8 @@ public class ClientDao {
 				user.setGstNo(rs.getString("GSTNO"));
 				user.setPhoneNumber(rs.getLong("PHONENUMBER"));
 				user.setPanNo(rs.getString("PANNO"));
+				user.setPhoneNumber1(rs.getLong("PhoneNumber2"));
+				user.setEmail1(rs.getString("email2"));
 				users.add(user);
 			}
 		}
@@ -71,7 +83,7 @@ public class ClientDao {
 		}
 		return users;
 	}
-	public boolean deleteClient(int clientId) {
+	public boolean deleteClient(int clientId,HttpServletRequest request,HttpServletResponse response) {
 		try {
 			Connection con = MySqlConnection.getInstance();
 			
@@ -81,11 +93,17 @@ public class ClientDao {
 			return true;
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 		return false;
 	}
-	public boolean updateClient(int clientId, String editedColumn, String newValue) {
+	public boolean updateClient(int clientId, String editedColumn, String newValue,HttpServletRequest request,HttpServletResponse response) {
 		String updateQuery = "UPDATE Clients SET "+editedColumn+" = ? WHERE clientId = ?";
 		
 		try {
@@ -97,7 +115,13 @@ public class ClientDao {
 			return true;
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 		return false;
 	}

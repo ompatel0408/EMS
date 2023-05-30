@@ -61,7 +61,8 @@ function getAllPurchaseDetails()
 		xhr.send(JSON.stringify({projectId:document.getElementById('projectId').value,Token:'AllDetailsFromGRNApproval'}));
 		
 	}else{
-		xhr.send(JSON.stringify({projectId:document.getElementById('projectId').value,Token:'AllDetails'}));	
+		localStorage.setItem("isReceived",true)	
+		xhr.send(JSON.stringify({projectId:document.getElementById('projectId').value,Token:'AllDetails'}));
 	}
 }
 

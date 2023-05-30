@@ -1,23 +1,27 @@
 package com.dao;
 
-
+import java.io.IOException;
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import com.bean.AccessBean;
 import com.dbConnection.*;
+import com.service.ExceptionHandler;
 
-public class AccessDao 
-{
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class AccessDao {
 	public AccessBean getAllAccess(int userId) {
 		try {
 			Connection con = MySqlConnection.getInstance();
 			PreparedStatement pstmt = con.prepareStatement("select * from access where userId=?");
 			pstmt.setInt(1, userId);
 			ResultSet rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				AccessBean access = new AccessBean();
 				access.setUserId(userId);
 				access.setAccessManagement(rs.getInt("accessmanagement"));
@@ -39,7 +43,7 @@ public class AccessDao
 				access.setIssueNoteList(rs.getInt("issuenotelist"));
 				access.setProjectStatus(rs.getInt("projectstatus"));
 				access.setPoList(rs.getInt("polist"));
-				access.setQuotationPerOffers(rs.getInt("quotationperoffer"));	
+				access.setQuotationPerOffers(rs.getInt("quotationperoffer"));
 				access.setShowQuotationPerOffer(rs.getInt("showquotationperoffer"));
 				access.setShowFinalQuotation(rs.getInt("showfinalquotation"));
 				access.setStockList(rs.getInt("showstocklist"));
@@ -50,64 +54,77 @@ public class AccessDao
 				access.setShowLogs(rs.getInt("logs"));
 				access.setShowOrder(rs.getInt("orders"));
 				access.setAddGraph(rs.getInt("graph"));
-				access.setDpr(rs.getInt("dpr"));  
-				 access.setDprList(rs.getInt("dprList"));
-				 access.setDrawingRevision(rs.getInt("drawingRevision"));
-				 access.setPhase(rs.getInt("phase"));
-				 access.setPhaseUpdate(rs.getInt("phaseUpdate"));
-				 access.setAddMachine(rs.getInt("addMachine"));
-				 access.setShowMachine(rs.getInt("showMachine"));
-				 access.setListOrder(rs.getInt("giveMntMachine"));
-				 access.setGiveMntMachine(rs.getInt("giveMntMachine"));;
-				 access.setReceiveMntMachine(rs.getInt("receiveMntMachine"));
-				 //access.setListMntMachine(rs.getInt("listMntMachine"));
-				 access.setGateOutWrd(rs.getInt("gateOutWrd"));
-				 access.setGateInWrd(rs.getInt("gateInWrd"));
-				 access.setGateList(rs.getInt("gateList"));
-				 access.setPoPrint(rs.getInt("poPrint"));
-				 access.setApprovelPending(rs.getInt("approvelPending"));
-				 access.setApprovelPenList(rs.getInt("approvelPenList"));
-				 access.setDispatch(rs.getInt("dispatch"));
+				access.setDpr(rs.getInt("dpr"));
+				access.setDprList(rs.getInt("dprList"));
+				access.setDrawingRevision(rs.getInt("drawingRevision"));
+				access.setPhase(rs.getInt("phase"));
+				access.setPhaseUpdate(rs.getInt("phaseUpdate"));
+				access.setAddMachine(rs.getInt("addMachine"));
+				access.setShowMachine(rs.getInt("showMachine"));
+				access.setListOrder(rs.getInt("giveMntMachine"));
+				access.setGiveMntMachine(rs.getInt("giveMntMachine"));
+				;
+				access.setReceiveMntMachine(rs.getInt("receiveMntMachine"));
+				// access.setListMntMachine(rs.getInt("listMntMachine"));
+				access.setGateOutWrd(rs.getInt("gateOutWrd"));
+				access.setGateInWrd(rs.getInt("gateInWrd"));
+				access.setGateList(rs.getInt("gateList"));
+				access.setPoPrint(rs.getInt("poPrint"));
+				access.setApprovelPending(rs.getInt("approvelPending"));
+				access.setApprovelPenList(rs.getInt("approvelPenList"));
+				access.setDispatch(rs.getInt("dispatch"));
 				return access;
 			}
-		
-			
-		}
-		catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	public void changeStatus(int userId,int status,String field) {
+
+	public void changeStatus(int userId, int status, String field, HttpServletRequest request,
+			HttpServletResponse response) {
 		try {
 			Connection con = MySqlConnection.getInstance();
-			if(status==1) {
-				status=0;
-			}else {
-				status=1;
+			if (status == 1) {
+				status = 0;
+			} else {
+				status = 1;
 			}
-			PreparedStatement pstmt = con.prepareStatement("update access set "+field.toUpperCase()+" = "+status+" where userId = ?");
+			PreparedStatement pstmt = con.prepareStatement(
+					"update access set " + field.toUpperCase() + " = " + status + " where userId = ?");
 			pstmt.setInt(1, userId);
-			System.out.println("access = "+field);
-			System.out.println("status = "+status);
-			System.out.println("usesr = "+userId);
+			System.out.println("access = " + field);
+			System.out.println("status = " + status);
+			System.out.println("usesr = " + userId);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
-	
-	public void addAcess(int userId) {
+
+	public void addAcess(int userId, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			Connection con = MySqlConnection.getInstance();
-			
+
 			PreparedStatement pstmt = con.prepareStatement("insert into access (userId) values (?)");
 			pstmt.setInt(1, userId);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
+
 	public int getUserIdFromDatabase(String email) {
 		// TODO Auto-generated method stub
 		try {
@@ -115,9 +132,9 @@ public class AccessDao
 			PreparedStatement pstmt = con.prepareStatement("select userId from user where email=?");
 			pstmt.setString(1, email);
 			ResultSet rs = pstmt.executeQuery();
-			int userId=0;
-			while(rs.next()) {
-				userId=rs.getInt("userId");
+			int userId = 0;
+			while (rs.next()) {
+				userId = rs.getInt("userId");
 			}
 			return userId;
 		} catch (Exception e) {

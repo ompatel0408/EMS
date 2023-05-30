@@ -141,7 +141,7 @@ public class EMSIssueNoteServlet extends HttpServlet {
 			ArrayList<EMSIssueNoteBean> areind = IssueNoteServices.fetchDataFromXHRRequestInIssueBean(request.getReader(),request);
 			
 			HttpSession session = request.getSession();
-			if(eind.addItems(areind))
+			if(eind.addItems(areind,request,response))
 			{
 				System.out.println("Items added successfylly....");
 				for(EMSIssueNoteBean EINB:areind) {

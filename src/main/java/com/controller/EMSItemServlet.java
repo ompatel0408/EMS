@@ -66,7 +66,7 @@ public class EMSItemServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			ArrayList<ItemBean> AQb = ItemServices.fetchDataFromXHRRequest(request.getReader(),request);
 			
-			if(ItemDao.addItems(AQb)) {
+			if(ItemDao.addItems(AQb,request,response)) {
 				System.out.println("Item Added SuccessFully");
 				
 				for(ItemBean IB : AQb) {

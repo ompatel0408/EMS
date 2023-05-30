@@ -30,21 +30,21 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="item-id">Vendors</label> <select id="vendorId"
+									<label for="item-id">Persons</label> <select id="vendorId"
 										name="vendorId" class="form-control" required>
-										<option value="select" selected>Select Vendors</option>
+										<option value="select" selected>Select Persons</option>
 									</select>
 								</div>
 
 								<div class="form-group">
 									<label>Received Quantity</label> <input type="number"
 										class="form-control" name="qty" id="Quantity"
-										placeholder="Enter Quantity">
+										placeholder="Enter Quantity" pattern="[0-9]"  required="required">
 								</div>
 								<div class="form-group">
 									<label>Vehicle Number</label> <input type="text"
 										class="form-control" id="vehicleNo" name="vehicleNo"
-										placeholder="Enter Vehicle Number">
+										placeholder="Enter Vehicle Number" pattern="[A-Za-z0-9_\- ]{1,50}"  required="required">
 								</div>
 							</div>
 							<!-- /.col -->
@@ -57,13 +57,13 @@
 								</div>
 								<div class="form-group">
 									<label>Receive Date</label> <input type="date"
-										class="form-control" name="idate" id="idate">
+										class="form-control" name="idate" id="idate" required="required">
 								</div>
 								<div class="form-group">
 									<label>Remark</label>
 									<textarea class="form-control" rows="3"
 										placeholder="Enter Remark" name="remark" id="remark"
-										style="height: 100px;"></textarea>
+										style="height: 100px;" required="required"></textarea>
 								</div>
 								<div class="col">
 									<div class="form-group mt-3 d-flex justify-content-around">

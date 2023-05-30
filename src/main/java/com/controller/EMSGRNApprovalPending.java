@@ -48,12 +48,12 @@ public class EMSGRNApprovalPending extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		try {
 		Gson gson = new Gson();
 		
 	    ArrayList<EMSGRNPendingBean> AEGPB = EMSGRNPendingServices.fetchDataFromXHRRequest(request.getReader(), request);
 	    
-	    if(EMSGRNApprovalPendingDao.getInstance().addGRNApprovalPending(AEGPB)) {
+	    if(EMSGRNApprovalPendingDao.getInstance().addGRNApprovalPending(AEGPB,request,response)) {
 	    	System.out.println("inserted successfully!");
 	    }else {
 	    	System.out.println("not inserted!");
@@ -63,12 +63,15 @@ public class EMSGRNApprovalPending extends HttpServlet {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(json);
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
 	    
 	}
 	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		try {
 		BufferedReader reader = request.getReader();
 	    StringBuilder sb = new StringBuilder();
 	    String line;
@@ -91,7 +94,9 @@ public class EMSGRNApprovalPending extends HttpServlet {
 		    response.setCharacterEncoding("UTF-8");
 		    response.getWriter().write(json);
 	    }
-		
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
 		
 	}
 }

@@ -1,5 +1,5 @@
 <%@page import="com.bean.DailyProgressReportBean"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList,com.dao.DailyProgressReportDao"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Date"%>
 <!DOCTYPEhtml>
@@ -17,7 +17,7 @@
 	href="assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 <%
-ArrayList<DailyProgressReportBean> dprs = (ArrayList<DailyProgressReportBean>) request.getAttribute("dprs");
+/*ArrayList<DailyProgressReportBean> dprs = (ArrayList<DailyProgressReportBean>) request.getAttribute(  "dprs");*/
 int srNo = 1;
 %>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -34,7 +34,7 @@ int srNo = 1;
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title mt-2">
-										<b>Vendors List</b>
+										<b>Daily progress report List</b>
 									</h3>
 								</div>
 								<div class="card-body">
@@ -61,7 +61,7 @@ int srNo = 1;
 													</thead>
 													<tbody>
 														<%
-														for (DailyProgressReportBean d : dprs) {
+														for (DailyProgressReportBean d : DailyProgressReportDao.getInstance().getAllDpr()) {
 														%>
 														<tr>
 															<td><%=srNo++%></td>

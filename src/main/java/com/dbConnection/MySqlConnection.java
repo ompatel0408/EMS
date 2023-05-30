@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 
 public class MySqlConnection {
 
-	 private static final String URLNAME="jdbc:mysql://localhost:3306/EMS";
+	 private static final String URLNAME="jdbc:mysql://localhost:3306/EMS?autoReconnect=true";
 	 private static final String DRIVERCLASS="com.mysql.cj.jdbc.Driver";
 	 private static final String USERNAME="root";
 	 private static final String PASSWD="";

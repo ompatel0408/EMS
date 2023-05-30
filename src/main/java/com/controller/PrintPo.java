@@ -15,24 +15,33 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.service.ExceptionHandler;
 
+@SuppressWarnings("serial")
 public class PrintPo extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
 		System.out.println(request.getParameter("vendor"));
 		System.out.println(request.getParameter("project"));
 		System.out.println(request.getParameter("transport"));
-		System.out.println(EMSVendorsDao.getInstance().updatePrice(request.getParameter("vendor"),request.getParameter("project"),request.getParameter("transport")));
+		System.out.println(EMSVendorsDao.getInstance().updatePrice(request.getParameter("vendor"),request.getParameter("project"),request.getParameter("transport"),request,response));
 		request.setAttribute("vendorDet", EMSVendorsDao.getInstance().getVendor(request.getParameter("vendor")));
 		request.setAttribute("poDet", EMSVendorsDao.getInstance().getPoDet(request.getParameter("project")));
 		request.setAttribute("povendorDet", EMSVendorsDao.getInstance().getPOVendorDet(request.getParameter("vendor"),request.getParameter("project")));
 		request.getRequestDispatcher("PoPrint.jsp").forward(request, response);
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
 		System.out.println(request.getParameter("vendor"));
 		System.out.println(request.getParameter("project"));
 		System.out.println(request.getParameter("transport"));
-		EMSVendorsDao.getInstance().updatePrice(request.getParameter("vendor"),request.getParameter("project"),request.getParameter("transport"));
+		EMSVendorsDao.getInstance().updatePrice(request.getParameter("vendor"),request.getParameter("project"),request.getParameter("transport"),request,response);
 		doGet(request, response);
+		}catch(Exception e) {
+			ExceptionHandler.handleException(request, response, e);
+		}
 	}
 	
 protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

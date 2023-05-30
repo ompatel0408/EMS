@@ -57,13 +57,13 @@
 									<label>Category</label> <input type="text" class="form-control"
 										id="category-id" placeholder="Enter Category" disabled>
 										<input type="hidden" class="form-control"
-										id="quantity1" disabled>
+										id="quantity1" required="required" disabled>
 								</div>
 							</div>
 							<div class="col-sm-3">
 								<div class="form-group">
 									<label>Grade</label> <input type="text" class="form-control"
-										id="grade-id" placeholder="Enter Grade" disabled>
+										id="grade-id" placeholder="Enter Grade" required="required" disabled>
 								</div>
 							</div>
 
@@ -72,18 +72,18 @@
 
 								<div class="form-group">
 									<label>Size</label> <input type="text" class="form-control"
-										id="size-id" placeholder="Enter Size" disabled>
+										id="size-id" placeholder="Enter Size" pattern="[A-Za-z0-9 ]{1,100}" required="required" disabled>
 								</div>
 								<div class="form-group">
 									<label>Quantity</label> <input type="number" class="form-control"
-										id="Quantity" placeholder="Enter Quantaty"  disabled>
+										id="Quantity" placeholder="Enter Quantity" pattern="[0-9]" required="required" disabled>
 								</div>
 							</div>
 							<!-- /.col -->
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Units</label> <input type="text" class="form-control"
-										id="unit-id" placeholder="Enter Units" disabled>
+										id="unit-id" placeholder="Enter Units" pattern="[A-Za-z]{1,50}" required="required" disabled>
 								</div>
 							</div>
 							<div class="col">

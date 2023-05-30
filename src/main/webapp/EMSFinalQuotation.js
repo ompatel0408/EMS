@@ -69,7 +69,6 @@ var originalAmount;
 function clickOfRadioButton(){
 	count++;
 	if(count <=1){
-		alert("firstTime")
 		originalAmount = parseFloat(document.getElementById('TotalAmount').value);
 	}
 	var radioButton = document.getElementsByName('customRadio');

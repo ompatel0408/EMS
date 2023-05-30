@@ -11,12 +11,15 @@ import com.bean.EMSDispatchBean;
 import com.dao.EMSDispatchDao;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.service.ExceptionHandler;
 
 
+@SuppressWarnings("serial")
 @WebServlet("/EMSDispatchItemServlet")
 public class EMSDispatchItemServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
 		String clientId = req.getParameter("clientId");
 		String offerId = req.getParameter("offerId");
 		String vehicleNo = req.getParameter("vehicleNo");
@@ -28,8 +31,11 @@ public class EMSDispatchItemServlet extends HttpServlet {
 		EMSDispatchBean edb = new EMSDispatchBean(clientId, offerId, vehicleNo, travelComOwnr, travelCom, checkBy,
 				dest);
 		EMSDispatchDao edd = EMSDispatchDao.getInstance();
-		System.out.println(edd.insertDispatchItems(edb));
+		System.out.println(edd.insertDispatchItems(edb,req,resp));
 		req.getRequestDispatcher("EMSDirectorsDashboard.jsp").forward(req, resp);
+		}catch(Exception e) {
+			ExceptionHandler.handleException(req, resp, e);
+		}
 	}
 
 	@Override
@@ -56,7 +62,7 @@ public class EMSDispatchItemServlet extends HttpServlet {
 			response.getWriter().write(json);
 		 
 		} catch (Exception e) {
-			e.printStackTrace();
+			ExceptionHandler.handleException(request, response, e);
 		}
 	}
 }

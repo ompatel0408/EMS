@@ -38,6 +38,7 @@ public class CatagoryGradeSizeServlet extends HttpServlet {
 			rd.forward(request, response);
 		}catch(Exception e) {
 			ExceptionHandler.handleException(request, response, e);
+			
 		}
 		
 	}
@@ -62,7 +63,7 @@ public class CatagoryGradeSizeServlet extends HttpServlet {
 				CatagoryGradeSizeBean cBean = new CatagoryGradeSizeBean();
 				cBean.setCatagoryName(catagoryName);
 				CatagoryGradeSizeDao catagory=CatagoryGradeSizeDao.getInstance();
-				if(catagory.addCatagory(cBean)) {
+				if(catagory.addCatagory(cBean,request,response)) {
 					System.out.println("Category Added successfully!");
 					if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new category ".concat(catagoryName).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","CATEGORY"))) {
 						init();
@@ -83,7 +84,7 @@ public class CatagoryGradeSizeServlet extends HttpServlet {
 				if(GradeName!="")
 				{		
 						CatagoryGradeSizeDao grade=CatagoryGradeSizeDao.getInstance();
-						if(grade.addGrade(SelectedCatName,GradeName)) {
+						if(grade.addGrade(SelectedCatName,GradeName,request,response)) {
 							if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new garde ".concat(GradeName).concat(" of category ").concat(SelectedCatName).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","GRADE"))) {
 								init();
 								System.out.println("GRADE insert Logs Inserted!");
@@ -107,7 +108,7 @@ public class CatagoryGradeSizeServlet extends HttpServlet {
 				if(((selectFieldForGrade!="null" && GradeFieldName!="null") && (selectFieldForGrade!="null") && (GradeFieldName!="null")))
 				{				
 					CatagoryGradeSizeDao grade=CatagoryGradeSizeDao.getInstance();
-					if(grade.addSize(selectFieldForGrade,GradeFieldName,size)) {
+					if(grade.addSize(selectFieldForGrade,GradeFieldName,size,request,response)) {
 						System.out.println("size  added");
 						if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new size ".concat(size).concat(" of grade ").concat(GradeFieldName).concat(" and category ").concat(selectFieldForGrade).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","SIZE"))) {
 							init();

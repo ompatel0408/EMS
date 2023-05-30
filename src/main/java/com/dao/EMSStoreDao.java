@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import com.bean.EMSStoreBean;
 import com.dbConnection.MySqlConnection;
 import com.google.gson.JsonElement;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class EMSStoreDao {
 
@@ -50,7 +54,7 @@ Connection conn = MySqlConnection.getInstance();
 		}
 	}
 	
-	public boolean addItems(ArrayList<EMSStoreBean> sb) {
+	public boolean addItems(ArrayList<EMSStoreBean> sb,HttpServletRequest request,HttpServletResponse response) {
 		String insertQuery = "INSERT INTO STORE (categoryId, gradeId, sizeId, quantity) VALUES(?,?,?,?)";
 		String checkQuery="select storeid from store where categoryId=? and gradeId=? and sizeId=?";
 		Connection conn = MySqlConnection.getInstance();
@@ -82,7 +86,13 @@ Connection conn = MySqlConnection.getInstance();
 				}
 				return true;
 			} catch (SQLException e) {
-				e.printStackTrace();
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 		}
 		return false;

@@ -41,7 +41,7 @@ public class EMSPurchaseListServlet extends HttpServlet {
 
 			EMSPurchaseDao odao = EMSPurchaseDao.getInstance();
 			int poid = Integer.parseInt(req.getParameter("poid"));
-			odao.deleteParticularPO(poid);
+			odao.deleteParticularPO(poid,req,resp);
 			ArrayList<EMSPurchaseBean> pos = new ArrayList<EMSPurchaseBean>();
 			pos = odao.getAllPurchaseOrder();
 			

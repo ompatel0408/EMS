@@ -42,9 +42,6 @@
 									<span class="progress-description m-1 h-75" id="progressDesc"></span>
 									<span class="progress-description m-1 h-75" id="progressDescOfAvailable"></span>
 									<span id="profitAlert"></span>
-									<!-- <span class="progress-description m-2 h-75"> Your total quotation without profit is <b> 1000000</b>, With profit <b>1500000</b>.
-									<br> You are purchased items total amount's of <span id="totalPurchase">600000</span>, and your profit is 400000.
-									 </span> -->
 								</div>
 							</div>
 						</div>
@@ -93,7 +90,7 @@
                             <div class="col-sm-3">
                             <div class="form-group">
                                     <label>Size</label>
-                                    <input type="text" class="form-control" id="size-id" placeholder="Size" requireddisabled>
+                                    <input type="text" class="form-control" id="size-id" placeholder="Size" required disabled>
                             </div>
                             </div>
 
@@ -103,7 +100,7 @@
                                     <label>Rate</label>
                                     <div>
                                         <input class="form-control" id="rate-id" maxlength="20" name="HSNcode" onkeyup="calculateAmount()"
-                                            placeholder="Enter Rate" type="text" value="" required disabled="disabled">
+                                            placeholder="Enter Rate" type="text" value=""    pattern="[0-9]{1,15}"  required="required" disabled="disabled">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -121,7 +118,7 @@
                                     <label>Order Quantity</label>
                                     <div>
                                         <input class="form-control" id="orderQuan-id" maxlength="20" name="HSNcode"
-                                            placeholder="Enter Order quantity" type="text" value="" required disabled>
+                                            placeholder="Enter Order quantity" type="text" value="" pattern="[0-9]{1,15}"  required="required" disabled>
                                     </div>
                                 </div>
                                 </div>
@@ -131,7 +128,7 @@
                                     <label>Unit</label>
                                     <div>
                                         <input class="form-control" id="unit-id" maxlength="20" name="unit" 
-                                            placeholder="Enter Unit" type="text" value="" required disabled>
+                                            placeholder="Enter Unit" type="text" value="" pattern="[A-Za-z._ ]{1,30}"  required="required" disabled>
                                     </div>
                                 </div>
                                 </div>
@@ -146,13 +143,13 @@
                                 <div class="form-group">
                                     <label class="float-left">Remark</label>
                                     <textarea class="form-control" rows="3" placeholder="Enter Remark..." id="remark-Id"
-                                        style="height: 39px;" disabled></textarea>
+                                        style="height: 39px;" required="required" disabled></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="PaymentTermsId">Payment Terms</label>
                                     <select id="PaymentTermsId" class="form-control" required>
                                     	<option value="">Select Payment terms</option>
-                                    	<option value="1">Immidiete</option>
+                                    	<option value="1">Immediate</option>
                                     	<option value="7">within one week</option>
                                     	<option value="15">within one half month</option>
                                     	<option value="30">within one month</option>
@@ -162,13 +159,13 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Discount(%)</label>
-                                    <input type="text" class="form-control" id="DiscountPercentage" onkeyup="calculateDiscountAmount()" placeholder="0" required disabled>
+                                    <input type="text" class="form-control" id="DiscountPercentage" onkeyup="calculateDiscountAmount()" placeholder="0" pattern="[0-9]{1,9}"  required="required" disabled>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Discount Amount</label>
-                                    <input type="text" class="form-control" id="DiscountAmount" onkeyup="calculateDiscountPercentage()" placeholder="0" disabled>
+                                    <input type="text" class="form-control" id="DiscountAmount" onkeyup="calculateDiscountPercentage()" placeholder="0" pattern="[0-9]{1,10}"  required="required"  disabled>
                                 </div>
                             </div>
                             <div class="col-md-2">

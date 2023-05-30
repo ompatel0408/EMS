@@ -71,10 +71,10 @@ int srNo = 0;
 															<td><%=gb.getVendorName()%></td>
 															<td><%=gb.getMatName()%></td>
 															<td><%=gb.getQty()%></td>
-															<td><%=gb.getSize()%></td>
+															<td><%=gb.getSize() == null ? "Not found" : gb.getSize()%></td>
 															<td><%=gb.getVehicleNo()%></td>
-															<td><%=gb.getReceive() == 0 ? "Yes" : "No"%></td>
-															<td><%=gb.getReceived() == 0 ? "Yes" : "No"%></td>
+															<td><%=gb.getReceive() != 0 ? "Yes" : "No"%></td>
+															<td><%=gb.getReceived() != 0 ? "Yes" : "No"%></td>
 															<td>
 																<button type="button" class="btn btn-primary btn-sm"
 																	data-toggle="modal"

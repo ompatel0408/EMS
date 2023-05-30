@@ -2,28 +2,18 @@ package com.controller;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-
-import java.io.IOException;
 import java.util.ArrayList;
-
 import com.bean.EMSOffersBean;
 import com.bean.QuotationPerItemBean;
 import com.dao.EMSOffersDao;
 import com.dao.QuotationPerItemDao;
 import com.service.ExceptionHandler;
-
 import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
+@SuppressWarnings("serial")
 public class QuotationPerItemListServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

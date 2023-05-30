@@ -181,41 +181,6 @@ int srNo = 1;
 																		<!-- /.modal-project show -->
 																	</div>
 																</div>
-																<button type="button" class="btn btn-danger btn-sm"
-																	data-toggle="modal"
-																	data-target="#modal-projectDelete<%=qb.getQuotationId()%>">
-																	<i class="fas fa-trash"></i>
-																</button>
-																<div class="modal fade"
-																	id="modal-projectDelete<%=qb.getQuotationId()%>">
-																	<div class="modal-dialog">
-																		<div class="modal-content bg-danger">
-																			<div class="modal-header">
-																				<h4 class="modal-title">Delete Quotation</h4>
-																				<button type="button" class="close"
-																					data-dismiss="modal" aria-label="Close">
-																					<span aria-hidden="true"></span>
-																				</button>
-																			</div>
-																			<div class="modal-body">
-																				<p>Are you sure you want to delete this
-																					Quotation?</p>
-																			</div>
-																			<div class="modal-footer justify-content-between">
-																				<button type="button" class="btn btn-outline-light"
-																					data-dismiss="modal">Close</button>
-																				<form action="EMSFinalQuotationListServlet"
-																					method="get">
-																					<input type="hidden" name="quotationId"
-																						value=<%=qb.getQuotationId()%>><input
-																						type="hidden" name="update" value="notupdate">
-																					<button type="submit" class="btn btn-outline-light">Delete
-																						Quotation</button>
-																				</form>
-																			</div>
-																		</div>
-																	</div>
-																</div>
 															</td>
 															<!-- Project Edit model -->
 														</tr>

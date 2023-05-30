@@ -12,7 +12,7 @@
 		<div class="text-center">
 			<h1 class="display-1 fw-bold">500</h1>
 			<p class="fs-3">
-				<span class="text-danger">Opps!</span> Something went wrong
+				<span class="text-danger">Opps!</span> Something went wrong!
 			</p>
 			<a href="${referer}" class="btn btn-danger">Back to Dashboard</a>
 		</div>

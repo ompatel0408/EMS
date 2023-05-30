@@ -11,6 +11,10 @@ import com.bean.ClientBean;
 import com.bean.ItemBean;
 import com.bean.SubItemBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class ItemDao {
 	
@@ -24,7 +28,7 @@ public class ItemDao {
 		return instance;
 	}
 	
-	public static boolean addItems(ArrayList<ItemBean> Aqb) {
+	public static boolean addItems(ArrayList<ItemBean> Aqb,HttpServletRequest request,HttpServletResponse response) {
 		
 		//String insertQuery = "INSERT INTO ITEMS(CLIENTID,ITEMCODE,ITEMNAME,Quantity,QuotationId,TagNo,DeliveryDate,Remarks) VALUES(?,?,?,?,?,?,?,?)";
 		
@@ -63,7 +67,13 @@ public class ItemDao {
 				insertToSubItems(asib);
 				return true;
 		 }catch(SQLException e) {
-			 e.printStackTrace();
+			 try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 		 }
 		 
 		return false;
@@ -251,7 +261,7 @@ public class ItemDao {
 		return null;
 	}
 	
-	public void deleteItem(String itemCode) {
+	public void deleteItem(String itemCode,HttpServletRequest request,HttpServletResponse response) {
 		try {
 			Connection con = MySqlConnection.getInstance();
 			PreparedStatement pstmt = con.prepareStatement("delete from items where itemcode = ?");
@@ -260,11 +270,17 @@ public class ItemDao {
 			
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			try {
+				ExceptionHandler.handleException(request, response, e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 
+
 		}
 	}
 
-	public void updateItem(String newData, String changeField, String itemCode) {
+	public void updateItem(String newData, String changeField, String itemCode,HttpServletRequest request,HttpServletResponse response) {
 		try {
 			Connection con = MySqlConnection.getInstance();
 			PreparedStatement pstmt = con.prepareStatement("update items set " + changeField + "= ? where itemcode = ? ");

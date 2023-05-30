@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 import com.bean.EMSProductionBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class EMSProductionDao {
 
@@ -46,7 +50,7 @@ public class EMSProductionDao {
 		return false;
 	}
 
-	public boolean addDataToDatabase(EMSProductionBean EB) {
+	public boolean addDataToDatabase(EMSProductionBean EB,HttpServletRequest request,HttpServletResponse response) {
 
 		Connection conn = MySqlConnection.getInstance();
 		System.out.println("project---" + EB.getprojectId());
@@ -67,8 +71,14 @@ public class EMSProductionDao {
 					stmt.setString(4, EB.getprojectId());
 					stmt.executeUpdate();
 					return true;
-				} catch (SQLException E) {
-					E.printStackTrace();
+				} catch (SQLException e) {
+					try {
+						ExceptionHandler.handleException(request, response, e);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} 
+
 				}
 			} else {
 				System.out.println("Connection is not establised!");
@@ -90,8 +100,14 @@ public class EMSProductionDao {
 					stmt.setString(4, EB.getqualityCheck());
 					stmt.executeUpdate();
 					return true;
-				} catch (SQLException E) {
-					E.printStackTrace();
+				} catch (SQLException e) {
+					try {
+						ExceptionHandler.handleException(request, response, e);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} 
+
 				}
 			} else {
 				System.out.println("Connection is not establised!");
@@ -100,7 +116,7 @@ public class EMSProductionDao {
 		return false;
 	}
 
-	public boolean addPhase(String project, String itemCode, ArrayList<String> AEPB) {
+	public boolean addPhase(String project, String itemCode, ArrayList<String> AEPB,HttpServletRequest request,HttpServletResponse response) {
 
 		String insertQuery = "INSERT INTO Phase(projectid,itemcode,phasename) VALUES(?,?,?)";
 		Connection conn = MySqlConnection.getInstance();
@@ -117,8 +133,14 @@ public class EMSProductionDao {
 				stmt.executeBatch();
 				return true;
 
-			} catch (SQLException E) {
-				E.printStackTrace();
+			} catch (SQLException e) {
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 		} else {
 			System.out.println("Connction is not establised!");

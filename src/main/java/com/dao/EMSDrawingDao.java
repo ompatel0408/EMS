@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +12,11 @@ import com.bean.EMSDrawingBean;
 import com.bean.EMSGRNBean;
 import com.bean.SubItemBean;
 import com.dbConnection.MySqlConnection;
+import com.service.ExceptionHandler;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class EMSDrawingDao {
 	
@@ -102,7 +108,7 @@ public class EMSDrawingDao {
 		return false;
 	}
 	
-	public boolean addDrawingDetails(String drawingId,EMSDrawingBean EDB) {
+	public boolean addDrawingDetails(String drawingId,EMSDrawingBean EDB,HttpServletRequest request,HttpServletResponse response) {
 		
 		String insertQuery = "INSERT INTO Drawing(DrawingId,ClientDrawing,EMSDrawing) Values(?,?,?)";
 		Connection conn = MySqlConnection.getInstance();
@@ -118,9 +124,16 @@ public class EMSDrawingDao {
 				stmt.executeUpdate();
 				return true;
 			}catch(SQLException e) {
-				if(EMSDrawingDao.getInstance().updateDrawing(drawingId,EDB)) {
-					return true;
-				}
+				try {
+					if(EMSDrawingDao.getInstance().updateDrawing(drawingId,EDB,request,response)) {
+						return true;
+					}
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+
 			}
 		}else {
 			System.out.println("Connection is not establised!");
@@ -130,7 +143,7 @@ public class EMSDrawingDao {
 	}
 	
 	
-	public boolean updateDrawing(String drawingId,EMSDrawingBean EDB) {
+	public boolean updateDrawing(String drawingId,EMSDrawingBean EDB,HttpServletRequest request,HttpServletResponse response) {
 		
 
 		String insertQuery = "UPDATE Drawing SET ClientDrawing = ? , EMSDrawing = ? WHERE DRAWINGID = ?";
@@ -147,7 +160,12 @@ public class EMSDrawingDao {
 				stmt.executeUpdate();
 				return true;
 			}catch(SQLException e) {
-				e.printStackTrace();
+				try {
+					ExceptionHandler.handleException(request, response, e);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}else {
 			System.out.println("Connection is not establised!");

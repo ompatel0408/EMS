@@ -212,7 +212,7 @@ function submitForm1() {
 	xhr.onreadystatechange = function() {
 		if (xhr.status == 200) {
 			console.log(xhr.responseText);
-			/*window.location.href = "ListIndentServlet?token=1&projectid=0&itemcode=0";*/
+			window.location.href = "DPRList.jsp";
 		}
 	}
 	xhr.send(JSON.stringify(data));

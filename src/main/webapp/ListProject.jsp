@@ -157,7 +157,6 @@ int srNo = 1;
 																								option you want to update..</option>
 																							<option value="clientpoid">Client_PO_ID</option>
 																							<option value="advancepaypercent">Advance_Pay_Percent</option>
-																							<option value="afterpaypercent">After_Pay_Percent</option>
 																							<option value="clientid">Client_Id</option>
 																						</select>
 																						<div class="form-group"
@@ -180,40 +179,6 @@ int srNo = 1;
 																				</div>
 																			</div>
 																			<!-- /.modal-project show -->
-																		</div>
-																	</div>
-																</div>
-																<button type="button" class="btn btn-danger btn-sm"
-																	data-toggle="modal"
-																	data-target="#modal-projectDelete<%=p.getProjectId()%>">
-																	<i class="fas fa-trash"></i>Delete
-																</button>
-																<div class="modal fade"
-																	id="modal-projectDelete<%=p.getProjectId()%>">
-																	<div class="modal-dialog">
-																		<div class="modal-content bg-danger">
-																			<div class="modal-header">
-																				<h4 class="modal-title">Delete Project</h4>
-																				<button type="button" class="close"
-																					data-dismiss="modal" aria-label="Close">
-																					<span aria-hidden="true"></span>
-																				</button>
-																			</div>
-																			<div class="modal-body">
-																				<p>Are you sure you want to delete this project?</p>
-																			</div>
-																			<div class="modal-footer justify-content-between">
-																				<button type="button" class="btn btn-outline-light"
-																					data-dismiss="modal">Close</button>
-																				<form action="ProjectServlet" method="get">
-																					<input type="hidden" name="projectId"
-																						value=<%=p.getProjectId()%>><input
-																						type="hidden" name="update" value="notupdate">
-																					<input type="hidden" name="view" value="notview">
-																					<button type="submit" class="btn btn-outline-light">Delete
-																						Project</button>
-																				</form>
-																			</div>
 																		</div>
 																	</div>
 																</div>

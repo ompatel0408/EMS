@@ -38,12 +38,15 @@ public class EMSVendorsServlet extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 			EMSVendorsDao vendorDao = EMSVendorsDao.getInstance();
-			if(vendorDao.addVendor(ibean)) {
+			if(vendorDao.addVendor(ibean,request,response)) {
 				System.out.println("vendor added successfully!");
 				for(EMSVendorsBean EVB:ibean) {
 					if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A new vendor ".concat(EVB.getVendorName()).concat(" has been added!"),Integer.parseInt(session.getAttribute("userId").toString()),"INSERTED","VENDOR"))) {
 						init();
 						System.out.println("VENDOR insert Logs Inserted!");
+						response.setContentType("application/json");
+						response.setCharacterEncoding("UTF-8");
+						response.getWriter().write("Hello!");
 					}else {
 						System.out.println("VENDOR insert Logs not inserted!");
 					}
@@ -95,7 +98,7 @@ public class EMSVendorsServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			
 			EMSVendorsDao vendorDao = EMSVendorsDao.getInstance();
-			if(vendorDao.updateVendor(newData, changeField, vendorId)){
+			if(vendorDao.updateVendor(newData, changeField, vendorId,request,response)){
 				System.out.println("Vendor update");
 				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A vendor information of ".concat(request.getParameter("vendorName")).concat( " has been updated successfully!"),Integer.parseInt(session.getAttribute("userId").toString()),"UPDATED","VENDOR"))) {
 					System.out.println("vendor update Logs Inserted!");
@@ -118,7 +121,7 @@ public class EMSVendorsServlet extends HttpServlet {
 
 			int vendorId = Integer.parseInt(req.getParameter("vendorId"));
 			HttpSession session = req.getSession();
-			if(EMSVendorsDao.getInstance().deleteVendor(vendorId)) {
+			if(EMSVendorsDao.getInstance().deleteVendor(vendorId,req,resp)) {
 				System.out.println("Vendor deleted!");
 				if(EMSLogsDao.getInstance().insertLogs(new EMSLogsBean("A client record of ".concat(req.getParameter("vendorName")).concat(" has been deleted successfully!"),Integer.parseInt(session.getAttribute("userId").toString()),"DELETED","CLIENTS"))) {
 					
