@@ -171,6 +171,10 @@
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
 								<p>Generate P.O</p>
 						</a></li>
+						<li class="nav-item"><a href="EMSConsumablePurchase.jsp" id="EMSConsumable-id" style="display: block;"
+							class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<p>Purchase consumable</p>
+						</a></li>
 						<li class="nav-item" id="polist-target-id" style="display: none;"><a
 							href="EMSPurchaseListServlet?delete=no" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>

@@ -20,7 +20,6 @@ public class EMSAddPersonServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		try {
-
 			request.setAttribute("person", PersonsDao.getInstance().getAllPersonsFromDba());
 			request.getRequestDispatcher("EMSPersonsList.jsp").forward(request, response);
 		}catch(Exception e) {

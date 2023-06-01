@@ -85,8 +85,6 @@ public class SendMail {
 
 			m.printStackTrace();
 		}
-		
-
 	}
 	
 	public static void mailTokenEveryDay() {
