@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.bean.EMSDirectorsDashboardBean;
 import com.bean.QuotationBean;
 import com.dbConnection.MySqlConnection;
+import com.google.gson.JsonElement;
 import com.service.ExceptionHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -191,6 +192,31 @@ public boolean updateisPaidForPayment(String projectId,HttpServletRequest reques
 	
 	
 	return false;
+}
+
+public int getLossProjects() {
+	String selectQuery = "select count(*) from projects where profitloss=0;";
+	Connection conn = MySqlConnection.getInstance();
+	
+	if(conn != null) {
+		try{
+			
+			Statement stmt = conn.createStatement();
+			ResultSet rs=stmt.executeQuery(selectQuery);
+			int loss = 0;
+			if(rs.next()) {
+				loss = rs.getInt(1);
+			}
+			return loss;
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}else {
+		System.out.println("Connection is not establised!");
+	}
+	return 0;
 }
 	
 }

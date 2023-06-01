@@ -29,7 +29,7 @@
 		<div class="lockscreen-item">
 			<!-- lockscreen image -->
 			<div class="lockscreen-image">
-				<img src="assets/dist/img/user1-128x128.jpg" alt="User Image">
+				<img src="assets/dist/img/EMS.jpeg" alt="User Image">
 			</div>
 			<form class="lockscreen-credentials mt-5" action="EMSLoginServlet" method="post">
 				<div class="input-group">

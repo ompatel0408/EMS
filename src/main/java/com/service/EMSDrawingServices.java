@@ -218,7 +218,9 @@ public class EMSDrawingServices {
 				else {
 					EMSDrawingDao.getInstance().addToDrawingHistory(project,offer,subItem,"Clients/".concat(project).concat("").concat(offer).concat("").concat(subItem).concat(Integer.toString(count)).concat(".").concat(type1),"Projects/".concat(project).concat("").concat(offer).concat("").concat(subItem).concat(Integer.toString(count)).concat(".").concat(type2));
 				}
-	        
+				
+				EMSDrawingDao.getInstance().addToDrawing(project,offer,subItem,"Clients/".concat(project).concat("").concat(offer).concat("").concat(subItem).concat(Integer.toString(count)).concat(".").concat(type1),"Projects/".concat(project).concat("").concat(offer).concat("").concat(subItem).concat(Integer.toString(count)).concat(".").concat(type2));
+				
 	        FileOutputStream outputStream = new FileOutputStream(file);
 	        FileOutputStream outputStream1 = new FileOutputStream(file1);
 	        FileOutputStream outputStream2 = new FileOutputStream(file2);

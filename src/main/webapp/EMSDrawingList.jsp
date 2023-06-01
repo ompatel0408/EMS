@@ -48,19 +48,17 @@
 														</tr>
 													</thead>
 													<tbody id="myTable">
-														<%for (SubItemBean EGB : EMSDrawingDao.getInstance().getAllData()) {%>
+														<%for (SubItemBean EGB : EMSDrawingDao.getInstance().getOriginalDrawing()) {%>
 														<tr>
 															<td id="GRNId"><%=EGB.getProjectId()%></td>
 															<td><a><%=EGB.getItemcode()%></a><br></td>
 															<td><a><%=EGB.getSubitemcode()%></a><br></td>
 															<td class="project-actionstext-right"><a
-																href="DownloadServlet?fileName=Clients/<%=EGB.getProjectId()%>
-				<%=EGB.getItemcode()%><%=EGB.getSubitemcode()%>">
+																href="DownloadServlet?fileName=<%=EGB.getClient()%>">
 																	<button type="button" class="btn btn-info btn-sm">
 																		Client Drawing</button>
 															</a> <a
-																href="DownloadServlet?fileName=Projects/<%=EGB.getProjectId()%>
-				<%=EGB.getItemcode()%><%=EGB.getSubitemcode()%>"">
+																href="DownloadServlet?fileName=<%=EGB.getEms()%>"">
 																	<button type="button" class="btn btn-info btn-sm">
 																		EMS Drawing</button>
 															</a>

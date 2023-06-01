@@ -98,7 +98,14 @@ public class EMSDirectorsDashboardServlet extends HttpServlet {
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				response.getWriter().write(json);
-			} else {
+			}else if (jsonObject.get("Token").getAsString().equals("loss")) {
+				System.out.println("Hii From Loss");
+				json = gson.toJson(EMSDirectorsDashboardDao.getInstacne().getLossProjects());
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(json);
+			}
+			else {
 				System.out.println("Hii From Notify");
 				json = gson.toJson(EMSDirectorsDashboardDao.getInstacne().getAllNotifications());
 				response.setContentType("application/json");

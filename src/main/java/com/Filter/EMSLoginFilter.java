@@ -59,6 +59,8 @@ public class EMSLoginFilter implements Filter {
 					}
 					HttpSession session = req.getSession();
 					session.setAttribute("userId", ELB.getUserId());
+					System.out.println(ELB.getName());
+					session.setAttribute("name", ELB.getName());
 					chain.doFilter(req, response);
 			}else {
 				RequestDispatcher rd = request.getRequestDispatcher("EMSLogin.jsp");

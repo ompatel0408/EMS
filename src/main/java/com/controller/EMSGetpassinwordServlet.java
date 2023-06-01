@@ -68,6 +68,14 @@ public class EMSGetpassinwordServlet extends HttpServlet
 	    	response.setCharacterEncoding("UTF-8");
 	    	response.getWriter().write(json);
 	    }
+	    else if(jsonObject.get("Token").getAsString().equals("quantity"))
+	    {	
+	    	String item=jsonObject.get("items").toString().replace("\"", "");
+	    	String json = gson.toJson(egp.getquantity(jsonObject.get("Vendor").toString().replace("\"", ""),item));
+	    	response.setContentType("application/json");
+	    	response.setCharacterEncoding("UTF-8");
+	    	response.getWriter().write(json);
+	    }
 		}catch(Exception e) {
 			ExceptionHandler.handleException(request, response, e);
 		}

@@ -37,6 +37,36 @@ try {
 			}
 		}
 		xhr3.send(JSON.stringify({ Token: "proCount" }));
+		
+		
+
+		let Data4;
+		var xhr4 = new XMLHttpRequest();
+		xhr4.open('PUT', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet', true);
+		console.log("Here")
+		xhr4.onload = function() {
+			if (xhr4.status === 200) {
+				Data4 = JSON.parse(xhr4.responseText);
+				document.getElementById('lossNumber').innerHTML = Data4;
+				console.log(Data4)
+			}
+		}
+		xhr4.send(JSON.stringify({ Token: "loss" }));
+		
+		let Data5;
+		var xhr5 = new XMLHttpRequest();
+		xhr4.open('PUT', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet', true);
+		console.log("Here")
+		xhr5.onload = function() {
+			if (xhr4.status === 200) {
+				Data4 = JSON.parse(xhr5.responseText);
+				document.getElementById('lossNumber').innerHTML = Data5;
+				console.log(Data5)
+			}
+		}
+		xhr5.send(JSON.stringify({ Token: "" }));
+		
+		xhr1.send(JSON.stringify({ token: "orderSum" }));
 	}
 }catch(e)
 {

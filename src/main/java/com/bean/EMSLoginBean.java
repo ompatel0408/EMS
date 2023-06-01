@@ -25,9 +25,10 @@ public class EMSLoginBean {
 	}
 	
 	
-	public EMSLoginBean(int userId,String secretKey) {
+	public EMSLoginBean(int userId,String name,String secretKey) {
 		this.userId = userId;
 		this.secretKey = secretKey;
+		this.name=name;
 	}
 	
 	public int getUserId() {

@@ -4,6 +4,32 @@ public class SubItemBean {
 	String itemcode;
 	String subitemcode;
 	String projectId;
+	String ems;
+	public String getEms() {
+		return ems;
+	}
+
+	public void setEms(String ems) {
+		this.ems = ems;
+	}
+
+	public String getClient() {
+		return client;
+	}
+
+	public void setClient(String client) {
+		this.client = client;
+	}
+
+	String client;
+	
+	public SubItemBean(String projectId, String itemcode, String subitemcode,String client,String ems) {
+		this.projectId = projectId;
+		this.itemcode = itemcode;
+		this.subitemcode = subitemcode;
+		this.client=client;
+		this.ems=ems;
+	}
 	
 	public SubItemBean(String projectId, String itemcode, String subitemcode) {
 		this.projectId = projectId;

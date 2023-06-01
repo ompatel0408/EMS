@@ -24,12 +24,14 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			String filePath1=null;
 			if(!request.getParameter("fileName").contains("."))
 			{	
+				System.out.println("1stif");
 				filePath = "/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/DrawingImages/"+request.getParameter("fileName").concat(".").concat("pdf");		    
 				filePath1 = "/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/DrawingImages/"+request.getParameter("fileName").concat(".").concat("dwg");
 			}
 			else {
-				filePath = "/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/DrawingImages/"+request.getParameter("fileName").concat(".");		    
-				filePath1 = "/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/DrawingImages/"+request.getParameter("fileName").concat(".");
+				System.out.println("2ndif");
+				filePath = "/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/DrawingImages/"+request.getParameter("fileName");		    
+				filePath1 = "/Users/ompatel/Desktop/Java Eclipse/workspace/EMS/src/main/webapp/DrawingImages/"+request.getParameter("fileName");
 			}
 		    System.out.println(filePath);
 		    // create a File object to represent the file
@@ -42,6 +44,9 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		    	{
 		    		response.sendRedirect("EMSDrawingList.jsp");
 			        return;
+		    	}
+		    	else {
+		    		File file3=file;
 		    	}
 		        
 		    }

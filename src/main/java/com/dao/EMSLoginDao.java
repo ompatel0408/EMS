@@ -129,7 +129,7 @@ public class EMSLoginDao {
 	
 	public EMSLoginBean getAllDetails(String password) {
 		
-		String selectQuery = "SELECT userId,secretKey FROM USER WHERE PASSWORD = ?";
+		String selectQuery = "SELECT userId,name,secretKey FROM USER WHERE PASSWORD = ?";
 		Connection conn = MySqlConnection.getInstance();
 		EMSLoginBean ELB = null;
 		if(conn != null) {
@@ -142,7 +142,7 @@ public class EMSLoginDao {
 				ResultSet rs= stmt.executeQuery();
 				
 				if(rs.next()) {
-					ELB = new EMSLoginBean(rs.getInt(1), rs.getString(2));
+					ELB = new EMSLoginBean(rs.getInt(1), rs.getString(2),rs.getString(3));
 				}
 				return ELB;
 				

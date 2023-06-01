@@ -9,6 +9,7 @@ import java.util.HashSet;
 
 import com.bean.EMSGetpassinwordBean;
 import com.dbConnection.MySqlConnection;
+import com.google.gson.JsonElement;
 import com.service.ExceptionHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -111,6 +112,27 @@ public class EMSGetpassinwordDao
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public int getquantity(String vendor, String items) {
+		System.out.println(vendor);
+		System.out.println(items);
+		Connection conn = MySqlConnection.getInstance();
+		try {
+			int quantity=0;
+			PreparedStatement stmt = conn.prepareStatement("Select quntity from gatepassoutword join persons on issueperson=id where name =? and MATERIALMACHINENAME=?");
+			stmt.setString(1, vendor);
+			stmt.setString(2, items);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next())
+			{
+				quantity=rs.getInt(1);
+			}
+			return quantity;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	
 }
