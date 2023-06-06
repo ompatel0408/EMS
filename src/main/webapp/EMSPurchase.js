@@ -16,7 +16,7 @@ document.getElementById('progressDescOfAvailable').innerHTML="Add Project and It
 window.onload = function getProjects1() {
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://localhost:8080/EMS/EMSPurchaseServlet', true);
+	xhr.open('GET', 'http://192.168.1.9:8080/EMS/EMSPurchaseServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onreadystatechange = function() {
 		if (xhr.status === 200) {
@@ -41,7 +41,7 @@ function appendProjects(projects) {
 }
 
 document.getElementById('ProjectId1').addEventListener('change', () => {
-	console.log('quoate')
+	
 	document.getElementById('ProjectId1').disabled = true;
 	document.getElementById('category-id').disabled = true;
 	document.getElementById('grade-id').disabled = true;
@@ -68,7 +68,7 @@ function ProjectChange() {
 
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSPurchaseServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSPurchaseServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -101,7 +101,7 @@ function getIndentList() {
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSPurchaseServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSPurchaseServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -121,7 +121,7 @@ function getIndentList() {
 	
 	let Data = ""
 	let xhr2 = new XMLHttpRequest();
-	xhr2.open('PUT', 'http://localhost:8080/EMS/EMSPurchaseServlet', true);
+	xhr2.open('PUT', 'http://192.168.1.9:8080/EMS/EMSPurchaseServlet', true);
 	xhr2.setRequestHeader('Content-type', 'application/json');
 	xhr2.onreadystatechange = function() {
 		if (xhr2.readyState === XMLHttpRequest.DONE && xhr2.status === 200) {
@@ -288,12 +288,9 @@ var submitData = []
 
 function submitForm() {
 	
-	console.log("Edit Id :"+EditId)
 	
 	var js1 = data.filter(x => x.count == EditId)
 	
-	console.log(")))***********")
-	console.log(js1)
 	js1[0].TotalAmount = document.getElementById('Totalamount-id').value;
 	js1[0].vendorName = document.getElementById('vendor-id').value;
 	
@@ -321,7 +318,7 @@ function submitForm() {
 	
 	totalAmountAppended+=parseFloat(document.getElementById('Totalamount-id').value)
     percent=(totalAmountAppended*100)/givenQuote
-    console.log(percent)
+    
     progressBar.style.width = percent + '%';
     progressBar.setAttribute('aria-valuenow', percent);
     change()
@@ -386,7 +383,7 @@ function submitFormToServlet() {
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('POST', 'http://localhost:8080/EMS/EMSPurchaseServlet', true);
+	xhr.open('POST', 'http://192.168.1.9:8080/EMS/EMSPurchaseServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');

@@ -65,7 +65,7 @@
 														int temp = 0;
 														for (QuotationPerItemBean list : lists) {
 														%>
-														<tr>
+														<tr id="" >
 															<td><%=++temp%></td>
 															<td><%=list.getCatagory()%></td>
 															<td><a> <%=list.getGrade()%>
@@ -75,15 +75,7 @@
 															<td><a> <%=list.getQuantity()%>
 															</a> <br></td>
 															<td><a> <%=list.getpricePerItem()%>
-															</a> <%-- <td>
-																						<button type="button"
-																							class="btn btn-danger btn-sm"
-																							data-toggle="modal"
-																							data-target="#modal-projectDelete<%=list.getCatagoryId()%><%=list.getGradeId()%><%=list.getSize()%>">
-																							<i class="fas fa-trash"></i>
-																							Delete
-																						</button>
-																				</td> --%>
+															</a> 
 																<div class="modal fade"
 																	id="modal-projectDelete<%=list.getCatagoryId()%><%=list.getGradeId()%><%=list.getSize()%>">
 																	<div class="modal-dialog">

@@ -1,7 +1,7 @@
 window.onload = function getClients1(){
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSItemServlet',true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSItemServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {
@@ -31,7 +31,7 @@ function appendClients(Clients)
 document.getElementById("clientId").addEventListener("change", () => {
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open("PUT","http://localhost:8080/EMS/EMSDispatchItemServlet",true);
+	xhr.open("PUT","http://192.168.1.9:8080/EMS/EMSDispatchItemServlet",true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() 
 	{

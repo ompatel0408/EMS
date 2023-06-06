@@ -2,7 +2,7 @@ try {
 	window.onload = function() {
 		let Data1;
 		var xhr1 = new XMLHttpRequest();
-		xhr1.open('PUT', 'http://localhost:8080/EMS/EMSItemListServlet', true);
+		xhr1.open('PUT', 'http://192.168.1.9:8080/EMS/EMSItemListServlet', true);
 		xhr1.onload = function() {
 			if (xhr1.status === 200) {
 				Data1 = JSON.parse(xhr1.responseText);
@@ -17,7 +17,7 @@ try {
 
 		let Data2;
 		var xhr2 = new XMLHttpRequest();
-		xhr2.open('PUT', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet', true);
+		xhr2.open('PUT', 'http://192.168.1.9:8080/EMS/EMSDirectorsDashboardServlet', true);
 		xhr2.onload = function() {
 			if (xhr2.status === 200) {
 				Data2 = JSON.parse(xhr2.responseText);
@@ -28,7 +28,7 @@ try {
 
 		let proCount = 0;
 		var xhr3 = new XMLHttpRequest();
-		xhr3.open("PUT", "http://localhost:8080/EMS/EMSDispatchItemsListServlet", true);
+		xhr3.open("PUT", "http://192.168.1.9:8080/EMS/EMSDispatchItemsListServlet", true);
 		xhr3.onload = () => {
 			if (xhr3.status == 200) {
 				proCount = JSON.parse(xhr3.responseText);
@@ -42,7 +42,7 @@ try {
 
 		let Data4;
 		var xhr4 = new XMLHttpRequest();
-		xhr4.open('PUT', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet', true);
+		xhr4.open('PUT', 'http://192.168.1.9:8080/EMS/EMSDirectorsDashboardServlet', true);
 		console.log("Here")
 		xhr4.onload = function() {
 			if (xhr4.status === 200) {
@@ -55,7 +55,7 @@ try {
 		
 		let Data5;
 		var xhr5 = new XMLHttpRequest();
-		xhr4.open('PUT', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet', true);
+		xhr4.open('PUT', 'http://192.168.1.9:8080/EMS/EMSDirectorsDashboardServlet', true);
 		console.log("Here")
 		xhr5.onload = function() {
 			if (xhr4.status === 200) {

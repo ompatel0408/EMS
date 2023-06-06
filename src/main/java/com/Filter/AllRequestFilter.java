@@ -22,8 +22,10 @@ public class AllRequestFilter implements Filter{
 		
 		try {
 			
+			
+			System.out.println("Hii reached!!!!");
 			if((request.getSession().getAttribute("userId") == null) && (request.getRequestURL().toString().contains(".jsp"))) {
-				
+				System.out.println("Hii reached!!!!1");
 				request.getRequestDispatcher("Unauthorised.jsp").forward(request, response);
 				
 			}else {
@@ -31,6 +33,7 @@ public class AllRequestFilter implements Filter{
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+			System.out.println("Hii reached!!!!2");
 			response.sendRedirect("EMSLogin.jsp");
 		}
 		

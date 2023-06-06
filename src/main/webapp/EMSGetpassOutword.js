@@ -2,7 +2,7 @@ window.onload = () => {
 	
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSAddPersonServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSAddPersonServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {

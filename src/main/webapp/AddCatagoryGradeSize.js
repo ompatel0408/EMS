@@ -110,7 +110,7 @@ function Demo() {
 	let id = document.getElementById('size-id1').value
 	const xhr = new XMLHttpRequest();
 	
-	xhr.open("POST", "http://localhost:8080/EMS/GetGradeListServlet",true);
+	xhr.open("POST", "http://192.168.1.9:8080/EMS/GetGradeListServlet",true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	
 	xhr.onload = function() {

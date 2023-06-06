@@ -158,7 +158,7 @@
 
 			// specify the servlet URL and HTTP method
 			xhr
-					.open('DELETE', 'http://localhost:8080/EMS/EMSGRNServlet',
+					.open('DELETE', 'http://192.168.1.9:8080/EMS/EMSGRNServlet',
 							true);
 
 			// set headers

@@ -1,7 +1,7 @@
 try {
 	document.addEventListener("DOMContentLoaded", () => {
 		var xhr = new XMLHttpRequest();
-		xhr.open('POST', 'http://localhost:8080/EMS/EMSDirectorsDashboardServlet', true);
+		xhr.open('POST', 'http://192.168.1.9:8080/EMS/EMSDirectorsDashboardServlet', true);
 		xhr.onload = function() {
 			if (xhr.status == 200) {
 				var userId = JSON.parse(xhr.responseText);
@@ -16,7 +16,7 @@ try {
 
 		var gradeData;
 		var xhr = new XMLHttpRequest();
-		xhr.open('GET', `http://localhost:8080/EMS/ShowManagementAccess?change=2&userId=${userId}`, true);
+		xhr.open('GET', `http://192.168.1.9:8080/EMS/ShowManagementAccess?change=2&userId=${userId}`, true);
 		xhr.setRequestHeader('Content-type', 'application/json');
 		xhr.onload = function() {
 			if (xhr.status == 200) {

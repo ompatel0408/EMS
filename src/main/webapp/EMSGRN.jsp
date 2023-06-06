@@ -142,7 +142,7 @@ input[type="file"]:not(:focus)+.custom-file-upload::after {
 	function getVendorName() {
 			let Data;
 			var xhr = new XMLHttpRequest();
-			xhr.open('GET', 'http://localhost:8080/EMS/EMSGRNServlet',true);
+			xhr.open('GET', 'http://192.168.1.9:8080/EMS/EMSGRNServlet',true);
 			xhr.onreadystatechange = function() {
 		  		if (xhr.status === 200) {
 		    		Data = JSON.parse(xhr.responseText);

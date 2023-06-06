@@ -4,12 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 
 import com.bean.EMSGetpassOutwordBean;
 import com.dbConnection.MySqlConnection;
-import com.mysql.cj.protocol.Resultset;
 import com.service.ExceptionHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class EMSGetpassOutwordDao {
 	
-	private static EMSGetpassOutwordDao instance;
+	private static EMSGetpassOutwordDao instance = null;
 	
 	public static EMSGetpassOutwordDao getInstance()
 	{
@@ -98,5 +97,4 @@ public class EMSGetpassOutwordDao {
 		return false;
 	}
 	
-	public int getQtyfromDba()
 }

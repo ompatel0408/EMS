@@ -24,33 +24,29 @@
 				data-widget="treeview" role="menu" data-accordion="false">
 				<li class="nav-item"><a href="EMSDirectorsDashboard.jsp"
 					class="nav-link active">
-						<p>Dashboard</p>
+						Dashboard
 				</a></li>
 				<li class="nav-item" id="addclient-target-id" style="display: none;"><a
 					href="ClientServlet?clientId=0&update=notupdate" class="nav-link">
 						<i class="nav-icon fas ion-person"></i>
-						<p>Client</p>
+						Client
 				</a></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
 						class="nav-icon fas fa-chart-pie"></i>
 						<p>
-							Access Management <i class="right fas fa-angle-left"></i>
+						Access Management <i class="right fas fa-angle-left"></i>
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item" id="accessmanagement-target-id"
 							style="display: none;"><a href="AccessManagementServlet"
 							class="nav-link"><i class="far fa-circle nav-icon"></i>
-								<p>Give Access</p> </a></li>
-						<!-- <li class="nav-item"><a href="EMSUser.jsp" class="nav-link"> <i
-								class="far fa-circle nav-icon"></i>
-								<p>Add User</p>
-						</a></li> -->
+								Give Access </a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
 						class="nav-icon fas fa-columns   "></i>
 						<p>
-							Projects <i class="fas fa-angle-left right"></i>
+										Projects <i class="fas fa-angle-left right"></i>
 						</p>
 				</a>
 					<ul class="nav nav-treeview">
@@ -58,67 +54,67 @@
 						<li class="nav-item" id="addoffer-target-id"
 							style="display: none;"><a href="EMSClientListServlet"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Add Offers</p>
+								Add Offers
 						</a></li>
 						<li class="nav-item" id="quotationperoffer-target-id"
 							style="display: none;"><a href="EMSQuotationPerItem.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>QuotationPerOffers</p>
+								QuotationPerOffers
 						</a></li>
 
 						<li class="nav-item" id="quotationperofferlist-target-id"
 							style="display: none;"><a
 							href="QuotationPerItemListServlet?offer=1" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
-								<p>Quotation Per Offer List</p>
+								Quotation Per Offer List
 						</a></li>
 
 						<li class="nav-item" id="finalquotation-target-id"
 							style="display: none;"><a href="EMSFinalQuotation.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>FinalQuotation</p>
+								FinalQuotation
 						</a></li>
 
 						<li class="nav-item" id="finalquotationlist-target-id"
 							style="display: none;"><a
 							href="EMSFinalQuotationListServlet?quotationId=0&update=notupdate"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>FinalQuotation List</p>
+								FinalQuotation List
 						</a></li>
 
 						<li class="nav-item" id="addorder-target-id"
 							style="display: none;"><a href="EMSItem.jsp"
 							class="nav-link" onclick="AddHeaders()"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Add orders</p>
+								Add orders
 						</a></li>
 						<li class="nav-item" id="orderlist-target-id"
 							style="display: none;"><a
 							href="EMSItemListServlet?itemCode=0&update=notupdate"
 							class="nav-link" onclick="AddHeaders()"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>orders List</p>
+								orders List
 						</a></li>
 						<li class="nav-item" id="addproject-target-id"
 							style="display: none;"><a
 							href="ProjectServlet?projectId=0&update=notupdate"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Add Project</p>
+								Add Project
 						</a></li>
 						<li class="nav-item" id="adddrawing-target-id"
 							style="display: none;"><a href="EMSDrawing.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Add Drawings</p>
+								Add Drawings
 						</a></li>
 						<li class="nav-item" id="drawinglist-target-id"
 							style="display: none;"><a href="EMSDrawingList.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Drawing List</p>
+								Drawing List
 						</a></li>
 						<li class="nav-item" id="drawingRevision-id"
 							style="display: none;"><a href="DrawingRevision.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Drawing Revision List</p>
+								Drawing Revision List
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
@@ -132,12 +128,12 @@
 						<li class="nav-item" id="dpr-id" style="display: none;"><a
 							href="DailyProgressReport.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Daily Process Report</p>
+								Daily Process Report
 						</a></li>
 						<li class="nav-item" id="dprList-id" style="display: none;"><a
-							href="DailyProgressReportServlet?delete=notdelete"
+							href="DPRList.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>DPR List</p>
+								DPR List
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
@@ -150,13 +146,13 @@
 						<li class="nav-item" id="generateindent-target-id"
 							style="display: none;"><a href="IndentServlet"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Generate Indent</p>
+								Generate Indent
 						</a></li>
 						<li class="nav-item" id="indentlist-target-id"
 							style="display: none;"><a
 							href="ListIndentServlet?token=1&projectid=0&itemcode=0"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Indent list</p>
+								Indent list
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
@@ -169,22 +165,22 @@
 						<li class="nav-item" id="generatepo-target-id"
 							style="display: none;"><a href="EMSPurchase.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Generate P.O</p>
+								Generate P.O
 						</a></li>
 						<li class="nav-item"><a href="EMSConsumablePurchase.jsp"
 							id="EMSConsumable-id" style="display: block;" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
-								<p>Purchase consumable</p>
+								Purchase consumable
 						</a></li>
 						<li class="nav-item" id="polist-target-id" style="display: none;"><a
 							href="EMSPurchaseListServlet?delete=no" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>P.O List</p>
+								P.O List
 						</a></li>
 						<li class="nav-item"><a href="VendorProjectListPO.jsp"
 							id="poPrint-id" style="display: none;" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>P.O List Print</p>
+								P.O List Print
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
@@ -197,23 +193,23 @@
 						<li class="nav-item" id="generategrn-target-id"
 							style="display: none;"><a href="EMSGRN.jsp" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
-								<p>Generate GRN</p>
+								Generate GRN
 						</a></li>
 						<li class="nav-item" id="grnlist-target-id" style="display: none;"><a
 							href="EMSGRNList.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>GRN List</p>
+								GRN List
 						</a></li>
 						<li class="nav-item" id="grnApprovelPen-id" style="display: none;"><a
 							href="GRNApprovalPending.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>GRN Approval Pending</p>
+								GRN Approval Pending
 						</a></li>
 
 						<li class="nav-item" id="grnPeningOrder-id" style="display: none;"><a
 							href="EMSGRNPendingList.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>GRN Pending Orders List</p>
+								GRN Pending Orders List
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
@@ -226,13 +222,13 @@
 						<li class="nav-item" id="generateissuenote-target-id"
 							style="display: none;"><a href="EMSIssueNote.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Generate Issue Note</p>
+							Generate Issue Note
 						</a></li>
 						<li class="nav-item" id="issuenotelist-target-id"
 							id="indentlist-target-id" style="display: none;"><a
 							href="EMSIssueNoteListServlet" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Issue Note List</p>
+								Issue Note List
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
@@ -245,32 +241,32 @@
 						<li class="nav-item" id="addnewstock-target-id"
 							style="display: none;"><a href="CatagoryGradeSizeServlet"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Add new stock</p>
+								Add new stock
 						</a></li>
 						<li class="nav-item" id="addgeneralstore-target-id"
 							style="display: none;"><a href="EMSStore.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Add to general store</p>
+								Add to general store
 						</a></li>
 						<li class="nav-item" id="stocklist-target-id"
 							style="display: none;"><a href="EMSStoreListServlet"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Stock List</p>
+								Stock List
 						</a></li>
 						<li class="nav-item" id="gatePassOut-id" style="display: none;"><a
 							href="EMSGatepassOutword.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Gatepass Outword</p>
+								Gate pass Out word
 						</a></li>
 						<li class="nav-item" id="gatePassIn-id" style="display: none;"><a
 							href="EMSGatepassinword.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Gatepass Inword</p>
+								Gate pass In word
 						</a></li>
 						<li class="nav-item" id="gatePassList-id" style="display: none;"><a
 							href="EMSGetpassListServlet" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Getepass List</p>
+								Gete pass List
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
@@ -283,12 +279,12 @@
 						<li class="nav-item" id="phase-id" style="display: none;"><a
 							href="ProductionPhase.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Project Status</p>
+								Project Status
 						</a></li>
 						<li class="nav-item" id="phaseUpdate-id" style="display: none;"><a
 							href="PhaseUpdate.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Phase Update</p>
+								Phase Update
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
@@ -301,13 +297,13 @@
 						<li class="nav-item" id="addvendor-target-id"
 							style="display: none;"><a href="EMSVendors.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Add Vendor</p>
+								Add Vendor
 						</a></li>
 						<li class="nav-item" id="vendorlist-target-id"
 							style="display: none;"><a
 							href="EMSVendorsServlet?vendorId=0&update=notupdate"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>list Vendor</p>
+								list Vendor
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
@@ -320,12 +316,12 @@
 						<li class="nav-item" id="addvendor-target-id"
 							style="display: block;"><a href="EMSAddPersons.jsp"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Add Persons</p>
+								Add Persons
 						</a></li>
 						<li class="nav-item" id="vendorlist-target-id"
 							style="display: block;"><a href="EMSAddPersonServlet"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>list Persons</p>
+								list Persons
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
@@ -338,22 +334,22 @@
 						<li class="nav-item" id="addMachine-id" style="display: none;"><a
 							href="EMSAddMachine.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Add Machine</p>
+								Add Machine
 						</a></li>
 						<li class="nav-item" id="showMachine-id" style="display: none;"><a
 							href="EMSAddMachineListServlet" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Show Machines</p>
+								Show Machines
 						</a></li>
 						<li class="nav-item" id="giveMntMcn-id" style="display: none;"><a
 							href="EMSAddMachineInMnt.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Give for Maintenance</p>
+								Give for Maintenance
 						</a></li>
 						<li class="nav-item" id="getMntMcn-id" style="display: none;"><a
 							href="EMSReceiveFromMnt.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Receive from Maintenance</p>
+								Receive from Maintenance
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <i
@@ -366,7 +362,7 @@
 						<li class="nav-item" id="dispatchItem-id" style="display: none;"><a
 							href="EMSDispatchItems.jsp" class="nav-link"> <i
 								class="far fa-circle nav-icon"></i>
-								<p>Dispatch Item</p>
+								Dispatch Item
 						</a></li>
 
 					</ul></li>
@@ -380,7 +376,7 @@
 						<li class="nav-item"><a href="EMSALLUpdateLogs.jsp"
 							id="showlogs-target-id" style="display: none;" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
-								<p>View Logs</p>
+								View Logs
 						</a></li>
 					</ul></li>
 				<li class="nav-item"><a href="#" class="nav-link"> <!-- <i class="nav-icon fas fa-edit"></i> -->
@@ -392,7 +388,7 @@
 					<ul class="nav nav-treeview">
 						<li class="nav-item"><a href="EMSLogoutServlet"
 							class="nav-link"> <i class="far fa-circle nav-icon"></i>
-								<p>Logout</p>
+								Logout
 						</a></li>
 					</ul></li>
 			</ul>

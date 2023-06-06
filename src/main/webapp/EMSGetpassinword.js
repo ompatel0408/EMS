@@ -2,7 +2,7 @@ window.onload = () => {
 	
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSGetpassinwordServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSGetpassinwordServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -32,7 +32,7 @@ document.getElementById("vendorId").addEventListener("change",() => {
 	
 	var xhr = new XMLHttpRequest();
 	let Data;
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSGetpassinwordServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSGetpassinwordServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -63,7 +63,7 @@ document.getElementById("itemsId").addEventListener("change",() => {
 	console.log(document.getElementById("itemsId").value)
 	var xhr = new XMLHttpRequest();
 	let Data;
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSGetpassinwordServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSGetpassinwordServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {

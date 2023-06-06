@@ -2,7 +2,7 @@ package com.service;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import org.apache.tomcat.jakartaee.commons.compress.utils.IOUtils;
+import org.apache.commons.compress.utils.IOUtils;
 
 import com.bean.EMSGRNBean;
 

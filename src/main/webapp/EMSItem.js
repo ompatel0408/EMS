@@ -73,7 +73,7 @@ function appendMap(){
 window.onload = function getClients1(){
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSItemServlet',true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSItemServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {
@@ -114,7 +114,7 @@ function XHRRequestForItem() {
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('POST', 'http://localhost:8080/EMS/EMSItemServlet', true);
+	xhr.open('POST', 'http://192.168.1.9:8080/EMS/EMSItemServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -136,7 +136,7 @@ function XHRRequestForQuotationId()
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSItemServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSItemServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -164,7 +164,7 @@ function GetOfferData(){
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSOffersServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSOffersServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');

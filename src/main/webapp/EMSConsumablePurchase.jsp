@@ -29,14 +29,14 @@
 				</div>
 
 				<div class="card-body">
-					<form onsubmit="event.preventDefault();submitFormToServlet()">
+					<form onsubmit="event.preventDefault();submitData()">
 						<div class="row">
 							<div class="col-sm-6">
 								<!-- text input -->
 								<div class="form-group">
-									<label for="item-id">CategoryName</label> <select id="CategoryName"
-										class="form-control" onload="getProjects1()"
-										onblur="ProjectChange()" onchange="enableFields()" required>
+									<label for="item-id">CategoryName</label> <select
+										id="CategoryName" class="form-control"
+										onchange="enableFields()" required>
 										<option value="None">Select CategoryName</option>
 										<option value="Boxes">Boxes</option>
 										<option value="Nos">Nos.</option>
@@ -57,21 +57,33 @@
 										placeholder="Enter Remark..." id="remark-Id"
 										style="height: 125px;" required="required" disabled="disabled"></textarea>
 								</div>
+
 							</div>
 							<div class="col-sm-6">
+								<div class="form-group">
+									<label>itemName</label>
+									<div>
+										<input class="form-control" id="itemName" maxlength="20"
+											name="itemName" type="text" placeholder="Enter Item"
+											disabled="disabled">
+									</div>
+								</div>
+
 								<div class="form-group">
 									<label>Quantity</label>
 									<div>
 										<input class="form-control" id="Quantity-id" maxlength="20"
-											name="quantity" type="text" placeholder="Enter quantity" disabled="disabled">
+											name="quantity" type="text" placeholder="Enter quantity"
+											disabled="disabled">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="vendor-id">Vendor Name</label> <select
-										id="vendor-id" class="form-control" required disabled="disabled">
+										id="vendor-id" class="form-control" required
+										disabled="disabled">
 									</select>
 								</div>
-								
+
 								<div class="form-group">
 									<label>Date</label>
 									<div>
@@ -79,43 +91,68 @@
 											name="datename" type="date" disabled="disabled">
 									</div>
 								</div>
-								
+								<div class="row">
+								 <div class="col-md-4"> 
+									<div class="form-group">
+										<label>Discount(%)</label> <input type="text"
+											class="form-control" id="DiscountPercentage"
+											onkeyup="calculateDiscountAmount()" placeholder="0"
+											pattern="[0-9]{1,9}" required="required" disabled>
+									</div>
+									</div>
+									<div class="col-md-4">
+									<div class="form-group">
+										<label>Discount Amount</label> <input type="text"
+											class="form-control" id="DiscountAmount"
+											onkeyup="calculateDiscountPercentage()" placeholder="0"
+											pattern="[0-9]{1,10}" required="required" disabled>
+									</div>
+									</div>
+									<div class="col-md-4">
+									<div class="form-group">
+										<label>Total Amount</label> <input type="text" value="0"
+											class="form-control" id="Totalamount-id" placeholder="0.0"
+											disabled>
+									</div>
+									</div>
+								 </div> 
+								 </div>
+							
+							<div class="col-md-2">
+								<label><input type="radio" class="chk" name="chks"
+									value="0.00" id="Nil" onclick="clickOfRadioButton()"
+									checked="checked">&nbsp;&nbsp;Nil (0.00 %)</label>
 							</div>
 							<div class="col-md-2">
 								<label><input type="radio" class="chk" name="chks"
-									value="0.00" id="Nil" onclick="clickOfRadioButton()" checked="checked">&nbsp;&nbsp;Nil
-									(0.00 %)</label>
+									value="5.00" id="FivePer" onclick="clickOfRadioButton()">&nbsp;&nbsp;GST
+									(5.00 %)</label>
 							</div>
 							<div class="col-md-2">
 								<label><input type="radio" class="chk" name="chks"
-									value="5.00" id="FivePer" onclick="clickOfRadioButton()"
-									>&nbsp;&nbsp;GST (5.00 %)</label>
+									value="12.00" id="TwelvePer" onclick="clickOfRadioButton()">&nbsp;&nbsp;GST
+									(12.00 %)</label>
 							</div>
 							<div class="col-md-2">
 								<label><input type="radio" class="chk" name="chks"
-									value="12.00" id="TwelvePer" onclick="clickOfRadioButton()"
-									>&nbsp;&nbsp;GST (12.00 %)</label>
-							</div>
-							<div class="col-md-2">
-								<label><input type="radio" class="chk" name="chks"
-									value="18.00" id="EighteenPer" onclick="clickOfRadioButton()"
-									>&nbsp;&nbsp;GST (18.00 %)</label>
+									value="18.00" id="EighteenPer" onclick="clickOfRadioButton()">&nbsp;&nbsp;GST
+									(18.00 %)</label>
 							</div>
 							<div class="col-md-2">
 								<label><input type="radio" class="chk" name="chks"
 									value="28.00" id="TwentyEightPer"
-									onclick="clickOfRadioButton()">&nbsp;&nbsp;GST
-									(28.00 %)</label>
+									onclick="clickOfRadioButton()">&nbsp;&nbsp;GST (28.00
+									%)</label>
 							</div>
 							<div class="col-md-2">
 								<label><input type="radio" class="chk" name="chks"
-									value="3.00" id="ThreePer" onclick="clickOfRadioButton()"
-									>&nbsp;&nbsp;GST (3.00 %)</label>
+									value="3.00" id="ThreePer" onclick="clickOfRadioButton()">&nbsp;&nbsp;GST
+									(3.00 %)</label>
 							</div>
 							<div
 								class="col-sm-6 d-flex justify-content-center align-items-center mt-auto ">
 								<button type="button" class="btn btn-primary disabled"
-									id="add-store" onclick="submit()">
+									id="add-store" onclick="submitForm()">
 									<strong>+ Add to Purchase </strong>
 								</button>
 							</div>
@@ -153,11 +190,12 @@
 						<thead>
 							<tr>
 								<th style="width: 10%">Sr.No</th>
+								<th style="width: 10%">itemName</th>
 								<th style="width: 10%">Category</th>
-								<th style="width: 10%">Grade</th>
-								<th style="width: 12%">Size</th>
-								<th style="width: 10%">TotalAmount</th>
-								<th style="width: 10%">VendorName</th>
+								<th style="width: 8%">rate</th>
+								<th style="width: 10%">Quantity</th>
+								<th style="width: 10%">Vendor</th>
+								<th style="width: 10%">totalAmount</th>
 								<th style="width: 9%"></th>
 							</tr>
 						</thead>

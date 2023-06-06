@@ -1,7 +1,7 @@
 window.onload = function getProject1() {
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSProductionServlet',true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSProductionServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {
@@ -15,7 +15,7 @@ window.onload = function getProject1() {
 	
 	let categoryData;
 	var xhr1 = new XMLHttpRequest();
-	xhr1.open('GET', 'http://localhost:8080/EMS/EMSQuotationPerItemServlet', true);
+	xhr1.open('GET', 'http://192.168.1.9:8080/EMS/EMSQuotationPerItemServlet', true);
 	xhr1.onload = function() {
 		if (xhr1.status === 200) {
 			categoryData = JSON.parse(xhr1.responseText);
@@ -38,7 +38,7 @@ function appendProjects(Data) {
 function getOffers() {
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSDrawingServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSDrawingServlet', true);
 	xhr.onreadystatechange = function() {
 		if (xhr.status === 200) {
 			Data = JSON.parse(xhr.responseText);
@@ -62,7 +62,7 @@ function appendOffer(Clients) {
 function getSubItems() {
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSDrawingServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSDrawingServlet', true);
 	xhr.onload = function() {
 		if (xhr.status === 200) {
 			Data = JSON.parse(xhr.responseText);
@@ -99,7 +99,7 @@ function appendCategory(categoryData) {
 document.getElementById("categoryId").addEventListener("change", () => {
 	let gradeData;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSQuotationPerItemServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSQuotationPerItemServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -125,7 +125,7 @@ function appendGrade(gradeData) {
 document.getElementById("gradeId").addEventListener("change", () => {
 	let sizeData;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSQuotationPerItemServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSQuotationPerItemServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -207,7 +207,7 @@ document.getElementById("deleteClicked").addEventListener("click", () => {
 function submitForm1() {
 	console.log(data)
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'http://localhost:8080/EMS/DailyProgressReportServlet', true);
+	xhr.open('POST', 'http://192.168.1.9:8080/EMS/DailyProgressReportServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onreadystatechange = function() {
 		if (xhr.status == 200) {

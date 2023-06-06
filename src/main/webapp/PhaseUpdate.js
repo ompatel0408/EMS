@@ -1,7 +1,7 @@
 window.onload = function getProject1() {
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSProductionServlet',true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSProductionServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {
@@ -26,7 +26,7 @@ function appendProjects(Data) {
 function getOffers() {
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSDrawingServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSDrawingServlet', true);
 	xhr.onreadystatechange = function() {
 		if (xhr.status === 200) {
 			Data = JSON.parse(xhr.responseText);
@@ -51,7 +51,7 @@ function getSubItems() {
 	
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSDrawingServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSDrawingServlet', true);
 	xhr.onload = function() {
 		if (xhr.status === 200) {
 			Data = JSON.parse(xhr.responseText);
@@ -76,7 +76,7 @@ function getPhase() {
 	
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/DailyProgressReportServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/DailyProgressReportServlet', true);
 	xhr.onload = function() {
 		if (xhr.status === 200) {
 			Data = JSON.parse(xhr.responseText);

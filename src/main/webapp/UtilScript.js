@@ -9,7 +9,7 @@ function AddHeaders(){
             console.log(xhr.responseText);            
         }
     }
-  	xhr.open('GET', 'http://localhost:8080/EMS/EMSItemServlet', true);
+  	xhr.open('GET', 'http://192.168.1.9:8080/EMS/EMSItemServlet', true);
  	xhr.send();
 };
 

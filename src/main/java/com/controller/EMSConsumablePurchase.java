@@ -2,6 +2,10 @@ package com.controller;
 
 import java.io.IOException;
 
+import com.bean.EMSConsumablePurchaseBean;
+import com.dao.EMSConsumablePurchaseDao;
+import com.service.EMSConsumablePurchaseService;
+import java.util.ArrayList;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,13 +23,24 @@ public class EMSConsumablePurchase extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		ArrayList<EMSConsumablePurchaseBean> AECPB = EMSConsumablePurchaseService.fetchDataFromXHRRequest(request.getReader(), request);
+		
+		if(EMSConsumablePurchaseDao.getInstance().addPurchase(AECPB, request, response)) {
+			
+			System.out.println("Purchase added successfully!!!!");
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write("Hii");
+			
+		}else {
+			System.out.println("Purchase not added successfully!!!!");
+		}
 	}
 
 }

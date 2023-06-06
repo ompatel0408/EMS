@@ -268,7 +268,7 @@ public class QuotationPerItemDao {
 				stmt.setInt(10, qpib.getSize());
 				stmt.addBatch();
 			}
-			int[] result = stmt.executeBatch();
+			 stmt.executeBatch();
 			return true;
 		}catch(SQLException e) {
 			e.printStackTrace();

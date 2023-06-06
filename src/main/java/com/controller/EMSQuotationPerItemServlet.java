@@ -4,9 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.bean.EMSLogsBean;
 import com.bean.QuotationPerItemBean;
 import com.dao.EMSLogsDao;
@@ -15,7 +12,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.service.ExceptionHandler;
 import com.service.QuotationPerItemServices;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,7 +26,6 @@ public class EMSQuotationPerItemServlet extends HttpServlet {
 	private static String category = "";
 	private static HashMap<String,String> map = new HashMap<String,String>();
 	private static ArrayList<String> arr = new ArrayList<String>();
-	private static boolean isFound = false;
 	
 	
 	public static EMSQuotationPerItemServlet getInstance() {

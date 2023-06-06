@@ -2,7 +2,7 @@ window.onload = function()
 {
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSAddMachineInMntServlet',true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSAddMachineInMntServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {
@@ -31,7 +31,7 @@ document.getElementById("machineId").addEventListener("change", ()=>{
 	
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSAddMachineInMntServlet',true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSAddMachineInMntServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {

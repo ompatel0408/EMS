@@ -7,7 +7,7 @@ window.onload = () => {
 	
 	var xhr = new XMLHttpRequest();
 	
-	xhr.open('GET', 'http://localhost:8080/EMS/EMSStoreServlet', true);
+	xhr.open('GET', 'http://192.168.1.9:8080/EMS/EMSStoreServlet', true);
 	
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -71,7 +71,7 @@ function XHRRequestForStore() {
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('POST', 'http://localhost:8080/EMS/EMSStoreServlet', true);
+	xhr.open('POST', 'http://192.168.1.9:8080/EMS/EMSStoreServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');
@@ -81,7 +81,7 @@ function XHRRequestForStore() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var response = xhr.responseText;
 			console.log(response);
-			window.location.href = "http://localhost:8080/EMS/EMSStoreListServlet"
+			window.location.href = "http://192.168.1.9:8080/EMS/EMSStoreListServlet"
 		}
 	}
 	// send the request
@@ -114,7 +114,7 @@ document.getElementById("category-id").addEventListener("change", () => {
 	console.log("in blur of grade ");
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSStoreServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSStoreServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -143,7 +143,7 @@ document.getElementById("grade-id").addEventListener("change", () => {
 	console.log("in blur of grade ");
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSStoreServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSStoreServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {
@@ -172,7 +172,7 @@ function getQuant(){
 	
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSStoreServlet', true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSStoreServlet', true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
 		if (xhr.status === 200) {

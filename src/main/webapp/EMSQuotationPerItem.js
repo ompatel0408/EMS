@@ -81,7 +81,7 @@ function disableLogic(){
 function getXHRRequestToQuotationPerItemCatagory(){
 	let categoryData;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://localhost:8080/EMS/EMSQuotationPerItemServlet',true);
+	xhr.open('GET', 'http://192.168.1.9:8080/EMS/EMSQuotationPerItemServlet',true);
 	xhr.onload = function() {
   		if (xhr.status === 200) {	  
     		categoryData = JSON.parse(xhr.responseText);
@@ -120,7 +120,7 @@ function getXHRRequestToQuotationPerItemGrade(){
 	
 	let gradeData;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSQuotationPerItemServlet',true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSQuotationPerItemServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {
@@ -152,7 +152,7 @@ function appendGrade(gradeData){
 window.onload = function getOffers(){
 	let Data;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSQuotationPerItemServlet',true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSQuotationPerItemServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {
@@ -184,7 +184,7 @@ function appendOffers(offers){
 function getXHRRequestToQuotationPerItemSize(){
 	let sizeData;
 	var xhr = new XMLHttpRequest();
-	xhr.open('PUT', 'http://localhost:8080/EMS/EMSQuotationPerItemServlet',true);
+	xhr.open('PUT', 'http://192.168.1.9:8080/EMS/EMSQuotationPerItemServlet',true);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	xhr.onload = function() {
   		if (xhr.status === 200) {
@@ -235,7 +235,7 @@ function XHRRequestForQuotationPerItem(){
 	var xhr = new XMLHttpRequest();
 
 	// specify the servlet URL and HTTP method
-	xhr.open('POST', 'http://localhost:8080/EMS/EMSQuotationPerItemServlet', true);
+	xhr.open('POST', 'http://192.168.1.9:8080/EMS/EMSQuotationPerItemServlet', true);
 
 	// set headers
 	xhr.setRequestHeader('Content-type', 'application/json');

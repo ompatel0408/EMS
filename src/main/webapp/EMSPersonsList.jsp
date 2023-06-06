@@ -106,7 +106,7 @@ int srNo = 1;
 			let Data;
 			var xhr = new XMLHttpRequest();
 			xhr.open('DELETE',
-					'http://localhost:8080/EMS/EMSAddPersonServlet', true);
+					'http://192.168.1.9:8080/EMS/EMSAddPersonServlet', true);
 			xhr.setRequestHeader('Content-type', 'application/json');
 			xhr.onload = function() {
 				if (xhr.status === 200) {
